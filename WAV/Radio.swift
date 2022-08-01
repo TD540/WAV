@@ -18,15 +18,14 @@ class Radio: ObservableObject {
     @Published var isPlaying = false
     @Published var currentShowTitle: String?
 
-    func updateCurrentShowTitle() {
+    func updateCurrentShowTitle() async {
+        currentShowTitle = await RadioState.title()
     }
 
     func play() {
         player.replaceCurrentItem(with: playerItem)
         player.play()
         isPlaying = true
-
-        updateCurrentShowTitle()
 
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback)
@@ -37,7 +36,7 @@ class Radio: ObservableObject {
                 image
             }
             MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-                MPMediaItemPropertyTitle: "currentShowTitle",
+                MPMediaItemPropertyTitle: currentShowTitle ?? "...",
                 MPMediaItemPropertyArtist: "We Are Various",
                 MPMediaItemPropertyArtwork: artwork,
                 MPMediaItemPropertyPlaybackDuration: 0,
@@ -82,6 +81,9 @@ struct RadioState: Decodable {
                 do {
                     let decodedIcestats = try JSONDecoder().decode(RadioState.self, from: fixedData)
                     let title = decodedIcestats.icestats.source.title
+                    DispatchQueue.main.async {
+                        Radio.shared.currentShowTitle = title
+                    }
                     return(title)
                 } catch {
                     print("oops: \(String(describing: error))")
