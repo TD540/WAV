@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RadioView: View {
     @StateObject var radio = Radio.shared
-    @State var title: String?
 
     var body: some View {
         VStack {
@@ -25,21 +24,22 @@ struct RadioView: View {
                     .aspectRatio(contentMode: .fit)
                     .padding()
             }
-            if (title != nil) {
-                Text(title!)
+            if let title = radio.currentShowTitle {
+                Text(title)
                     .font(Font.custom("pixelmix", size: 30))
                     .lineSpacing(15)
                     .padding()
             }
         }
         .task() {
-            title = await RadioState.title()
+            await radio.updateCurrentShowTitle()
         }
     }
 }
 
 struct RadioView_Previews: PreviewProvider {
     static var previews: some View {
-        RadioView(title: "preview title")
+        Radio.shared.currentShowTitle = "preview title..."
+        return RadioView()
     }
 }

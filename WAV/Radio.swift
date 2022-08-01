@@ -13,13 +13,31 @@ class Radio: ObservableObject {
     private init() {}
     static let shared = Radio()
     let url = "https://icecast.wearevarious.com/live.mp3"
+    let state = "https://icecast.wearevarious.com/status-json.xsl"
     let playerItem = AVPlayerItem(url: URL(string: "https://icecast.wearevarious.com/live.mp3")!)
     let player = AVPlayer()
     @Published var isPlaying = false
     @Published var currentShowTitle: String?
 
     func updateCurrentShowTitle() async {
-        currentShowTitle = await RadioState.title()
+        guard let url = URL(string: state) else { return }
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            if let naughtyJSON = String(data: data, encoding: .utf8) {
+                let fixedJSON = naughtyJSON.replacingOccurrences(of: ":-,", with: ":\"\",")
+                let fixedData = fixedJSON.data(using: .utf8)!
+                do {
+                    let decodedIcestats = try JSONDecoder().decode(RadioState.self, from: fixedData)
+                    DispatchQueue.main.async {
+                        self.currentShowTitle = decodedIcestats.icestats.source.title
+                    }
+                } catch {
+                    print("oops: \(String(describing: error))")
+                }
+            }
+        } catch {
+            print("URLSession failed \(String(describing: error))")
+        }
     }
 
     func play() {
@@ -68,33 +86,7 @@ class Radio: ObservableObject {
 
 }
 
-
 struct RadioState: Decodable {
-    static let url = URL(string: "https://icecast.wearevarious.com/status-json.xsl")
-    static func title() async -> String? {
-        guard let url = url else { return nil }
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            if let naughtyJSON = String(data: data, encoding: .utf8) {
-                let fixedJSON = naughtyJSON.replacingOccurrences(of: ":-,", with: ":\"\",")
-                let fixedData = fixedJSON.data(using: .utf8)!
-                do {
-                    let decodedIcestats = try JSONDecoder().decode(RadioState.self, from: fixedData)
-                    let title = decodedIcestats.icestats.source.title
-                    DispatchQueue.main.async {
-                        Radio.shared.currentShowTitle = title
-                    }
-                    return(title)
-                } catch {
-                    print("oops: \(String(describing: error))")
-                }
-            }
-        } catch {
-            print("URLSession failed \(String(describing: error))")
-        }
-        return nil
-    }
-
     let icestats: Icestats
     struct Icestats: Decodable {
         let source: Source
