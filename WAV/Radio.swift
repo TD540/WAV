@@ -11,7 +11,6 @@ import MediaPlayer
 
 class Radio: ObservableObject {
     init() {
-        play()
         Task(priority: .medium){
             await updateCurrentShowTitle()
         }
@@ -37,25 +36,38 @@ class Radio: ObservableObject {
                     if currentShowTitle != newTitle {
                         DispatchQueue.main.async {
                             self.currentShowTitle = newTitle
+                            self.updateNowPlayingInfo()
                         }
                     }
                 } catch {
-                    print("oops: \(String(describing: error))")
+                    print(String(describing: error))
                 }
             }
         } catch {
-            print("URLSession failed \(String(describing: error))")
-        }
-
-        do {
-            sleep(10)
+            print(String(describing: error))
         }
         Task(priority: .medium){
+            sleep(10)
             await updateCurrentShowTitle()
         }
     }
 
+    func updateNowPlayingInfo() {
+        let image = UIImage(named: "artwork")!
+        let artwork = MPMediaItemArtwork.init(boundsSize: image.size) { _ -> UIImage in
+            image
+        }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyTitle: currentShowTitle ?? "...",
+            MPMediaItemPropertyArtist: "We Are Various",
+            MPMediaItemPropertyArtwork: artwork,
+            MPMediaItemPropertyPlaybackDuration: 0,
+            MPNowPlayingInfoPropertyIsLiveStream: true
+        ]
+    }
+
     func play() {
+        player.replaceCurrentItem(with: nil)
         player.replaceCurrentItem(with: playerItem)
         player.play()
         isPlaying = true
@@ -64,17 +76,8 @@ class Radio: ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(.playback)
             try AVAudioSession.sharedInstance().setActive(true)
 
-            let image = UIImage(named: "artwork")!
-            let artwork = MPMediaItemArtwork.init(boundsSize: image.size) { _ -> UIImage in
-                image
-            }
-            MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-                MPMediaItemPropertyTitle: currentShowTitle ?? "...",
-                MPMediaItemPropertyArtist: "We Are Various",
-                MPMediaItemPropertyArtwork: artwork,
-                MPMediaItemPropertyPlaybackDuration: 0,
-                MPNowPlayingInfoPropertyIsLiveStream: true
-            ]
+            updateNowPlayingInfo()
+
             let commandCenter = MPRemoteCommandCenter.shared()
             commandCenter.playCommand.isEnabled = true
             commandCenter.stopCommand.isEnabled = true
@@ -90,12 +93,10 @@ class Radio: ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
-
     }
 
     func stop() {
-        //player.pause()
-        player.replaceCurrentItem(with: nil)
+        player.pause()
         isPlaying = false
     }
 
