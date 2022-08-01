@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var radio: Radio
     var body: some View {
-        RadioView()
+        RadioView(radio: radio)
     }
 }
 

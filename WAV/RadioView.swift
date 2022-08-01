@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RadioView: View {
-    @StateObject var radio = Radio.shared
+    @StateObject var radio: Radio
 
     var body: some View {
         VStack {
@@ -40,7 +40,8 @@ struct RadioView: View {
 
 struct RadioView_Previews: PreviewProvider {
     static var previews: some View {
-        Radio.shared.currentShowTitle = "preview title..."
-        return RadioView()
+        let radio = Radio.shared
+        radio.currentShowTitle = "preview title..."
+        return RadioView(radio: radio)
     }
 }
