@@ -10,7 +10,6 @@ import Foundation
 import MediaPlayer
 
 class Radio: ObservableObject {
-    private init() {}
     static let shared = Radio()
     let url = "https://icecast.wearevarious.com/live.mp3"
     let state = "https://icecast.wearevarious.com/status-json.xsl"

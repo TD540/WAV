@@ -25,7 +25,8 @@ struct RadioView: View {
                     .padding()
             }
             if let title = radio.currentShowTitle {
-                Text(title)
+                let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
+                Text(cleanTitle)
                     .font(Font.custom("pixelmix", size: 30))
                     .lineSpacing(15)
                     .padding()
