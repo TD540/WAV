@@ -10,6 +10,12 @@ import Foundation
 import MediaPlayer
 
 class Radio: ObservableObject {
+    init() {
+        play()
+        Task(priority: .medium){
+            await updateCurrentShowTitle()
+        }
+    }
     static let shared = Radio()
     let url = "https://icecast.wearevarious.com/live.mp3"
     let state = "https://icecast.wearevarious.com/status-json.xsl"
@@ -26,9 +32,12 @@ class Radio: ObservableObject {
                 let fixedJSON = naughtyJSON.replacingOccurrences(of: ":-,", with: ":\"\",")
                 let fixedData = fixedJSON.data(using: .utf8)!
                 do {
-                    let decodedIcestats = try JSONDecoder().decode(RadioState.self, from: fixedData)
-                    DispatchQueue.main.async {
-                        self.currentShowTitle = decodedIcestats.icestats.source.title
+                    let decoded = try JSONDecoder().decode(RadioState.self, from: fixedData)
+                    let newTitle = decoded.icestats.source.title
+                    if currentShowTitle != newTitle {
+                        DispatchQueue.main.async {
+                            self.currentShowTitle = newTitle
+                        }
                     }
                 } catch {
                     print("oops: \(String(describing: error))")
@@ -36,6 +45,13 @@ class Radio: ObservableObject {
             }
         } catch {
             print("URLSession failed \(String(describing: error))")
+        }
+
+        do {
+            sleep(10)
+        }
+        Task(priority: .medium){
+            await updateCurrentShowTitle()
         }
     }
 
