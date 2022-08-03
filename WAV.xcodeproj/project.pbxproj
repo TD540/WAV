@@ -19,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E90ED1C3289B06830009EC65 /* status-json.sample.xsl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "status-json.sample.xsl.json"; sourceTree = "<group>"; };
 		E91F682B28867FE7005985BF /* WAV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WAV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91F682E28867FE7005985BF /* WAVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVApp.swift; sourceTree = "<group>"; };
 		E91F683028867FE7005985BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +78,7 @@
 		E91F683428867FEC005985BF /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
+				E90ED1C3289B06830009EC65 /* status-json.sample.xsl.json */,
 				E91F683528867FEC005985BF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";

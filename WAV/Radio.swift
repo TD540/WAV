@@ -10,45 +10,51 @@ import Foundation
 import MediaPlayer
 
 class Radio: ObservableObject {
-    init() {
-        Task(priority: .medium){
-            await updateCurrentShowTitle()
-        }
-    }
     static let shared = Radio()
-    let url = "https://icecast.wearevarious.com/live.mp3"
+
+    init() {
+        updateCurrentShowTitle()
+    }
+
     let state = "https://icecast.wearevarious.com/status-json.xsl"
     let playerItem = AVPlayerItem(url: URL(string: "https://icecast.wearevarious.com/live.mp3")!)
     let player = AVPlayer()
+
     @Published var isPlaying = false
     @Published var currentShowTitle: String?
 
-    func updateCurrentShowTitle() async {
-        guard let url = URL(string: state) else { return }
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            if let naughtyJSON = String(data: data, encoding: .utf8) {
-                let fixedJSON = naughtyJSON.replacingOccurrences(of: ":-,", with: ":\"\",")
-                let fixedData = fixedJSON.data(using: .utf8)!
-                do {
-                    let decoded = try JSONDecoder().decode(RadioState.self, from: fixedData)
-                    let newTitle = decoded.icestats.source.title
-                    if currentShowTitle != newTitle {
-                        DispatchQueue.main.async {
-                            self.currentShowTitle = newTitle
-                            self.updateNowPlayingInfo()
+    func updateCurrentShowTitle() {
+        Task(priority: .medium) {
+            guard let url = URL(string: state) else { return }
+            do {
+                let (data, _) = try await URLSession.shared.data(from: url)
+                if let naughtyJSON = String(data: data, encoding: .utf8) {
+                    let fixedJSON = naughtyJSON.replacingOccurrences(of: ":-,", with: ":\"\",")
+                    let fixedData = fixedJSON.data(using: .utf8)!
+                    do {
+                        let decoded = try JSONDecoder().decode(RadioState.self, from: fixedData)
+                        let newTitle = decoded.icestats.source.title
+                        if currentShowTitle != newTitle {
+                            DispatchQueue.main.async {
+                                self.currentShowTitle = newTitle
+                                if self.isPlaying {
+                                    self.updateNowPlayingInfo()
+                                }
+                            }
                         }
+                    } catch {
+                        print(String(describing: error))
                     }
-                } catch {
-                    print(String(describing: error))
                 }
+            } catch {
+                print(String(describing: error))
             }
-        } catch {
-            print(String(describing: error))
-        }
-        Task(priority: .medium){
-            sleep(10)
-            await updateCurrentShowTitle()
+            // wait a minute
+            try await Task.sleep(nanoseconds: 60_000_000_000)
+            guard !Task.isCancelled else {
+                return
+            }
+            updateCurrentShowTitle()
         }
     }
 

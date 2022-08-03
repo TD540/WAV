@@ -32,9 +32,6 @@ struct RadioView: View {
                     .padding()
             }
         }
-        .task() {
-            await radio.updateCurrentShowTitle()
-        }
     }
 }
 
