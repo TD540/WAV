@@ -66,8 +66,7 @@
 				E98887AD28942DC2002E0349 /* Info.plist */,
 				E91F682E28867FE7005985BF /* WAVApp.swift */,
 				E91F683028867FE7005985BF /* ContentView.swift */,
-				E9A413642896CFCE00BF9D98 /* Radio.swift */,
-				E966D6C5288AF89900337C47 /* RadioView.swift */,
+				E9B229A8289C65A000AC55CF /* Radio */,
 				E98887A828942A78002E0349 /* Fonts */,
 				E91F683228867FEC005985BF /* Assets.xcassets */,
 				E91F683428867FEC005985BF /* Preview Content */,
@@ -92,6 +91,15 @@
 				E98887A428942A6D002E0349 /* pixelmix.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		E9B229A8289C65A000AC55CF /* Radio */ = {
+			isa = PBXGroup;
+			children = (
+				E9A413642896CFCE00BF9D98 /* Radio.swift */,
+				E966D6C5288AF89900337C47 /* RadioView.swift */,
+			);
+			path = Radio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

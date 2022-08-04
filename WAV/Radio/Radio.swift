@@ -5,26 +5,22 @@
 //  Created by Thomas on 31/07/2022.
 //
 
-import AVKit
 import Foundation
 import MediaPlayer
 
 class Radio: ObservableObject {
     static let shared = Radio()
 
-    init() {
-        updateCurrentShowTitle()
-    }
-
-    let state = "https://icecast.wearevarious.com/status-json.xsl"
-    let playerItem = AVPlayerItem(url: URL(string: "https://icecast.wearevarious.com/live.mp3")!)
+    private let state = "https://icecast.wearevarious.com/status-json.xsl"
+    private let playerItem = AVPlayerItem(url: URL(string: "https://icecast.wearevarious.com/live.mp3")!)
     let player = AVPlayer()
 
+    private var task: Task<Void, Error>?
     @Published var isPlaying = false
-    @Published var currentShowTitle: String?
+    @Published var title: String?
 
-    func updateCurrentShowTitle() {
-        Task(priority: .medium) {
+    func updateTitle() {
+        task = Task(priority: .medium) {
             guard let url = URL(string: state) else { return }
             do {
                 let (data, _) = try await URLSession.shared.data(from: url)
@@ -34,11 +30,11 @@ class Radio: ObservableObject {
                     do {
                         let decoded = try JSONDecoder().decode(RadioState.self, from: fixedData)
                         let newTitle = decoded.icestats.source.title
-                        if currentShowTitle != newTitle {
+                        if title != newTitle {
                             DispatchQueue.main.async {
-                                self.currentShowTitle = newTitle
+                                self.title = newTitle
                                 if self.isPlaying {
-                                    self.updateNowPlayingInfo()
+                                    self.updateInfoCenter()
                                 }
                             }
                         }
@@ -51,20 +47,24 @@ class Radio: ObservableObject {
             }
             // wait a minute
             try await Task.sleep(nanoseconds: 60_000_000_000)
-            guard !Task.isCancelled else {
-                return
-            }
-            updateCurrentShowTitle()
+            guard !Task.isCancelled else { return }
+            updateTitle()
         }
     }
 
-    func updateNowPlayingInfo() {
-        let image = UIImage(named: "artwork")!
+    func cancelUpdateUnlessPlaying() {
+        if !isPlaying {
+            task?.cancel()
+        }
+    }
+
+    func updateInfoCenter(image: UIImage = UIImage(named: "artwork")!, title: String? = nil) {
         let artwork = MPMediaItemArtwork.init(boundsSize: image.size) { _ -> UIImage in
             image
         }
+        let title = title ?? title
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-            MPMediaItemPropertyTitle: currentShowTitle ?? "...",
+            MPMediaItemPropertyTitle: title ?? "...",
             MPMediaItemPropertyArtist: "We Are Various",
             MPMediaItemPropertyArtwork: artwork,
             MPMediaItemPropertyPlaybackDuration: 0,
@@ -82,7 +82,7 @@ class Radio: ObservableObject {
             try AVAudioSession.sharedInstance().setCategory(.playback)
             try AVAudioSession.sharedInstance().setActive(true)
 
-            updateNowPlayingInfo()
+            updateInfoCenter()
 
             let commandCenter = MPRemoteCommandCenter.shared()
             commandCenter.playCommand.isEnabled = true

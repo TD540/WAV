@@ -24,7 +24,7 @@ struct RadioView: View {
                     .aspectRatio(contentMode: .fit)
                     .padding()
             }
-            if let title = radio.currentShowTitle {
+            if let title = radio.title {
                 let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
                 Text(cleanTitle)
                     .font(Font.custom("pixelmix", size: 30))
@@ -32,13 +32,19 @@ struct RadioView: View {
                     .padding()
             }
         }
+        .onAppear {
+            radio.updateTitle()
+        }
+        .onDisappear {
+            radio.cancelUpdateUnlessPlaying()
+        }
     }
 }
 
 struct RadioView_Previews: PreviewProvider {
     static var previews: some View {
         let radio = Radio.shared
-        radio.currentShowTitle = "preview title..."
+        radio.title = "preview title..."
         return RadioView(radio: radio)
     }
 }
