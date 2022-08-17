@@ -17,6 +17,7 @@
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
 		E98887AC28942A91002E0349 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887AB28942A91002E0349 /* readme.txt */; };
 		E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A413642896CFCE00BF9D98 /* Radio.swift */; };
+		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		E98887AB28942A91002E0349 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		E98887AD28942DC2002E0349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E9A413642896CFCE00BF9D98 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
+		E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelButton.swift; path = WAV/PixelButton.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			children = (
 				E9A413642896CFCE00BF9D98 /* Radio.swift */,
 				E966D6C5288AF89900337C47 /* RadioView.swift */,
+				E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */,
 			);
 			path = Radio;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				E91F683128867FE7005985BF /* ContentView.swift in Sources */,
 				E91CCD7E289E8D0A00F2E3C6 /* ParsingXML.swift in Sources */,
 				E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */,
+				E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */,
 				E966D6C6288AF89900337C47 /* RadioView.swift in Sources */,
 				E91F682F28867FE7005985BF /* WAVApp.swift in Sources */,
 			);
