@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct PixelButton: View {
-    // @Binding
-    @State
-    var isPlaying: Bool = false
-    @State var lastUpdate = Date()
+    @Binding var isPlaying: Bool
+    @State var currentGrid = [[Int]]()
+    @State var transition = [[[Int]]]()
     var color = Color.accentColor
     let pauseGrid = [
         [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
@@ -53,8 +52,8 @@ struct PixelButton: View {
         [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     ]
-    func nextGrid(firstGrid: [[Int]], secondGrid: [[Int]]) ->  [[Int]] {
-        var nextGrid = [[Int]]()
+    private func createRandomGrid(from firstGrid: [[Int]], and secondGrid: [[Int]]) ->  [[Int]] {
+        var randomGrid = [[Int]]()
         var index = 0
         for line in firstGrid {
             var pIndex = 0
@@ -66,55 +65,67 @@ struct PixelButton: View {
                 } else {
                     let odds = Int.random(in: 0...100)
                     nextLine.append(
-                        odds < 50 ? newPixel : pixel
+                        odds < 20 ? newPixel : pixel
                     )
                 }
                 pIndex += 1
             }
-            nextGrid.append(nextLine)
+            randomGrid.append(nextLine)
             index += 1
         }
-        return nextGrid
+        return randomGrid
     }
-    func randomTransitionGrids() -> [[[Int]]] {
-        let randomGrid1 = nextGrid(firstGrid: playGrid, secondGrid: pauseGrid)
-        let randomGrid2 = nextGrid(firstGrid: randomGrid1, secondGrid: pauseGrid)
-        let randomGrid3 = nextGrid(firstGrid: randomGrid2, secondGrid: pauseGrid)
-        return [playGrid, randomGrid1, randomGrid2, randomGrid3, pauseGrid]
+    private func newRandomTransition() -> [[[Int]]] {
+        let startGrid = isPlaying ? playGrid : pauseGrid
+        let endGrid = isPlaying ?  pauseGrid : playGrid
+        let randomGrid1 = createRandomGrid(from: startGrid, and: endGrid)
+        let randomGrid2 = createRandomGrid(from: randomGrid1, and: endGrid)
+        let randomGrid3 = createRandomGrid(from: randomGrid2, and: endGrid)
+        let randomGrid4 = createRandomGrid(from: randomGrid3, and: endGrid)
+        let randomGrid5 = createRandomGrid(from: randomGrid4, and: endGrid)
+        let randomGrid6 = createRandomGrid(from: randomGrid5, and: endGrid)
+        return [
+            startGrid,
+            randomGrid1,
+            randomGrid2,
+            randomGrid3,
+            randomGrid4,
+            randomGrid5,
+            randomGrid6,
+            endGrid
+        ]
     }
-    func pixelButtonView(for date: Date) -> some View {
-        if date > lastUpdate  {
-            Date.now
-        }
-        lastUpdate = date
-        return VStack(spacing: 0) {
-            ForEach(playGrid, id:\.self) { line in
+    var body: some View {
+        VStack(spacing: 0) {
+            ForEach(currentGrid, id:\.self) { line in
                 HStack(spacing: 0) {
                     ForEach(line, id:\.self) { pixel in
                         Rectangle()
                             .fill(pixel == 1 ? color : .clear)
-                }
+                    }
                     .aspectRatio(1, contentMode: .fit)
                 }
             }
         }
-    }
-    var body: some View {
-        VStack {
-            Text(isPlaying ? "playing" : "not playing")
-
-            TimelineView(.animation) { context in
-                pixelButtonView(for: context.date)
+        .onChange(of: isPlaying, perform: { _ in
+            transition = newRandomTransition()
+            var runCount = 0
+            Timer.scheduledTimer(withTimeInterval: 0.04, repeats: true) { timer in
+                currentGrid = transition[runCount]
+                runCount += 1
+                if runCount == transition.count {
+                    timer.invalidate()
+                }
             }
-            .onTapGesture {
-                isPlaying.toggle()
-            }
+        })
+        .onAppear {
+            currentGrid = isPlaying ? pauseGrid : playGrid
         }
     }
 }
 
-struct PixelButton_Previews: PreviewProvider {
-    static var previews: some View {
-        PixelButton(isPlaying: true)
-    }
-}
+//struct PixelButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PixelButton(isPlaying: false)
+//    }
+//}

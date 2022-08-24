@@ -18,7 +18,7 @@ struct RadioView: View {
                     radio.play()
                 }
             } label: {
-                PixelButton()
+                PixelButton(isPlaying: $radio.isPlaying)
             }
             if let title = radio.title {
                 let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
