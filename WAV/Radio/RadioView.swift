@@ -40,6 +40,12 @@ struct RadioView: View {
     }
 }
 
+struct NoButtonStyle: PrimitiveButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+    }
+}
+
 struct RadioView_Previews: PreviewProvider {
     static var previews: some View {
         let radio = Radio.shared

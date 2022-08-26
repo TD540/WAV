@@ -2,130 +2,133 @@
 //  PixelButton.swift
 //  WAV
 //
-//  Created by Thomas on 17/08/2022.
+//  Created by Thomas on 17/08/2022,
+//  Preview in RadioView.swift
 //
 
 import SwiftUI
 
 struct PixelButton: View {
     @Binding var isPlaying: Bool
-    @State var currentGrid = [[Int]]()
-    @State var transition = [[[Int]]]()
-    var color = Color.accentColor
-    let pauseGrid = [
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1]
-    ]
-    let playGrid = [
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
-        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ]
-    private func createRandomGrid(from firstGrid: [[Int]], and secondGrid: [[Int]]) ->  [[Int]] {
-        var randomGrid = [[Int]]()
+    @State private var grid = Grid()
+    private let pauseGrid = Grid(
+        lines: [
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1]
+        ]
+    )
+    private let playGrid = Grid(
+        lines: [
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+            [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        ]
+    )
+    var body: some View {
+        Canvas { context, size in
+            var path = Path()
+            let size = size.width / Double(12)
+            for line in 0 ..< grid.lines.count {
+                for pixel in 0 ..< grid.lines[line].count {
+                    if grid.lines[line][pixel] == 1 {
+                        let startX = size * Double(pixel)
+                        let startY = size * Double(line)
+                        let rect = CGRect(x: startX, y: startY, width: size, height: size)
+                        path.addRect(rect)
+                    }
+
+                }
+            }
+            context.fill(path, with: .color(.accentColor))
+        }
+        .aspectRatio(6/9, contentMode: .fit)
+        .onAppear {
+            grid = isPlaying ? pauseGrid : playGrid
+        }
+        .onChange(of: isPlaying, perform: { _ in
+            let transition = pixelGridTransition()
+            var count = 0
+            Timer.scheduledTimer(withTimeInterval: 0.015, repeats: true) { timer in
+                grid = Grid(lines: transition.grids[count].lines)
+                count += 1
+                if count == transition.grids.count {
+                    timer.invalidate()
+                }
+            }
+        })
+    }
+    private func randomGrid(from first: Grid, to second: Grid) ->  Grid {
+        var randomGrid = Grid()
         var index = 0
-        for line in firstGrid {
+        for line in first.lines {
             var pIndex = 0
             var nextLine = [Int]()
             for pixel in line {
-                let newPixel = secondGrid[index][pIndex]
+                let newPixel = second.lines[index][pIndex]
                 if pixel == newPixel {
                     nextLine.append(pixel)
                 } else {
                     let odds = Int.random(in: 0...100)
                     nextLine.append(
-                        odds < 20 ? newPixel : pixel
+                        odds < 10 ? newPixel : pixel
                     )
                 }
                 pIndex += 1
             }
-            randomGrid.append(nextLine)
+            randomGrid.lines.append(nextLine)
             index += 1
         }
         return randomGrid
     }
-    private func newRandomTransition() -> [[[Int]]] {
-        let startGrid = isPlaying ? playGrid : pauseGrid
-        let endGrid = isPlaying ?  pauseGrid : playGrid
-        let randomGrid1 = createRandomGrid(from: startGrid, and: endGrid)
-        let randomGrid2 = createRandomGrid(from: randomGrid1, and: endGrid)
-        let randomGrid3 = createRandomGrid(from: randomGrid2, and: endGrid)
-        let randomGrid4 = createRandomGrid(from: randomGrid3, and: endGrid)
-        let randomGrid5 = createRandomGrid(from: randomGrid4, and: endGrid)
-        let randomGrid6 = createRandomGrid(from: randomGrid5, and: endGrid)
-        return [
-            startGrid,
-            randomGrid1,
-            randomGrid2,
-            randomGrid3,
-            randomGrid4,
-            randomGrid5,
-            randomGrid6,
-            endGrid
-        ]
+    private func pixelGridTransition() -> Transition {
+        let first = isPlaying ? playGrid : pauseGrid
+        let last = isPlaying ? pauseGrid : playGrid
+        let steps = 10
+        var transition = Transition()
+        transition.grids.append(first)
+        for _ in 0...steps {
+            transition.grids.append(
+                randomGrid(from: transition.grids.last!, to: last)
+            )
+        }
+        transition.grids.append(last)
+        return transition
     }
-    var body: some View {
-        VStack(spacing: 0) {
-            ForEach(currentGrid, id:\.self) { line in
-                HStack(spacing: 0) {
-                    ForEach(line, id:\.self) { pixel in
-                        Rectangle()
-                            .fill(pixel == 1 ? color : .clear)
-                    }
-                    .aspectRatio(1, contentMode: .fit)
-                }
-            }
-        }
-        .onChange(of: isPlaying, perform: { _ in
-            transition = newRandomTransition()
-            var runCount = 0
-            Timer.scheduledTimer(withTimeInterval: 0.04, repeats: true) { timer in
-                currentGrid = transition[runCount]
-                runCount += 1
-                if runCount == transition.count {
-                    timer.invalidate()
-                }
-            }
-        })
-        .onAppear {
-            currentGrid = isPlaying ? pauseGrid : playGrid
-        }
+    private struct Grid {
+        var lines = [[Int]]()
+    }
+    private struct Transition {
+        var grids = [Grid]()
     }
 }
-
-//struct PixelButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PixelButton(isPlaying: false)
-//    }
-//}
