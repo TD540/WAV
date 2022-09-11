@@ -10,6 +10,7 @@ import SwiftUI
 struct RadioView: View {
     @StateObject var radio: Radio
     var body: some View {
+        Group {
         VStack(spacing: 0) {
             Button {
                 if radio.isPlaying {
@@ -19,18 +20,18 @@ struct RadioView: View {
                 }
             } label: {
                 PixelButton(isPlaying: $radio.isPlaying)
+
             }
             if let title = radio.title {
                 let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
                 Text(cleanTitle)
                     .font(Font.custom("pixelmix", size: 28))
                     .lineSpacing(4)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.vertical)
+                    .padding(.top)
             }
         }
-        .frame(maxHeight: .infinity, alignment: .top)
-        .padding()
+        }
+        .frame(maxWidth: 300)
         .onAppear {
             radio.updateTitle()
         }
