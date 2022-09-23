@@ -19,6 +19,7 @@ class Radio: ObservableObject {
     @Published var isPlaying = false
     //    @Published var isLive = false
     @Published var title: String?
+    @Published var artURL: URL?
 
     func updateTitle() {
         task = Task(priority: .medium) {
@@ -34,6 +35,8 @@ class Radio: ObservableObject {
                     if title != newTitle {
                         DispatchQueue.main.async {
                             self.title = newTitle
+                            let artURLString = decoded.nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
+                            self.artURL = URL(string: artURLString)
                         }
                     }
                 } catch {
@@ -50,14 +53,7 @@ class Radio: ObservableObject {
         }
     }
 
-    func cancelUpdateUnlessPlaying() {
-        if !isPlaying {
-            task?.cancel()
-        }
-    }
-
     func updateInfoCenter() {
-        //        let image = isLive ? UIImage(named: "WAVIcon-live")! : UIImage(named: "WAVIcon")!
         let image = UIImage(named: "WAVIcon")!
         let artwork = MPMediaItemArtwork.init(boundsSize: image.size) { _ -> UIImage in
             image
@@ -70,19 +66,15 @@ class Radio: ObservableObject {
             MPNowPlayingInfoPropertyIsLiveStream: true
         ]
     }
-
     func play() {
         player.replaceCurrentItem(with: nil)
         player.replaceCurrentItem(with: playerItem)
         player.play()
         isPlaying = true
-
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback)
             try AVAudioSession.sharedInstance().setActive(true)
-
             updateInfoCenter()
-
             let commandCenter = MPRemoteCommandCenter.shared()
             commandCenter.playCommand.isEnabled = true
             commandCenter.stopCommand.isEnabled = true
@@ -99,10 +91,10 @@ class Radio: ObservableObject {
             print(error.localizedDescription)
         }
     }
-
     func stop() {
         player.pause()
         isPlaying = false
+        task?.cancel()
     }
 
 }
@@ -113,6 +105,7 @@ struct NowPlayingAPI: Decodable {
         let song: Song
         struct Song: Decodable {
             let text: String
+            let art: String
         }
     }
 }

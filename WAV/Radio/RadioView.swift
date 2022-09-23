@@ -10,8 +10,21 @@ import SwiftUI
 struct RadioView: View {
     @StateObject var radio: Radio
     var body: some View {
-        Group {
-        VStack(spacing: 0) {
+        VStack {
+            if let artURL = radio.artURL {
+                AsyncImage(url: artURL) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                } placeholder: {}
+            }
+            if let title = radio.title {
+                let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
+                Text(cleanTitle)
+                    .font(Font.custom("pixelmix", size: 28))
+                    .lineSpacing(4)
+                    .padding()
+            }
             Button {
                 if radio.isPlaying {
                     radio.stop()
@@ -20,23 +33,11 @@ struct RadioView: View {
                 }
             } label: {
                 PixelButton(isPlaying: $radio.isPlaying)
-
-            }
-            if let title = radio.title {
-                let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
-                Text(cleanTitle)
-                    .font(Font.custom("pixelmix", size: 28))
-                    .lineSpacing(4)
-                    .padding(.top)
+                    .frame(maxWidth: 100)
             }
         }
-        }
-        .frame(maxWidth: 300)
         .onAppear {
             radio.updateTitle()
-        }
-        .onDisappear {
-            radio.cancelUpdateUnlessPlaying()
         }
     }
 }
