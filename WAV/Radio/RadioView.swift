@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MarqueeText
 
 struct RadioView: View {
     @StateObject var radio: Radio
@@ -16,14 +17,22 @@ struct RadioView: View {
                     image
                         .resizable()
                         .scaledToFit()
-                } placeholder: {}
+                } placeholder: {
+                    Rectangle()
+                        .fill(.red)
+                        .aspectRatio(contentMode: .fit)
+                }
             }
             if let title = radio.title {
                 let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
-                Text(cleanTitle)
-                    .font(Font.custom("pixelmix", size: 28))
-                    .lineSpacing(4)
-                    .padding()
+                MarqueeText(
+                    text: cleanTitle,
+                    font: UIFont(name: "pixelmix", size: 38)!,
+                    leftFade: 0,
+                    rightFade: 0,
+                    startDelay: 2
+                )
+                .padding()
             }
             Button {
                 if radio.isPlaying {
@@ -35,7 +44,9 @@ struct RadioView: View {
                 PixelButton(isPlaying: $radio.isPlaying)
                     .frame(maxWidth: 100)
             }
+            Spacer()
         }
+        .edgesIgnoringSafeArea(.top)
         .onAppear {
             radio.updateTitle()
         }

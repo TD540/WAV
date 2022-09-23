@@ -54,17 +54,34 @@ class Radio: ObservableObject {
     }
 
     func updateInfoCenter() {
-        let image = UIImage(named: "WAVIcon")!
-        let artwork = MPMediaItemArtwork.init(boundsSize: image.size) { _ -> UIImage in
-            image
+        let title = title
+        if let url = artURL {
+            DispatchQueue.global().async {
+                if let data = try? Data(contentsOf: url) {
+                    if let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            let artwork = MPMediaItemArtwork.init(boundsSize: image.size) { _ -> UIImage in
+                                image
+                            }
+                            MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+                                MPMediaItemPropertyArtwork: artwork,
+                                MPMediaItemPropertyTitle: title ?? "Radio",
+                                MPMediaItemPropertyArtist: "We Are Various",
+                                MPMediaItemPropertyPlaybackDuration: 0,
+                                MPNowPlayingInfoPropertyIsLiveStream: true
+                            ]
+                        }
+                    }
+                }
+            }
+        } else {
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+                MPMediaItemPropertyTitle: title ?? "Radio",
+                MPMediaItemPropertyArtist: "We Are Various",
+                MPMediaItemPropertyPlaybackDuration: 0,
+                MPNowPlayingInfoPropertyIsLiveStream: true
+            ]
         }
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-            MPMediaItemPropertyTitle: title ?? "Radio",
-            MPMediaItemPropertyArtist: "We Are Various",
-            MPMediaItemPropertyArtwork: artwork,
-            MPMediaItemPropertyPlaybackDuration: 0,
-            MPNowPlayingInfoPropertyIsLiveStream: true
-        ]
     }
     func play() {
         player.replaceCurrentItem(with: nil)
