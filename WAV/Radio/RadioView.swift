@@ -19,21 +19,25 @@ struct RadioView: View {
                         .scaledToFit()
                 } placeholder: {
                     Rectangle()
-                        .fill(.red)
-                        .aspectRatio(contentMode: .fit)
+                        .fill(Color.secondary.opacity(0.2))
+                        .scaledToFit()
                 }
+                .shadow(radius: 25)
+                .padding()
             }
             if let title = radio.title {
                 let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
                 MarqueeText(
                     text: cleanTitle,
-                    font: UIFont(name: "pixelmix", size: 38)!,
+                    font: UIFont(name: "pixelmix", size: 16)!,
                     leftFade: 0,
                     rightFade: 0,
                     startDelay: 2
                 )
-                .padding()
+                .foregroundColor(.accentColor)
+
             }
+            Spacer()
             Button {
                 if radio.isPlaying {
                     radio.stop()
@@ -42,11 +46,10 @@ struct RadioView: View {
                 }
             } label: {
                 PixelButton(isPlaying: $radio.isPlaying)
-                    .frame(maxWidth: 100)
+                    .frame(maxWidth: 150)
             }
             Spacer()
         }
-        .edgesIgnoringSafeArea(.top)
         .onAppear {
             radio.updateTitle()
         }

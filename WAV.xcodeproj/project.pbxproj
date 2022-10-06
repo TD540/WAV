@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E91CCD7E289E8D0A00F2E3C6 /* ParsingXML.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91CCD7D289E8D0A00F2E3C6 /* ParsingXML.swift */; };
 		E91F682F28867FE7005985BF /* WAVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F682E28867FE7005985BF /* WAVApp.swift */; };
 		E91F683128867FE7005985BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F683028867FE7005985BF /* ContentView.swift */; };
 		E91F683328867FEC005985BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683228867FEC005985BF /* Assets.xcassets */; };
@@ -25,7 +24,6 @@
 		E90ED1C3289B06830009EC65 /* status-json.sample.20220803.xsl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "status-json.sample.20220803.xsl.json"; sourceTree = "<group>"; };
 		E91CCD7B289E7D6500F2E3C6 /* status-json.sample.20220806.xsl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "status-json.sample.20220806.xsl.json"; sourceTree = "<group>"; };
 		E91CCD7C289E7FA700F2E3C6 /* stream.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = stream.xml; sourceTree = "<group>"; };
-		E91CCD7D289E8D0A00F2E3C6 /* ParsingXML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParsingXML.swift; sourceTree = "<group>"; };
 		E91F682B28867FE7005985BF /* WAV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WAV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91F682E28867FE7005985BF /* WAVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVApp.swift; sourceTree = "<group>"; };
 		E91F683028867FE7005985BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,14 +50,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E91CCD7F289E9E1500F2E3C6 /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-				E91CCD7D289E8D0A00F2E3C6 /* ParsingXML.swift */,
-			);
-			path = Utilities;
-			sourceTree = "<group>";
-		};
 		E91F682228867FE7005985BF = {
 			isa = PBXGroup;
 			children = (
@@ -82,7 +72,6 @@
 				E98887AD28942DC2002E0349 /* Info.plist */,
 				E91F682E28867FE7005985BF /* WAVApp.swift */,
 				E91F683028867FE7005985BF /* ContentView.swift */,
-				E91CCD7F289E9E1500F2E3C6 /* Utilities */,
 				E9B229A8289C65A000AC55CF /* Radio */,
 				E98887A828942A78002E0349 /* Fonts */,
 				E91F683228867FEC005985BF /* Assets.xcassets */,
@@ -202,7 +191,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E91F683128867FE7005985BF /* ContentView.swift in Sources */,
-				E91CCD7E289E8D0A00F2E3C6 /* ParsingXML.swift in Sources */,
 				E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */,
 				E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */,
 				E966D6C6288AF89900337C47 /* RadioView.swift in Sources */,
