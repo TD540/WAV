@@ -31,12 +31,14 @@ class Radio: ObservableObject {
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     let decoded = try jsonDecoder.decode(NowPlayingAPI.self, from: data)
-                    let newTitle = decoded.nowPlaying.song.text
+                    let newTitle = decoded.nowPlaying.song.title
                     if title != newTitle {
                         DispatchQueue.main.async {
                             self.title = newTitle
                             let artURLString = decoded.nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
-                            self.artURL = URL(string: artURLString)
+                            if artURLString != "https://azuracast.wearevarious.com/static/img/generic_song.jpg" {
+                                self.artURL = URL(string: artURLString)
+                            }
                         }
                     }
                 } catch {
@@ -121,7 +123,7 @@ struct NowPlayingAPI: Decodable {
     struct NowPlaying: Decodable {
         let song: Song
         struct Song: Decodable {
-            let text: String
+            let title: String
             let art: String
         }
     }

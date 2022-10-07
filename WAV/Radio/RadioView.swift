@@ -9,22 +9,33 @@ import SwiftUI
 import MarqueeText
 
 struct RadioView: View {
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var radio: Radio
     var body: some View {
-        VStack {
-            if let artURL = radio.artURL {
-                AsyncImage(url: artURL) { image in
-                    image
+        VStack(spacing: 0) {
+            ZStack {
+                if let artURL = radio.artURL {
+                    AsyncImage(url: artURL) { image in
+                        image
+                            .resizable()
+                            .scaledToFit()
+                    } placeholder: {
+                        ZStack {
+                            Rectangle()
+                                .fill(Color.accentColor)
+                                .scaledToFit()
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        }
+                    }
+                } else {
+                    Image("Globe")
                         .resizable()
                         .scaledToFit()
-                } placeholder: {
-                    Rectangle()
-                        .fill(Color.secondary.opacity(0.2))
-                        .scaledToFit()
                 }
-                .shadow(radius: 25)
-                .padding()
             }
+            // .rotation3DEffect(.degrees(-10), axis: (x: -1, y: 0, z: 0), perspective: 0.3)
+            .shadow(color: .black.opacity(0.4), radius: 10, x: 0.0, y: 25.0)
             if let title = radio.title {
                 let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
                 MarqueeText(
@@ -34,8 +45,10 @@ struct RadioView: View {
                     rightFade: 0,
                     startDelay: 2
                 )
-                .foregroundColor(.accentColor)
-
+                .padding(10)
+                .foregroundColor(.white)
+                .background(.black)
+                .padding(.top, 15)
             }
             Spacer()
             Button {
@@ -46,10 +59,11 @@ struct RadioView: View {
                 }
             } label: {
                 PixelButton(isPlaying: $radio.isPlaying)
-                    .frame(maxWidth: 150)
+                    .frame(maxWidth: 130)
             }
             Spacer()
         }
+        .padding()
         .onAppear {
             radio.updateTitle()
         }
@@ -65,7 +79,7 @@ struct NoButtonStyle: PrimitiveButtonStyle {
 struct RadioView_Previews: PreviewProvider {
     static var previews: some View {
         let radio = Radio.shared
-        radio.title = "This is a very very very very very very long title"
+        radio.title = "Title"
         return RadioView(radio: radio)
     }
 }
