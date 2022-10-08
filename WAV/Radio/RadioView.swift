@@ -12,58 +12,61 @@ struct RadioView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var radio: Radio
     var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                if let artURL = radio.artURL {
-                    AsyncImage(url: artURL) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                    } placeholder: {
-                        ZStack {
-                            Rectangle()
-                                .fill(Color.accentColor)
+        VStack {
+            VStack(spacing: 20) {
+                Spacer()
+
+                ZStack {
+                    if let artURL = radio.artURL {
+                        AsyncImage(url: artURL) { image in
+                            image
+                                .resizable()
                                 .scaledToFit()
-                            ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        } placeholder: {
+                            ZStack {
+                                Rectangle()
+                                    .fill(Color.accentColor)
+                                    .scaledToFit()
+                                ProgressView()
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                            }
                         }
+                    } else {
+                        ZStack(alignment: .bottom) {
+                            Image("Globe")
+                                .resizable()
+                                .scaledToFit()
+                            if let title = radio.title {
+                                let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
+                                MarqueeText(
+                                    text: cleanTitle,
+                                    font: UIFont(name: "pixelmix", size: 18)!,
+                                    leftFade: 0,
+                                    rightFade: 0,
+                                    startDelay: 2
+                                )
+                                .foregroundColor(.accentColor)
+                            }
+                        }
+                        .aspectRatio(1, contentMode: .fit)
                     }
-                } else {
-                    Image("Globe")
-                        .resizable()
-                        .scaledToFit()
                 }
-            }
-            // .rotation3DEffect(.degrees(-10), axis: (x: -1, y: 0, z: 0), perspective: 0.3)
-            .shadow(color: .black.opacity(0.4), radius: 10, x: 0.0, y: 25.0)
-            if let title = radio.title {
-                let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
-                MarqueeText(
-                    text: cleanTitle,
-                    font: UIFont(name: "pixelmix", size: 16)!,
-                    leftFade: 0,
-                    rightFade: 0,
-                    startDelay: 2
-                )
-                .padding(10)
-                .foregroundColor(.white)
-                .background(.black)
-                .padding(.top, 15)
-            }
-            Spacer()
-            Button {
-                if radio.isPlaying {
-                    radio.stop()
-                } else {
-                    radio.play()
+                .shadow(color: .black.opacity(0.2), radius: 30, x: 0.0, y: 25.0)
+                //.rotation3DEffect(.degrees(-10), axis: (x: 1, y: 0, z: 0), perspective: 0.3)
+
+                Button {
+                    if radio.isPlaying {
+                        radio.stop()
+                    } else {
+                        radio.play()
+                    }
+                } label: {
+                    PixelButton(isPlaying: $radio.isPlaying)
                 }
-            } label: {
-                PixelButton(isPlaying: $radio.isPlaying)
-                    .frame(maxWidth: 130)
+
+                Spacer()
             }
-            Spacer()
         }
-        .padding()
         .onAppear {
             radio.updateTitle()
         }
