@@ -11,6 +11,7 @@ import MarqueeText
 struct RadioView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var radio: Radio
+    @ObservedObject var manager = MotionManager()
     var body: some View {
         VStack {
             VStack(spacing: 0) {
@@ -49,9 +50,8 @@ struct RadioView: View {
                         .aspectRatio(1, contentMode: .fit)
                     }
                 }
+                .modifier(ParallaxMotionModifier(manager: manager, magnitude: 10))
                 .padding()
-//                .shadow(color: .black.opacity(0.3), radius: 20, x: 0.0, y: 20.0)
-//                .rotation3DEffect(.degrees(15), axis: (x: 1, y: 0, z: 0), perspective: 0.4)
 
                 Button {
                     if radio.isPlaying {
@@ -63,7 +63,7 @@ struct RadioView: View {
                     PixelButton(isPlaying: $radio.isPlaying)
                 }
                 .offset(CGSize(width: 0, height: -70))
-                .shadow(color: .black.opacity(0.4), radius: 15, x: 0.0, y: -30.0)
+                .shadow(color: .black.opacity(0.3), radius: 15, x: 0.0, y: -30.0)
             }
         }
         .onAppear {

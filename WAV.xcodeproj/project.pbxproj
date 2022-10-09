@@ -15,6 +15,7 @@
 		E958BACA28F17E4300D37B13 /* WeekSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E958BAC928F17E4300D37B13 /* WeekSchedule.swift */; };
 		E958BACD28F17EFC00D37B13 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = E958BACC28F17EFC00D37B13 /* WebView */; };
 		E966D6C6288AF89900337C47 /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E966D6C5288AF89900337C47 /* RadioView.swift */; };
+		E970B3F828F3708000A7305E /* ParallaxMotionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970B3F728F3708000A7305E /* ParallaxMotionModifier.swift */; };
 		E98887A628942A70002E0349 /* pixelmix.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98887A428942A6D002E0349 /* pixelmix.ttf */; };
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
 		E98887AC28942A91002E0349 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887AB28942A91002E0349 /* readme.txt */; };
@@ -33,6 +34,7 @@
 		E91F683528867FEC005985BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E958BAC928F17E4300D37B13 /* WeekSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSchedule.swift; sourceTree = "<group>"; };
 		E966D6C5288AF89900337C47 /* RadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
+		E970B3F728F3708000A7305E /* ParallaxMotionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxMotionModifier.swift; sourceTree = "<group>"; };
 		E98887A428942A6D002E0349 /* pixelmix.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pixelmix.ttf; sourceTree = "<group>"; };
 		E98887A928942A8D002E0349 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		E98887AB28942A91002E0349 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				E9A413642896CFCE00BF9D98 /* Radio.swift */,
 				E966D6C5288AF89900337C47 /* RadioView.swift */,
 				E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */,
+				E970B3F728F3708000A7305E /* ParallaxMotionModifier.swift */,
 			);
 			path = Radio;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 				E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */,
 				E966D6C6288AF89900337C47 /* RadioView.swift in Sources */,
 				E958BACA28F17E4300D37B13 /* WeekSchedule.swift in Sources */,
+				E970B3F828F3708000A7305E /* ParallaxMotionModifier.swift in Sources */,
 				E91F682F28867FE7005985BF /* WAVApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
