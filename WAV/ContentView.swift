@@ -9,8 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var radio: Radio
+    
     var body: some View {
-        RadioView(radio: radio)
+        TabView {
+            RadioView(radio: radio)
+                .tabItem {
+                    Image(systemName: "radio")
+                    Text("Radio")
+                }
+            WeekSchedule()
+                .tabItem {
+                    Image(systemName: "calendar")
+                    Text("Week Schedule")
+                }
+        }
     }
 }
 

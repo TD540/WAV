@@ -12,6 +12,8 @@
 		E91F683328867FEC005985BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683228867FEC005985BF /* Assets.xcassets */; };
 		E91F683628867FEC005985BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683528867FEC005985BF /* Preview Assets.xcassets */; };
 		E92342FE28DE47F000E9DD12 /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = E92342FD28DE47F000E9DD12 /* MarqueeText */; };
+		E958BACA28F17E4300D37B13 /* WeekSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E958BAC928F17E4300D37B13 /* WeekSchedule.swift */; };
+		E958BACD28F17EFC00D37B13 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = E958BACC28F17EFC00D37B13 /* WebView */; };
 		E966D6C6288AF89900337C47 /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E966D6C5288AF89900337C47 /* RadioView.swift */; };
 		E98887A628942A70002E0349 /* pixelmix.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98887A428942A6D002E0349 /* pixelmix.ttf */; };
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
@@ -29,6 +31,7 @@
 		E91F683028867FE7005985BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E91F683228867FEC005985BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E91F683528867FEC005985BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E958BAC928F17E4300D37B13 /* WeekSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekSchedule.swift; sourceTree = "<group>"; };
 		E966D6C5288AF89900337C47 /* RadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
 		E98887A428942A6D002E0349 /* pixelmix.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pixelmix.ttf; sourceTree = "<group>"; };
 		E98887A928942A8D002E0349 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
@@ -43,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E958BACD28F17EFC00D37B13 /* WebView in Frameworks */,
 				E92342FE28DE47F000E9DD12 /* MarqueeText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,6 +76,7 @@
 				E98887AD28942DC2002E0349 /* Info.plist */,
 				E91F682E28867FE7005985BF /* WAVApp.swift */,
 				E91F683028867FE7005985BF /* ContentView.swift */,
+				E958BAC928F17E4300D37B13 /* WeekSchedule.swift */,
 				E9B229A8289C65A000AC55CF /* Radio */,
 				E98887A828942A78002E0349 /* Fonts */,
 				E91F683228867FEC005985BF /* Assets.xcassets */,
@@ -129,6 +134,7 @@
 			name = WAV;
 			packageProductDependencies = (
 				E92342FD28DE47F000E9DD12 /* MarqueeText */,
+				E958BACC28F17EFC00D37B13 /* WebView */,
 			);
 			productName = WAV;
 			productReference = E91F682B28867FE7005985BF /* WAV.app */;
@@ -160,6 +166,7 @@
 			mainGroup = E91F682228867FE7005985BF;
 			packageReferences = (
 				E92342FC28DE47F000E9DD12 /* XCRemoteSwiftPackageReference "MarqueeText" */,
+				E958BACB28F17EFC00D37B13 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
 			);
 			productRefGroup = E91F682C28867FE7005985BF /* Products */;
 			projectDirPath = "";
@@ -194,6 +201,7 @@
 				E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */,
 				E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */,
 				E966D6C6288AF89900337C47 /* RadioView.swift in Sources */,
+				E958BACA28F17E4300D37B13 /* WeekSchedule.swift in Sources */,
 				E91F682F28867FE7005985BF /* WAVApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +419,14 @@
 				kind = branch;
 			};
 		};
+		E958BACB28F17EFC00D37B13 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kylehickinson/SwiftUI-WebView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -418,6 +434,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E92342FC28DE47F000E9DD12 /* XCRemoteSwiftPackageReference "MarqueeText" */;
 			productName = MarqueeText;
+		};
+		E958BACC28F17EFC00D37B13 /* WebView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E958BACB28F17EFC00D37B13 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */;
+			productName = WebView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
