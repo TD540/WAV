@@ -13,9 +13,7 @@ struct RadioView: View {
     @StateObject var radio: Radio
     var body: some View {
         VStack {
-            VStack(spacing: 20) {
-                Spacer()
-
+            VStack(spacing: 0) {
                 ZStack {
                     if let artURL = radio.artURL {
                         AsyncImage(url: artURL) { image in
@@ -51,8 +49,9 @@ struct RadioView: View {
                         .aspectRatio(1, contentMode: .fit)
                     }
                 }
-                .shadow(color: .black.opacity(0.2), radius: 30, x: 0.0, y: 25.0)
-                //.rotation3DEffect(.degrees(-10), axis: (x: 1, y: 0, z: 0), perspective: 0.3)
+                .padding()
+                .shadow(color: .black.opacity(0.3), radius: 20, x: 0.0, y: 20.0)
+                .rotation3DEffect(.degrees(15), axis: (x: 1, y: 0, z: 0), perspective: 0.4)
 
                 Button {
                     if radio.isPlaying {
@@ -63,8 +62,8 @@ struct RadioView: View {
                 } label: {
                     PixelButton(isPlaying: $radio.isPlaying)
                 }
-
-                Spacer()
+                .offset(CGSize(width: 0, height: -90))
+                .shadow(color: .black.opacity(0.3), radius: 20, x: 0.0, y: -20.0)
             }
         }
         .onAppear {
