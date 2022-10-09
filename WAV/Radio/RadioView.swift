@@ -50,8 +50,8 @@ struct RadioView: View {
                     }
                 }
                 .padding()
-                .shadow(color: .black.opacity(0.3), radius: 20, x: 0.0, y: 20.0)
-                .rotation3DEffect(.degrees(15), axis: (x: 1, y: 0, z: 0), perspective: 0.4)
+//                .shadow(color: .black.opacity(0.3), radius: 20, x: 0.0, y: 20.0)
+//                .rotation3DEffect(.degrees(15), axis: (x: 1, y: 0, z: 0), perspective: 0.4)
 
                 Button {
                     if radio.isPlaying {
@@ -62,8 +62,8 @@ struct RadioView: View {
                 } label: {
                     PixelButton(isPlaying: $radio.isPlaying)
                 }
-                .offset(CGSize(width: 0, height: -90))
-                .shadow(color: .black.opacity(0.3), radius: 20, x: 0.0, y: -20.0)
+                .offset(CGSize(width: 0, height: -70))
+                .shadow(color: .black.opacity(0.4), radius: 15, x: 0.0, y: -30.0)
             }
         }
         .onAppear {
