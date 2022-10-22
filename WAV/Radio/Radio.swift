@@ -12,12 +12,13 @@ class Radio: ObservableObject {
     static let shared = Radio()
 
     private let state = "https://azuracast.wearevarious.com/api/nowplaying/1"
+    private let liveState = "https://radio.wearevarious.com/stream.xml"
     private let playerItem = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
     let player = AVPlayer()
 
     private var task: Task<Void, Error>?
     @Published var isPlaying = false
-    //    @Published var isLive = false
+    @Published var isLive = false
     @Published var title: String?
     @Published var artURL: URL?
 
@@ -25,28 +26,39 @@ class Radio: ObservableObject {
         task = Task(priority: .medium) {
             guard let url = URL(string: state) else { return }
             do {
-                print("WAV: URLSession \(url)")
+                // print("WAV: URLSession \(url)")
                 let (data, _) = try await URLSession.shared.data(from: url)
                 do {
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     let decoded = try jsonDecoder.decode(NowPlayingAPI.self, from: data)
                     let newTitle = decoded.nowPlaying.song.title
-                    if title != newTitle {
-                        DispatchQueue.main.async {
-                            self.title = newTitle
-                            let artURLString = decoded.nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
-                            if artURLString != "https://azuracast.wearevarious.com/static/img/generic_song.jpg" {
-                                self.artURL = URL(string: artURLString)
+                    if newTitle == "Live Broadcast" {
+                        // first check if live broadcast
+                        // check live state
+                        updateLiveTitle()
+                    } else {
+                        // not live a live broadcast
+                        // check if the show title has changed
+                        if title != newTitle {
+                            // update title
+                            DispatchQueue.main.async {
+                                // title is a published var that triggers SwiftUI update
+                                // and UI changes must happen on main queue
+                                self.title = newTitle
+                                let artURLString = decoded.nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
+                                if !artURLString.hasSuffix("generic_song.jpg") {
+                                    self.artURL = URL(string: artURLString)
+                                }
                             }
                         }
                     }
                 } catch {
-                    print("WAV: JSONDecoder", String(describing: error))
+                    // print("WAV: JSONDecoder", String(describing: error))
                 }
 
             } catch {
-                print("WAV: URLSession", String(describing: error))
+                // print("WAV: URLSession", String(describing: error))
             }
             // wait a minute
             try await Task.sleep(nanoseconds: 60_000_000_000)
@@ -54,6 +66,32 @@ class Radio: ObservableObject {
             updateTitle()
         }
     }
+
+    func updateLiveTitle() {
+        Task(priority: .medium) {
+            guard let liveURL = URL(string: liveState) else { return }
+            do {
+                // print("WAV: URLSession \(liveURL)")
+                let (data, _) = try await URLSession.shared.data(from: liveURL)
+                let dom = MicroDOM(data: data)
+                let tree = dom.parse()
+                // print(tree?.tag ?? "") // todo: check later if this is still "live" when wearevarious.com radio is not live
+                if let tags = tree?.getElementsByTagName("title") {
+                    let newTitle = tags[0].data
+                    if title != newTitle {
+                        DispatchQueue.main.async {
+                            self.isLive = true
+                            self.title = newTitle
+                        }
+                    }
+                }
+            } catch {
+                print("WAV: URLSession", String(describing: error))
+            }
+        }
+    }
+
+
 
     func updateInfoCenter() {
         let title = title
