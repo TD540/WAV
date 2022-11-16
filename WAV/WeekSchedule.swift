@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import WebView
 import WebKit
 
 struct WeekSchedule: View {
