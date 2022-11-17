@@ -14,13 +14,15 @@ struct ContentView: View {
         TabView {
             RadioView(radio: radio)
                 .tabItem {
-                    Image(systemName: "radio")
-                    Text("Radio")
+                    Label("Radio", systemImage: "radio")
                 }
             WeekSchedule()
                 .tabItem {
-                    Image(systemName: "calendar")
-                    Text("Week Schedule")
+                    Label("Schedule", systemImage: "calendar")
+                }
+            Text("Coming (back) soon")
+                .tabItem {
+                    Label("Archive", systemImage: "waveform.path")
                 }
         }
     }
