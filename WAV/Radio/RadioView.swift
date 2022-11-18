@@ -27,7 +27,7 @@ struct RadioView: View {
                     NoArtwork()
                 }
             }
-            .shadow(color: .black.opacity(0.05), radius: 15, x: 0.0, y: 15.0)
+            .shadow(color: .black.opacity(0.3), radius: 10, x: 0.0, y: 15.0)
             .padding(.bottom, -50)
 
             // Radio Button

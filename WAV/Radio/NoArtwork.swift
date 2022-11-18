@@ -13,7 +13,7 @@ struct NoArtwork: View {
             .resizable()
             .scaledToFit()
             .aspectRatio(1, contentMode: .fit)
-            .border(.black.opacity(0.1))
+            .border(.black)
     }
 }
 

@@ -29,15 +29,15 @@ struct ContentView: View {
         TabView {
             RadioView(radio: radio)
                 .tabItem {
-                    Label("Radio", systemImage: "dot.radiowaves.left.and.right")
+                    Label("LIVE", systemImage: "dot.radiowaves.left.and.right")
                 }
             Schedule()
                 .tabItem {
-                    Label("Schedule", systemImage: "calendar.badge.clock")
+                    Label("SCHEDULE", systemImage: "calendar.badge.clock")
                 }
             Archive()
                 .tabItem {
-                    Label("Archive", systemImage: "square.stack")
+                    Label("ARCHIVE", systemImage: "square.stack")
                 }
         }
     }
