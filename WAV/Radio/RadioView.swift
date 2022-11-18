@@ -12,23 +12,25 @@ struct RadioView: View {
     @StateObject var radio: Radio
     @ObservedObject var manager = MotionManager()
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             // Radio Image
+            //            ZStack {
+
+            NoArtworkBackup()
+
             Group {
                 if let artURL = radio.artURL {
                     AsyncImage(url: artURL) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
+                        Artwork(image: image)
+                            .padding(.top, -70)
                     } placeholder: {
                         ArtworkPlaceholder()
                     }
-                } else {
-                    NoArtwork()
                 }
             }
             .shadow(color: .black.opacity(0.3), radius: 10, x: 0.0, y: 15.0)
-            .padding(.bottom, -50)
+
+            //            }
 
             // Radio Button
             Button {
@@ -40,12 +42,12 @@ struct RadioView: View {
             } label: {
                 PixelButton(isPlaying: $radio.isPlaying)
                     .shadow(color: .black.opacity(0.3), radius: 25, x: 0.0, y: -10.0)
-                    .padding(.top, -50)
+                    .padding(.top, -70)
             }
 
             // Radio Title
             if let title = radio.title {
-                let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
+                let cleanTitle = title.uppercased().applyingTransform(.stripDiacritics, reverse: false)!
                 MarqueeText(
                     text: cleanTitle,
                     font: UIFont(name: "pixelmix", size: 18)!,
@@ -53,11 +55,11 @@ struct RadioView: View {
                     rightFade: 0,
                     startDelay: 2
                 )
+                .padding(.top, 20)
                 .foregroundColor(.accentColor)
-                .padding(.top, 30)
             }
         }
-        .padding(.bottom, 50)
+        .padding(.bottom, 20)
         .onAppear {
             radio.updateTitle()
         }
@@ -73,7 +75,8 @@ struct NoButtonStyle: PrimitiveButtonStyle {
 struct RadioView_Previews: PreviewProvider {
     static var previews: some View {
         let radio = Radio.shared
-        radio.title = "Title"
+        //        radio.artURL = URL(string: "https://thumbnailer.mixcloud.com/unsafe/288x288/extaudio/5/4/b/2/b201-d6f9-4688-b1e5-efcc63dc8100")
+        //        radio.title = "Title"
         return RadioView(radio: radio)
     }
 }

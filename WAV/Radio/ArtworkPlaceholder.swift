@@ -9,13 +9,10 @@ import SwiftUI
 
 struct ArtworkPlaceholder: View {
     var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(Color.accentColor)
-                .scaledToFit()
-            ProgressView()
-                .progressViewStyle(CircularProgressViewStyle(tint: .white))
-        }
+        ProgressView()
+            .progressViewStyle(CircularProgressViewStyle(tint: .white))
+            .padding(5)
+            .background(Rectangle().fill(Color.accentColor))
     }
 }
 

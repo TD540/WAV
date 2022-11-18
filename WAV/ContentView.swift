@@ -10,21 +10,6 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var radio: Radio
 
-    init() {
-     UITabBarItem
-            .appearance()
-            .setTitleTextAttributes(
-                [
-                    NSAttributedString.Key.font:
-                        UIFont.init(
-                            name: "pixelmix",
-                            size: 9
-                        )!
-                ],
-                for: .normal
-            )
-    }
-    
     var body: some View {
         TabView {
             RadioView(radio: radio)
@@ -35,9 +20,13 @@ struct ContentView: View {
                 .tabItem {
                     Label("SCHEDULE", systemImage: "calendar.badge.clock")
                 }
-            Archive()
+            UnderConstruction()
                 .tabItem {
                     Label("ARCHIVE", systemImage: "square.stack")
+                }
+            UnderConstruction()
+                .tabItem {
+                    Label("CHAT", systemImage: "message")
                 }
         }
     }
@@ -49,5 +38,3 @@ struct ContentView_Previews: PreviewProvider {
             .environmentObject(Radio.shared)
     }
 }
-
-

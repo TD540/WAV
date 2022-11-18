@@ -7,18 +7,19 @@
 
 import SwiftUI
 
-struct NoArtwork: View {
+struct NoArtworkBackup: View {
     var body: some View {
-        Image("NoArtwork")
+        Image("NoArtworkBackup")
             .resizable()
+            .renderingMode(.template)
+            .foregroundColor(.accentColor)
             .scaledToFit()
             .aspectRatio(1, contentMode: .fit)
-            .border(.black)
     }
 }
 
-struct NoArtwork_Previews: PreviewProvider {
+struct NoArtworkBackup_Previews: PreviewProvider {
     static var previews: some View {
-        NoArtwork()
+        NoArtworkBackup()
     }
 }

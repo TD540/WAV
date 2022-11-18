@@ -32,7 +32,7 @@ class Radio: ObservableObject {
                     let jsonDecoder = JSONDecoder()
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     let decoded = try jsonDecoder.decode(NowPlayingAPI.self, from: data)
-                    let newTitle = decoded.nowPlaying.song.title
+                    let newTitle = decoded.nowPlaying.song.text
                     if newTitle == "Live Broadcast" {
                         // first check if live broadcast
                         // check live state
@@ -161,8 +161,12 @@ struct NowPlayingAPI: Decodable {
     struct NowPlaying: Decodable {
         let song: Song
         struct Song: Decodable {
-            let title: String
+            let text: String
             let art: String
         }
+    }
+    let live: Live
+    struct Live: Decodable {
+        let isLive: Bool
     }
 }
