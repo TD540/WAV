@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Placeholder: View {
+struct ArtworkPlaceholder: View {
     var body: some View {
         ZStack {
             Rectangle()
@@ -21,6 +21,6 @@ struct Placeholder: View {
 
 struct Placeholder_Previews: PreviewProvider {
     static var previews: some View {
-        Placeholder()
+        ArtworkPlaceholder()
     }
 }

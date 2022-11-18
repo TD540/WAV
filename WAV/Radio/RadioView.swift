@@ -13,47 +13,51 @@ struct RadioView: View {
     @ObservedObject var manager = MotionManager()
     var body: some View {
         VStack {
-            VStack(spacing: 0) {
-
-                // Radio Image
+            // Radio Image
+            Group {
                 if let artURL = radio.artURL {
                     AsyncImage(url: artURL) { image in
                         image
                             .resizable()
                             .scaledToFit()
                     } placeholder: {
-                        Placeholder()
+                        ArtworkPlaceholder()
                     }
                 } else {
                     NoArtwork()
                 }
+            }
+            .shadow(color: .black.opacity(0.05), radius: 15, x: 0.0, y: 15.0)
+            .padding(.bottom, -50)
 
-                // Radio Button
-                Button {
-                    if radio.isPlaying {
-                        radio.stop()
-                    } else {
-                        radio.play()
-                    }
-                } label: {
-                    PixelButton(isPlaying: $radio.isPlaying)
-                        .shadow(color: .black.opacity(0.3), radius: 25, x: 0.0, y: -10.0)
+            // Radio Button
+            Button {
+                if radio.isPlaying {
+                    radio.stop()
+                } else {
+                    radio.play()
                 }
+            } label: {
+                PixelButton(isPlaying: $radio.isPlaying)
+                    .shadow(color: .black.opacity(0.3), radius: 25, x: 0.0, y: -10.0)
+                    .padding(.top, -50)
+            }
 
-                // Radio Title
-                if let title = radio.title {
-                    let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
-                    MarqueeText(
-                        text: cleanTitle,
-                        font: UIFont(name: "pixelmix", size: 18)!,
-                        leftFade: 0,
-                        rightFade: 0,
-                        startDelay: 2
-                    )
-                    .foregroundColor(.accentColor)
-                }
+            // Radio Title
+            if let title = radio.title {
+                let cleanTitle = title.applyingTransform(.stripDiacritics, reverse: false)!
+                MarqueeText(
+                    text: cleanTitle,
+                    font: UIFont(name: "pixelmix", size: 18)!,
+                    leftFade: 0,
+                    rightFade: 0,
+                    startDelay: 2
+                )
+                .foregroundColor(.accentColor)
+                .padding(.top, 30)
             }
         }
+        .padding(.bottom, 50)
         .onAppear {
             radio.updateTitle()
         }

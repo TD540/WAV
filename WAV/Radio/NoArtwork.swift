@@ -9,14 +9,15 @@ import SwiftUI
 
 struct NoArtwork: View {
     var body: some View {
-        Image("Globe")
+        Image("NoArtwork")
             .resizable()
             .scaledToFit()
             .aspectRatio(1, contentMode: .fit)
+            .border(.black.opacity(0.1))
     }
 }
 
-struct Globe_Previews: PreviewProvider {
+struct NoArtwork_Previews: PreviewProvider {
     static var previews: some View {
         NoArtwork()
     }

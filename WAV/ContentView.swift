@@ -9,20 +9,35 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var radio: Radio
+
+    init() {
+     UITabBarItem
+            .appearance()
+            .setTitleTextAttributes(
+                [
+                    NSAttributedString.Key.font:
+                        UIFont.init(
+                            name: "pixelmix",
+                            size: 9
+                        )!
+                ],
+                for: .normal
+            )
+    }
     
     var body: some View {
         TabView {
             RadioView(radio: radio)
                 .tabItem {
-                    Label("Radio", systemImage: "radio")
+                    Label("Radio", systemImage: "dot.radiowaves.left.and.right")
                 }
-            WeekSchedule()
+            Schedule()
                 .tabItem {
-                    Label("Schedule", systemImage: "calendar")
+                    Label("Schedule", systemImage: "calendar.badge.clock")
                 }
-            Text("Coming (back) soon")
+            Archive()
                 .tabItem {
-                    Label("Archive", systemImage: "waveform.path")
+                    Label("Archive", systemImage: "square.stack")
                 }
         }
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 import WebKit
 
-struct WeekSchedule: View {
+struct Schedule: View {
     @StateObject var webViewStore: WebViewStore
     init() {
         /// Some CSS to hide everything but page content
@@ -37,6 +37,6 @@ struct WeekSchedule: View {
 
 struct WeekSchedule_Previews: PreviewProvider {
     static var previews: some View {
-        WeekSchedule()
+        Schedule()
     }
 }
