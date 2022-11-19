@@ -9,8 +9,6 @@ import Foundation
 import MediaPlayer
 
 class Radio: ObservableObject {
-    static let shared = Radio()
-
     private let state = "https://azuracast.wearevarious.com/api/nowplaying/1"
     private let liveState = "https://radio.wearevarious.com/stream.xml"
     private let playerItem = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
