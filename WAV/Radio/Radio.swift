@@ -22,7 +22,7 @@ class Radio: ObservableObject {
     @Published var title: String?
     @Published var artURL: URL?
 
-    func updateTitle() {
+    func update() {
         task = Task(priority: .medium) {
             guard let url = URL(string: state) else { return }
             do {
@@ -33,24 +33,13 @@ class Radio: ObservableObject {
                     jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                     let decoded = try jsonDecoder.decode(NowPlayingAPI.self, from: data)
                     let newTitle = decoded.nowPlaying.song.text
-                    if newTitle == "Live Broadcast" {
-                        // first check if live broadcast
-                        // check live state
+                    if decoded.live.isLive {
                         updateLiveTitle()
                     } else {
-                        // not live a live broadcast
-                        // check if the show title has changed
-                        if title != newTitle {
-                            // update title
-                            DispatchQueue.main.async {
-                                // title is a published var that triggers SwiftUI update
-                                // and UI changes must happen on main queue
-                                self.title = newTitle
-                                let artURLString = decoded.nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
-                                if !artURLString.hasSuffix("generic_song.jpg") {
-                                    self.artURL = URL(string: artURLString)
-                                }
-                            }
+                        updateTitle(newTitle: newTitle)
+                        let artURLString = decoded.nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
+                        if !artURLString.hasSuffix("generic_song.jpg") {
+                            self.artURL = URL(string: artURLString)
                         }
                     }
                 } catch {
@@ -63,19 +52,32 @@ class Radio: ObservableObject {
             // wait a minute
             try await Task.sleep(nanoseconds: 60_000_000_000)
             guard !Task.isCancelled else { return }
-            updateTitle()
+            update()
         }
     }
+    func updateTitle(newTitle: String) {
+            // not live a live broadcast
+            // check if the show title has changed
+            if title != newTitle {
+                // update title
+                DispatchQueue.main.async {
+                    // title is a published var that triggers SwiftUI update
+                    // and UI changes must happen on main queue
+                    self.title = newTitle
+                }
+            }
+    }
 
+    /// updateLiveTitle() parses stream.xml and updates title
     func updateLiveTitle() {
         Task(priority: .medium) {
             guard let liveURL = URL(string: liveState) else { return }
             do {
-                // print("WAV: URLSession \(liveURL)")
+                 print("WAV: URLSession \(liveURL)")
                 let (data, _) = try await URLSession.shared.data(from: liveURL)
                 let dom = MicroDOM(data: data)
                 let tree = dom.parse()
-                // print(tree?.tag ?? "") // todo: check later if this is still "live" when wearevarious.com radio is not live
+                 print(tree?.tag ?? "") // todo: check later if this is still "live" when wearevarious.com radio is not live
                 if let tags = tree?.getElementsByTagName("title") {
                     let newTitle = tags[0].data
                     if title != newTitle {

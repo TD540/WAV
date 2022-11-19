@@ -10,9 +10,8 @@ import SwiftUI
 struct ArtworkPlaceholder: View {
     var body: some View {
         ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-            .padding(5)
-            .background(Rectangle().fill(Color.accentColor))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .scaledToFit()
     }
 }
 

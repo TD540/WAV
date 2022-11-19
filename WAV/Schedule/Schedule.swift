@@ -9,16 +9,15 @@ import SwiftUI
 import WebKit
 
 struct Schedule: View {
-    @StateObject var webViewStore: WebViewStore
+    @StateObject var webViewStore: WebViewStore // check Extensions > WebView for more 
     init() {
-        /// Some CSS to hide everything but page content
-        let css = "body > :not(.box-wrapper), .menu-wrapper, .main-container > :not(.page-wrapper), #page-header {display: none !important}"
-        let source = "var style = document.createElement('style'); style.innerHTML = '\(css)'; document.head.appendChild(style)"
+        let hideEverythingExceptContentStyle = "body > :not(.box-wrapper), .menu-wrapper, .main-container > :not(.page-wrapper), #page-header {display: none !important} .main-container .row-container .row-parent { padding: 16px 36px }"
+        let appendStyle = "var style = document.createElement('style'); style.innerHTML = '\(hideEverythingExceptContentStyle)'; document.head.appendChild(style)"
         let userScript = WKUserScript(
-            source: source,
+            source: appendStyle,
             injectionTime: .atDocumentEnd,
             forMainFrameOnly: true,
-            in: .defaultClient
+            in: .world(name: "app")
         )
         let userContentController = WKUserContentController()
         userContentController.addUserScript(userScript)
@@ -28,10 +27,19 @@ struct Schedule: View {
         _webViewStore = StateObject(wrappedValue: store)
     }
     var body: some View {
-        WebView(webView: webViewStore.webView)
-            .onAppear {
-                webViewStore.webView.load(URLRequest(url: URL(string: "https://wearevarious.com/week-schedule")!))
-            }
+        VStack {
+            Image("WAV")
+                .resizable()
+                .renderingMode(.template)
+                .foregroundColor(.accentColor)
+                .scaledToFit()
+                .frame(maxHeight: 30)
+                .padding(.top, 20)
+            WebView(webView: webViewStore.webView)
+                .onAppear {
+                    webViewStore.webView.load(URLRequest(url: URL(string: "https://wearevarious.com/week-schedule")!))
+                }
+        }
     }
 }
 

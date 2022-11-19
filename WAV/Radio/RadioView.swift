@@ -13,24 +13,19 @@ struct RadioView: View {
     @ObservedObject var manager = MotionManager()
     var body: some View {
         VStack(spacing: 0) {
-            // Radio Image
-            //            ZStack {
+            RadioViewHeader()
 
-            NoArtworkBackup()
-
-            Group {
-                if let artURL = radio.artURL {
+            if let artURL = radio.artURL {
+                // Show Radio Artwork
+                Group {
                     AsyncImage(url: artURL) { image in
                         Artwork(image: image)
-                            .padding(.top, -70)
                     } placeholder: {
                         ArtworkPlaceholder()
                     }
                 }
+                .padding(.top, -70)
             }
-            .shadow(color: .black.opacity(0.3), radius: 10, x: 0.0, y: 15.0)
-
-            //            }
 
             // Radio Button
             Button {
@@ -61,7 +56,7 @@ struct RadioView: View {
         }
         .padding(.bottom, 20)
         .onAppear {
-            radio.updateTitle()
+            radio.update()
         }
     }
 }
@@ -75,8 +70,8 @@ struct NoButtonStyle: PrimitiveButtonStyle {
 struct RadioView_Previews: PreviewProvider {
     static var previews: some View {
         let radio = Radio.shared
-        //        radio.artURL = URL(string: "https://thumbnailer.mixcloud.com/unsafe/288x288/extaudio/5/4/b/2/b201-d6f9-4688-b1e5-efcc63dc8100")
-        //        radio.title = "Title"
+//                radio.artURL = URL(string: "https://thumbnailer.mixcloud.com/unsafe/288x288/extaudio/5/4/b/2/b201-d6f9-4688-b1e5-efcc63dc8100")
+                radio.title = "Title"
         return RadioView(radio: radio)
     }
 }

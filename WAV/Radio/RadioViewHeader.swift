@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NoArtworkBackup: View {
+struct RadioViewHeader: View {
     var body: some View {
         Image("NoArtworkBackup")
             .resizable()
@@ -18,8 +18,8 @@ struct NoArtworkBackup: View {
     }
 }
 
-struct NoArtworkBackup_Previews: PreviewProvider {
+struct RadioViewHeader_Previews: PreviewProvider {
     static var previews: some View {
-        NoArtworkBackup()
+        RadioViewHeader()
     }
 }
