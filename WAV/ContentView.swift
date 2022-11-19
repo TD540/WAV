@@ -24,7 +24,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("SCHEDULE", systemImage: "calendar.badge.clock")
                 }
-            UnderConstruction()
+            ArchiveView()
                 .tabItem {
                     Label("ARCHIVE", systemImage: "square.stack")
                 }

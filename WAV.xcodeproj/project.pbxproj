@@ -11,6 +11,16 @@
 		E91F683128867FE7005985BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F683028867FE7005985BF /* ContentView.swift */; };
 		E91F683328867FEC005985BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683228867FEC005985BF /* Assets.xcassets */; };
 		E91F683628867FEC005985BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683528867FEC005985BF /* Preview Assets.xcassets */; };
+		E93473A72928CBF300E2016C /* RecordBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E934739D2928CBF200E2016C /* RecordBoxView.swift */; };
+		E93473A82928CBF300E2016C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E934739E2928CBF200E2016C /* DataController.swift */; };
+		E93473A92928CBF300E2016C /* RecordBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E934739F2928CBF200E2016C /* RecordBoxViewModel.swift */; };
+		E93473AA2928CBF300E2016C /* WebPlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473A02928CBF200E2016C /* WebPlayerViewModel.swift */; };
+		E93473AB2928CBF300E2016C /* WebPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473A12928CBF200E2016C /* WebPlayerView.swift */; };
+		E93473AC2928CBF300E2016C /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473A22928CBF200E2016C /* RecordView.swift */; };
+		E93473AD2928CBF300E2016C /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473A32928CBF300E2016C /* ArchiveView.swift */; };
+		E93473AE2928CBF300E2016C /* RotatingButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473A42928CBF300E2016C /* RotatingButtonStyle.swift */; };
+		E93473AF2928CBF300E2016C /* userScript.js in Resources */ = {isa = PBXBuildFile; fileRef = E93473A52928CBF300E2016C /* userScript.js */; };
+		E93473B02928CBF300E2016C /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473A62928CBF300E2016C /* BlurView.swift */; };
 		E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E958BAC928F17E4300D37B13 /* Schedule.swift */; };
 		E961C5B92925206F0091FB0B /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5B82925206F0091FB0B /* WebView.swift */; };
 		E961C5BB292520D00091FB0B /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5BA292520D00091FB0B /* MarqueeText.swift */; };
@@ -40,6 +50,16 @@
 		E91F683028867FE7005985BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E91F683228867FEC005985BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E91F683528867FEC005985BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E934739D2928CBF200E2016C /* RecordBoxView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordBoxView.swift; sourceTree = "<group>"; };
+		E934739E2928CBF200E2016C /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		E934739F2928CBF200E2016C /* RecordBoxViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordBoxViewModel.swift; sourceTree = "<group>"; };
+		E93473A02928CBF200E2016C /* WebPlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPlayerViewModel.swift; sourceTree = "<group>"; };
+		E93473A12928CBF200E2016C /* WebPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPlayerView.swift; sourceTree = "<group>"; };
+		E93473A22928CBF200E2016C /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		E93473A32928CBF300E2016C /* ArchiveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveView.swift; sourceTree = "<group>"; };
+		E93473A42928CBF300E2016C /* RotatingButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatingButtonStyle.swift; sourceTree = "<group>"; };
+		E93473A52928CBF300E2016C /* userScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = userScript.js; sourceTree = "<group>"; };
+		E93473A62928CBF300E2016C /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
 		E958BAC928F17E4300D37B13 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		E961C5B82925206F0091FB0B /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		E961C5BA292520D00091FB0B /* MarqueeText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarqueeText.swift; sourceTree = "<group>"; };
@@ -98,6 +118,7 @@
 				E995B16729280CA9001EB77B /* Temp */,
 				E9F17F9E292788D400F0FC27 /* Extensions */,
 				E9B229A8289C65A000AC55CF /* Radio */,
+				E934739C2928CBB000E2016C /* Archive */,
 				E961C5C72925EF790091FB0B /* Schedule */,
 				E98887A828942A78002E0349 /* Fonts */,
 				E91F683428867FEC005985BF /* Preview Content */,
@@ -114,6 +135,23 @@
 				E91F683528867FEC005985BF /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E934739C2928CBB000E2016C /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				E93473A32928CBF300E2016C /* ArchiveView.swift */,
+				E93473A62928CBF300E2016C /* BlurView.swift */,
+				E934739E2928CBF200E2016C /* DataController.swift */,
+				E934739D2928CBF200E2016C /* RecordBoxView.swift */,
+				E934739F2928CBF200E2016C /* RecordBoxViewModel.swift */,
+				E93473A22928CBF200E2016C /* RecordView.swift */,
+				E93473A42928CBF300E2016C /* RotatingButtonStyle.swift */,
+				E93473A52928CBF300E2016C /* userScript.js */,
+				E93473A12928CBF200E2016C /* WebPlayerView.swift */,
+				E93473A02928CBF200E2016C /* WebPlayerViewModel.swift */,
+			);
+			path = Archive;
 			sourceTree = "<group>";
 		};
 		E961C5C72925EF790091FB0B /* Schedule */ = {
@@ -231,6 +269,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E93473AF2928CBF300E2016C /* userScript.js in Resources */,
 				E98887AC28942A91002E0349 /* readme.txt in Resources */,
 				E91F683628867FEC005985BF /* Preview Assets.xcassets in Resources */,
 				E98887AA28942A8D002E0349 /* license.txt in Resources */,
@@ -247,14 +286,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9FC53C0290084A600814244 /* MicroDOM.swift in Sources */,
+				E93473AE2928CBF300E2016C /* RotatingButtonStyle.swift in Sources */,
+				E93473AD2928CBF300E2016C /* ArchiveView.swift in Sources */,
 				E91F683128867FE7005985BF /* ContentView.swift in Sources */,
 				E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */,
 				E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */,
+				E93473AB2928CBF300E2016C /* WebPlayerView.swift in Sources */,
 				E966D6C6288AF89900337C47 /* RadioView.swift in Sources */,
+				E93473A72928CBF300E2016C /* RecordBoxView.swift in Sources */,
+				E93473B02928CBF300E2016C /* BlurView.swift in Sources */,
+				E93473AC2928CBF300E2016C /* RecordView.swift in Sources */,
+				E93473AA2928CBF300E2016C /* WebPlayerViewModel.swift in Sources */,
 				E995B16929280CB5001EB77B /* UnderConstruction.swift in Sources */,
 				E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */,
 				E961C5B92925206F0091FB0B /* WebView.swift in Sources */,
 				E961C5BB292520D00091FB0B /* MarqueeText.swift in Sources */,
+				E93473A82928CBF300E2016C /* DataController.swift in Sources */,
+				E93473A92928CBF300E2016C /* RecordBoxViewModel.swift in Sources */,
 				E961C5C629253FA80091FB0B /* RadioViewHeader.swift in Sources */,
 				E961C5BF292520EF0091FB0B /* MarqueeText-SwiftUI+Extension.swift in Sources */,
 				E9F17FA42927894A00F0FC27 /* Color.swift in Sources */,

@@ -9,12 +9,13 @@ import SwiftUI
 
 @main
 struct WAVApp: App {
-    @StateObject var radio = Radio.shared
+    @StateObject var radio = Radio()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(radio)
+                .environmentObject(DataController())
         }
     }
 }

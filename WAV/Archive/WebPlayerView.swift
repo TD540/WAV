@@ -1,0 +1,121 @@
+//
+//  WebPlayerView.swift
+//  WeAreVarious
+//
+//  Created by Thomas on 16/04/2021.
+//
+
+import SwiftUI
+
+struct WebPlayerView: View {
+    @StateObject private var viewModel: ViewModel
+    @Environment(\.colorScheme) var colorScheme
+
+    init(dataController: DataController) {
+        let viewModel = ViewModel(dataController: dataController)
+        _viewModel = StateObject(wrappedValue: viewModel)
+    }
+
+    var body: some View {
+        ZStack {
+            WebView(webView: viewModel.webViewStore.webView)
+                .frame(width: 0, height: 0)
+                .onChange(of: viewModel.playingRecord, perform: viewModel.onPlayingRecordChanging)
+
+            HStack {
+                Spacer()
+                if let playingRecord = viewModel.playingRecord {
+                    playingView(playingRecord: playingRecord)
+                } else {
+                    notPlayingView()
+                }
+                Spacer()
+            }
+            .background(
+                backgroundView()
+            )
+        }
+    }
+
+    func backgroundView() -> some View {
+        ZStack {
+            BlurView(style: .systemUltraThinMaterial)
+            if viewModel.playingRecord != nil {
+                if colorScheme == .light {
+                    Color("Pink")
+                    .blendMode(.multiply)
+                } else {
+                    Color.accentColor
+                        .blendMode(.multiply)
+                }
+            }
+        }
+        .edgesIgnoringSafeArea(.bottom)
+    }
+
+    func notPlayingView() -> some View {
+        Text("WE ARE VARIOUS")
+            .multilineTextAlignment(.center)
+            .font(Font.custom("pixelmix", size: 16))
+            .lineSpacing(16)
+            .padding()
+    }
+
+    func playingView(playingRecord: MixcloudCast) -> some View {
+        VStack {
+            Button(action: viewModel.playToggle) {
+                RecordView(pictureURL: playingRecord.pictureURL)
+            }
+            .frame(width: 256, height: 128)
+            .buttonStyle(RotatingButtonStyle(isRotating: viewModel.isPlaying))
+            .rotation3DEffect(.degrees(30), axis: (x: 0.1, y: 0, z: 0), perspective: 0.5)
+            .shadow(color: .black.opacity(0.6), radius: 10, x: 0.0, y: 15.0)
+
+            Text(
+                playingRecord.name
+                    .replacingOccurrences(
+                        of: " at we are various",
+                        with: "",
+                        options: .caseInsensitive
+                    )
+            )
+            .foregroundColor(.white)
+            .textCase(.uppercase)
+            .multilineTextAlignment(.center)
+            .font(Font.custom("pixelmix", size: 10))
+            .lineSpacing(8)
+            .padding(10)
+            .background(Color.black)
+        }
+    }
+}
+
+struct WebPlayerView_Previews: PreviewProvider {
+    static var previews: some View {
+        MixcloudCast.autoplay = false
+        return Group {
+            Group {
+                VStack {
+                    Spacer()
+                    WebPlayerView(dataController: DataController(disableAPI: true, previewPlaying: false))
+                }
+                VStack {
+                    Spacer()
+                    WebPlayerView(dataController: DataController(disableAPI: true, previewPlaying: true))
+                }
+            }
+            Group {
+                VStack {
+                    Spacer()
+                    WebPlayerView(dataController: DataController(disableAPI: true, previewPlaying: false))
+                }
+                VStack {
+                    Spacer()
+                    WebPlayerView(dataController: DataController(disableAPI: true, previewPlaying: true))
+                }
+            }
+            .preferredColorScheme(.dark)
+        }
+        .previewLayout(.fixed(width: 400.0, height: 250.0))
+    }
+}
