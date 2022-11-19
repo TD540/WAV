@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WebView
 import WebKit
 
 extension WebPlayerView {

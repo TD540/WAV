@@ -23,7 +23,7 @@ struct ArchiveView: View {
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
         ArchiveView()
-            .environmentObject(DataController(disableAPI: true, previewPlaying: false))
+            .environmentObject(DataController(disableAPI: false, previewPlaying: false))
             .preferredColorScheme(.light)
     }
 }

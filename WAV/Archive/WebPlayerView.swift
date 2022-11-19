@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WebView
 
 struct WebPlayerView: View {
     @StateObject private var viewModel: ViewModel
@@ -26,8 +27,6 @@ struct WebPlayerView: View {
                 Spacer()
                 if let playingRecord = viewModel.playingRecord {
                     playingView(playingRecord: playingRecord)
-                } else {
-                    notPlayingView()
                 }
                 Spacer()
             }
@@ -43,7 +42,7 @@ struct WebPlayerView: View {
             if viewModel.playingRecord != nil {
                 if colorScheme == .light {
                     Color("Pink")
-                    .blendMode(.multiply)
+                        .blendMode(.multiply)
                 } else {
                     Color.accentColor
                         .blendMode(.multiply)
@@ -71,21 +70,14 @@ struct WebPlayerView: View {
             .rotation3DEffect(.degrees(30), axis: (x: 0.1, y: 0, z: 0), perspective: 0.5)
             .shadow(color: .black.opacity(0.6), radius: 10, x: 0.0, y: 15.0)
 
-            Text(
-                playingRecord.name
-                    .replacingOccurrences(
-                        of: " at we are various",
-                        with: "",
-                        options: .caseInsensitive
-                    )
-            )
-            .foregroundColor(.white)
-            .textCase(.uppercase)
-            .multilineTextAlignment(.center)
-            .font(Font.custom("pixelmix", size: 10))
-            .lineSpacing(8)
-            .padding(10)
-            .background(Color.black)
+            Text(playingRecord.name)
+                .foregroundColor(.white)
+                .textCase(.uppercase)
+                .multilineTextAlignment(.center)
+                .font(Font.custom("pixelmix", size: 10))
+                .lineSpacing(8)
+                .padding(10)
+                .shadow(color: .black, radius: 5, x: 0, y: 5)
         }
     }
 }
@@ -93,29 +85,10 @@ struct WebPlayerView: View {
 struct WebPlayerView_Previews: PreviewProvider {
     static var previews: some View {
         MixcloudCast.autoplay = false
-        return Group {
-            Group {
-                VStack {
-                    Spacer()
-                    WebPlayerView(dataController: DataController(disableAPI: true, previewPlaying: false))
-                }
-                VStack {
-                    Spacer()
-                    WebPlayerView(dataController: DataController(disableAPI: true, previewPlaying: true))
-                }
-            }
-            Group {
-                VStack {
-                    Spacer()
-                    WebPlayerView(dataController: DataController(disableAPI: true, previewPlaying: false))
-                }
-                VStack {
-                    Spacer()
-                    WebPlayerView(dataController: DataController(disableAPI: true, previewPlaying: true))
-                }
-            }
-            .preferredColorScheme(.dark)
+        return VStack {
+            Spacer()
+            WebPlayerView(dataController: DataController(disableAPI: false, previewPlaying: true))
         }
-        .previewLayout(.fixed(width: 400.0, height: 250.0))
+        // .preferredColorScheme(.dark)
     }
 }
