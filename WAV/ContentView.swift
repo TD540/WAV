@@ -14,7 +14,11 @@ struct ContentView: View {
         TabView {
             RadioView(radio: radio)
                 .tabItem {
-                    Label("LIVE", systemImage: "dot.radiowaves.left.and.right")
+                    Label(
+                        radio.isLive ? "LIVE" : "RADIO",
+                        systemImage: radio.isLive ?
+                        "dot.radiowaves.left.and.right" : "radio"
+                    )
                 }
             Schedule()
                 .tabItem {
