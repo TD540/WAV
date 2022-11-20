@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var radio: Radio
+    @EnvironmentObject var dataController: DataController
 
     var body: some View {
         TabView {
@@ -24,7 +25,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("SCHEDULE", systemImage: "calendar.badge.clock")
                 }
-            ArchiveView()
+            ArchiveView(dataController: dataController)
                 .tabItem {
                     Label("ARCHIVE", systemImage: "square.stack")
                 }
@@ -40,5 +41,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(Radio())
+            .environmentObject(DataController())
     }
 }

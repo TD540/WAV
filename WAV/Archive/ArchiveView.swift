@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ArchiveView: View {
-    @EnvironmentObject var dataController: DataController
-    @Environment(\.colorScheme) var colorScheme
+    @StateObject var dataController: DataController
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -22,8 +21,7 @@ struct ArchiveView: View {
 
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveView()
-            .environmentObject(DataController(disableAPI: false, previewPlaying: false))
+        ArchiveView(dataController: DataController(disableAPI: false, previewPlaying: false))
             .preferredColorScheme(.light)
     }
 }
