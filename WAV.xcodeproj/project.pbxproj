@@ -30,6 +30,7 @@
 		E98887A628942A70002E0349 /* pixelmix.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98887A428942A6D002E0349 /* pixelmix.ttf */; };
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
 		E98887AC28942A91002E0349 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887AB28942A91002E0349 /* readme.txt */; };
+		E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E993B768292AD1E600654912 /* RadioMarquee.swift */; };
 		E995B16929280CB5001EB77B /* UnderConstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E995B16829280CB5001EB77B /* UnderConstruction.swift */; };
 		E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A413642896CFCE00BF9D98 /* Radio.swift */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
@@ -68,6 +69,7 @@
 		E98887A928942A8D002E0349 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		E98887AB28942A91002E0349 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		E98887AD28942DC2002E0349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E993B768292AD1E600654912 /* RadioMarquee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioMarquee.swift; sourceTree = "<group>"; };
 		E995B16829280CB5001EB77B /* UnderConstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderConstruction.swift; sourceTree = "<group>"; };
 		E9A413642896CFCE00BF9D98 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
 		E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelButton.swift; path = WAV/PixelButton.swift; sourceTree = SOURCE_ROOT; };
@@ -116,8 +118,8 @@
 				E995B16729280CA9001EB77B /* Temp */,
 				E9F17F9E292788D400F0FC27 /* Extensions */,
 				E9B229A8289C65A000AC55CF /* Radio */,
-				E934739C2928CBB000E2016C /* Archive */,
 				E961C5C72925EF790091FB0B /* Schedule */,
+				E934739C2928CBB000E2016C /* Archive */,
 				E98887A828942A78002E0349 /* Fonts */,
 				E91F683428867FEC005985BF /* Preview Content */,
 			);
@@ -183,6 +185,7 @@
 			children = (
 				E9A413642896CFCE00BF9D98 /* Radio.swift */,
 				E966D6C5288AF89900337C47 /* RadioView.swift */,
+				E993B768292AD1E600654912 /* RadioMarquee.swift */,
 				E961C5C529253FA80091FB0B /* RadioViewHeader.swift */,
 				E9F17FA52928059200F0FC27 /* Artwork.swift */,
 				E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */,
@@ -296,6 +299,7 @@
 				E966D6C6288AF89900337C47 /* RadioView.swift in Sources */,
 				E995B16929280CB5001EB77B /* UnderConstruction.swift in Sources */,
 				E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */,
+				E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */,
 				E904E42F2928ED2300DEE8B9 /* RotatingButtonStyle.swift in Sources */,
 				E961C5C629253FA80091FB0B /* RadioViewHeader.swift in Sources */,
 				E9F17FA42927894A00F0FC27 /* Color.swift in Sources */,

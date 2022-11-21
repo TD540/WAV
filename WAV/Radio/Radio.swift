@@ -9,80 +9,87 @@ import Foundation
 import MediaPlayer
 
 class Radio: ObservableObject {
-    private let state = "https://azuracast.wearevarious.com/api/nowplaying/1"
-    private let liveState = "https://radio.wearevarious.com/stream.xml"
-    private let playerItem = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
+    private let nowPlayingURL = URL(string: "https://azuracast.wearevarious.com/api/nowplaying/1")!
+    private let livestreamInfoURL = URL(string: "https://radio.wearevarious.com/stream.xml")!
+    private let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
     let player = AVPlayer()
 
     private var task: Task<Void, Error>?
     @Published var isPlaying = false
     @Published var isLive = false
-    @Published var title: String?
+    @Published var isOffAir = false
+    @Published var title: String = "We Are Various"
     @Published var artURL: URL?
 
-    func update() {
+    func updateState() {
         task = Task(priority: .medium) {
-            guard let url = URL(string: state) else { return }
             do {
-                // print("WAV: URLSession \(url)")
-                let (data, _) = try await URLSession.shared.data(from: url)
+                let (jsonData, _) = try await URLSession.shared.data(from: nowPlayingURL)
+                let jsonDecoder = JSONDecoder()
+                jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
-                    let jsonDecoder = JSONDecoder()
-                    jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
-                    let decoded = try jsonDecoder.decode(NowPlayingAPI.self, from: data)
-                    let newTitle = decoded.nowPlaying.song.text
-                    if decoded.live.isLive {
-                        updateLiveTitle()
-                    } else {
-                        updateTitle(newTitle: newTitle)
-                        let artURLString = decoded.nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
-                        if !artURLString.hasSuffix("generic_song.jpg") {
-                            self.artURL = URL(string: artURLString)
+                    let newData = try jsonDecoder.decode(NowPlayingType.self, from: jsonData)
+                    isOffAir = newData.title.lowercased().hasPrefix("currently off air")
+                    isLive = newData.isLive
+                    if title != newData.title {
+                        if isLive {
+                            updateLiveTitle()
+                        } else {
+                            updateTitle(with: newData.title)
+                        }
+                    }
+                    if artURL != URL(string: newData.artURL) {
+                        if newData.artURL.hasSuffix("generic_song.jpg") {
+                            // generic artwork image available but looks aweful, so update with nil
+                            updateArtURL(with: nil)
+                        } else {
+                            // artwork image available
+                            updateArtURL(with: newData.artURL)
                         }
                     }
                 } catch {
-                    // print("WAV: JSONDecoder", String(describing: error))
+                    print("WAV: JSON decode: ", String(describing: error))
+                    updateTitle(with: "We Are Various")
+                    updateArtURL(with: nil)
                 }
-
             } catch {
-                // print("WAV: URLSession", String(describing: error))
+                print("WAV: URLSession error: ", String(describing: error))
+                updateTitle(with: "We Are Various")
+                updateArtURL(with: nil)
             }
-            // wait a minute
+            
             try await Task.sleep(nanoseconds: 60_000_000_000)
             guard !Task.isCancelled else { return }
-            update()
+            updateState()
         }
     }
-    func updateTitle(newTitle: String) {
-            // not live a live broadcast
-            // check if the show title has changed
-            if title != newTitle {
-                // update title
-                DispatchQueue.main.async {
-                    // title is a published var that triggers SwiftUI update
-                    // and UI changes must happen on main queue
-                    self.title = newTitle
-                }
+    func updateArtURL(with newArt: String?) {
+        DispatchQueue.main.async {
+            if let newArt {
+                self.artURL = URL(string: newArt)
+            } else {
+                self.artURL = nil
             }
+        }
+    }
+    func updateTitle(with newTitle: String) {
+        DispatchQueue.main.async {
+            self.title = newTitle
+        }
     }
 
     /// updateLiveTitle() parses stream.xml and updates title
     func updateLiveTitle() {
         Task(priority: .medium) {
-            guard let liveURL = URL(string: liveState) else { return }
             do {
-                 print("WAV: URLSession \(liveURL)")
-                let (data, _) = try await URLSession.shared.data(from: liveURL)
+                let (data, _) = try await URLSession.shared.data(from: livestreamInfoURL)
                 let dom = MicroDOM(data: data)
                 let tree = dom.parse()
-                 print(tree?.tag ?? "") // todo: check later if this is still "live" when wearevarious.com radio is not live
+                print(tree?.tag ?? "") // todo: check later if this is still "live" when wearevarious.com radio is not live
                 if let tags = tree?.getElementsByTagName("title") {
                     let newTitle = tags[0].data
                     if title != newTitle {
-                        DispatchQueue.main.async {
-                            self.isLive = true
-                            self.title = newTitle
-                        }
+                        updateTitle(with: newTitle)
                     }
                 }
             } catch {
@@ -105,8 +112,8 @@ class Radio: ObservableObject {
                             }
                             MPNowPlayingInfoCenter.default().nowPlayingInfo = [
                                 MPMediaItemPropertyArtwork: artwork,
-                                MPMediaItemPropertyTitle: title ?? "Radio",
-                                MPMediaItemPropertyArtist: "We Are Various",
+                                MPMediaItemPropertyTitle: title,
+                                MPMediaItemPropertyArtist: "WAV",
                                 MPMediaItemPropertyPlaybackDuration: 0,
                                 MPNowPlayingInfoPropertyIsLiveStream: true
                             ]
@@ -116,8 +123,8 @@ class Radio: ObservableObject {
             }
         } else {
             MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-                MPMediaItemPropertyTitle: title ?? "Radio",
-                MPMediaItemPropertyArtist: "We Are Various",
+                MPMediaItemPropertyTitle: title,
+                MPMediaItemPropertyArtist: "WAV",
                 MPMediaItemPropertyPlaybackDuration: 0,
                 MPNowPlayingInfoPropertyIsLiveStream: true
             ]
@@ -125,7 +132,7 @@ class Radio: ObservableObject {
     }
     func play() {
         player.replaceCurrentItem(with: nil)
-        player.replaceCurrentItem(with: playerItem)
+        player.replaceCurrentItem(with: livestream)
         player.play()
         isPlaying = true
         do {
@@ -156,7 +163,7 @@ class Radio: ObservableObject {
 
 }
 
-struct NowPlayingAPI: Decodable {
+struct NowPlayingType: Decodable {
     let nowPlaying: NowPlaying
     struct NowPlaying: Decodable {
         let song: Song
@@ -165,8 +172,18 @@ struct NowPlayingAPI: Decodable {
             let art: String
         }
     }
+    var title: String {
+        nowPlaying.song.text
+    }
+    /// `art` contains a URL string to a relevant image
+    var artURL: String {
+        nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
+    }
     let live: Live
     struct Live: Decodable {
         let isLive: Bool
+    }
+    var isLive: Bool {
+        live.isLive
     }
 }

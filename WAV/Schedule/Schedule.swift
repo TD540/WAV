@@ -10,10 +10,13 @@ import WebView
 import WebKit
 
 struct Schedule: View {
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var webViewStore: WebViewStore // check Extensions > WebView for more 
     init() {
+        let darkMode = "* {color: \(colorScheme == .light ? "black" : "white") !important}"
+        let transparentBackground = "*{background-color: transparent!important}"
         let hideEverythingExceptContentStyle = "body > :not(.box-wrapper), .menu-wrapper, .main-container > :not(.page-wrapper), #page-header {display: none !important} .main-container .row-container .row-parent { padding: 16px 36px }"
-        let appendStyle = "var style = document.createElement('style'); style.innerHTML = '\(hideEverythingExceptContentStyle)'; document.head.appendChild(style)"
+        let appendStyle = "var style = document.createElement('style'); style.innerHTML = '\(transparentBackground + hideEverythingExceptContentStyle)'; document.head.appendChild(style)"
         let userScript = WKUserScript(
             source: appendStyle,
             injectionTime: .atDocumentEnd,
@@ -28,16 +31,18 @@ struct Schedule: View {
         _webViewStore = StateObject(wrappedValue: store)
     }
     var body: some View {
-        VStack {
-            Image("WAV")
-                .resizable()
-                .renderingMode(.template)
-                .foregroundColor(.accentColor)
-                .scaledToFit()
-                .frame(maxHeight: 30)
-                .padding(.top, 20)
+        ZStack(alignment: Alignment.top) {
+            RadioViewHeader()
+                .opacity(0.6)
+//                .frame(maxHeight: 200)
+//                .blur(radius: 4)
             WebView(webView: webViewStore.webView)
+                .padding(.top, -70)
+                .edgesIgnoringSafeArea(.bottom)
                 .onAppear {
+                    webViewStore.webView.isOpaque = false
+                    webViewStore.webView.backgroundColor = .clear
+                    webViewStore.webView.scrollView.backgroundColor = .clear
                     webViewStore.webView.load(URLRequest(url: URL(string: "https://wearevarious.com/week-schedule")!))
                 }
         }
