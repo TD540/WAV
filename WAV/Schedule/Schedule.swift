@@ -10,7 +10,6 @@ import WebView
 import WebKit
 
 struct Schedule: View {
-    @Environment(\.colorScheme) var colorScheme
     @StateObject var webViewStore = WebViewStore(webView: WKWebView(frame: .zero))
 
     func modifySchedulePageCSS() {
