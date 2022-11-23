@@ -11,46 +11,55 @@ import WebKit
 
 struct Schedule: View {
     @Environment(\.colorScheme) var colorScheme
-    @StateObject var webViewStore: WebViewStore
+    @StateObject var webViewStore = WebViewStore(webView: WKWebView(frame: .zero))
 
-    init() {
+    func modifySchedulePageCSS() {
         let css = """
-            *{background-color: transparent!important}
-        body > :not(.box-wrapper), .menu-wrapper, .main-container > :not(.page-wrapper), #page-header {display: none !important} .main-container .row-container .row-parent { padding: 16px 36px }
-        """
-        let appendStyle = "var style = document.createElement('style'); style.innerHTML = `\(css)`; document.head.appendChild(style)"
+            * {
+                background-color: transparent !important
+            }
+            body > :not(.box-wrapper),
+            .menu-wrapper,
+            .main-container > :not(.page-wrapper),
+            #page-header {
+                display: none !important
+            }
+            .main-container .row-container .row-parent {
+                padding: 16px 36px
+            }
+            @media (prefers-color-scheme: dark) {
+              #main-page-id * {
+                color: white !important;
+                border-color: white !important;
+              }
+            }
+            """
+        let script = """
+            var style = document.createElement('style');
+            style.innerHTML = `\(css)`;
+            document.head.appendChild(style)
+            alert("hello")
+            """
         let userScript = WKUserScript(
-            source: appendStyle,
+            source: script,
             injectionTime: .atDocumentEnd,
             forMainFrameOnly: true,
             in: .world(name: "app")
         )
-        let userContentController = WKUserContentController()
-        userContentController.addUserScript(userScript)
-        let configuration = WKWebViewConfiguration()
-        configuration.userContentController = userContentController
-        let store = WebViewStore(webView: WKWebView(frame: .zero, configuration: configuration))
-
-        store.webView.isOpaque = false
-        store.webView.backgroundColor = .clear
-        store.webView.scrollView.backgroundColor = .clear
-
-        _webViewStore = StateObject(wrappedValue: store)
+        webViewStore.configuration.userContentController.addUserScript(userScript)
+        webViewStore.webView.isOpaque = false
+        webViewStore.webView.backgroundColor = .clear
+        webViewStore.webView.scrollView.backgroundColor = .clear
     }
 
     var body: some View {
-        ZStack(alignment: Alignment.top) {
-            //                .frame(maxHeight: 200)
-            //                .blur(radius: 4)
-            WebView(webView: webViewStore.webView)
-                .padding(.top, -70)
-                .edgesIgnoringSafeArea(.bottom)
-                .onAppear {
-                    webViewStore.webView.load(URLRequest(url: URL(string: "https://wearevarious.com/week-schedule")!))
-                }
-        }
+        WebView(webView: webViewStore.webView)
+            .edgesIgnoringSafeArea(.bottom)
+            .onAppear {
+                modifySchedulePageCSS()
+                webViewStore.webView.load(URLRequest(url: URL(string: "https://wearevarious.com/week-schedule")!))
+            }
     }
-
 }
 
 struct Schedule_Previews: PreviewProvider {
