@@ -29,7 +29,7 @@ struct ContentView: View {
                 .tabItem {
                     Label("ARCHIVE", systemImage: "square.stack")
                 }
-            UnderConstruction()
+            Chat()
                 .tabItem {
                     Label("CHAT", systemImage: "message")
                 }

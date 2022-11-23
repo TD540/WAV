@@ -29,8 +29,10 @@ class Radio: ObservableObject {
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
                     let newData = try jsonDecoder.decode(NowPlayingType.self, from: jsonData)
-                    isOffAir = newData.title.lowercased().hasPrefix("currently off air")
-                    isLive = newData.isLive
+                    DispatchQueue.main.async {
+                        self.isOffAir = newData.title.lowercased().hasPrefix("currently off air")
+                        self.isLive = newData.isLive
+                    }
                     if title != newData.title {
                         if isLive {
                             updateLiveTitle()

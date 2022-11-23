@@ -33,6 +33,7 @@
 		E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E993B768292AD1E600654912 /* RadioMarquee.swift */; };
 		E995B16929280CB5001EB77B /* UnderConstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E995B16829280CB5001EB77B /* UnderConstruction.swift */; };
 		E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A413642896CFCE00BF9D98 /* Radio.swift */; };
+		E9AB244F292DBDEC00086338 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AB244E292DBD8300086338 /* Chat.swift */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
 		E9D77354292AB3D800C816C3 /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = E9D77353292AB3D800C816C3 /* MarqueeText */; };
 		E9F17FA32927894A00F0FC27 /* SafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F17FA12927894A00F0FC27 /* SafeAreaInsets.swift */; };
@@ -72,6 +73,7 @@
 		E993B768292AD1E600654912 /* RadioMarquee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioMarquee.swift; sourceTree = "<group>"; };
 		E995B16829280CB5001EB77B /* UnderConstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderConstruction.swift; sourceTree = "<group>"; };
 		E9A413642896CFCE00BF9D98 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
+		E9AB244E292DBD8300086338 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelButton.swift; path = WAV/PixelButton.swift; sourceTree = SOURCE_ROOT; };
 		E9F17FA12927894A00F0FC27 /* SafeAreaInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeAreaInsets.swift; sourceTree = "<group>"; };
 		E9F17FA22927894A00F0FC27 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				E9B229A8289C65A000AC55CF /* Radio */,
 				E961C5C72925EF790091FB0B /* Schedule */,
 				E934739C2928CBB000E2016C /* Archive */,
+				E9AB244D292DBD6D00086338 /* Chat */,
 				E98887A828942A78002E0349 /* Fonts */,
 				E91F683428867FEC005985BF /* Preview Content */,
 			);
@@ -178,6 +181,14 @@
 				E995B16829280CB5001EB77B /* UnderConstruction.swift */,
 			);
 			path = Temp;
+			sourceTree = "<group>";
+		};
+		E9AB244D292DBD6D00086338 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				E9AB244E292DBD8300086338 /* Chat.swift */,
+			);
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		E9B229A8289C65A000AC55CF /* Radio */ = {
@@ -290,6 +301,7 @@
 				E9FC53C0290084A600814244 /* MicroDOM.swift in Sources */,
 				E904E4312928ED2300DEE8B9 /* RecordBoxView.swift in Sources */,
 				E91F683128867FE7005985BF /* ContentView.swift in Sources */,
+				E9AB244F292DBDEC00086338 /* Chat.swift in Sources */,
 				E904E4362928ED2300DEE8B9 /* ArchiveView.swift in Sources */,
 				E904E4332928ED2300DEE8B9 /* RecordBoxViewModel.swift in Sources */,
 				E904E4342928ED2300DEE8B9 /* WebPlayerView.swift in Sources */,
