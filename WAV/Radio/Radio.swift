@@ -17,7 +17,7 @@ class Radio: ObservableObject {
     private var task: Task<Void, Error>?
     @Published var isPlaying = false
     @Published var isLive = false
-    @Published var isOffAir = false
+    @Published var isOffAir = true
     @Published var title: String = "We Are Various"
     @Published var artURL: URL?
 
@@ -30,7 +30,7 @@ class Radio: ObservableObject {
                 do {
                     let newData = try jsonDecoder.decode(NowPlayingType.self, from: jsonData)
                     DispatchQueue.main.async {
-                        self.isOffAir = newData.title.lowercased().hasPrefix("currently off air")
+                        self.isOffAir = newData.isOffAir
                         self.isLive = newData.isLive
                     }
                     if title != newData.title {
@@ -181,11 +181,10 @@ struct NowPlayingType: Decodable {
     var artURL: String {
         nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
     }
-    let live: Live
-    struct Live: Decodable {
-        let isLive: Bool
-    }
     var isLive: Bool {
-        live.isLive
+        title.lowercased().contains("live broadcast")
+    }
+    var isOffAir: Bool {
+        title.lowercased().contains("currently off air")
     }
 }
