@@ -34,7 +34,7 @@ class Radio: ObservableObject {
                         self.isLive = newData.isLive
                     }
                     if title != newData.title {
-                        if isLive {
+                        if newData.isLive {
                             updateLiveTitle()
                         } else {
                             updateTitle(with: newData.title)
