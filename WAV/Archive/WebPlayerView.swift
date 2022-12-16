@@ -60,7 +60,7 @@ struct WebPlayerView: View {
             .padding()
     }
 
-    func playingView(playingRecord: MixcloudCast) -> some View {
+    func playingView(playingRecord: WAVPost) -> some View {
         VStack {
             Button(action: viewModel.playToggle) {
                 RecordView(pictureURL: playingRecord.pictureURL)
@@ -84,7 +84,7 @@ struct WebPlayerView: View {
 
 struct WebPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        MixcloudCast.autoplay = false
+        WAVPost.autoplay = false
         return VStack {
             Spacer()
             WebPlayerView(dataController: DataController(disableAPI: false, previewPlaying: true))

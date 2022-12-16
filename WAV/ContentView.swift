@@ -10,9 +10,10 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var radio: Radio
     @EnvironmentObject var dataController: DataController
+    @State private var tabSelection = 3
 
     var body: some View {
-        TabView {
+        TabView(selection: $tabSelection) {
             RadioView(radio: radio)
                 .tabItem {
                     Label(
@@ -21,18 +22,22 @@ struct ContentView: View {
                         "dot.radiowaves.left.and.right" : "radio"
                     )
                 }
+                .tag(1)
             Schedule()
                 .tabItem {
                     Label("SCHEDULE", systemImage: "calendar.badge.clock")
                 }
+                .tag(2)
             ArchiveView(dataController: dataController)
                 .tabItem {
                     Label("ARCHIVE", systemImage: "square.stack")
                 }
+                .tag(3)
             Chat()
                 .tabItem {
                     Label("CHAT", systemImage: "message")
                 }
+                .tag(4)
         }
     }
 }

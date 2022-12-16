@@ -12,7 +12,7 @@ import WebKit
 extension WebPlayerView {
     class ViewModel: NSObject, ObservableObject, WKScriptMessageHandler {
         let dataController: DataController
-        var playingRecord: MixcloudCast? { dataController.state.playing }
+        var playingRecord: WAVPost? { dataController.state.playing }
 
         @Published var webViewStore: WebViewStore
         @Published var isPlaying = false
@@ -49,7 +49,7 @@ extension WebPlayerView {
 
             if let playingRecord = playingRecord {
                 webViewStore.webView.load(
-                    URLRequest(url: playingRecord.webPlayerURL)
+                    URLRequest(url: playingRecord.mixcloudEmbed)
                 )
             }
 
@@ -84,15 +84,15 @@ extension WebPlayerView {
         func onWebViewAppearing() {
             if let playingRecord = playingRecord {
                 webViewStore.webView.load(
-                    URLRequest(url: playingRecord.webPlayerURL)
+                    URLRequest(url: playingRecord.mixcloudEmbed)
                 )
             }
         }
 
-        func onPlayingRecordChanging(playingRecord: MixcloudCast?) {
+        func onPlayingRecordChanging(playingRecord: WAVPost?) {
             if let playingRecord = playingRecord {
                 webViewStore.webView.load(
-                    URLRequest(url: playingRecord.webPlayerURL)
+                    URLRequest(url: playingRecord.mixcloudEmbed)
                 )
             }
         }

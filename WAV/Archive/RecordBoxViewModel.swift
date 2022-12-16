@@ -16,7 +16,7 @@ extension RecordBoxView {
             self.dataController = dataController
         }
 
-        var records: [MixcloudCast] {
+        var records: [WAVPost] {
             dataController.state.wavCasts
         }
 
@@ -24,11 +24,11 @@ extension RecordBoxView {
             dataController.loadNextPageIfPossible()
         }
 
-        func isPlaying(_ record: MixcloudCast) -> Bool {
+        func isPlaying(_ record: WAVPost) -> Bool {
             dataController.state.playing == record
         }
 
-        func play(_ record: MixcloudCast) {
+        func play(_ record: WAVPost) {
             UINotificationFeedbackGenerator().notificationOccurred(.success)
             dataController.play(record)
         }
