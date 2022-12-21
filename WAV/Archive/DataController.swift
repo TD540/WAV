@@ -114,8 +114,14 @@ struct WAVPost: Codable, Identifiable, Equatable {
     var name: String {
         title.rendered
     }
-    var mixcloudEmbed: URL {
-        URL(string: mixcloudURL)!
+    var mixcloudWidget: URL {
+        let range = mixcloudURL.range(of: "mixcloud.com")!
+        let slug = String(mixcloudURL[range.upperBound...])
+        let widgetURL = "https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&hide_artwork=1" +
+        "&autoplay=\(WAVPost.autoplay ? "1" : "0")" +
+        "&feed=" +
+        "\(slug.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)"
+        return URL(string: widgetURL)!
     }
     var pictureURL: URL {
         URL(string: embedded.wpFeaturedmedia.first!.sourceURL)!

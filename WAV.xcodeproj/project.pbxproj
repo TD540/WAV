@@ -17,7 +17,6 @@
 		E904E4352928ED2300DEE8B9 /* userScript.js in Resources */ = {isa = PBXBuildFile; fileRef = E93473B12928E95E00E2016C /* userScript.js */; };
 		E904E4362928ED2300DEE8B9 /* ArchiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B52928E95E00E2016C /* ArchiveView.swift */; };
 		E904E4372928ED2300DEE8B9 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B22928E95E00E2016C /* BlurView.swift */; };
-		E904E4382928ED2300DEE8B9 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B92928E95E00E2016C /* RecordView.swift */; };
 		E91F682F28867FE7005985BF /* WAVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F682E28867FE7005985BF /* WAVApp.swift */; };
 		E91F683128867FE7005985BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F683028867FE7005985BF /* ContentView.swift */; };
 		E91F683328867FEC005985BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683228867FEC005985BF /* Assets.xcassets */; };
@@ -40,6 +39,7 @@
 		E9F17FA42927894A00F0FC27 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F17FA22927894A00F0FC27 /* Color.swift */; };
 		E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F17FA52928059200F0FC27 /* Artwork.swift */; };
 		E9FC53C0290084A600814244 /* MicroDOM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC53BF290084A600814244 /* MicroDOM.swift */; };
+		E9FCF7F529539D7B0015C442 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FCF7F429539D7B0015C442 /* RecordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +59,6 @@
 		E93473B62928E95E00E2016C /* RotatingButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatingButtonStyle.swift; sourceTree = "<group>"; };
 		E93473B72928E95E00E2016C /* WebPlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPlayerViewModel.swift; sourceTree = "<group>"; };
 		E93473B82928E95E00E2016C /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		E93473B92928E95E00E2016C /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		E93473BA2928E95E00E2016C /* RecordBoxViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordBoxViewModel.swift; sourceTree = "<group>"; };
 		E958BAC928F17E4300D37B13 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlaceholder.swift; sourceTree = "<group>"; };
@@ -79,6 +78,7 @@
 		E9F17FA22927894A00F0FC27 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		E9F17FA52928059200F0FC27 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		E9FC53BF290084A600814244 /* MicroDOM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicroDOM.swift; sourceTree = "<group>"; };
+		E9FCF7F429539D7B0015C442 /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +147,8 @@
 				E93473B22928E95E00E2016C /* BlurView.swift */,
 				E93473B82928E95E00E2016C /* DataController.swift */,
 				E93473B42928E95E00E2016C /* RecordBoxView.swift */,
+				E9FCF7F429539D7B0015C442 /* RecordView.swift */,
 				E93473BA2928E95E00E2016C /* RecordBoxViewModel.swift */,
-				E93473B92928E95E00E2016C /* RecordView.swift */,
 				E93473B62928E95E00E2016C /* RotatingButtonStyle.swift */,
 				E93473B12928E95E00E2016C /* userScript.js */,
 				E93473B32928E95E00E2016C /* WebPlayerView.swift */,
@@ -305,6 +305,7 @@
 				E904E4362928ED2300DEE8B9 /* ArchiveView.swift in Sources */,
 				E904E4332928ED2300DEE8B9 /* RecordBoxViewModel.swift in Sources */,
 				E904E4342928ED2300DEE8B9 /* WebPlayerView.swift in Sources */,
+				E9FCF7F529539D7B0015C442 /* RecordView.swift in Sources */,
 				E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */,
 				E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */,
 				E904E4322928ED2300DEE8B9 /* DataController.swift in Sources */,
@@ -321,7 +322,6 @@
 				E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */,
 				E91F682F28867FE7005985BF /* WAVApp.swift in Sources */,
 				E9F17FA32927894A00F0FC27 /* SafeAreaInsets.swift in Sources */,
-				E904E4382928ED2300DEE8B9 /* RecordView.swift in Sources */,
 				E961C5C429253F4C0091FB0B /* ArtworkPlaceholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

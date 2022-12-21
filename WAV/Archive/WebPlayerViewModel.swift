@@ -48,8 +48,9 @@ extension WebPlayerView {
             super.init()
 
             if let playingRecord = playingRecord {
+                print("TD: Loading Widget: \(playingRecord.mixcloudWidget)")
                 webViewStore.webView.load(
-                    URLRequest(url: playingRecord.mixcloudEmbed)
+                    URLRequest(url: playingRecord.mixcloudWidget)
                 )
             }
 
@@ -84,7 +85,7 @@ extension WebPlayerView {
         func onWebViewAppearing() {
             if let playingRecord = playingRecord {
                 webViewStore.webView.load(
-                    URLRequest(url: playingRecord.mixcloudEmbed)
+                    URLRequest(url: playingRecord.mixcloudWidget)
                 )
             }
         }
@@ -92,7 +93,7 @@ extension WebPlayerView {
         func onPlayingRecordChanging(playingRecord: WAVPost?) {
             if let playingRecord = playingRecord {
                 webViewStore.webView.load(
-                    URLRequest(url: playingRecord.mixcloudEmbed)
+                    URLRequest(url: playingRecord.mixcloudWidget)
                 )
             }
         }
