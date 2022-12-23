@@ -79,14 +79,3 @@ class MicroDOM: NSObject, XMLParserDelegate {
         stack.last?.data = string
     }
 }
-
-//let string = "<root><h1>Hello!</h1><h1>World!</h1></root>"
-//let dom = MicroDOM(data: Data(string.utf8))
-//let tree = dom.parse()
-//print(tree?.tag ?? "")
-//
-//if let tags = tree?.getElementsByTagName("h1") {
-//    for tag in tags {
-//        print(tag.data)
-//    }
-//}

@@ -50,12 +50,12 @@ class Radio: ObservableObject {
                         }
                     }
                 } catch {
-                    print("WAV: JSON decode: ", String(describing: error))
+                    // print("WAV: JSON decode: ", String(describing: error))
                     updateTitle(with: "We Are Various")
                     updateArtURL(with: nil)
                 }
             } catch {
-                print("WAV: URLSession error: ", String(describing: error))
+                // print("WAV: URLSession error: ", String(describing: error))
                 updateTitle(with: "We Are Various")
                 updateArtURL(with: nil)
             }
@@ -87,7 +87,7 @@ class Radio: ObservableObject {
                 let (data, _) = try await URLSession.shared.data(from: livestreamInfoURL)
                 let dom = MicroDOM(data: data)
                 let tree = dom.parse()
-                print(tree?.tag ?? "") // todo: check later if this is still "live" when wearevarious.com radio is not live
+                // print(tree?.tag ?? "") // todo: check later if this is still "live" when wearevarious.com radio is not live
                 if let tags = tree?.getElementsByTagName("title") {
                     let newTitle = tags[0].data
                     if title != newTitle {
@@ -95,7 +95,7 @@ class Radio: ObservableObject {
                     }
                 }
             } catch {
-                print("WAV: URLSession", String(describing: error))
+                // print("WAV: URLSession", String(describing: error))
             }
         }
     }
@@ -154,7 +154,7 @@ class Radio: ObservableObject {
                 return .success
             }
         } catch {
-            print(error.localizedDescription)
+            // print(error.localizedDescription)
         }
     }
     func stop() {

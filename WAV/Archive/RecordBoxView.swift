@@ -26,9 +26,14 @@ struct RecordBoxView: View {
                                     image
                                         .resizable()
                                         .scaledToFit()
-                                } placeholder: {}
+                                        .padding()
+                                } placeholder: {
+                                    ProgressView()
+                                }
                             }
                             Text(record.name)
+                                .font(.custom("pixelmix", size: 18))
+                                .foregroundColor(.accentColor)
                         }
                     }
                     .onAppear(perform: viewModel.records.last == record ? viewModel.loadNext : nil)
@@ -41,7 +46,7 @@ struct RecordBoxView: View {
 
 struct RecordBoxView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordBoxView(dataController: DataController(disableAPI: true))
+        RecordBoxView(dataController: DataController())
             .preferredColorScheme(.light)
     }
 }

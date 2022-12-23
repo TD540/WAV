@@ -21,7 +21,7 @@ struct ArchiveView: View {
 
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveView(dataController: DataController(disableAPI: false, previewPlaying: false))
+        ArchiveView(dataController: DataController())
             .preferredColorScheme(.light)
     }
 }

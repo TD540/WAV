@@ -25,18 +25,14 @@
 		E961C5C429253F4C0091FB0B /* ArtworkPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */; };
 		E961C5C629253FA80091FB0B /* RadioViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5C529253FA80091FB0B /* RadioViewHeader.swift */; };
 		E966D6C6288AF89900337C47 /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E966D6C5288AF89900337C47 /* RadioView.swift */; };
-		E970B3F828F3708000A7305E /* ParallaxMotionModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E970B3F728F3708000A7305E /* ParallaxMotionModifier.swift */; };
 		E98887A628942A70002E0349 /* pixelmix.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98887A428942A6D002E0349 /* pixelmix.ttf */; };
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
 		E98887AC28942A91002E0349 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887AB28942A91002E0349 /* readme.txt */; };
 		E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E993B768292AD1E600654912 /* RadioMarquee.swift */; };
-		E995B16929280CB5001EB77B /* UnderConstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E995B16829280CB5001EB77B /* UnderConstruction.swift */; };
 		E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A413642896CFCE00BF9D98 /* Radio.swift */; };
 		E9AB244F292DBDEC00086338 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AB244E292DBD8300086338 /* Chat.swift */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
 		E9D77354292AB3D800C816C3 /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = E9D77353292AB3D800C816C3 /* MarqueeText */; };
-		E9F17FA32927894A00F0FC27 /* SafeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F17FA12927894A00F0FC27 /* SafeAreaInsets.swift */; };
-		E9F17FA42927894A00F0FC27 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F17FA22927894A00F0FC27 /* Color.swift */; };
 		E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F17FA52928059200F0FC27 /* Artwork.swift */; };
 		E9FC53C0290084A600814244 /* MicroDOM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC53BF290084A600814244 /* MicroDOM.swift */; };
 		E9FCF7F529539D7B0015C442 /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FCF7F429539D7B0015C442 /* RecordView.swift */; };
@@ -64,18 +60,14 @@
 		E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlaceholder.swift; sourceTree = "<group>"; };
 		E961C5C529253FA80091FB0B /* RadioViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioViewHeader.swift; sourceTree = "<group>"; };
 		E966D6C5288AF89900337C47 /* RadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
-		E970B3F728F3708000A7305E /* ParallaxMotionModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParallaxMotionModifier.swift; sourceTree = "<group>"; };
 		E98887A428942A6D002E0349 /* pixelmix.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pixelmix.ttf; sourceTree = "<group>"; };
 		E98887A928942A8D002E0349 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		E98887AB28942A91002E0349 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		E98887AD28942DC2002E0349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E993B768292AD1E600654912 /* RadioMarquee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioMarquee.swift; sourceTree = "<group>"; };
-		E995B16829280CB5001EB77B /* UnderConstruction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderConstruction.swift; sourceTree = "<group>"; };
 		E9A413642896CFCE00BF9D98 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
 		E9AB244E292DBD8300086338 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelButton.swift; path = WAV/PixelButton.swift; sourceTree = SOURCE_ROOT; };
-		E9F17FA12927894A00F0FC27 /* SafeAreaInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafeAreaInsets.swift; sourceTree = "<group>"; };
-		E9F17FA22927894A00F0FC27 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		E9F17FA52928059200F0FC27 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		E9FC53BF290084A600814244 /* MicroDOM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicroDOM.swift; sourceTree = "<group>"; };
 		E9FCF7F429539D7B0015C442 /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
@@ -117,8 +109,6 @@
 				E91F683228867FEC005985BF /* Assets.xcassets */,
 				E91F682E28867FE7005985BF /* WAVApp.swift */,
 				E91F683028867FE7005985BF /* ContentView.swift */,
-				E995B16729280CA9001EB77B /* Temp */,
-				E9F17F9E292788D400F0FC27 /* Extensions */,
 				E9B229A8289C65A000AC55CF /* Radio */,
 				E961C5C72925EF790091FB0B /* Schedule */,
 				E934739C2928CBB000E2016C /* Archive */,
@@ -175,14 +165,6 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		E995B16729280CA9001EB77B /* Temp */ = {
-			isa = PBXGroup;
-			children = (
-				E995B16829280CB5001EB77B /* UnderConstruction.swift */,
-			);
-			path = Temp;
-			sourceTree = "<group>";
-		};
 		E9AB244D292DBD6D00086338 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,18 +184,8 @@
 				E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */,
 				E9FC53BF290084A600814244 /* MicroDOM.swift */,
 				E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */,
-				E970B3F728F3708000A7305E /* ParallaxMotionModifier.swift */,
 			);
 			path = Radio;
-			sourceTree = "<group>";
-		};
-		E9F17F9E292788D400F0FC27 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				E9F17FA22927894A00F0FC27 /* Color.swift */,
-				E9F17FA12927894A00F0FC27 /* SafeAreaInsets.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -310,18 +282,14 @@
 				E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */,
 				E904E4322928ED2300DEE8B9 /* DataController.swift in Sources */,
 				E966D6C6288AF89900337C47 /* RadioView.swift in Sources */,
-				E995B16929280CB5001EB77B /* UnderConstruction.swift in Sources */,
 				E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */,
 				E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */,
 				E904E42F2928ED2300DEE8B9 /* RotatingButtonStyle.swift in Sources */,
 				E961C5C629253FA80091FB0B /* RadioViewHeader.swift in Sources */,
-				E9F17FA42927894A00F0FC27 /* Color.swift in Sources */,
 				E904E4372928ED2300DEE8B9 /* BlurView.swift in Sources */,
 				E904E4302928ED2300DEE8B9 /* WebPlayerViewModel.swift in Sources */,
-				E970B3F828F3708000A7305E /* ParallaxMotionModifier.swift in Sources */,
 				E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */,
 				E91F682F28867FE7005985BF /* WAVApp.swift in Sources */,
-				E9F17FA32927894A00F0FC27 /* SafeAreaInsets.swift in Sources */,
 				E961C5C429253F4C0091FB0B /* ArtworkPlaceholder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

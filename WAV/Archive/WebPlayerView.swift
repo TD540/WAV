@@ -87,7 +87,7 @@ struct WebPlayerView_Previews: PreviewProvider {
         WAVPost.autoplay = false
         return VStack {
             Spacer()
-            WebPlayerView(dataController: DataController(disableAPI: false, previewPlaying: true))
+            WebPlayerView(dataController: DataController())
         }
         // .preferredColorScheme(.dark)
     }

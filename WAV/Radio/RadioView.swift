@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RadioView: View {
     @StateObject var radio: Radio
-    @ObservedObject var manager = MotionManager()
     var body: some View {
         VStack(spacing: 0) {
 

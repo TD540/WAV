@@ -20,16 +20,15 @@ class DataController: ObservableObject {
             .store(in: &subscriptions)
     }
     func play(_ wavCast: WAVPost) {
-        // print("playing: \(wavCast.webPlayerURL.description)")
         state.playing = wavCast
     }
     private func onReceive(_ completion: Subscribers.Completion<Error>) {
         switch completion {
         case .finished:
-            print("TD: FINISHED")
+            // print("WAV: onReceive \(completion)")
             break
         case .failure:
-            print("TD: ERROR \(completion)")
+            // print("WAV: ERROR \(completion)")
             state.canLoadNextPage = false
         }
     }
@@ -44,37 +43,8 @@ class DataController: ObservableObject {
         var page = 0
         var canLoadNextPage = true
     }
-    init(disableAPI: Bool = false, previewPlaying: Bool = false) {
-        let previewCast = WAVPost(
-            id: 99999999999999,
-            date: "2022-12-01T20:14:58",
-            title: WAVPost.Title(rendered: "PREVIEW TITLE"),
-            mixcloudURL: "https://www.mixcloud.com/MonkeyShoulder/dj-jazzy-jeff-monkey-shoulder-mix/",
-            embedded:
-                WAVPost.Embedded(
-                    wpFeaturedmedia:
-                        [WAVPost.WpFeaturedmedia(
-                            sourceURL: "https://dev.wearevarious.com/wp-content/uploads/2022/12/b0c5-764e-4089-b8ca-07ee4a48f6cf.jpg")
-                        ]
-                )
-        )
-        if disableAPI {
-            state = State(
-                playing: previewPlaying ? previewCast : nil,
-                wavCasts: Array(repeating: previewCast, count: 100),
-                page: 1, canLoadNextPage: false
-            )
-        }
-        if previewPlaying {
-            state = State(
-                playing: previewPlaying ? previewCast : nil,
-                wavCasts: [],
-                page: 1, canLoadNextPage: true
-            )
-        }
-    }
     static var preview: DataController = {
-        DataController(previewPlaying: true)
+        DataController()
     }()
 }
 
@@ -84,6 +54,7 @@ enum WAVWordPress {
         let url = URL(
             string: "https://dev.wearevarious.com/wp-json/wp/v2/posts?_fields=id,date,title,_links,mixcloud_url&_embed=wp:featuredmedia&per_page=\(limit)&offset=\(page*limit)"
         )!
+        // print("WAV: Loading \(url)")
         return URLSession.shared
             .dataTaskPublisher(for: url)
             .tryMap { try JSONDecoder().decode([WAVPost].self, from: $0.data) }
