@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ArchiveView: View {
-    @StateObject var dataController: DataController
+    @StateObject var archiveDataController: ArchiveDataController
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            RecordBoxView(dataController: dataController)
-            WebPlayerView(dataController: dataController)
+            RecordBoxView(archiveDataController: archiveDataController)
+            WebPlayerView(archiveDataController: archiveDataController)
         }
         // BUG: Adding .edgesIgnoringSafeArea(.all) causes RecordBoxView's scrollViewProxy.scrollTo to scroll wrong.
     }
@@ -21,7 +21,7 @@ struct ArchiveView: View {
 
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveView(dataController: DataController())
+        ArchiveView(archiveDataController: ArchiveDataController())
             .preferredColorScheme(.light)
     }
 }

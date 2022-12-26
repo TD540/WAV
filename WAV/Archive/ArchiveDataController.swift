@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class DataController: ObservableObject {
+class ArchiveDataController: ObservableObject {
     // let container: NSPersistentCloudKitContainer
     // Todo: Save played before states in iCloud
     @Published private(set) var state = State()
@@ -19,8 +19,8 @@ class DataController: ObservableObject {
             .sink(receiveCompletion: onReceive, receiveValue: onReceive)
             .store(in: &subscriptions)
     }
-    func play(_ wavCast: WAVPost) {
-        state.playing = wavCast
+    func play(_ wavPost: WAVPost) {
+        state.playing = wavPost
     }
     private func onReceive(_ completion: Subscribers.Completion<Error>) {
         switch completion {
@@ -33,18 +33,18 @@ class DataController: ObservableObject {
         }
     }
     private func onReceive(_ batch: [WAVPost]) {
-        state.wavCasts += batch
+        state.wavPosts += batch
         state.page += 1
         state.canLoadNextPage = batch.count == WAVWordPress.limit
     }
     struct State {
         var playing: WAVPost? // needs to go to infinitelist
-        var wavCasts: [WAVPost] = []
+        var wavPosts: [WAVPost] = []
         var page = 0
         var canLoadNextPage = true
     }
-    static var preview: DataController = {
-        DataController()
+    static var preview: ArchiveDataController = {
+        ArchiveDataController()
     }()
 }
 
@@ -54,7 +54,7 @@ enum WAVWordPress {
         let url = URL(
             string: "https://dev.wearevarious.com/wp-json/wp/v2/posts?_fields=id,date,title,_links,mixcloud_url&_embed=wp:featuredmedia&per_page=\(limit)&offset=\(page*limit)"
         )!
-        // print("WAV: Loading \(url)")
+        print("WAV: Loading \(url)")
         return URLSession.shared
             .dataTaskPublisher(for: url)
             .tryMap { try JSONDecoder().decode([WAVPost].self, from: $0.data) }

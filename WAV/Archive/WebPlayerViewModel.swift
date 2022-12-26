@@ -11,14 +11,14 @@ import WebKit
 
 extension WebPlayerView {
     class ViewModel: NSObject, ObservableObject, WKScriptMessageHandler {
-        let dataController: DataController
-        var playingRecord: WAVPost? { dataController.state.playing }
+        let archiveDataController: ArchiveDataController
+        var playingRecord: WAVPost? { archiveDataController.state.playing }
 
         @Published var webViewStore: WebViewStore
         @Published var isPlaying = false
 
-        init(dataController: DataController) {
-            self.dataController = dataController
+        init(archiveDataController: ArchiveDataController) {
+            self.archiveDataController = archiveDataController
             let userContentController = WKUserContentController()
             let configuration = WKWebViewConfiguration()
             guard let source = try? String(

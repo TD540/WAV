@@ -9,8 +9,8 @@ import SwiftUI
 
 struct RecordBoxView: View {
     @ObservedObject private var viewModel: ViewModel
-    init(dataController: DataController) {
-        viewModel = ViewModel(dataController: dataController)
+    init(archiveDataController: ArchiveDataController) {
+        viewModel = ViewModel(archiveDataController: archiveDataController)
     }
     var body: some View {
         ScrollView {
@@ -20,21 +20,19 @@ struct RecordBoxView: View {
                     Button {
                         viewModel.play(record)
                     } label: {
-                        VStack {
+                        VStack(alignment: .leading) {
                             if let pictureURL = record.pictureURL {
                                 AsyncImage(url: pictureURL) { image in
                                     image
                                         .resizable()
                                         .scaledToFit()
-                                        .padding()
                                 } placeholder: {
                                     ProgressView()
                                 }
                             }
-                            Text(record.name)
-                                .font(.custom("pixelmix", size: 18))
-                                .foregroundColor(.accentColor)
+                            ShowTitle(string: record.name.uppercased())
                         }
+                        .padding()
                     }
                     .onAppear(perform: viewModel.records.last == record ? viewModel.loadNext : nil)
                 }
@@ -46,7 +44,7 @@ struct RecordBoxView: View {
 
 struct RecordBoxView_Previews: PreviewProvider {
     static var previews: some View {
-        RecordBoxView(dataController: DataController())
+        RecordBoxView(archiveDataController: ArchiveDataController())
             .preferredColorScheme(.light)
     }
 }

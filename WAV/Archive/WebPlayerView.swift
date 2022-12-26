@@ -12,8 +12,8 @@ struct WebPlayerView: View {
     @StateObject private var viewModel: ViewModel
     @Environment(\.colorScheme) var colorScheme
 
-    init(dataController: DataController) {
-        let viewModel = ViewModel(dataController: dataController)
+    init(archiveDataController: ArchiveDataController) {
+        let viewModel = ViewModel(archiveDataController: archiveDataController)
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
@@ -87,7 +87,7 @@ struct WebPlayerView_Previews: PreviewProvider {
         WAVPost.autoplay = false
         return VStack {
             Spacer()
-            WebPlayerView(dataController: DataController())
+            WebPlayerView(archiveDataController: ArchiveDataController())
         }
         // .preferredColorScheme(.dark)
     }

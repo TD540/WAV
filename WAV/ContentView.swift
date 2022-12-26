@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var radio: Radio
-    @EnvironmentObject var dataController: DataController
+    @EnvironmentObject var archiveDataControllerroller: ArchiveDataController
     @State private var tabSelection = 3
 
     var body: some View {
@@ -28,7 +28,7 @@ struct ContentView: View {
                     Label("SCHEDULE", systemImage: "calendar.badge.clock")
                 }
                 .tag(2)
-            ArchiveView(dataController: dataController)
+            ArchiveView(archiveDataController: archiveDataControllerroller)
                 .tabItem {
                     Label("ARCHIVE", systemImage: "square.stack")
                 }
@@ -46,6 +46,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
             .environmentObject(Radio())
-            .environmentObject(DataController())
+            .environmentObject(ArchiveDataController())
     }
 }

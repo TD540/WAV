@@ -10,27 +10,27 @@ import UIKit // ?
 
 extension RecordBoxView {
     class ViewModel: ObservableObject {
-        var dataController: DataController
+        var archiveDataController: ArchiveDataController
 
-        init(dataController: DataController) {
-            self.dataController = dataController
+        init(archiveDataController: ArchiveDataController) {
+            self.archiveDataController = archiveDataController
         }
 
         var records: [WAVPost] {
-            dataController.state.wavCasts
+            archiveDataController.state.wavPosts
         }
 
         func loadNext() {
-            dataController.loadNextPageIfPossible()
+            archiveDataController.loadNextPageIfPossible()
         }
 
         func isPlaying(_ record: WAVPost) -> Bool {
-            dataController.state.playing == record
+            archiveDataController.state.playing == record
         }
 
         func play(_ record: WAVPost) {
             UINotificationFeedbackGenerator().notificationOccurred(.success)
-            dataController.play(record)
+            archiveDataController.play(record)
         }
     }
 }

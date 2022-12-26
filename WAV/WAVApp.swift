@@ -10,13 +10,13 @@ import SwiftUI
 @main
 struct WAVApp: App {
     @StateObject var radio = Radio()
-    @StateObject var dataController = DataController()
+    @StateObject var archiveDataController = ArchiveDataController()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(radio)
-                .environmentObject(dataController)
+                .environmentObject(archiveDataController)
         }
     }
 }
