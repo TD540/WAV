@@ -1,5 +1,5 @@
 //
-//  RecordBoxViewModel.swift
+//  InfiniteArchiveViewModel.swift
 //  WeAreVarious
 //
 //  Created by Thomas on 24/05/2021.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit // ?
 
-extension RecordBoxView {
+extension InfiniteArchiveView {
     class ViewModel: ObservableObject {
         var archiveDataController: ArchiveDataController
 

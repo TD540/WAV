@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ArchiveView.swift
 //  WeAreVarious
 //
 //  Created by Thomas on 10/05/2021.
@@ -12,10 +12,9 @@ struct ArchiveView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            RecordBoxView(archiveDataController: archiveDataController)
-            WebPlayerView(archiveDataController: archiveDataController)
+            InfiniteArchiveView(archiveDataController: archiveDataController)
+            ArchivePlayerView(archiveDataController: archiveDataController)
         }
-        // BUG: Adding .edgesIgnoringSafeArea(.all) causes RecordBoxView's scrollViewProxy.scrollTo to scroll wrong.
     }
 }
 

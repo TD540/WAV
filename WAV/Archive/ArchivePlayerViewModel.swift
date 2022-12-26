@@ -1,5 +1,5 @@
 //
-//  WebPlayerViewModel.swift
+//  ArchivePlayerViewModel.swift
 //  WeAreVarious
 //
 //  Created by Thomas on 20/05/2021.
@@ -9,7 +9,7 @@ import Foundation
 import WebView
 import WebKit
 
-extension WebPlayerView {
+extension ArchivePlayerView {
     class ViewModel: NSObject, ObservableObject, WKScriptMessageHandler {
         let archiveDataController: ArchiveDataController
         var playingRecord: WAVPost? { archiveDataController.state.playing }

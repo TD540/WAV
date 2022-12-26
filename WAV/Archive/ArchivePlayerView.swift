@@ -1,5 +1,5 @@
 //
-//  WebPlayerView.swift
+//  ArchivePlayerView.swift
 //  WeAreVarious
 //
 //  Created by Thomas on 16/04/2021.
@@ -8,7 +8,7 @@
 import SwiftUI
 import WebView
 
-struct WebPlayerView: View {
+struct ArchivePlayerView: View {
     @StateObject private var viewModel: ViewModel
     @Environment(\.colorScheme) var colorScheme
 
@@ -87,7 +87,7 @@ struct WebPlayerView_Previews: PreviewProvider {
         WAVPost.autoplay = false
         return VStack {
             Spacer()
-            WebPlayerView(archiveDataController: ArchiveDataController())
+            ArchivePlayerView(archiveDataController: ArchiveDataController())
         }
         // .preferredColorScheme(.dark)
     }
