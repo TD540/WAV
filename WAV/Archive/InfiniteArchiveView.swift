@@ -14,27 +14,16 @@ struct InfiniteArchiveView: View {
     }
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 20) {
+            LazyVStack {
                 ForEach(viewModel.records.indices, id: \.self) { index in
                     let record = viewModel.records[index]
-                    VStack(alignment: .leading, spacing: 4) {
+                    VStack(alignment: .leading) {
                         Button {
                             viewModel.play(record)
                         } label: {
-                            if let pictureURL = record.pictureURL {
-                                AsyncImage(url: pictureURL) { image in
-                                    image
-                                        .resizable()
-                                        .scaledToFit()
-                                } placeholder: {
-                                    ProgressView()
-                                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                                        .aspectRatio(1.5, contentMode: .fit)
-                                        .background(.black.opacity(0.1))
-                                }
-                            }
+                            archiveItemButtonLabel(record: record)
                         }
-                        ShowTitle(string: record.name.uppercased())
+                        archiveItemInfo(record: record)
                     }
                     .padding(.horizontal)
                     .onAppear(perform: viewModel.records.last == record ? viewModel.loadNext : nil)
@@ -43,6 +32,24 @@ struct InfiniteArchiveView: View {
         }
         .background(.black.opacity(0.1))
         .onAppear(perform: viewModel.loadNext)
+    }
+    func archiveItemButtonLabel(record: WAVPost) -> some View {
+        AsyncImage(url: record.pictureURL) { image in
+            image
+                .resizable()
+                .scaledToFit()
+        } placeholder: {
+            ProgressView()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .aspectRatio(1.5, contentMode: .fit)
+                .background(.black.opacity(0.1))
+        }
+    }
+    func archiveItemInfo(record: WAVPost) -> some View {
+        VStack(alignment: .leading) {
+            ShowTitle(string: record.name)
+            ShowTitle(string: record.dateFormatted)
+        }
     }
 }
 

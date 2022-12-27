@@ -82,8 +82,16 @@ struct WAVPost: Codable, Identifiable, Equatable {
     }
 
     static var autoplay = true
+    
     var name: String {
         title.rendered
+    }
+    var dateFormatted: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        let date = dateFormatter.date(from: date)
+        dateFormatter.dateFormat = "MMMM d, yyyy"
+        return dateFormatter.string(from: date!)
     }
     var mixcloudWidget: URL {
         let range = mixcloudURL.range(of: "mixcloud.com")!

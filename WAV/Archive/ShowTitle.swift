@@ -28,9 +28,9 @@ struct ShowTitle: View {
             ForEach(lines, id: \.self) { string in
                 Text(string.uppercased())
                     .foregroundColor(.white)
-                    .padding(8)
+                    .padding(6)
                     .background(.black)
-                    .lineSpacing(8)
+                    .lineSpacing(6)
                     .font(.custom("pixelmix", size: 12))
             }
         }
