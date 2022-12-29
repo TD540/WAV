@@ -58,7 +58,7 @@ struct NoButtonStyle: PrimitiveButtonStyle {
 struct RadioView_Previews: PreviewProvider {
     static var previews: some View {
         let radio = Radio()
-        //                radio.artURL = URL(string: "https://thumbnailer.mixcloud.com/unsafe/288x288/extaudio/5/4/b/2/b201-d6f9-4688-b1e5-efcc63dc8100")
+        // radio.artURL = URL(string: "https://thumbnailer.mixcloud.com/unsafe/288x288/extaudio/5/4/b/2/b201-d6f9-4688-b1e5-efcc63dc8100")
         radio.title = "Title"
         return RadioView(radio: radio)
     }

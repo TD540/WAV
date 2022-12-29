@@ -8,7 +8,7 @@
 import Foundation
 import UIKit // ?
 
-extension InfiniteArchiveView {
+extension InfiniteView {
     class ViewModel: ObservableObject {
         var archiveDataController: ArchiveDataController
 

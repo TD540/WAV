@@ -12,7 +12,7 @@ struct ArchiveView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            InfiniteArchiveView(archiveDataController: archiveDataController)
+            InfiniteView(archiveDataController: archiveDataController)
             ArchivePlayerView(archiveDataController: archiveDataController)
         }
     }

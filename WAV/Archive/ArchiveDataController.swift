@@ -9,10 +9,8 @@ import Foundation
 import Combine
 
 class ArchiveDataController: ObservableObject {
-    // let container: NSPersistentCloudKitContainer
-    // Todo: Save played before states in iCloud
-    @Published private(set) var state = State()
-    private var subscriptions = Set<AnyCancellable>()
+    @Published var state = State()
+    var subscriptions = Set<AnyCancellable>()
     func loadNextPageIfPossible() {
         guard state.canLoadNextPage else { return }
         WAVWordPress.load(page: state.page)
@@ -25,10 +23,8 @@ class ArchiveDataController: ObservableObject {
     private func onReceive(_ completion: Subscribers.Completion<Error>) {
         switch completion {
         case .finished:
-            // print("WAV: onReceive \(completion)")
             break
         case .failure:
-            // print("WAV: ERROR \(completion)")
             state.canLoadNextPage = false
         }
     }
@@ -38,7 +34,7 @@ class ArchiveDataController: ObservableObject {
         state.canLoadNextPage = batch.count == WAVWordPress.limit
     }
     struct State {
-        var playing: WAVPost? // needs to go to infinitelist
+        var playing: WAVPost?
         var wavPosts: [WAVPost] = []
         var page = 0
         var canLoadNextPage = true
