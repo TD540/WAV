@@ -10,8 +10,9 @@ import SwiftUI
 struct ArchiveItem: View {
     let record: WAVPost
     let action: () -> Void
+    let spacing: Double = 10
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: spacing) {
             Button {
                 action()
             } label: {
@@ -19,14 +20,12 @@ struct ArchiveItem: View {
             }
             archiveItemInfo(record: record)
         }
-        
-        
     }
     func archiveItemButtonLabel(record: WAVPost) -> some View {
         AsyncImage(url: record.pictureURL) { image in
             image
-                .resizable()
-                .scaledToFit()
+                .centerCropped()
+                .aspectRatio(100/66.7, contentMode: .fit)
         } placeholder: {
             ProgressView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -35,11 +34,12 @@ struct ArchiveItem: View {
         }
     }
     func archiveItemInfo(record: WAVPost) -> some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: spacing) {
             Group {
                 Text(record.name.uppercased())
-                    .foregroundColor(.white)
+                    .frame(alignment: .leading)
                     .padding(8)
+                    .foregroundColor(.white)
                     .background(.black)
                 Text(record.dateFormatted.uppercased())
             }
@@ -61,7 +61,7 @@ struct ArchiveItem_Previews: PreviewProvider {
                     [
                         WAVPost.WpFeaturedmedia(
                             sourceURL:
-                                "https://dev.wearevarious.com/wp-content/uploads/2022/07/privat-live-at-de-nor-.jpg"
+                                "https://wearevarious.com/wp-content/uploads/2022/12/common-divisor-nikolai-23-12-2022-300x300.jpeg"
                         )
                     ]
             )
@@ -69,5 +69,17 @@ struct ArchiveItem_Previews: PreviewProvider {
         ArchiveItem(
             record: wavPost
         ) { /* action */ }
+    }
+}
+
+extension Image {
+    func centerCropped() -> some View {
+        GeometryReader { geo in
+            self
+                .resizable()
+                .scaledToFill()
+                .frame(width: geo.size.width, height: geo.size.height)
+                .clipped()
+        }
     }
 }

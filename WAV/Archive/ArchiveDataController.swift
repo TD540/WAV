@@ -48,9 +48,8 @@ enum WAVWordPress {
     static let limit = 10
     static func load(page: Int) -> AnyPublisher<[WAVPost], Error> {
         let url = URL(
-            string: "https://dev.wearevarious.com/wp-json/wp/v2/posts?_fields=id,date,title,_links,mixcloud_url&_embed=wp:featuredmedia&per_page=\(limit)&offset=\(page*limit)"
+            string: "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(limit)&offset=\(page*limit)"
         )!
-        print("WAV: Loading \(url)")
         return URLSession.shared
             .dataTaskPublisher(for: url)
             .tryMap { try JSONDecoder().decode([WAVPost].self, from: $0.data) }
