@@ -10,7 +10,7 @@ import SwiftUI
 struct ArchiveItem: View {
     let record: WAVPost
     let action: () -> Void
-    let spacing: Double = 10
+    let spacing: Double = 5
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             Button {

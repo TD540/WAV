@@ -14,7 +14,7 @@ struct InfiniteView: View {
     }
     var body: some View {
         ScrollView {
-            LazyVStack {
+            LazyVStack(spacing: 20) {
                 ForEach(viewModel.records.indices, id: \.self) { index in
                     ArchiveItem(record: viewModel.records[index]) {
                         viewModel.play(viewModel.records[index])
