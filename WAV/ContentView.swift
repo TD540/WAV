@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var radio: Radio
     @EnvironmentObject var archiveDataControllerroller: ArchiveDataController
-    @State private var tabSelection = 3
+    @State private var tabSelection = 1
 
     var body: some View {
         TabView(selection: $tabSelection) {
@@ -38,6 +38,9 @@ struct ContentView: View {
                     Label("CHAT", systemImage: "message")
                 }
                 .tag(4)
+        }
+        .onAppear {
+            tabSelection = radio.isOffAir ? 3 : 1
         }
     }
 }

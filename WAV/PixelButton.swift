@@ -132,3 +132,22 @@ struct PixelButton: View {
         var grids = [Grid]()
     }
 }
+
+struct PixelButton_Previews: PreviewProvider {
+    static var previews: some View {
+        PixelButtonTest()
+    }
+}
+
+struct PixelButtonTest: View {
+    @State var isPlaying = false
+    var body: some View {
+        PixelButton(isPlaying: $isPlaying)
+            .onAppear {
+                isPlaying = true
+            }
+            .onTapGesture {
+                isPlaying.toggle()
+            }
+    }
+}

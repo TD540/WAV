@@ -12,6 +12,7 @@ class Radio: ObservableObject {
     private let nowPlayingURL = URL(string: "https://azuracast.wearevarious.com/api/nowplaying/1")!
     private let livestreamInfoURL = URL(string: "https://radio.wearevarious.com/stream.xml")!
     private let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
+    // private let livestream = AVPlayerItem(url: URL(string: "https://live-radio-cf-vrt.akamaized.net/groupa/live/a9f36fda-cb3c-4b4e-9405-a5bba55654c0/live.isml/live-audio=128000.m3u8")!) // dev
     let player = AVPlayer()
 
     private var task: Task<Void, Error>?
@@ -42,7 +43,7 @@ class Radio: ObservableObject {
                     }
                     if artURL != URL(string: newData.artURL) {
                         if newData.artURL.hasSuffix("generic_song.jpg") {
-                            // generic artwork image available but looks aweful, so update with nil
+                            // generic artwork image looks aweful, update with nil
                             updateArtURL(with: nil)
                         } else {
                             // artwork image available
@@ -50,12 +51,10 @@ class Radio: ObservableObject {
                         }
                     }
                 } catch {
-                    // print("WAV: JSON decode: ", String(describing: error))
                     updateTitle(with: "We Are Various")
                     updateArtURL(with: nil)
                 }
             } catch {
-                // print("WAV: URLSession error: ", String(describing: error))
                 updateTitle(with: "We Are Various")
                 updateArtURL(with: nil)
             }
@@ -95,7 +94,7 @@ class Radio: ObservableObject {
                     }
                 }
             } catch {
-                // print("WAV: URLSession", String(describing: error))
+                 print("WAV: URLSession", String(describing: error))
             }
         }
     }
@@ -183,8 +182,10 @@ struct NowPlayingType: Decodable {
     }
     var isLive: Bool {
         title.lowercased().contains("live broadcast")
+        // true // dev
     }
     var isOffAir: Bool {
         title.lowercased().contains("currently off air")
+        // false // dev
     }
 }
