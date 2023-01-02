@@ -1,5 +1,5 @@
 //
-//  InfiniteArchiveViewModel.swift
+//  InfiniteViewModel.swift
 //  WeAreVarious
 //
 //  Created by Thomas on 24/05/2021.
@@ -10,6 +10,11 @@ import UIKit // ?
 
 extension InfiniteView {
     class ViewModel: ObservableObject {
+
+        static var preview: ViewModel = {
+            ViewModel(archiveDataController: ArchiveDataController.preview)
+        }()
+        
         var archiveDataController: ArchiveDataController
 
         init(archiveDataController: ArchiveDataController) {

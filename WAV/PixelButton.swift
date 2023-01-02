@@ -9,6 +9,7 @@
 import SwiftUI
 
 struct PixelButton: View {
+    var color = Color.accentColor
     @Binding var isPlaying: Bool
     @State private var grid = Grid()
     private let pauseGrid = Grid(
@@ -70,7 +71,7 @@ struct PixelButton: View {
 
                 }
             }
-            context.fill(path, with: .color(.accentColor))
+            context.fill(path, with: .color(color))
         }
         .aspectRatio(6/9, contentMode: .fit)
         .onAppear {

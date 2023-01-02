@@ -8,32 +8,56 @@
 import SwiftUI
 
 struct ArchiveItem: View {
-    let record: WAVPost
-    let action: () -> Void
+    @ObservedObject var viewModel: InfiniteView.ViewModel
+    let index: Int
+    var record: WAVPost {
+        viewModel.records[index]
+    }
+    var isPlaying: Bool {
+        record == viewModel.archiveDataController.state.playing
+    }
+    var isPlayingBinding: Binding<Bool> {
+        Binding {
+            record == viewModel.archiveDataController.state.playing
+        } set: { _ in }
+    }
     let spacing: Double = 5
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             Button {
-                action()
+                viewModel.play(viewModel.records[index])
             } label: {
-                archiveItemButtonLabel(record: record)
+                archiveItemButtonLabel()
             }
-            archiveItemInfo(record: record)
+            archiveItemInfo()
         }
     }
-    func archiveItemButtonLabel(record: WAVPost) -> some View {
-        AsyncImage(url: record.pictureURL) { image in
-            image
-                .centerCropped()
-                .aspectRatio(100/66.7, contentMode: .fit)
-        } placeholder: {
-            ProgressView()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .aspectRatio(1.5, contentMode: .fit)
-                .background(.black.opacity(0.1))
+    func archiveItemButtonLabel() -> some View {
+        ZStack {
+            AsyncImage(url: record.pictureURL) { image in
+                image
+                    .centerCropped()
+                    .aspectRatio(100/66.7, contentMode: .fit)
+            } placeholder: {
+                ProgressView()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .aspectRatio(1.5, contentMode: .fit)
+                    .background(.black.opacity(0.1))
+            }
+
+//            BlurView(style: .systemThinMaterial)
+//                .mask {
+//                    PixelButton(isPlaying: isPlayingBinding)
+//                }
+//                .frame(maxWidth: 100)
+
+            PixelButton(isPlaying: isPlayingBinding)
+                .frame(maxWidth: 150)
+                .blendMode(.multiply)
+                .opacity(0.9)
         }
     }
-    func archiveItemInfo(record: WAVPost) -> some View {
+    func archiveItemInfo() -> some View {
         VStack(alignment: .leading, spacing: spacing) {
             Group {
                 Text(record.name.uppercased())
@@ -49,28 +73,14 @@ struct ArchiveItem: View {
     }
 }
 
-struct ArchiveItem_Previews: PreviewProvider {
-    static var previews: some View {
-        let wavPost = WAVPost(
-            id: 1,
-            date: "2022-12-24T17:43:55",
-            title: WAVPost.Title(rendered: "88 Black Gravity X-Mas Rhythms for the brain"),
-            mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
-            embedded: WAVPost.Embedded(
-                wpFeaturedmedia:
-                    [
-                        WAVPost.WpFeaturedmedia(
-                            sourceURL:
-                                "https://wearevarious.com/wp-content/uploads/2022/12/common-divisor-nikolai-23-12-2022-300x300.jpeg"
-                        )
-                    ]
-            )
-        )
-        ArchiveItem(
-            record: wavPost
-        ) { /* action */ }
-    }
-}
+//struct ArchiveItem_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ArchiveItem(
+//            viewModel: InfiniteView.ViewModel.preview,
+//            index: 0
+//        )
+//    }
+//}
 
 extension Image {
     func centerCropped() -> some View {

@@ -67,4 +67,20 @@ struct WAVPost: Codable, Identifiable, Equatable {
         let rendered: String
     }
 
+    static let preview = WAVPost(
+        id: 1,
+        date: "2022-12-24T17:43:55",
+        title: WAVPost.Title(rendered: "WAVPost Title rendered"),
+        mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
+        embedded: WAVPost.Embedded(
+            wpFeaturedmedia:
+                [
+                    WAVPost.WpFeaturedmedia(
+                        sourceURL:
+                            "https://wearevarious.com/wp-content/uploads/2022/12/common-divisor-nikolai-23-12-2022-300x300.jpeg"
+                    )
+                ]
+        )
+    )
+
 }

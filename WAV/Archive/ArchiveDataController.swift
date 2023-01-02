@@ -40,7 +40,8 @@ class ArchiveDataController: ObservableObject {
         var canLoadNextPage = true
     }
     static var preview: ArchiveDataController = {
-        ArchiveDataController()
+        let previewArchiveDataController = ArchiveDataController()
+        return previewArchiveDataController
     }()
 }
 
