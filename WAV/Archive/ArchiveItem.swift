@@ -8,24 +8,24 @@
 import SwiftUI
 
 struct ArchiveItem: View {
-    @ObservedObject var viewModel: InfiniteView.ViewModel
+    @Environment(\.colorScheme) var colorScheme
+    @ObservedObject var infiniteViewModel: InfiniteView.ViewModel
     let index: Int
     var record: WAVPost {
-        viewModel.records[index]
-    }
-    var isPlaying: Bool {
-        record == viewModel.archiveDataController.state.playing
+        infiniteViewModel.records[index]
     }
     var isPlayingBinding: Binding<Bool> {
         Binding {
-            record == viewModel.archiveDataController.state.playing
+            record == infiniteViewModel.archiveDataController.state.selectedPost
+            &&
+            infiniteViewModel.archiveDataController.state.isPlaying
         } set: { _ in }
     }
     let spacing: Double = 5
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             Button {
-                viewModel.play(viewModel.records[index])
+                infiniteViewModel.play(infiniteViewModel.records[index])
             } label: {
                 archiveItemButtonLabel()
             }
@@ -49,12 +49,13 @@ struct ArchiveItem: View {
 //                .mask {
 //                    PixelButton(isPlaying: isPlayingBinding)
 //                }
+//                .opacity(0.9)
 //                .frame(maxWidth: 100)
 
             PixelButton(isPlaying: isPlayingBinding)
                 .frame(maxWidth: 150)
-                .blendMode(.multiply)
-                .opacity(0.9)
+                .blendMode(.colorBurn)
+
         }
     }
     func archiveItemInfo() -> some View {
@@ -64,7 +65,7 @@ struct ArchiveItem: View {
                     .frame(alignment: .leading)
                     .padding(8)
                     .foregroundColor(.white)
-                    .background(.black)
+                    .background(colorScheme == .dark ? Color.accentColor : .black)
                 Text(record.dateFormatted.uppercased())
             }
             .lineSpacing(8)
@@ -73,14 +74,14 @@ struct ArchiveItem: View {
     }
 }
 
-//struct ArchiveItem_Previews: PreviewProvider {
-//    static var previews: some View {
-//        ArchiveItem(
-//            viewModel: InfiniteView.ViewModel.preview,
-//            index: 0
-//        )
-//    }
-//}
+struct ArchiveItem_Previews: PreviewProvider {
+    static var previews: some View {
+        ArchiveItem(
+            infiniteViewModel: InfiniteView.ViewModel.preview,
+            index: 0
+        )
+    }
+}
 
 extension Image {
     func centerCropped() -> some View {

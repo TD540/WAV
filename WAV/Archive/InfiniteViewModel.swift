@@ -30,12 +30,17 @@ extension InfiniteView {
         }
 
         func isPlaying(_ record: WAVPost) -> Bool {
-            archiveDataController.state.playing == record
+            archiveDataController.state.selectedPost == record
         }
 
         func play(_ record: WAVPost) {
             UINotificationFeedbackGenerator().notificationOccurred(.success)
             archiveDataController.play(record)
         }
+
+//        func playToggle(_ record: WAVPost) {
+//            UINotificationFeedbackGenerator().notificationOccurred(.success)
+//            archiveDataController.playToggle(record)
+//        }
     }
 }

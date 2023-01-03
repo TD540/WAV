@@ -10,9 +10,9 @@ import WebView
 import WebKit
 
 extension ArchivePlayerView {
-    class ViewModel: NSObject, ObservableObject, WKScriptMessageHandler {
+    class ArchivePlayerViewModel: NSObject, ObservableObject, WKScriptMessageHandler {
         let archiveDataController: ArchiveDataController
-        var playingRecord: WAVPost? { archiveDataController.state.playing }
+        var playing: WAVPost? { archiveDataController.state.selectedPost }
 
         @Published var webViewStore: WebViewStore
         @Published var isPlaying = false
@@ -40,14 +40,14 @@ extension ArchivePlayerView {
             configuration.mediaTypesRequiringUserActionForPlayback = []
             let webView = WKWebView(frame: .zero, configuration: configuration)
             webView.customUserAgent = "Mozilla/5.0 "
-                + "(Windows NT 10.0; rv:78.0) "
-                + "Gecko/20100101 Firefox/78.0"
+            + "(Windows NT 10.0; rv:78.0) "
+            + "Gecko/20100101 Firefox/78.0"
 
             webViewStore = WebViewStore(webView: webView)
 
             super.init()
 
-            if let playingRecord = playingRecord {
+            if let playingRecord = playing {
                 // print("WAV: Loading Widget: \(playingRecord.mixcloudWidget)")
                 webViewStore.webView.load(
                     URLRequest(url: playingRecord.mixcloudWidget)
@@ -64,6 +64,7 @@ extension ArchivePlayerView {
             if message.name == "isPlaying" {
                 // swiftlint:disable:next force_cast
                 isPlaying = message.body as! Bool == false // 😅
+                archiveDataController.state.isPlaying = isPlaying
             }
         }
 
@@ -83,9 +84,9 @@ extension ArchivePlayerView {
         }
 
         func onWebViewAppearing() {
-            if let playingRecord = playingRecord {
+            if let playing {
                 webViewStore.webView.load(
-                    URLRequest(url: playingRecord.mixcloudWidget)
+                    URLRequest(url: playing.mixcloudWidget)
                 )
             }
         }

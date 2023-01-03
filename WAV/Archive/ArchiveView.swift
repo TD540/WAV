@@ -21,6 +21,6 @@ struct ArchiveView: View {
 struct ArchiveView_Previews: PreviewProvider {
     static var previews: some View {
         ArchiveView(archiveDataController: ArchiveDataController.preview)
-            .preferredColorScheme(.light)
+            .preferredColorScheme(.dark)
     }
 }

@@ -18,7 +18,7 @@ class ArchiveDataController: ObservableObject {
             .store(in: &subscriptions)
     }
     func play(_ wavPost: WAVPost) {
-        state.playing = wavPost
+        state.selectedPost = wavPost
     }
     private func onReceive(_ completion: Subscribers.Completion<Error>) {
         switch completion {
@@ -34,13 +34,16 @@ class ArchiveDataController: ObservableObject {
         state.canLoadNextPage = batch.count == WAVWordPress.limit
     }
     struct State {
-        var playing: WAVPost?
+        var isPlaying =  false
+        var selectedPost: WAVPost?
         var wavPosts: [WAVPost] = []
         var page = 0
         var canLoadNextPage = true
     }
     static var preview: ArchiveDataController = {
         let previewArchiveDataController = ArchiveDataController()
+        previewArchiveDataController.state.wavPosts += [WAVPost.preview]
+        previewArchiveDataController.state.selectedPost = WAVPost.preview
         return previewArchiveDataController
     }()
 }

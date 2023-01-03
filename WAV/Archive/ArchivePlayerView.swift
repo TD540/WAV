@@ -9,22 +9,22 @@ import SwiftUI
 import WebView
 
 struct ArchivePlayerView: View {
-    @StateObject private var viewModel: ViewModel
+    @StateObject private var model: ArchivePlayerViewModel
     @Environment(\.colorScheme) var colorScheme
 
     init(archiveDataController: ArchiveDataController) {
-        let viewModel = ViewModel(archiveDataController: archiveDataController)
-        _viewModel = StateObject(wrappedValue: viewModel)
+        let model = ArchivePlayerViewModel(archiveDataController: archiveDataController)
+        _model = StateObject(wrappedValue: model)
     }
 
     var body: some View {
         ZStack {
-            WebView(webView: viewModel.webViewStore.webView)
+            WebView(webView: model.webViewStore.webView)
                 .frame(width: 0, height: 0)
-                .onChange(of: viewModel.playingRecord, perform: viewModel.onPlayingRecordChanging)
+                .onChange(of: model.playing, perform: model.onPlayingRecordChanging)
 
-            if let playingRecord = viewModel.playingRecord {
-                playingView(playingRecord: playingRecord)
+            if let record = model.playing {
+                playingView(record)
                     .background(
                         backgroundView()
                     )
@@ -35,7 +35,7 @@ struct ArchivePlayerView: View {
     func backgroundView() -> some View {
         ZStack {
             BlurView(style: .systemUltraThinMaterial)
-            if viewModel.playingRecord != nil {
+            if model.playing != nil {
                 if colorScheme == .light {
                     Color("WAVPink")
                         .blendMode(.multiply)
@@ -56,17 +56,17 @@ struct ArchivePlayerView: View {
             .padding()
     }
 
-    func playingView(playingRecord: WAVPost) -> some View {
+    func playingView(_ wavPost: WAVPost) -> some View {
         VStack {
-            Button(action: viewModel.playToggle) {
-                RecordView(pictureURL: playingRecord.pictureURL)
+            Button(action: model.playToggle) {
+                RecordView(pictureURL: wavPost.pictureURL)
             }
             .frame(width: 256, height: 60)
-            .buttonStyle(RotatingButtonStyle(isRotating: viewModel.isPlaying))
+            .buttonStyle(RotatingButtonStyle(isRotating: model.isPlaying))
             .rotation3DEffect(.degrees(40), axis: (x: 0.1, y: 0, z: 0), perspective: 0.5)
             .shadow(color: .black.opacity(0.6), radius: 10, x: 0.0, y: 15.0)
 
-            Text(playingRecord.name)
+            Text(wavPost.name)
                 .foregroundColor(.white)
                 .textCase(.uppercase)
                 .multilineTextAlignment(.center)
@@ -82,9 +82,11 @@ struct ArchivePlayerView: View {
 struct WebPlayerView_Previews: PreviewProvider {
     static var previews: some View {
         WAVPost.autoplay = false
+        let controller = ArchiveDataController.preview
+        controller.state.selectedPost = WAVPost.preview
         return VStack {
             Spacer()
-            ArchivePlayerView(archiveDataController: ArchiveDataController.preview)
+            ArchivePlayerView(archiveDataController: controller)
         }
         //         .preferredColorScheme(.dark)
     }
