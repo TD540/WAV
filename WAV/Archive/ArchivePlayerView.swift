@@ -11,10 +11,11 @@ import WebView
 struct ArchivePlayerView: View {
     @StateObject private var model: ArchivePlayerViewModel
     @Environment(\.colorScheme) var colorScheme
-
-    init(archiveDataController: ArchiveDataController) {
+    var scrollProxy: ScrollViewProxy
+    init(archiveDataController: ArchiveDataController, scrollProxy: ScrollViewProxy) {
         let model = ArchivePlayerViewModel(archiveDataController: archiveDataController)
         _model = StateObject(wrappedValue: model)
+        self.scrollProxy = scrollProxy
     }
 
     var body: some View {
@@ -22,12 +23,12 @@ struct ArchivePlayerView: View {
             WebView(webView: model.webViewStore.webView)
                 .frame(width: 0, height: 0)
                 .onChange(of: model.archiveDataController.state.selectedPost, perform: model.onPlayingRecordChanging)
-                .onChange(of: model.archiveDataController.state.playPause) { newValue in
+                .onChange(of: model.archiveDataController.state.playPause) { _ in
                     model.playToggle()
                 }
 
-            if let record = model.archiveDataController.state.selectedPost {
-                playingView(record)
+            if let wavPost = model.archiveDataController.state.selectedPost {
+                playingView(wavPost)
                     .background(
                         backgroundView()
                     )
@@ -61,7 +62,12 @@ struct ArchivePlayerView: View {
 
     func playingView(_ wavPost: WAVPost) -> some View {
         VStack {
-            Button(action: model.archiveDataController.scrollToPlaying) {
+            Button {
+                withAnimation {
+                    scrollProxy.scrollTo(model.archiveDataController.state.selectedPost?.id, anchor: .center)
+                    UINotificationFeedbackGenerator().notificationOccurred(.warning)
+                }
+            } label: {
                 RecordView(pictureURL: wavPost.pictureURL)
             }
             .frame(width: 256, height: 60)
@@ -88,10 +94,12 @@ struct WebPlayerView_Previews: PreviewProvider {
         let controller = ArchiveDataController.preview
         controller.state.selectedPost = WAVPost.preview
         controller.state.isPlaying = false
-        return VStack {
-            Spacer()
-            ArchivePlayerView(archiveDataController: controller)
+        return ScrollViewReader { scrollProxy in
+            VStack {
+                Spacer()
+                ArchivePlayerView(archiveDataController: controller, scrollProxy: scrollProxy)
+            }
         }
-        //         .preferredColorScheme(.dark)
+        // .preferredColorScheme(.dark)
     }
 }

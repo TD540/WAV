@@ -17,9 +17,6 @@ class ArchiveDataController: ObservableObject {
             .sink(receiveCompletion: onReceive, receiveValue: onReceive)
             .store(in: &subscriptions)
     }
-    func scrollToPlaying() {
-        print("WAV: scrollToPlaying() \(state.selectedPost?.id.description ?? "nothing")")
-    }
     private func onReceive(_ completion: Subscribers.Completion<Error>) {
         switch completion {
         case .finished:

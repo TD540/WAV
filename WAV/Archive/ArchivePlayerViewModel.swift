@@ -60,7 +60,7 @@ extension ArchivePlayerView {
                 archiveDataController.state.isPlaying = message.body as! Bool == false
             }
         }
-        
+
         func playToggle() {
             UINotificationFeedbackGenerator().notificationOccurred(.success)
             webViewStore.webView.evaluateJavaScript(
@@ -85,7 +85,6 @@ extension ArchivePlayerView {
         }
 
         func onPlayingRecordChanging(playingRecord: WAVPost?) {
-            print("WAV: onPlayingRecordChanging() triggered")
             if let playingRecord = playingRecord {
                 webViewStore.webView.load(
                     URLRequest(url: playingRecord.mixcloudWidget)

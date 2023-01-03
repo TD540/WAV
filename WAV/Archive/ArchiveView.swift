@@ -11,9 +11,11 @@ struct ArchiveView: View {
     @StateObject var archiveDataController: ArchiveDataController
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            InfiniteView(archiveDataController: archiveDataController)
-            ArchivePlayerView(archiveDataController: archiveDataController)
+        ScrollViewReader { scrollProxy in
+            ZStack(alignment: .bottom) {
+                InfiniteView(archiveDataController: archiveDataController, scrollProxy: scrollProxy)
+                ArchivePlayerView(archiveDataController: archiveDataController, scrollProxy: scrollProxy)
+            }
         }
     }
 }
