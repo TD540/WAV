@@ -12,10 +12,8 @@ import WebKit
 extension ArchivePlayerView {
     class ArchivePlayerViewModel: NSObject, ObservableObject, WKScriptMessageHandler {
         let archiveDataController: ArchiveDataController
-        var playing: WAVPost? { archiveDataController.state.selectedPost }
 
         @Published var webViewStore: WebViewStore
-        @Published var isPlaying = false
 
         init(archiveDataController: ArchiveDataController) {
             self.archiveDataController = archiveDataController
@@ -47,7 +45,7 @@ extension ArchivePlayerView {
 
             super.init()
 
-            if let playingRecord = playing {
+            if let playingRecord = archiveDataController.state.selectedPost {
                 // print("WAV: Loading Widget: \(playingRecord.mixcloudWidget)")
                 webViewStore.webView.load(
                     URLRequest(url: playingRecord.mixcloudWidget)
@@ -57,17 +55,12 @@ extension ArchivePlayerView {
             userContentController.add(self, contentWorld: .defaultClient, name: "isPlaying")
         }
 
-        func userContentController(
-            _ userContentController: WKUserContentController,
-            didReceive message: WKScriptMessage
-        ) {
+        func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             if message.name == "isPlaying" {
-                // swiftlint:disable:next force_cast
-                isPlaying = message.body as! Bool == false // 😅
-                archiveDataController.state.isPlaying = isPlaying
+                archiveDataController.state.isPlaying = message.body as! Bool == false
             }
         }
-
+        
         func playToggle() {
             UINotificationFeedbackGenerator().notificationOccurred(.success)
             webViewStore.webView.evaluateJavaScript(
@@ -84,14 +77,15 @@ extension ArchivePlayerView {
         }
 
         func onWebViewAppearing() {
-            if let playing {
+            if let selectedPost = archiveDataController.state.selectedPost {
                 webViewStore.webView.load(
-                    URLRequest(url: playing.mixcloudWidget)
+                    URLRequest(url: selectedPost.mixcloudWidget)
                 )
             }
         }
 
         func onPlayingRecordChanging(playingRecord: WAVPost?) {
+            print("WAV: onPlayingRecordChanging() triggered")
             if let playingRecord = playingRecord {
                 webViewStore.webView.load(
                     URLRequest(url: playingRecord.mixcloudWidget)

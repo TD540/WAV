@@ -17,8 +17,8 @@ class ArchiveDataController: ObservableObject {
             .sink(receiveCompletion: onReceive, receiveValue: onReceive)
             .store(in: &subscriptions)
     }
-    func play(_ wavPost: WAVPost) {
-        state.selectedPost = wavPost
+    func scrollToPlaying() {
+        print("WAV: scrollToPlaying() \(state.selectedPost?.id.description ?? "nothing")")
     }
     private func onReceive(_ completion: Subscribers.Completion<Error>) {
         switch completion {
@@ -35,6 +35,7 @@ class ArchiveDataController: ObservableObject {
     }
     struct State {
         var isPlaying =  false
+        var playPause = false // the value of doesn't matter, only the toggle
         var selectedPost: WAVPost?
         var wavPosts: [WAVPost] = []
         var page = 0

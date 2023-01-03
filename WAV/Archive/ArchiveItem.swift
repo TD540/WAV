@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ArchiveItem: View {
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject var infiniteViewModel: InfiniteView.ViewModel
+    var infiniteViewModel: InfiniteView.ViewModel
     let index: Int
     var record: WAVPost {
         infiniteViewModel.records[index]
@@ -25,7 +25,13 @@ struct ArchiveItem: View {
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             Button {
-                infiniteViewModel.play(infiniteViewModel.records[index])
+                print("WAV: ArchiveItem tapped \(record.id)")
+                if infiniteViewModel.archiveDataController.state.selectedPost != record {
+                    UINotificationFeedbackGenerator().notificationOccurred(.success)
+                    infiniteViewModel.archiveDataController.state.selectedPost = record
+                } else {
+                    infiniteViewModel.archiveDataController.state.playPause.toggle()
+                }
             } label: {
                 archiveItemButtonLabel()
             }
@@ -54,7 +60,7 @@ struct ArchiveItem: View {
 
             PixelButton(isPlaying: isPlayingBinding)
                 .frame(maxWidth: 150)
-                .blendMode(.colorBurn)
+                .blendMode(.hardLight)
 
         }
     }

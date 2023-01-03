@@ -21,9 +21,12 @@ struct ArchivePlayerView: View {
         ZStack {
             WebView(webView: model.webViewStore.webView)
                 .frame(width: 0, height: 0)
-                .onChange(of: model.playing, perform: model.onPlayingRecordChanging)
+                .onChange(of: model.archiveDataController.state.selectedPost, perform: model.onPlayingRecordChanging)
+                .onChange(of: model.archiveDataController.state.playPause) { newValue in
+                    model.playToggle()
+                }
 
-            if let record = model.playing {
+            if let record = model.archiveDataController.state.selectedPost {
                 playingView(record)
                     .background(
                         backgroundView()
@@ -35,7 +38,7 @@ struct ArchivePlayerView: View {
     func backgroundView() -> some View {
         ZStack {
             BlurView(style: .systemUltraThinMaterial)
-            if model.playing != nil {
+            if model.archiveDataController.state.selectedPost != nil {
                 if colorScheme == .light {
                     Color("WAVPink")
                         .blendMode(.multiply)
@@ -58,11 +61,11 @@ struct ArchivePlayerView: View {
 
     func playingView(_ wavPost: WAVPost) -> some View {
         VStack {
-            Button(action: model.playToggle) {
+            Button(action: model.archiveDataController.scrollToPlaying) {
                 RecordView(pictureURL: wavPost.pictureURL)
             }
             .frame(width: 256, height: 60)
-            .buttonStyle(RotatingButtonStyle(isRotating: model.isPlaying))
+            .buttonStyle(RotatingButtonStyle(isRotating: model.archiveDataController.state.isPlaying))
             .rotation3DEffect(.degrees(40), axis: (x: 0.1, y: 0, z: 0), perspective: 0.5)
             .shadow(color: .black.opacity(0.6), radius: 10, x: 0.0, y: 15.0)
 
@@ -84,6 +87,7 @@ struct WebPlayerView_Previews: PreviewProvider {
         WAVPost.autoplay = false
         let controller = ArchiveDataController.preview
         controller.state.selectedPost = WAVPost.preview
+        controller.state.isPlaying = false
         return VStack {
             Spacer()
             ArchivePlayerView(archiveDataController: controller)
