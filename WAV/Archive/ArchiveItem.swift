@@ -32,35 +32,28 @@ struct ArchiveItem: View {
                     infiniteViewModel.archiveDataController.state.playPause.toggle()
                 }
             } label: {
-                archiveItemButtonLabel()
+                image()
             }
             archiveItemInfo()
         }
     }
-    func archiveItemButtonLabel() -> some View {
+    func image() -> some View {
         ZStack {
             AsyncImage(url: record.pictureURL) { image in
                 image
                     .centerCropped()
                     .aspectRatio(100/66.7, contentMode: .fit)
+                    .overlay{
+                        PixelButton(isPlaying: isPlayingBinding)
+                            .blendMode(.hardLight)
+                            .padding(16)
+                    }
             } placeholder: {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .aspectRatio(1.5, contentMode: .fit)
                     .background(.black.opacity(0.1))
             }
-
-//            BlurView(style: .systemThinMaterial)
-//                .mask {
-//                    PixelButton(isPlaying: isPlayingBinding)
-//                }
-//                .opacity(0.9)
-//                .frame(maxWidth: 100)
-
-            PixelButton(isPlaying: isPlayingBinding)
-                .frame(maxWidth: 150)
-                .blendMode(.hardLight)
-
         }
     }
     func archiveItemInfo() -> some View {

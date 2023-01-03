@@ -21,39 +21,37 @@ struct RotatingButtonStyle: ButtonStyle {
     var stoppingAnimation = Animation.linear(duration: 0)
 
     func makeBody(configuration: Configuration) -> some View {
-        VStack {
-            Text("currentAngle: \(currentAngle)")
-            configuration.label
-                .modifier(
-                    PausableRotationEffect(
-                        desiredAngle: desiredAngle,
-                        currentAngle: $currentAngle
-                    )
+        configuration.label
+            .modifier(
+                PausableRotationEffect(
+                    desiredAngle: desiredAngle,
+                    currentAngle: $currentAngle
                 )
-                .onAppear {
-                    if isRotating {
-                        withAnimation(foreverAnimation) {
-                            let startAngle = currentAngle.truncatingRemainder(dividingBy: CGFloat.pi * 2)
-                            let angleDelta = CGFloat.pi * 2
-                            desiredAngle = startAngle + angleDelta
-                        }
+            )
+            .onAppear {
+                if isRotating {
+                    withAnimation(foreverAnimation) {
+                        let startAngle = currentAngle.truncatingRemainder(dividingBy: CGFloat.pi * 2)
+                        let angleDelta = CGFloat.pi * 2
+                        desiredAngle = startAngle + angleDelta
                     }
                 }
-                .onChange(of: isRotating, perform: { isRotatingChanged in
-                    if isRotatingChanged == true {
-                        withAnimation(foreverAnimation) {
-                            let startAngle = currentAngle.truncatingRemainder(dividingBy: CGFloat.pi * 2)
-                            let angleDelta = CGFloat.pi * 2
-                            desiredAngle = startAngle + angleDelta
-                        }
-                    } else {
-                        withAnimation(stoppingAnimation) {
-                            let startAngle = currentAngle.truncatingRemainder(dividingBy: CGFloat.pi * 2)
-                            desiredAngle = startAngle
-                        }
+            }
+            .onChange(of: isRotating, perform: { isRotatingChanged in
+                if isRotatingChanged == true {
+                    withAnimation(foreverAnimation) {
+                        let startAngle = currentAngle.truncatingRemainder(dividingBy: CGFloat.pi * 2)
+                        let angleDelta = CGFloat.pi * 2
+                        desiredAngle = startAngle + angleDelta
                     }
-                })
-        }
+                } else {
+                    withAnimation(stoppingAnimation) {
+                        let startAngle = currentAngle.truncatingRemainder(dividingBy: CGFloat.pi * 2)
+                        desiredAngle = startAngle
+                    }
+                }
+            })
+
 
     }
 
@@ -85,26 +83,45 @@ struct RotatingButtonStyle: ButtonStyle {
 
 struct RotatingButtonStyle_Previews: PreviewProvider {
     static var previews: some View {
-         PreviewRotatingButtonStyle()
+        PreviewRotatingButtonStyle()
     }
     struct PreviewRotatingButtonStyle: View {
         @State private var isPlaying: Bool = true
+        @State private var appearMethod = ""
+        @State private var hello = "HELLO"
         var body: some View {
-            TabView {
-                Button {
-                    isPlaying.toggle()
-                } label: {
-                    Text("💿")
-                        .font(.system(size: 200))
-                }
-                .buttonStyle(RotatingButtonStyle(isRotating: isPlaying))
-                .tabItem {
-                    Label("RotatingButtonStyle", systemImage: "opticaldisc")
-                }
-                Text("Tapped away, now tap back")
-                    .tabItem {
-                        Label("Tap me", systemImage: "ellipsis")
+            VStack {
+                Text(hello)
+                Spacer()
+                TabView {
+                    VStack {
+                        Text("\(appearMethod) isPlaying = \(isPlaying.description)")
+                        Button {
+                            isPlaying.toggle()
+                        } label: {
+                            Text("💿")
+                                .font(.system(size: 200))
+                        }
+                        .buttonStyle(RotatingButtonStyle(isRotating: isPlaying))
                     }
+                    .onDisappear {
+                        isPlaying = false
+                        appearMethod = "onDisappear"
+                        hello = "... \(isPlaying.description)"
+                    }
+                    .onAppear {
+                        isPlaying = true
+                        appearMethod = "onAppear"
+                        hello = "💿"
+                    }
+                    .tabItem {
+                        Label("RotatingButtonStyle", systemImage: "opticaldisc")
+                    }
+                    Text("Tapped away, now tap back")
+                        .tabItem {
+                            Label("Tap me", systemImage: "ellipsis")
+                        }
+                }
             }
         }
     }

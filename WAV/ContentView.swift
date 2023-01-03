@@ -23,14 +23,14 @@ struct ContentView: View {
                     )
                 }
                 .tag(1)
-            Schedule()
-                .tabItem {
-                    Label("SCHEDULE", systemImage: "calendar.badge.clock")
-                }
-                .tag(2)
             ArchiveView(archiveDataController: archiveDataControllerroller)
                 .tabItem {
                     Label("ARCHIVE", systemImage: "square.stack")
+                }
+                .tag(2)
+            Schedule()
+                .tabItem {
+                    Label("SCHEDULE", systemImage: "calendar.badge.clock")
                 }
                 .tag(3)
             Chat()
@@ -40,7 +40,7 @@ struct ContentView: View {
                 .tag(4)
         }
         .onAppear {
-            tabSelection = radio.isOffAir ? 3 : 1
+            tabSelection = radio.isOffAir ? 2 : 1
         }
     }
 }
