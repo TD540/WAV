@@ -25,7 +25,6 @@ struct ArchiveItem: View {
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             Button {
-                // print("WAV: ArchiveItem tapped \(record.id)")
                 if infiniteViewModel.archiveDataController.state.selectedPost != record {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
                     infiniteViewModel.archiveDataController.state.selectedPost = record
