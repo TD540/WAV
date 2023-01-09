@@ -10,34 +10,21 @@ import UIKit // ?
 
 extension InfiniteView {
     class ViewModel: ObservableObject {
-
-        static var preview: ViewModel = {
-            ViewModel(archiveDataController: ArchiveDataController.preview)
-        }()
-        
         var archiveDataController: ArchiveDataController
-
         init(archiveDataController: ArchiveDataController) {
             self.archiveDataController = archiveDataController
         }
-
-        var records: [WAVPost] {
-            archiveDataController.state.wavPosts
+        var wavShows: [WAVShow] {
+            archiveDataController.state.wavShows
         }
-
         func loadNext() {
             archiveDataController.loadNextPageIfPossible()
         }
-
-        func isPlaying(_ record: WAVPost) -> Bool {
-            archiveDataController.state.selectedPost == record
+        func isPlaying(_ wavShow: WAVShow) -> Bool {
+            archiveDataController.state.selectedShow == wavShow
         }
-
-        
-
-//        func playToggle(_ record: WAVPost) {
-//            UINotificationFeedbackGenerator().notificationOccurred(.success)
-//            archiveDataController.playToggle(record)
-//        }
+        static var preview: ViewModel = {
+            ViewModel(archiveDataController: ArchiveDataController.preview)
+        }()
     }
 }

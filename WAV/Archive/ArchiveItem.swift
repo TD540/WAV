@@ -11,12 +11,12 @@ struct ArchiveItem: View {
     @Environment(\.colorScheme) var colorScheme
     var infiniteViewModel: InfiniteView.ViewModel
     let index: Int
-    var record: WAVPost {
-        infiniteViewModel.records[index]
+    var wavShow: WAVShow {
+        infiniteViewModel.wavShows[index]
     }
     var isPlayingBinding: Binding<Bool> {
         Binding {
-            record == infiniteViewModel.archiveDataController.state.selectedPost
+            wavShow == infiniteViewModel.archiveDataController.state.selectedShow
             &&
             infiniteViewModel.archiveDataController.state.isPlaying
         } set: { _ in }
@@ -25,9 +25,9 @@ struct ArchiveItem: View {
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             Button {
-                if infiniteViewModel.archiveDataController.state.selectedPost != record {
+                if infiniteViewModel.archiveDataController.state.selectedShow != wavShow {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    infiniteViewModel.archiveDataController.state.selectedPost = record
+                    infiniteViewModel.archiveDataController.state.selectedShow = wavShow
                 } else {
                     infiniteViewModel.archiveDataController.state.playPause.toggle()
                 }
@@ -39,7 +39,7 @@ struct ArchiveItem: View {
     }
     func image() -> some View {
         ZStack {
-            AsyncImage(url: record.pictureURL) { image in
+            AsyncImage(url: wavShow.pictureURL) { image in
                 image
                     .centerCropped()
                     .aspectRatio(100/66.7, contentMode: .fit)
@@ -60,14 +60,13 @@ struct ArchiveItem: View {
         VStack(alignment: .leading, spacing: spacing) {
             Group {
                 Group {
-                    Text(record.title.uppercased())
-                    Text(record.name.uppercased())
+                    Text(wavShow.name.uppercased())
                 }
                 .frame(alignment: .leading)
                 .padding(8)
                 .foregroundColor(.white)
                 .background(.black)
-                Text(record.dateFormatted.uppercased())
+                Text(wavShow.dateFormatted.uppercased())
                     .padding(.horizontal, 8)
             }
             .lineSpacing(8)

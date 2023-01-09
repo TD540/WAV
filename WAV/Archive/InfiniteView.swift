@@ -18,14 +18,14 @@ struct InfiniteView: View {
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 30) {
-                ForEach(viewModel.records.indices, id: \.self) { index in
+                ForEach(viewModel.wavShows.indices, id: \.self) { index in
                     ArchiveItem(
                         infiniteViewModel: viewModel,
                         index: index
                     )
-                    .id(viewModel.records[index].id)
+                    .id(viewModel.wavShows[index].id)
                     .padding(.horizontal)
-                    .onAppear(perform: viewModel.records.last == viewModel.records[index] ? viewModel.loadNext : nil)
+                    .onAppear(perform: viewModel.wavShows.last == viewModel.wavShows[index] ? viewModel.loadNext : nil)
                 }
             }
         }
@@ -37,8 +37,8 @@ struct InfiniteView: View {
 struct InfiniteView_Previews: PreviewProvider {
     static var previews: some View {
         let archiveDataController = ArchiveDataController.preview
-        archiveDataController.state.wavPosts += [WAVPost.preview]
-        archiveDataController.state.selectedPost = nil
+        archiveDataController.state.wavShows += [WAVShow.preview]
+        archiveDataController.state.selectedShow = nil
         return ScrollViewReader { scrollProxy in
             InfiniteView(archiveDataController: archiveDataController, scrollProxy: scrollProxy)
         }

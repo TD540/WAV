@@ -45,7 +45,7 @@ extension ArchivePlayerView {
 
             super.init()
 
-            if let playingRecord = archiveDataController.state.selectedPost {
+            if let playingRecord = archiveDataController.state.selectedShow {
                 // print("WAV: Loading Widget: \(playingRecord.mixcloudWidget)")
                 webViewStore.webView.load(
                     URLRequest(url: playingRecord.mixcloudWidget)
@@ -77,14 +77,14 @@ extension ArchivePlayerView {
         }
 
         func onWebViewAppearing() {
-            if let selectedPost = archiveDataController.state.selectedPost {
+            if let selectedShow = archiveDataController.state.selectedShow {
                 webViewStore.webView.load(
-                    URLRequest(url: selectedPost.mixcloudWidget)
+                    URLRequest(url: selectedShow.mixcloudWidget)
                 )
             }
         }
 
-        func onPlayingRecordChanging(playingRecord: WAVPost?) {
+        func onPlayingRecordChanging(playingRecord: WAVShow?) {
             if let playingRecord = playingRecord {
                 webViewStore.webView.load(
                     URLRequest(url: playingRecord.mixcloudWidget)

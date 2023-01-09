@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var radio: Radio
-    @EnvironmentObject var archiveDataControllerroller: ArchiveDataController
+    @StateObject var radio = Radio()
+    @StateObject var archiveDataController = ArchiveDataController()
     @State private var tabSelection = 1
 
     var body: some View {
@@ -23,7 +23,7 @@ struct ContentView: View {
                     )
                 }
                 .tag(1)
-            ArchiveView(archiveDataController: archiveDataControllerroller)
+            ArchiveView(archiveDataController: archiveDataController)
                 .tabItem {
                     Label("ARCHIVE", systemImage: "square.stack")
                 }

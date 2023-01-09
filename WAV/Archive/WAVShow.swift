@@ -1,5 +1,5 @@
 //
-//  WAVPost.swift
+//  WAVShow.swift
 //  WAV
 //
 //  Created by Thomas on 01/01/2023.
@@ -7,10 +7,10 @@
 
 import Foundation
 
-typealias WAVPosts = [WAVPost]
+typealias WAVShows = [WAVShow]
 
-struct WAVPost: Codable, Identifiable, Equatable {
-    static func == (lhs: WAVPost, rhs: WAVPost) -> Bool {
+struct WAVShow: Codable, Identifiable, Equatable {
+    static func == (lhs: WAVShow, rhs: WAVShow) -> Bool {
         lhs.id == rhs.id
     }
 
@@ -42,7 +42,7 @@ struct WAVPost: Codable, Identifiable, Equatable {
         let range = mixcloudURL.range(of: "mixcloud.com")!
         let slug = String(mixcloudURL[range.upperBound...])
         let widgetURL = "https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&hide_artwork=1" +
-        "&autoplay=\(WAVPost.autoplay ? "1" : "0")" +
+        "&autoplay=\(WAVShow.autoplay ? "1" : "0")" +
         "&feed=" +
         "\(slug.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)"
         return URL(string: widgetURL)!
@@ -67,15 +67,15 @@ struct WAVPost: Codable, Identifiable, Equatable {
         let rendered: String
     }
 
-    static let preview = WAVPost(
+    static let preview = WAVShow(
         id: 1,
         date: "2022-12-24T17:43:55",
-        title: WAVPost.Title(rendered: "WAVPost Title rendered"),
+        title: WAVShow.Title(rendered: "Random WAV Show Title"),
         mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
-        embedded: WAVPost.Embedded(
+        embedded: WAVShow.Embedded(
             wpFeaturedmedia:
                 [
-                    WAVPost.WpFeaturedmedia(
+                    WAVShow.WpFeaturedmedia(
                         sourceURL:
                             "https://wearevarious.com/wp-content/uploads/2022/12/common-divisor-nikolai-23-12-2022-300x300.jpeg"
                     )
