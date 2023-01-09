@@ -43,10 +43,10 @@ struct ArchiveItem: View {
                 image
                     .centerCropped()
                     .aspectRatio(100/66.7, contentMode: .fit)
-                    .overlay{
+                    .overlay {
                         PixelButton(isPlaying: isPlayingBinding)
                             .blendMode(.hardLight)
-                            .padding(16)
+                            .frame(maxWidth: 60, maxHeight: 90)
                     }
             } placeholder: {
                 ProgressView()
@@ -59,12 +59,16 @@ struct ArchiveItem: View {
     func archiveItemInfo() -> some View {
         VStack(alignment: .leading, spacing: spacing) {
             Group {
-                Text(record.name.uppercased())
-                    .frame(alignment: .leading)
-                    .padding(8)
-                    .foregroundColor(.white)
-                    .background(colorScheme == .dark ? Color.accentColor : .black)
+                Group {
+                    Text(record.title.uppercased())
+                    Text(record.name.uppercased())
+                }
+                .frame(alignment: .leading)
+                .padding(8)
+                .foregroundColor(.white)
+                .background(.black)
                 Text(record.dateFormatted.uppercased())
+                    .padding(.horizontal, 8)
             }
             .lineSpacing(8)
             .font(.custom("pixelmix", size: 14))
@@ -78,17 +82,9 @@ struct ArchiveItem_Previews: PreviewProvider {
             infiniteViewModel: InfiniteView.ViewModel.preview,
             index: 0
         )
-    }
-}
-
-extension Image {
-    func centerCropped() -> some View {
-        GeometryReader { geo in
-            self
-                .resizable()
-                .scaledToFill()
-                .frame(width: geo.size.width, height: geo.size.height)
-                .clipped()
-        }
+        .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.white.opacity(0.15))
+        .preferredColorScheme(.dark)
     }
 }

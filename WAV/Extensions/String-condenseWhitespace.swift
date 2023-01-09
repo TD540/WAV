@@ -1,6 +1,5 @@
 //
 //  String-condenseWhitespace.swift
-//  WAV
 //
 //  https://stackoverflow.com/a/33058765/147163
 //

@@ -17,7 +17,7 @@ struct InfiniteView: View {
     }
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 20) {
+            LazyVStack(spacing: 30) {
                 ForEach(viewModel.records.indices, id: \.self) { index in
                     ArchiveItem(
                         infiniteViewModel: viewModel,
@@ -29,7 +29,7 @@ struct InfiniteView: View {
                 }
             }
         }
-        .background(colorScheme == .dark ? .white.opacity(0.12) : .black.opacity(0.1))
+        .background(colorScheme == .dark ? .white.opacity(0.15) : .black.opacity(0.1))
         .onAppear(perform: viewModel.loadNext)
     }
 }
@@ -42,6 +42,6 @@ struct InfiniteView_Previews: PreviewProvider {
         return ScrollViewReader { scrollProxy in
             InfiniteView(archiveDataController: archiveDataController, scrollProxy: scrollProxy)
         }
-            .preferredColorScheme(.dark)
+        .preferredColorScheme(.dark)
     }
 }
