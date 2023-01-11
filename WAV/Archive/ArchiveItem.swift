@@ -28,6 +28,7 @@ struct ArchiveItem: View {
                 if infiniteViewModel.archiveDataController.state.selectedShow != wavShow {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
                     infiniteViewModel.archiveDataController.state.selectedShow = wavShow
+                    print("WAV: now loading \(wavShow.mixcloudWidget)")
                 } else {
                     infiniteViewModel.archiveDataController.state.playPause.toggle()
                 }

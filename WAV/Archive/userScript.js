@@ -25,3 +25,9 @@ window.webAudioPromise = elementReady("audio").then((webAudioElement) => {
         window.webkit.messageHandlers.isPlaying.postMessage(webAudioElement.paused)
     }
 })
+
+window.onload = function() {
+    var style = document.createElement('style');
+    style.innerHTML = '.restricted-message-overlay { display: none !important }';
+    document.head.appendChild(style);
+}

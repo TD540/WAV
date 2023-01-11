@@ -19,21 +19,14 @@ struct ArchivePlayerView: View {
     }
 
     var body: some View {
-        ZStack {
-            WebView(webView: model.webViewStore.webView)
-                .frame(width: 0, height: 0)
-                .onChange(of: model.archiveDataController.state.selectedShow, perform: model.onPlayingRecordChanging)
-                .onChange(of: model.archiveDataController.state.playPause) { _ in
-                    model.playToggle()
-                }
-
-            if let wavShow = model.archiveDataController.state.selectedShow {
-                playingView(wavShow)
-                    .background(
-                        backgroundView()
-                    )
+        WebView(webView: model.webViewStore.webView)
+            .frame(height: 60)
+            .onChange(of: model.archiveDataController.state.selectedShow, perform: model.onPlayingRecordChanging)
+            .onChange(of: model.archiveDataController.state.playPause) { _ in
+                model.playToggle()
             }
-        }
+            .opacity(model.archiveDataController.state.selectedShow != nil ? 1 : 0)
+            .transition(.opacity)
     }
 
     func backgroundView() -> some View {
@@ -90,10 +83,10 @@ struct ArchivePlayerView: View {
 
 struct WebPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        WAVShow.autoplay = false
+        WAVShow.autoplay = true
         let controller = ArchiveDataController.preview
         controller.state.selectedShow = WAVShow.preview
-        controller.state.isPlaying = false
+        controller.state.isPlaying = true
         return ScrollViewReader { scrollProxy in
             VStack {
                 Spacer()

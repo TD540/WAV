@@ -37,6 +37,9 @@ extension ArchivePlayerView {
             configuration.userContentController = userContentController
             configuration.mediaTypesRequiringUserActionForPlayback = []
             let webView = WKWebView(frame: .zero, configuration: configuration)
+            webView.backgroundColor = .clear
+            webView.isOpaque = false
+            // print("WAV: \(webView.backgroundColor?.description ?? "no bgcolor")")
             webView.customUserAgent = "Mozilla/5.0 "
             + "(Windows NT 10.0; rv:78.0) "
             + "Gecko/20100101 Firefox/78.0"
