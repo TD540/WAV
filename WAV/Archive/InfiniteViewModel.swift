@@ -14,7 +14,7 @@ extension InfiniteView {
         init(archiveDataController: ArchiveDataController) {
             self.archiveDataController = archiveDataController
         }
-        var wavShows: [WAVShow] {
+        var wavShows: WAVShows {
             archiveDataController.state.wavShows
         }
         func loadNext() {

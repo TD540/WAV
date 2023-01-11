@@ -25,16 +25,16 @@ class ArchiveDataController: ObservableObject {
             state.canLoadNextPage = false
         }
     }
-    private func onReceive(_ batch: [WAVShow]) {
-        state.wavShows += batch
+    private func onReceive(_ wavShows: WAVShows) {
+        state.wavShows += wavShows
         state.page += 1
-        state.canLoadNextPage = batch.count == WAVWordPress.limit
+        state.canLoadNextPage = wavShows.count == WAVWordPress.limit
     }
     struct State {
         var isPlaying =  false
         var playPause = false // the value of doesn't matter, only the toggle
         var selectedShow: WAVShow?
-        var wavShows: [WAVShow] = []
+        var wavShows: WAVShows = []
         var page = 0
         var canLoadNextPage = true
     }
@@ -48,13 +48,14 @@ class ArchiveDataController: ObservableObject {
 
 enum WAVWordPress {
     static let limit = 10
-    static func load(page: Int) -> AnyPublisher<[WAVShow], Error> {
+    static func load(page: Int) -> AnyPublisher<WAVShows, Error> {
         let url = URL(
             string: "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(limit)&offset=\(page*limit)"
         )!
+        print("WAV: load restapi \(url.description)")
         return URLSession.shared
             .dataTaskPublisher(for: url)
-            .tryMap { try JSONDecoder().decode([WAVShow].self, from: $0.data) }
+            .tryMap { try JSONDecoder().decode(WAVShows.self, from: $0.data) }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }
