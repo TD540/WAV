@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ArchiveItem: View {
     @Environment(\.colorScheme) var colorScheme
+    @State var categories: WAVCategories = []
     var infiniteViewModel: InfiniteView.ViewModel
     let index: Int
     var wavShow: WAVShow {
@@ -21,7 +22,7 @@ struct ArchiveItem: View {
             infiniteViewModel.archiveDataController.state.isPlaying
         } set: { _ in }
     }
-    let spacing: Double = 5
+    let spacing: Double = 4
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             Button {
@@ -56,23 +57,61 @@ struct ArchiveItem: View {
                     .background(.black.opacity(0.1))
             }
         }
+//        .onAppear {
+//            /*
+//             load categories and tags
+//             and
+//             https://wearevarious.com/wp-json/wp/v2/tags?post=104390&_fields=name
+//             */
+//        }
     }
     func archiveItemInfo() -> some View {
         VStack(alignment: .leading, spacing: spacing) {
             Group {
                 Group {
                     Text(wavShow.name.uppercased())
+                        .wavBlack()
+                    FlexibleView(
+                        availableWidth: UIScreen.main.bounds.width, data: categories.map { $0.name },
+                        spacing: 4,
+                        alignment: .leading
+                    ) { item in
+                        Text(verbatim: item)
+                            .wavBlack(size: 10)
+                    }
                 }
                 .frame(alignment: .leading)
-                .padding(8)
-                .foregroundColor(.white)
-                .background(.black)
                 Text(wavShow.dateFormatted.uppercased())
-                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .font(.custom("pixelmix", size: 10))
             }
-            .lineSpacing(8)
-            .font(.custom("pixelmix", size: 14))
         }
+        .onAppear {
+            self.loadCategories()
+        }
+    }
+    func loadCategories() {
+        let url = URL(string: "https://wearevarious.com/wp-json/wp/v2/categories?post=\(wavShow.id)&_fields=name")!
+        print("WAV: loadCategories \(url.description)")
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            guard let data = data else {
+                print("Error: no data received")
+                return
+            }
+            do {
+                let categories = try JSONDecoder().decode(WAVCategories.self, from: data)
+                DispatchQueue.main.async {
+                    self.categories = categories
+                }
+            } catch let error {
+                print("Error decoding JSON: \(error)")
+            }
+        }
+        task.resume()
     }
 }
 

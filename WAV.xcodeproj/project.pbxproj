@@ -33,6 +33,9 @@
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
 		E98887AC28942A91002E0349 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887AB28942A91002E0349 /* readme.txt */; };
 		E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E993B768292AD1E600654912 /* RadioMarquee.swift */; };
+		E99C802A296F8ACB000629F9 /* View-readSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C8029296F8ACB000629F9 /* View-readSize.swift */; };
+		E99C802C296F8B06000629F9 /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802B296F8B06000629F9 /* FlexibleView.swift */; };
+		E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802D296F8E08000629F9 /* WAVBlack.swift */; };
 		E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A413642896CFCE00BF9D98 /* Radio.swift */; };
 		E9AB244F292DBDEC00086338 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AB244E292DBD8300086338 /* Chat.swift */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
@@ -74,6 +77,9 @@
 		E98887AB28942A91002E0349 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		E98887AD28942DC2002E0349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E993B768292AD1E600654912 /* RadioMarquee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioMarquee.swift; sourceTree = "<group>"; };
+		E99C8029296F8ACB000629F9 /* View-readSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-readSize.swift"; sourceTree = "<group>"; };
+		E99C802B296F8B06000629F9 /* FlexibleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleView.swift; sourceTree = "<group>"; };
+		E99C802D296F8E08000629F9 /* WAVBlack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlack.swift; sourceTree = "<group>"; };
 		E9A413642896CFCE00BF9D98 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
 		E9AB244E292DBD8300086338 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelButton.swift; path = WAV/PixelButton.swift; sourceTree = SOURCE_ROOT; };
@@ -152,6 +158,8 @@
 				E93473B42928E95E00E2016C /* InfiniteView.swift */,
 				E93473BA2928E95E00E2016C /* InfiniteViewModel.swift */,
 				E9702CA5295B5119007471A4 /* ArchiveItem.swift */,
+				E99C802D296F8E08000629F9 /* WAVBlack.swift */,
+				E99C802B296F8B06000629F9 /* FlexibleView.swift */,
 				E9702CA3295B4BD3007471A4 /* BlackTitle.swift */,
 				E93473B22928E95E00E2016C /* BlurView.swift */,
 				E9FCF7F429539D7B0015C442 /* RecordView.swift */,
@@ -172,6 +180,7 @@
 		E97D51B9295A2A1400DB9380 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E99C8029296F8ACB000629F9 /* View-readSize.swift */,
 				E97D51BA295A2A3900DB9380 /* String-condenseWhitespace.swift */,
 				E95AB21729663BB500AEC268 /* Image-centerCropped.swift */,
 			);
@@ -312,9 +321,12 @@
 				E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */,
 				E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */,
 				E904E42F2928ED2300DEE8B9 /* RotatingButtonStyle.swift in Sources */,
+				E99C802C296F8B06000629F9 /* FlexibleView.swift in Sources */,
 				E961C5C629253FA80091FB0B /* RadioViewHeader.swift in Sources */,
 				E904E4372928ED2300DEE8B9 /* BlurView.swift in Sources */,
 				E904E4302928ED2300DEE8B9 /* ArchivePlayerViewModel.swift in Sources */,
+				E99C802A296F8ACB000629F9 /* View-readSize.swift in Sources */,
+				E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */,
 				E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */,
 				E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */,
 				E91F682F28867FE7005985BF /* WAVApp.swift in Sources */,

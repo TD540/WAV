@@ -7,8 +7,6 @@
 
 import Foundation
 
-typealias WAVShows = [WAVShow]
-
 struct WAVShow: Codable, Identifiable, Equatable {
     static func == (lhs: WAVShow, rhs: WAVShow) -> Bool {
         lhs.id == rhs.id
@@ -17,11 +15,11 @@ struct WAVShow: Codable, Identifiable, Equatable {
     let id: Int
     let date: String
     let title: Title
+    let categories, tags: [Int]?
     let mixcloudURL: String
     let embedded: Embedded
-
     enum CodingKeys: String, CodingKey {
-        case id, date, title
+        case id, date, title, categories, tags
         case mixcloudURL = "mixcloud_url"
         case embedded = "_embedded"
     }
@@ -68,9 +66,11 @@ struct WAVShow: Codable, Identifiable, Equatable {
     }
 
     static let preview = WAVShow(
-        id: 1,
+        id: 109399,
         date: "2022-12-24T17:43:55",
-        title: WAVShow.Title(rendered: "Random WAV Show Title"),
+        title: Title(rendered: "Random WAV Show Title"),
+        categories: [1040],
+        tags: [1073, 368],
         mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
         embedded: WAVShow.Embedded(
             wpFeaturedmedia:
@@ -83,4 +83,22 @@ struct WAVShow: Codable, Identifiable, Equatable {
         )
     )
 
+}
+typealias WAVShows = [WAVShow]
+
+struct WAVCategory: Codable, Identifiable, Hashable {
+    internal init(name: String) {
+        self.name = name
+        print("WAV: Category \"\(name)\" initialized")
+    }
+    var id: String {
+        name
+    }
+    let name: String
+}
+typealias WAVCategories = [WAVCategory]
+
+func oops_init() {
+    var test = WAVCategories()
+    test.append(WAVCategory(name: "test"))
 }
