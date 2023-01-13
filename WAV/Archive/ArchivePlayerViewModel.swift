@@ -126,17 +126,17 @@ extension ArchivePlayerView {
 
 //        func updateInfoCenter(with selectedShow: WAVShow) {
 //            DispatchQueue.global().async {
-//                print("WAV: global async updateInfoCenter: \(selectedShow.title.rendered)")
+//                print("WAV: global async updateInfoCenter: \(selectedShow.name)")
 //                if let data = try? Data(contentsOf: selectedShow.pictureURL) {
 //                    if let image = UIImage(data: data) {
 //                        DispatchQueue.main.async {
-//                            print("WAV: main async nowPlayingInfo: \(selectedShow.title.rendered)")
+//                            print("WAV: main async nowPlayingInfo: \(selectedShow.name)")
 //                            let artwork = MPMediaItemArtwork.init(boundsSize: image.size) { _ -> UIImage in
 //                                image
 //                            }
 //                            MPNowPlayingInfoCenter.default().nowPlayingInfo = [
 //                                MPMediaItemPropertyArtwork: artwork,
-//                                MPMediaItemPropertyTitle: selectedShow.title.rendered,
+//                                MPMediaItemPropertyTitle: selectedShow.name,
 //                                MPMediaItemPropertyArtist: "We Are Various"
 //                                // MPMediaItemPropertyPlaybackDuration: 0
 //                            ]

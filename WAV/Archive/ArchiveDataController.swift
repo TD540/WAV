@@ -36,8 +36,7 @@ class ArchiveDataController: ObservableObject {
     }
     private func onReceive(_ wavShows: WAVShows) {
         // if mixcloudURL is empty, don't add show to wavShows
-        let filteredShows = wavShows.filter { !$0.mixcloudURL.isEmpty }
-        state.wavShows += filteredShows
+        state.wavShows += wavShows.filter { !$0.mixcloudURL.isEmpty }
         state.page += 1
         state.canLoadNextPage = wavShows.count == WAVWordPress.limit
     }
