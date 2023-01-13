@@ -67,7 +67,6 @@ extension ArchivePlayerView {
         }
 
         func playToggle(_: Bool) {
-            print("WAV: ")
             UINotificationFeedbackGenerator().notificationOccurred(.success)
             webViewStore.webView.evaluateJavaScript(
                 """

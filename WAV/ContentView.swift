@@ -42,6 +42,16 @@ struct ContentView: View {
         .onAppear {
             tabSelection = radio.isOffAir ? 2 : 1
         }
+        .onChange(of: archiveDataController.state.isPlaying) { isPlaying in
+            if isPlaying {
+                radio.stop()
+            }
+        }
+        .onChange(of: radio.isPlaying) { isPlaying in
+            if isPlaying {
+                archiveDataController.state.playPause.toggle()
+            }
+        }
     }
 }
 
