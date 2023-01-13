@@ -27,7 +27,7 @@ struct WAVShow: Codable, Identifiable, Equatable {
     static var autoplay = true
 
     var name: String {
-        title.rendered
+        title.rendered.stringByDecodingHTMLEntities
     }
     var dateFormatted: String {
         let dateFormatter = DateFormatter()
@@ -87,10 +87,6 @@ struct WAVShow: Codable, Identifiable, Equatable {
 typealias WAVShows = [WAVShow]
 
 struct WAVCategory: Codable, Identifiable, Hashable {
-    internal init(name: String) {
-        self.name = name
-        print("WAV: Category \"\(name)\" initialized")
-    }
     var id: String {
         name
     }

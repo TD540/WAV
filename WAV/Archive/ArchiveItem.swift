@@ -73,7 +73,9 @@ struct ArchiveItem: View {
                         .wavBlack()
                     FlexibleView(
                         availableWidth: UIScreen.main.bounds.width,
-                        data: categories.map { $0.name },
+                        data: categories.map {
+                            $0.name.stringByDecodingHTMLEntities
+                        },
                         spacing: 4,
                         alignment: .leading
                     ) { item in
