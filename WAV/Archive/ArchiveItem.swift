@@ -92,7 +92,7 @@ struct ArchiveItem: View {
     }
     func loadCategories() {
         let url = URL(string: "https://wearevarious.com/wp-json/wp/v2/categories?post=\(wavShow.id)&_fields=name")!
-        print("WAV: loadCategories \(url.description)")
+        // print("WAV: loadCategories \(url.description)")
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 print("Error: \(error)")

@@ -114,7 +114,7 @@ class Radio: ObservableObject {
                             MPNowPlayingInfoCenter.default().nowPlayingInfo = [
                                 MPMediaItemPropertyArtwork: artwork,
                                 MPMediaItemPropertyTitle: title,
-                                MPMediaItemPropertyArtist: "WAV",
+                                MPMediaItemPropertyArtist: "We Are Various",
                                 MPMediaItemPropertyPlaybackDuration: 0,
                                 MPNowPlayingInfoPropertyIsLiveStream: true
                             ]
@@ -125,7 +125,7 @@ class Radio: ObservableObject {
         } else {
             MPNowPlayingInfoCenter.default().nowPlayingInfo = [
                 MPMediaItemPropertyTitle: title,
-                MPMediaItemPropertyArtist: "WAV",
+                MPMediaItemPropertyArtist: "We Are Various",
                 MPMediaItemPropertyPlaybackDuration: 0,
                 MPNowPlayingInfoPropertyIsLiveStream: true
             ]

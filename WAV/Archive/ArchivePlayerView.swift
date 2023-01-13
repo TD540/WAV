@@ -10,6 +10,9 @@ import WebView
 
 struct ArchivePlayerView: View {
     @StateObject private var model: ArchivePlayerViewModel
+    var state: ArchiveDataController.State {
+        model.archiveDataController.state
+    }
     @Environment(\.colorScheme) var colorScheme
     var scrollProxy: ScrollViewProxy
     init(archiveDataController: ArchiveDataController, scrollProxy: ScrollViewProxy) {
@@ -21,18 +24,17 @@ struct ArchivePlayerView: View {
     var body: some View {
         WebView(webView: model.webViewStore.webView)
             .frame(height: 60)
-            .onChange(of: model.archiveDataController.state.selectedShow, perform: model.onPlayingRecordChanging)
-            .onChange(of: model.archiveDataController.state.playPause) { _ in
-                model.playToggle()
-            }
-            .opacity(model.archiveDataController.state.selectedShow != nil ? 1 : 0)
+            .onChange(of: state.selectedShow, perform: model.selectedShowChanged)
+            // .onChange(of: state.isPlaying, perform: model.updatecommandCenter) // To fix later
+            .onChange(of: state.playPause, perform: model.playToggle)
+            .opacity(state.selectedShow != nil ? 1 : 0)
             .transition(.opacity)
     }
 
     func backgroundView() -> some View {
         ZStack {
             BlurView(style: .systemUltraThinMaterial)
-            if model.archiveDataController.state.selectedShow != nil {
+            if state.selectedShow != nil {
                 if colorScheme == .light {
                     Color("WAVPink")
                         .blendMode(.multiply)
@@ -57,14 +59,14 @@ struct ArchivePlayerView: View {
         VStack {
             Button {
                 withAnimation {
-                    scrollProxy.scrollTo(model.archiveDataController.state.selectedShow?.id, anchor: .center)
+                    scrollProxy.scrollTo(state.selectedShow?.id, anchor: .center)
                     UINotificationFeedbackGenerator().notificationOccurred(.warning)
                 }
             } label: {
                 RecordView(pictureURL: wavShow.pictureURL)
             }
             .frame(width: 256, height: 60)
-            .buttonStyle(RotatingButtonStyle(isRotating: model.archiveDataController.state.isPlaying))
+            .buttonStyle(RotatingButtonStyle(isRotating: state.isPlaying))
             .rotation3DEffect(.degrees(40), axis: (x: 0.1, y: 0, z: 0), perspective: 0.5)
             .shadow(color: .black.opacity(0.6), radius: 10, x: 0.0, y: 15.0)
 
@@ -83,10 +85,10 @@ struct ArchivePlayerView: View {
 
 struct WebPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        WAVShow.autoplay = true
+        WAVShow.autoplay = false
         let controller = ArchiveDataController.preview
         controller.state.selectedShow = WAVShow.preview
-        controller.state.isPlaying = true
+        controller.state.isPlaying = false
         return ScrollViewReader { scrollProxy in
             VStack {
                 Spacer()
