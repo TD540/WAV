@@ -97,8 +97,3 @@ struct WAVCategory: Codable, Identifiable, Hashable {
     let name: String
 }
 typealias WAVCategories = [WAVCategory]
-
-func oops_init() {
-    var test = WAVCategories()
-    test.append(WAVCategory(name: "test"))
-}

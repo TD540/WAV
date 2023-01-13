@@ -9,7 +9,16 @@ import Foundation
 import Combine
 
 class ArchiveDataController: ObservableObject {
+    struct State {
+        var isPlaying =  false
+        var playPause = false // the value of doesn't matter, only the toggle
+        var selectedShow: WAVShow?
+        var wavShows: WAVShows = []
+        var page = 0
+        var canLoadNextPage = true
+    }
     @Published var state = State()
+
     var subscriptions = Set<AnyCancellable>()
     func loadNextPageIfPossible() {
         guard state.canLoadNextPage else { return }
@@ -25,18 +34,12 @@ class ArchiveDataController: ObservableObject {
             state.canLoadNextPage = false
         }
     }
-    private func onReceive(_ wavShows: WAVShows) {
-        state.wavShows += wavShows
+    private func onReceive(_ receivedWAVShows: WAVShows) {
+        // if mixcloudURL is empty, don't add show to wavShows
+        let filteredShows = receivedWAVShows.filter { !$0.mixcloudURL.isEmpty }
+        state.wavShows += filteredShows
         state.page += 1
-        state.canLoadNextPage = wavShows.count == WAVWordPress.limit
-    }
-    struct State {
-        var isPlaying =  false
-        var playPause = false // the value of doesn't matter, only the toggle
-        var selectedShow: WAVShow?
-        var wavShows: WAVShows = []
-        var page = 0
-        var canLoadNextPage = true
+        state.canLoadNextPage = receivedWAVShows.count == WAVWordPress.limit
     }
     static var preview: ArchiveDataController = {
         let previewArchiveDataController = ArchiveDataController()
