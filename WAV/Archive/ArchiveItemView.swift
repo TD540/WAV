@@ -1,5 +1,5 @@
 //
-//  ArchiveItem.swift
+//  ArchiveItemView.swift
 //  WAV
 //
 //  Created by Thomas on 27/12/2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ArchiveItem: View {
+struct ArchiveItemView: View {
     @Environment(\.colorScheme) var colorScheme
     @State var categories: WAVCategories = []
     var infiniteViewModel: InfiniteView.ViewModel
@@ -44,7 +44,6 @@ struct ArchiveItem: View {
             AsyncImage(url: wavShow.pictureURL) { image in
                 image
                     .centerCropped()
-                    .aspectRatio(100/66.7, contentMode: .fit)
                     .overlay {
                         PixelButton(isPlaying: isPlayingBinding)
                             .blendMode(.hardLight)
@@ -53,17 +52,10 @@ struct ArchiveItem: View {
             } placeholder: {
                 ProgressView()
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .aspectRatio(1.5, contentMode: .fit)
                     .background(.black.opacity(0.1))
             }
+            .aspectRatio(100/66.7, contentMode: .fit)
         }
-//        .onAppear {
-//            /*
-//             load categories and tags
-//             and
-//             https://wearevarious.com/wp-json/wp/v2/tags?post=104390&_fields=name
-//             */
-//        }
     }
     func archiveItemInfo() -> some View {
         VStack(alignment: .leading, spacing: spacing) {
@@ -120,7 +112,7 @@ struct ArchiveItem: View {
 
 struct ArchiveItem_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveItem(
+        ArchiveItemView(
             infiniteViewModel: InfiniteView.ViewModel.preview,
             index: 0
         )

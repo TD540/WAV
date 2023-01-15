@@ -85,11 +85,3 @@ struct WAVShow: Codable, Identifiable, Equatable {
 
 }
 typealias WAVShows = [WAVShow]
-
-struct WAVCategory: Codable, Identifiable, Hashable {
-    var id: String {
-        name
-    }
-    let name: String
-}
-typealias WAVCategories = [WAVCategory]

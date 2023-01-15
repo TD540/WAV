@@ -19,7 +19,7 @@ struct InfiniteView: View {
         ScrollView {
             LazyVStack(spacing: 30) {
                 ForEach(viewModel.wavShows.indices, id: \.self) { index in
-                    ArchiveItem(
+                    ArchiveItemView(
                         infiniteViewModel: viewModel,
                         index: index
                     )
