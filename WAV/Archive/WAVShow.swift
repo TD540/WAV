@@ -126,10 +126,8 @@ extension WAVShow {
     var mixcloudWidget: URL {
         let range = mixcloudURL.range(of: "mixcloud.com")!
         let slug = String(mixcloudURL[range.upperBound...])
-        let widgetURL = URL(string: "https://www.mixcloud.com/widget/iframe/")!
         var urlComponents = URLComponents(
-            url: widgetURL,
-            resolvingAgainstBaseURL: true
+            string: "https://www.mixcloud.com/widget/iframe"
         )!
         urlComponents.queryItems = [
             URLQueryItem(name: "light", value: colorScheme == .light ? "1" : "0"),
