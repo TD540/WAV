@@ -24,11 +24,11 @@ struct ArchivePlayerView: View {
     var body: some View {
         WebView(webView: model.webViewStore.webView)
             .frame(height: 60)
-            .onChange(of: state.selectedShow, perform: model.selectedShowChanged)
-            // .onChange(of: state.isPlaying, perform: model.updatecommandCenter) // To fix later
-            .onChange(of: state.playPause, perform: model.playToggle)
             .opacity(state.selectedShow != nil ? 1 : 0)
             .transition(.opacity)
+            .onChange(of: state.selectedShow, perform: model.selectedShowChanged)
+            .onChange(of: state.playPause, perform: model.playToggle)
+        // .onChange(of: state.isPlaying, perform: model.updatecommandCenter) // To fix later
     }
 
     func backgroundView() -> some View {
@@ -46,7 +46,6 @@ struct ArchivePlayerView: View {
         }
         .edgesIgnoringSafeArea(.bottom)
     }
-
     func notPlayingView() -> some View {
         Text("WE ARE VARIOUS")
             .multilineTextAlignment(.center)
@@ -54,8 +53,7 @@ struct ArchivePlayerView: View {
             .lineSpacing(16)
             .padding()
     }
-
-    func playingView(_ wavShow: WAVShow) -> some View {
+    func rotatingRecordView(_ wavShow: WAVShow) -> some View {
         VStack {
             Button {
                 withAnimation {

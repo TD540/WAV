@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct WAVShow {
     let id: Int
@@ -115,14 +116,30 @@ extension WAVShow {
         dateFormatter.dateFormat = "MMMM d, yyyy"
         return dateFormatter.string(from: date!)
     }
+    var colorScheme: ColorScheme {
+        if #available(iOS 13.0, *) {
+            return UIScreen.main.traitCollection.userInterfaceStyle == .dark ? .dark : .light
+        } else {
+            return .light
+        }
+    }
     var mixcloudWidget: URL {
         let range = mixcloudURL.range(of: "mixcloud.com")!
         let slug = String(mixcloudURL[range.upperBound...])
-        let widgetURL = "https://www.mixcloud.com/widget/iframe/?hide_cover=1&mini=1&hide_artwork=1" +
-        "&autoplay=\(WAVShow.autoplay ? "1" : "0")" +
-        "&feed=" +
-        "\(slug.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!)"
-        return URL(string: widgetURL)!
+        let widgetURL = URL(string: "https://www.mixcloud.com/widget/iframe/")!
+        var urlComponents = URLComponents(
+            url: widgetURL,
+            resolvingAgainstBaseURL: true
+        )!
+        urlComponents.queryItems = [
+            URLQueryItem(name: "light", value: colorScheme == .light ? "1" : "0"),
+            URLQueryItem(name: "hide_cover", value: "1"),
+            URLQueryItem(name: "mini", value: "1"),
+            URLQueryItem(name: "hide_artwork", value: "0"),
+            URLQueryItem(name: "autoplay", value: WAVShow.autoplay ? "1" : "0"),
+            URLQueryItem(name: "feed", value: slug.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!),
+        ]
+        return urlComponents.url!
     }
     var pictureURL: URL {
         if let mediumLarge = embedded.wpFeaturedmedia.first?.mediaDetails.sizes.mediumLarge {
