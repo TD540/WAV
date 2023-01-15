@@ -54,10 +54,17 @@ enum WAVWordPress {
         let url = URL(
             string: "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(limit)&offset=\(page*limit)"
         )!
-        // print("WAV: load restapi \(url.description)")
+        print("WAV: load restapi \(url.description)")
         return URLSession.shared
             .dataTaskPublisher(for: url)
-            .tryMap { try JSONDecoder().decode(WAVShows.self, from: $0.data) }
+            .tryMap { data, response in
+                do {
+                    return try JSONDecoder().decode(WAVShows.self, from: data)
+                } catch let error {
+                    print("WAV: JSONDecoder error \(error)")
+                    throw error
+                }
+            }
             .receive(on: DispatchQueue.main)
             .eraseToAnyPublisher()
     }

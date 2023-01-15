@@ -7,25 +7,104 @@
 
 import Foundation
 
-struct WAVShow: Codable, Identifiable, Equatable {
-    static func == (lhs: WAVShow, rhs: WAVShow) -> Bool {
-        lhs.id == rhs.id
-    }
-
+struct WAVShow {
     let id: Int
     let date: String
-    let title: Title
-    let categories, tags: [Int]?
-    let mixcloudURL: String
-    let embedded: Embedded
+    let link: String
+    let title: WAVShow.Title
+    let sticky: Bool
+    let categories, tags: [Int]
+    let mixcloudURL, tracklist: String
+    let embedded: WAVShow.Embedded
+}
+
+// static settings //dev
+extension WAVShow {
+    static var autoplay = true
+}
+
+// WP Rest API stuff
+extension WAVShow: Codable {
+    struct Title: Codable {
+        let rendered: String
+    }
+    struct Embedded: Codable {
+        let wpFeaturedmedia: [WpFeaturedmedia]
+        enum CodingKeys: String, CodingKey {
+            case wpFeaturedmedia = "wp:featuredmedia"
+        }
+    }
+    struct WpFeaturedmedia: Codable {
+        let sourceURL: String
+        let mediaDetails: MediaDetails
+        enum CodingKeys: String, CodingKey {
+            case sourceURL = "source_url"
+            case mediaDetails = "media_details"
+        }
+    }
+    struct MediaDetails: Codable {
+        let sizes: Sizes
+    }
+    struct Sizes: Codable {
+            let mediumLarge: MediumLarge?
+            enum CodingKeys: String, CodingKey {
+                case mediumLarge = "medium_large"
+            }
+    }
+    struct MediumLarge: Codable {
+        let sourceURL: String
+        enum CodingKeys: String, CodingKey {
+            case sourceURL = "source_url"
+        }
+    }
     enum CodingKeys: String, CodingKey {
-        case id, date, title, categories, tags
+        case id, date, link, title,
+             sticky, categories, tags,
+             tracklist
         case mixcloudURL = "mixcloud_url"
         case embedded = "_embedded"
     }
+}
 
-    static var autoplay = true
+// static preview
+extension WAVShow {
+    static let preview = WAVShow(
+        id: 109399,
+        date: "2022-12-24T17:43:55",
+        link: "https://wearevarious.com/bent-von-bent/gemu-xiv-dec22/",
+        title: Title(rendered: "Random WAV Show Title"),
+        sticky: false,
+        categories: [1040],
+        tags: [1073, 368],
+        mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
+        tracklist: "#todo",
+        embedded: WAVShow.Embedded(
+            wpFeaturedmedia:
+                [
+                    WAVShow.WpFeaturedmedia(
+                        sourceURL:
+                            "https://wearevarious.com/wp-content/uploads/2022/12/common-divisor-nikolai-23-12-2022-300x300.jpeg",
+                        mediaDetails: WAVShow.MediaDetails(
+                            sizes: Sizes(
+                                mediumLarge: WAVShow.MediumLarge(
+                                    sourceURL: "https://wearevarious.com/wp-content/uploads/2022/12/common-divisor-nikolai-23-12-2022-300x300.jpeg"
+                                )
+                            )
+                        )
+                    )
+                ]
+        )
+    )
+}
 
+extension WAVShow: Equatable {
+    static func == (lhs: WAVShow, rhs: WAVShow) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+// computed properties
+extension WAVShow {
     var name: String {
         title.rendered.stringByDecodingHTMLEntities
     }
@@ -46,42 +125,12 @@ struct WAVShow: Codable, Identifiable, Equatable {
         return URL(string: widgetURL)!
     }
     var pictureURL: URL {
-        URL(string: embedded.wpFeaturedmedia.first!.sourceURL)!
-    }
-
-    struct Embedded: Codable {
-        let wpFeaturedmedia: [WpFeaturedmedia]
-        enum CodingKeys: String, CodingKey {
-            case wpFeaturedmedia = "wp:featuredmedia"
+        if let mediumLarge = embedded.wpFeaturedmedia.first?.mediaDetails.sizes.mediumLarge {
+            return URL(string: mediumLarge.sourceURL)!
+        } else {
+            return URL(string: embedded.wpFeaturedmedia.first!.sourceURL)!
         }
     }
-    struct WpFeaturedmedia: Codable {
-        let sourceURL: String
-        enum CodingKeys: String, CodingKey {
-            case sourceURL = "source_url"
-        }
-    }
-    struct Title: Codable {
-        let rendered: String
-    }
-
-    static let preview = WAVShow(
-        id: 109399,
-        date: "2022-12-24T17:43:55",
-        title: Title(rendered: "Random WAV Show Title"),
-        categories: [1040],
-        tags: [1073, 368],
-        mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
-        embedded: WAVShow.Embedded(
-            wpFeaturedmedia:
-                [
-                    WAVShow.WpFeaturedmedia(
-                        sourceURL:
-                            "https://wearevarious.com/wp-content/uploads/2022/12/common-divisor-nikolai-23-12-2022-300x300.jpeg"
-                    )
-                ]
-        )
-    )
-
 }
+
 typealias WAVShows = [WAVShow]
