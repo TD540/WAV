@@ -6,41 +6,55 @@
 //
 
 import SwiftUI
+import Introspect
 
 struct ContentView: View {
     @StateObject var radio = Radio()
     @StateObject var archiveDataController = ArchiveDataController()
-    @State private var tabSelection = 1
+
+    @State var tab = 1
+
+    @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        TabView(selection: $tabSelection) {
-            RadioView(radio: radio)
+        ZStack(alignment: .bottom) {
+            TabView(selection: $tab) {
+                RadioView(radio: radio)
+                    .tabItem {
+                        Image(radio.isLive ? "tab-radio-live" : "tab-radio")
+                        Text(radio.isLive ? "LIVE" : "RADIO")
+                    }
+                    .tag(1)
+                ArchiveView(
+                    archiveDataController: archiveDataController
+                )
                 .tabItem {
-                    Label(
-                        radio.isLive ? "LIVE" : "RADIO",
-                        systemImage: radio.isLive ?
-                        "dot.radiowaves.left.and.right" : "radio"
-                    )
-                }
-                .tag(1)
-            ArchiveView(archiveDataController: archiveDataController)
-                .tabItem {
-                    Label("ARCHIVE", systemImage: "square.stack")
+                    Image("tab-archive")
+                    Text("ARCHIVE")
                 }
                 .tag(2)
-            Schedule()
-                .tabItem {
-                    Label("SCHEDULE", systemImage: "calendar.badge.clock")
-                }
-                .tag(3)
-            Chat()
-                .tabItem {
-                    Label("CHAT", systemImage: "message")
-                }
-                .tag(4)
+                Schedule()
+                    .tabItem {
+                        Image("tab-schedule")
+                        Text("SCHEDULE")
+                    }
+                    .tag(3)
+                Chat()
+                    .tabItem {
+                        Image("tab-chat")
+                        Text("CHAT")
+                    }
+                    .tag(4)
+            }
+            .introspectTabBarController { (UITabBarController) in
+                UITabBarController.tabBar.isHidden = true
+            }
+
+            CustomTabBar(tab: $tab, iconHeight: 44)
+
         }
         .onAppear {
-            tabSelection = radio.isOffAir ? 2 : 1
+            tab = radio.isOffAir ? 2 : 1
         }
         .onChange(of: archiveDataController.state.isPlaying) { isPlaying in
             if isPlaying {

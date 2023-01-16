@@ -10,10 +10,8 @@ import SwiftUI
 struct InfiniteView: View {
     @Environment(\.colorScheme) var colorScheme
     @ObservedObject private var viewModel: ViewModel
-    var scrollProxy: ScrollViewProxy
-    init(archiveDataController: ArchiveDataController, scrollProxy: ScrollViewProxy) {
+    init(archiveDataController: ArchiveDataController) {
         viewModel = ViewModel(archiveDataController: archiveDataController)
-        self.scrollProxy = scrollProxy
     }
     var body: some View {
         ScrollView {
@@ -29,7 +27,7 @@ struct InfiniteView: View {
                 }
             }
         }
-        .background(colorScheme == .dark ? .white.opacity(0.15) : .black.opacity(0.1))
+        .background(colorScheme == .light ? .black.opacity(0.1) : .white.opacity(0.1))
         .onAppear(perform: viewModel.loadNext)
     }
 }
@@ -39,9 +37,7 @@ struct InfiniteView_Previews: PreviewProvider {
         let archiveDataController = ArchiveDataController.preview
         archiveDataController.state.wavShows += [WAVShow.preview]
         archiveDataController.state.selectedShow = nil
-        return ScrollViewReader { scrollProxy in
-            InfiniteView(archiveDataController: archiveDataController, scrollProxy: scrollProxy)
-        }
+        return InfiniteView(archiveDataController: archiveDataController)
         .preferredColorScheme(.dark)
     }
 }
