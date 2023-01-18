@@ -55,7 +55,7 @@ struct ContentView: View {
 
                 CustomTabBar(
                     tab: $tab,
-                    iconHeight: 44
+                    iconHeight: 32
                 )
                 .readSize { size in
                     tabBarSize = size

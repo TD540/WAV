@@ -24,7 +24,7 @@ struct CustomTabBar: View {
     }
     var color: Color {
         if colorScheme == .light {
-            return .black.opacity(0.4)
+            return .black.opacity(0.6)
         } else {
             return .white.opacity(0.5)
         }
@@ -46,7 +46,7 @@ struct CustomTabBar: View {
                         .resizable()
                         .scaledToFit()
                         .frame(maxHeight: iconHeight)
-                        .scaleEffect(isSelected ? 1 : 1.1)
+                        .scaleEffect(isSelected ? 0.9 : 1)
                     Text("\(tabs[index].uppercased())")
                         .lineLimit(1)
                         .font(.custom("pixelmix", size: 12))
@@ -61,9 +61,8 @@ struct CustomTabBar: View {
                 }
             }
         }
-        .padding(.top, 15)
-        .padding(.horizontal, 15)
-        .padding(.bottom, safeAreaInsets.bottom)
+        .padding(.top, 10)
+        .padding(.bottom, safeAreaInsets.bottom == 0.0 ? 15 : safeAreaInsets.bottom)
         .background(.regularMaterial)
         .border(width: 1, edges: [.top], color: .secondary.opacity(0.2))
         .edgesIgnoringSafeArea(.bottom)
