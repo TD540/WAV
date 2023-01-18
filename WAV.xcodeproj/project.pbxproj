@@ -20,6 +20,7 @@
 		E91F683128867FE7005985BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F683028867FE7005985BF /* ContentView.swift */; };
 		E91F683328867FEC005985BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683228867FEC005985BF /* Assets.xcassets */; };
 		E91F683628867FEC005985BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683528867FEC005985BF /* Preview Assets.xcassets */; };
+		E93FBB90297746D5006CE29D /* View-readSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93FBB8F297746D5006CE29D /* View-readSize.swift */; };
 		E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E958BAC928F17E4300D37B13 /* Schedule.swift */; };
 		E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95AB21729663BB500AEC268 /* Image-centerCropped.swift */; };
 		E961C5C429253F4C0091FB0B /* ArtworkPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */; };
@@ -34,13 +35,14 @@
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
 		E98887AC28942A91002E0349 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887AB28942A91002E0349 /* readme.txt */; };
 		E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E993B768292AD1E600654912 /* RadioMarquee.swift */; };
-		E99C802A296F8ACB000629F9 /* View-readSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C8029296F8ACB000629F9 /* View-readSize.swift */; };
 		E99C802C296F8B06000629F9 /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802B296F8B06000629F9 /* FlexibleView.swift */; };
 		E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802D296F8E08000629F9 /* WAVBlack.swift */; };
 		E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A413642896CFCE00BF9D98 /* Radio.swift */; };
 		E9AB244F292DBDEC00086338 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AB244E292DBD8300086338 /* Chat.swift */; };
+		E9B0F901297696B3009B60A7 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E9B0F900297696B3009B60A7 /* FirebaseAnalytics */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
 		E9D77354292AB3D800C816C3 /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = E9D77353292AB3D800C816C3 /* MarqueeText */; };
+		E9D89F582976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */; };
 		E9DC8EE72961BA1D00C4B557 /* WAVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */; };
 		E9EC4CC829720C1400690B88 /* String-htmlEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */; };
 		E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F17FA52928059200F0FC27 /* Artwork.swift */; };
@@ -66,6 +68,7 @@
 		E93473B72928E95E00E2016C /* ArchivePlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivePlayerViewModel.swift; sourceTree = "<group>"; };
 		E93473B82928E95E00E2016C /* ArchiveDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveDataController.swift; sourceTree = "<group>"; };
 		E93473BA2928E95E00E2016C /* InfiniteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteViewModel.swift; sourceTree = "<group>"; };
+		E93FBB8F297746D5006CE29D /* View-readSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-readSize.swift"; sourceTree = "<group>"; };
 		E958BAC928F17E4300D37B13 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		E95AB21729663BB500AEC268 /* Image-centerCropped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image-centerCropped.swift"; sourceTree = "<group>"; };
 		E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlaceholder.swift; sourceTree = "<group>"; };
@@ -80,12 +83,12 @@
 		E98887AB28942A91002E0349 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		E98887AD28942DC2002E0349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E993B768292AD1E600654912 /* RadioMarquee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioMarquee.swift; sourceTree = "<group>"; };
-		E99C8029296F8ACB000629F9 /* View-readSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-readSize.swift"; sourceTree = "<group>"; };
 		E99C802B296F8B06000629F9 /* FlexibleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleView.swift; sourceTree = "<group>"; };
 		E99C802D296F8E08000629F9 /* WAVBlack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlack.swift; sourceTree = "<group>"; };
 		E9A413642896CFCE00BF9D98 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
 		E9AB244E292DBD8300086338 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelButton.swift; path = WAV/PixelButton.swift; sourceTree = SOURCE_ROOT; };
+		E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues-safeAreaInsets.swift"; sourceTree = "<group>"; };
 		E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVShow.swift; sourceTree = "<group>"; };
 		E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-htmlEntities.swift"; sourceTree = "<group>"; };
 		E9F17FA52928059200F0FC27 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
@@ -100,6 +103,7 @@
 			files = (
 				E9D77354292AB3D800C816C3 /* MarqueeText in Frameworks */,
 				E9718AB22974F3A3008132B8 /* Introspect in Frameworks */,
+				E9B0F901297696B3009B60A7 /* FirebaseAnalytics in Frameworks */,
 				E904E42E2928EC6200DEE8B9 /* WebView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -195,10 +199,11 @@
 		E97D51B9295A2A1400DB9380 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */,
 				E95AB21729663BB500AEC268 /* Image-centerCropped.swift */,
 				E97D51BA295A2A3900DB9380 /* String-condenseWhitespace.swift */,
 				E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */,
-				E99C8029296F8ACB000629F9 /* View-readSize.swift */,
+				E93FBB8F297746D5006CE29D /* View-readSize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -256,6 +261,7 @@
 				E904E42D2928EC6200DEE8B9 /* WebView */,
 				E9D77353292AB3D800C816C3 /* MarqueeText */,
 				E9718AB12974F3A3008132B8 /* Introspect */,
+				E9B0F900297696B3009B60A7 /* FirebaseAnalytics */,
 			);
 			productName = WAV;
 			productReference = E91F682B28867FE7005985BF /* WAV.app */;
@@ -289,6 +295,7 @@
 				E904E42C2928EC6200DEE8B9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
 				E9D77352292AB3D800C816C3 /* XCRemoteSwiftPackageReference "MarqueeText" */,
 				E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				E9B0F8FF297696B3009B60A7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = E91F682C28867FE7005985BF /* Products */;
 			projectDirPath = "";
@@ -327,6 +334,8 @@
 				E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */,
 				E91F683128867FE7005985BF /* ContentView.swift in Sources */,
 				E9AB244F292DBDEC00086338 /* Chat.swift in Sources */,
+				E93FBB90297746D5006CE29D /* View-readSize.swift in Sources */,
+				E9D89F582976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift in Sources */,
 				E904E4362928ED2300DEE8B9 /* ArchiveView.swift in Sources */,
 				E904E4332928ED2300DEE8B9 /* InfiniteViewModel.swift in Sources */,
 				E904E4342928ED2300DEE8B9 /* ArchivePlayerView.swift in Sources */,
@@ -343,7 +352,6 @@
 				E99C802C296F8B06000629F9 /* FlexibleView.swift in Sources */,
 				E961C5C629253FA80091FB0B /* RadioViewHeader.swift in Sources */,
 				E904E4302928ED2300DEE8B9 /* ArchivePlayerViewModel.swift in Sources */,
-				E99C802A296F8ACB000629F9 /* View-readSize.swift in Sources */,
 				E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */,
 				E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */,
 				E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */,
@@ -571,6 +579,14 @@
 				kind = branch;
 			};
 		};
+		E9B0F8FF297696B3009B60A7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		E9D77352292AB3D800C816C3 /* XCRemoteSwiftPackageReference "MarqueeText" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joekndy/MarqueeText";
@@ -591,6 +607,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		E9B0F900297696B3009B60A7 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E9B0F8FF297696B3009B60A7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
 		};
 		E9D77353292AB3D800C816C3 /* MarqueeText */ = {
 			isa = XCSwiftPackageProductDependency;

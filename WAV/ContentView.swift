@@ -13,49 +13,59 @@ struct ContentView: View {
     @StateObject var archiveDataController = ArchiveDataController()
 
     @State var tab = 1
+    @State var tabBarSize: CGSize = .zero
 
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        ZStack(alignment: .bottom) {
-            TabView(selection: $tab) {
-                RadioView(radio: radio)
+        GeometryReader { proxy in
+            ZStack(alignment: .bottom) {
+                TabView(selection: $tab) {
+                    RadioView(radio: radio)
+                        .tabItem {
+                            Image(radio.isLive ? "tab-radio-live" : "tab-radio")
+                            Text(radio.isLive ? "LIVE" : "RADIO")
+                        }
+                        .tag(1)
+                    ArchiveView(
+                        archiveDataController: archiveDataController,
+                        tabBarSize: tabBarSize
+                    )
                     .tabItem {
-                        Image(radio.isLive ? "tab-radio-live" : "tab-radio")
-                        Text(radio.isLive ? "LIVE" : "RADIO")
+                        Image("tab-archive")
+                        Text("ARCHIVE")
                     }
-                    .tag(1)
-                ArchiveView(
-                    archiveDataController: archiveDataController
-                )
-                .tabItem {
-                    Image("tab-archive")
-                    Text("ARCHIVE")
+                    .tag(2)
+                    Schedule()
+                        .tabItem {
+                            Image("tab-schedule")
+                            Text("SCHEDULE")
+                        }
+                        .tag(3)
+                    Chat()
+                        .tabItem {
+                            Image("tab-chat")
+                            Text("CHAT")
+                        }
+                        .tag(4)
                 }
-                .tag(2)
-                Schedule()
-                    .tabItem {
-                        Image("tab-schedule")
-                        Text("SCHEDULE")
-                    }
-                    .tag(3)
-                Chat()
-                    .tabItem {
-                        Image("tab-chat")
-                        Text("CHAT")
-                    }
-                    .tag(4)
-            }
-            .introspectTabBarController { (UITabBarController) in
-                UITabBarController.tabBar.isHidden = true
-            }
+                .introspectTabBarController { UITabBarController in
+                    UITabBarController.tabBar.isHidden = true
+                }
 
-            CustomTabBar(tab: $tab, iconHeight: 44)
+                CustomTabBar(
+                    tab: $tab,
+                    iconHeight: 44
+                )
+                .readSize { size in
+                    tabBarSize = size
+                }
 
+            }
+            .edgesIgnoringSafeArea(.bottom)
         }
-        .onAppear {
-            tab = radio.isOffAir ? 2 : 1
-        }
+        .edgesIgnoringSafeArea(.bottom)
+
         .onChange(of: archiveDataController.state.isPlaying) { isPlaying in
             if isPlaying {
                 radio.stop()
@@ -66,6 +76,10 @@ struct ContentView: View {
                 archiveDataController.state.playPause.toggle()
             }
         }
+        .onAppear {
+            tab = radio.isOffAir ? 2 : 1
+        }
+
     }
 }
 

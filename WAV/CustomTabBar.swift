@@ -9,17 +9,21 @@ import SwiftUI
 
 struct CustomTabBar: View {
     @Binding var tab: Int
+
     @Environment(\.colorScheme) var colorScheme
+    @Environment(\.safeAreaInsets) private var safeAreaInsets
+
     let tabs = ["radio", "archive", "schedule", "chat"]
+    let iconHeight: CGFloat
+
     var tabSelected: [Int] {
         var ts = [0, 0, 0, 0]
         ts[tab-1] = 1
         return ts
     }
-    let iconHeight: CGFloat
     var color: Color {
         if colorScheme == .light {
-            return .black.opacity(0.7)
+            return .black.opacity(0.4)
         } else {
             return .white.opacity(0.5)
         }
@@ -31,35 +35,46 @@ struct CustomTabBar: View {
             return .white
         }
     }
+
     var body: some View {
-        HStack(spacing: 0) {
-            ForEach(0..<tabs.count, id: \.self) { index in
-                return VStack {
-                    Image("tab-\(tabs[index])")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxHeight: iconHeight)
-                    Text("\(tabs[index].uppercased())")
-                        .lineLimit(1)
-                        .font(.custom("pixelmix", size: 12))
-                }
-                .padding(.vertical, 5)
-                .frame(maxWidth: .infinity)
-                .scaleEffect(tabSelected[index] == 1 ? 1 : 0.9)
-                .foregroundColor(tabSelected[index] == 1 ? selectedColor : color)
-                .onTapGesture {
-                    withAnimation(.linear(duration: 0.1)) {
-                        tab = index + 1
+        VStack(spacing: 0) {
+            Spacer()
+            HStack(spacing: 0) {
+                ForEach(0..<tabs.count, id: \.self) { index in
+                    let isSelected = tabSelected[index] == 1
+                    VStack {
+                        Image("tab-\(tabs[index])")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxHeight: iconHeight)
+                            .scaleEffect(isSelected ? 1 : 1.1)
+                        Text("\(tabs[index].uppercased())")
+                            .lineLimit(1)
+                            .font(.custom("pixelmix", size: 12))
+                    }
+                    .frame(maxWidth: .infinity)
+                    .shadow(color: isSelected ? .accentColor.opacity(0.3) : .black.opacity(0.4), radius: isSelected ? 2.0 : 5.0, y: isSelected ? 5 : 10)
+                    .foregroundColor(isSelected ? selectedColor : color)
+                    .onTapGesture {
+                        withAnimation(.linear(duration: 0.1)) {
+                            tab = index + 1
+                        }
                     }
                 }
             }
+            .padding(.top, 15)
+            .padding(.horizontal, 15)
+            .padding(.bottom, safeAreaInsets.bottom)
+            .background(.thinMaterial)
         }
-        .background(.thinMaterial)
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
-            CustomTabBar(tab: .constant(1), iconHeight: 30)
+        CustomTabBar(
+            tab: .constant(1),
+            iconHeight: 50)
     }
 }
