@@ -133,7 +133,7 @@ extension WAVShow {
             URLQueryItem(name: "light", value: colorScheme == .light ? "1" : "0"),
             URLQueryItem(name: "hide_cover", value: "1"),
             URLQueryItem(name: "mini", value: "1"),
-            URLQueryItem(name: "hide_artwork", value: "0"),
+            URLQueryItem(name: "hide_artwork", value: "1"),
             URLQueryItem(name: "autoplay", value: WAVShow.autoplay ? "1" : "0"),
             URLQueryItem(name: "feed", value: slug.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!),
         ]

@@ -16,6 +16,7 @@ struct CustomTabBar: View {
     let tabs = ["radio", "archive", "schedule", "chat"]
     let iconHeight: CGFloat
 
+    // Computed properties
     var tabSelected: [Int] {
         var ts = [0, 0, 0, 0]
         ts[tab-1] = 1
@@ -37,36 +38,34 @@ struct CustomTabBar: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            Spacer()
-            HStack(spacing: 0) {
-                ForEach(0..<tabs.count, id: \.self) { index in
-                    let isSelected = tabSelected[index] == 1
-                    VStack {
-                        Image("tab-\(tabs[index])")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxHeight: iconHeight)
-                            .scaleEffect(isSelected ? 1 : 1.1)
-                        Text("\(tabs[index].uppercased())")
-                            .lineLimit(1)
-                            .font(.custom("pixelmix", size: 12))
-                    }
-                    .frame(maxWidth: .infinity)
-                    .shadow(color: isSelected ? .accentColor.opacity(0.3) : .black.opacity(0.4), radius: isSelected ? 2.0 : 5.0, y: isSelected ? 5 : 10)
-                    .foregroundColor(isSelected ? selectedColor : color)
-                    .onTapGesture {
-                        withAnimation(.linear(duration: 0.1)) {
-                            tab = index + 1
-                        }
+        HStack(spacing: 0) {
+            ForEach(0..<tabs.count, id: \.self) { index in
+                let isSelected = tabSelected[index] == 1
+                VStack {
+                    Image("tab-\(tabs[index])")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxHeight: iconHeight)
+                        .scaleEffect(isSelected ? 1 : 1.1)
+                    Text("\(tabs[index].uppercased())")
+                        .lineLimit(1)
+                        .font(.custom("pixelmix", size: 12))
+                }
+                .frame(maxWidth: .infinity)
+                .shadow(color: isSelected ? .accentColor.opacity(0.3) : .black.opacity(0.4), radius: isSelected ? 2.0 : 5.0, y: isSelected ? 5 : 10)
+                .foregroundColor(isSelected ? selectedColor : color)
+                .onTapGesture {
+                    withAnimation(.linear(duration: 0.1)) {
+                        tab = index + 1
                     }
                 }
             }
-            .padding(.top, 15)
-            .padding(.horizontal, 15)
-            .padding(.bottom, safeAreaInsets.bottom)
-            .background(.thinMaterial)
         }
+        .padding(.top, 15)
+        .padding(.horizontal, 15)
+        .padding(.bottom, safeAreaInsets.bottom)
+        .background(.regularMaterial)
+        .border(width: 1, edges: [.top], color: .secondary.opacity(0.2))
         .edgesIgnoringSafeArea(.bottom)
     }
 }
