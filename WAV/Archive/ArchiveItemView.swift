@@ -12,6 +12,7 @@ struct ArchiveItemView: View {
     @Environment(\.colorScheme) var colorScheme
 
     @State var categories: WAVCategories = []
+    @State var tags: WAVTags = []
     @State var imageLoaded = false
 
     var infiniteViewModel: InfiniteView.ViewModel
@@ -22,11 +23,6 @@ struct ArchiveItemView: View {
     // Computed properties
     var wavShow: WAVShow {
         infiniteViewModel.wavShows[index]
-    }
-    var fixedCategories: [String] {
-        categories.map {
-            $0.name.stringByDecodingHTMLEntities
-        }
     }
     var isPlayingBinding: Binding<Bool> {
         Binding {
@@ -82,16 +78,17 @@ struct ArchiveItemView: View {
                 Group {
                     Text(wavShow.name.uppercased())
                         .wavBlack()
-                    FlexibleView(
-                        availableWidth: UIScreen.main.bounds.width,
-                        data: categories.map {
-                            $0.name.stringByDecodingHTMLEntities
-                        },
-                        spacing: 4,
-                        alignment: .leading
-                    ) { item in
-                        Text(verbatim: item)
-                            .wavBlack(size: 10)
+                    ScrollView(.horizontal, showsIndicators: true) {
+                        HStack(spacing: 4) {
+                            ForEach(categories) { cat in
+                                Text(verbatim: cat.name.stringByDecodingHTMLEntities)
+                                    .wavBlack(size: 10)
+                            }
+                            ForEach(tags) { tag in
+                                Text(verbatim: tag.name.stringByDecodingHTMLEntities)
+                                    .wavPink(size: 10)
+                            }
+                        }
                     }
                 }
                 .frame(alignment: .leading)
@@ -102,11 +99,11 @@ struct ArchiveItemView: View {
         }
         .onAppear {
             self.loadCategories()
+            self.loadTags()
         }
     }
     func loadCategories() {
-        let url = URL(string: "https://wearevarious.com/wp-json/wp/v2/categories?post=\(wavShow.id)&_fields=name")!
-        // print("WAV: loadCategories \(url.description)")
+        let url = URL(string: "https://wearevarious.com/wp-json/wp/v2/categories?post=\(wavShow.id)&_fields=id,name")!
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 print("Error: \(error)")
@@ -120,6 +117,28 @@ struct ArchiveItemView: View {
                 let categories = try JSONDecoder().decode(WAVCategories.self, from: data)
                 DispatchQueue.main.async {
                     self.categories = categories
+                }
+            } catch let error {
+                print("Error decoding JSON: \(error)")
+            }
+        }
+        task.resume()
+    }
+    func loadTags() {
+        let url = URL(string: "https://wearevarious.com/wp-json/wp/v2/categories?tags=\(wavShow.id)&_fields=id,name")!
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error: \(error)")
+                return
+            }
+            guard let data = data else {
+                print("Error: no data received")
+                return
+            }
+            do {
+                let tags = try JSONDecoder().decode(WAVTags.self, from: data)
+                DispatchQueue.main.async {
+                    self.tags = tags
                 }
             } catch let error {
                 print("Error decoding JSON: \(error)")

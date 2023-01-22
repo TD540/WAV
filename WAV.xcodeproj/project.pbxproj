@@ -47,6 +47,7 @@
 		E9DC8EE72961BA1D00C4B557 /* WAVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */; };
 		E9EC4CC829720C1400690B88 /* String-htmlEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */; };
 		E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F17FA52928059200F0FC27 /* Artwork.swift */; };
+		E9F9F407297DDABC0093A008 /* WAVPink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9F406297DDABC0093A008 /* WAVPink.swift */; };
 		E9FC53C0290084A600814244 /* MicroDOM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC53BF290084A600814244 /* MicroDOM.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVShow.swift; sourceTree = "<group>"; };
 		E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-htmlEntities.swift"; sourceTree = "<group>"; };
 		E9F17FA52928059200F0FC27 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
+		E9F9F406297DDABC0093A008 /* WAVPink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVPink.swift; sourceTree = "<group>"; };
 		E9FC53BF290084A600814244 /* MicroDOM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicroDOM.swift; sourceTree = "<group>"; };
 		E9FCF7F429539D7B0015C442 /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -174,6 +176,7 @@
 				E93473B42928E95E00E2016C /* InfiniteView.swift */,
 				E93473BA2928E95E00E2016C /* InfiniteViewModel.swift */,
 				E99C802D296F8E08000629F9 /* WAVBlack.swift */,
+				E9F9F406297DDABC0093A008 /* WAVPink.swift */,
 				E99C802B296F8B06000629F9 /* FlexibleView.swift */,
 				E9702CA3295B4BD3007471A4 /* BlackTitle.swift */,
 				E9718AAB2974B432008132B8 /* Trash */,
@@ -360,6 +363,7 @@
 				E9702CA6295B5119007471A4 /* ArchiveItemView.swift in Sources */,
 				E9718AAF2974CDFA008132B8 /* CustomTabBar.swift in Sources */,
 				E90555A22972FCA500428320 /* WAVCategory.swift in Sources */,
+				E9F9F407297DDABC0093A008 /* WAVPink.swift in Sources */,
 				E966D6C6288AF89900337C47 /* RadioView.swift in Sources */,
 				E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */,
 				E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */,

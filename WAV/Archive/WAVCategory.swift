@@ -8,9 +8,13 @@
 import Foundation
 
 struct WAVCategory: Codable, Identifiable, Hashable {
-    var id: String {
-        name
-    }
+    var id: Int
     let name: String
 }
 typealias WAVCategories = [WAVCategory]
+
+struct WAVTag: Codable, Identifiable, Hashable {
+    var id: Int
+    let name: String
+}
+typealias WAVTags = [WAVTag]
