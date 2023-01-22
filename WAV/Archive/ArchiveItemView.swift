@@ -6,14 +6,27 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct ArchiveItemView: View {
     @Environment(\.colorScheme) var colorScheme
+
     @State var categories: WAVCategories = []
+    @State var imageLoaded = false
+
     var infiniteViewModel: InfiniteView.ViewModel
+
     let index: Int
+    let spacing: Double = 4
+
+    // Computed properties
     var wavShow: WAVShow {
         infiniteViewModel.wavShows[index]
+    }
+    var fixedCategories: [String] {
+        categories.map {
+            $0.name.stringByDecodingHTMLEntities
+        }
     }
     var isPlayingBinding: Binding<Bool> {
         Binding {
@@ -22,7 +35,7 @@ struct ArchiveItemView: View {
             infiniteViewModel.archiveDataController.state.isPlaying
         } set: { _ in }
     }
-    let spacing: Double = 4
+    
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             Button {
@@ -40,22 +53,28 @@ struct ArchiveItemView: View {
         }
     }
     func image() -> some View {
-        ZStack {
-            AsyncImage(url: wavShow.pictureURL) { image in
-                image
-                    .centerCropped()
-                    .overlay {
-                        PixelButton(isPlaying: isPlayingBinding)
-                            .blendMode(.hardLight)
-                            .frame(maxWidth: 60, maxHeight: 90)
-                    }
-            } placeholder: {
-                ProgressView()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(.black.opacity(0.1))
-            }
-            .aspectRatio(100/66.7, contentMode: .fit)
+        GeometryReader { geo in
+            WebImage(url: wavShow.pictureURL)
+                .placeholder {
+                    ProgressView()
+                }
+                .onSuccess { _, _, _ in
+                    imageLoaded = true
+                }
+                .resizable()
+                .scaledToFill()
+                .frame(width: geo.size.width, height: geo.size.height)
+                .clipped()
+                .background(.black.opacity(0.1))
+                .overlay {
+                    PixelButton(isPlaying: isPlayingBinding)
+                        .blendMode(.hardLight)
+                        .frame(maxWidth: 60, maxHeight: 90)
+                        .opacity(imageLoaded ? 1 : 0)
+                        .animation(.easeOut, value: imageLoaded)
+                }
         }
+        .aspectRatio(100/66.7, contentMode: .fit)
     }
     func archiveItemInfo() -> some View {
         VStack(alignment: .leading, spacing: spacing) {
@@ -119,6 +138,5 @@ struct ArchiveItem_Previews: PreviewProvider {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.white.opacity(0.15))
-        .preferredColorScheme(.dark)
     }
 }
