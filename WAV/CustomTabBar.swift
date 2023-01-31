@@ -13,7 +13,7 @@ struct CustomTabBar: View {
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.safeAreaInsets) private var safeAreaInsets
 
-    let tabs = ["radio", "archive", "schedule", "chat"]
+    let tabs = ["radio", "archive", "schedule"] //, "chat"]
     let iconHeight: CGFloat
 
     // Computed properties
@@ -42,11 +42,11 @@ struct CustomTabBar: View {
             ForEach(0..<tabs.count, id: \.self) { index in
                 let isSelected = tabSelected[index] == 1
                 VStack {
-                    Image("tab-\(tabs[index])")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxHeight: iconHeight)
-                        .scaleEffect(isSelected ? 0.9 : 1)
+//                    Image("tab-\(tabs[index])")
+//                        .resizable()
+//                        .scaledToFit()
+//                        .frame(maxHeight: iconHeight)
+//                        .scaleEffect(isSelected ? 0.9 : 1)
                     Text("\(tabs[index].uppercased())")
                         .lineLimit(1)
                         .font(.custom("pixelmix", size: 12))
