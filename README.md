@@ -1,6 +1,6 @@
 # We Are Various
 
-<img src="WAV/Assets.xcassets/AppIcon.appiconset/Icon.png" style="max-width: 512px" />
+<img src="WAV/Assets.xcassets/AppIcon.appiconset/Icon.jpg" style="max-width: 256px" />
 
 First version of the We&nbsp;Are&nbsp;Various app allows iOS users to listen to the archive- or live stream.
 
