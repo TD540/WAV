@@ -42,12 +42,12 @@ struct ContentView: View {
                             Text("SCHEDULE")
                         }
                         .tag(3)
-                    Chat()
-                        .tabItem {
-                            Image("tab-chat")
-                            Text("CHAT")
-                        }
-                        .tag(4)
+                    // Chat()
+                    //     .tabItem {
+                    //         Image("tab-chat")
+                    //         Text("CHAT")
+                    //     }
+                    //     .tag(4)
                 }
                 .introspectTabBarController { UITabBarController in
                     UITabBarController.tabBar.isHidden = true
