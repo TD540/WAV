@@ -38,31 +38,24 @@ struct CustomTabBar: View {
     }
 
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 15) {
             ForEach(0..<tabs.count, id: \.self) { index in
                 let isSelected = tabSelected[index] == 1
-                VStack {
-//                    Image("tab-\(tabs[index])")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(maxHeight: iconHeight)
-//                        .scaleEffect(isSelected ? 0.9 : 1)
-                    Text("\(tabs[index].uppercased())")
-                        .lineLimit(1)
-                        .font(.custom("pixelmix", size: 12))
-                }
-                .frame(maxWidth: .infinity)
-                .shadow(color: isSelected ? .accentColor.opacity(0.3) : .black.opacity(0.4), radius: isSelected ? 2.0 : 5.0, y: isSelected ? 5 : 10)
-                .foregroundColor(isSelected ? selectedColor : color)
-                .onTapGesture {
-                    withAnimation(.linear(duration: 0.1)) {
-                        tab = index + 1
+                Text("\(tabs[index].uppercased())")
+                    .lineLimit(1)
+                    .font(.custom("pixelmix", size: 22))
+                    .shadow(color: isSelected ? .accentColor.opacity(0.3) : .black.opacity(0.4), radius: isSelected ? 2.0 : 5.0, y: isSelected ? 5 : 10)
+                    .foregroundColor(isSelected ? selectedColor : color)
+                    .onTapGesture {
+                        withAnimation(.linear(duration: 0.1)) {
+                            tab = index + 1
+                        }
                     }
-                }
             }
         }
-        .padding(.top, 10)
-        .padding(.bottom, safeAreaInsets.bottom == 0.0 ? 15 : safeAreaInsets.bottom)
+        .frame(maxWidth: .infinity)
+        .padding(.top, 15)
+        .padding(.bottom, safeAreaInsets.bottom == 0.0 ? 20 : safeAreaInsets.bottom)
         .background(.regularMaterial)
         .border(width: 1, edges: [.top], color: .secondary.opacity(0.2))
         .edgesIgnoringSafeArea(.bottom)
