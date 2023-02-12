@@ -40,7 +40,7 @@ struct CustomTabBar: View {
                 .padding(.horizontal, 10)
                 .padding(.bottom,
                          safeAreaInsets.bottom == 0.0
-                         ? 15
+                         ? 20
                          : safeAreaInsets.bottom
                 )
             }
