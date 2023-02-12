@@ -18,53 +18,37 @@ struct CustomTabBar: View {
 
     // Computed properties
     var tabSelected: [Int] {
-        var ts = [0, 0, 0, 0]
+        var ts = [0, 0, 0]
         ts[tab-1] = 1
         return ts
     }
-    var color: Color {
-        if colorScheme == .light {
-            return .black.opacity(0.6)
-        } else {
-            return .white.opacity(0.5)
-        }
-    }
-    var selectedColor: Color {
-        if colorScheme == .light {
-            return Color("WAVBlue")
-        } else {
-            return .white
-        }
-    }
 
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(alignment: .center, spacing: 5) {
+
             ForEach(0..<tabs.count, id: \.self) { index in
                 let isSelected = tabSelected[index] == 1
-                VStack {
-//                    Image("tab-\(tabs[index])")
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(maxHeight: iconHeight)
-//                        .scaleEffect(isSelected ? 0.9 : 1)
-                    Text("\(tabs[index].uppercased())")
-                        .lineLimit(1)
-                        .font(.custom("pixelmix", size: 12))
-                }
-                .frame(maxWidth: .infinity)
-                .shadow(color: isSelected ? .accentColor.opacity(0.3) : .black.opacity(0.4), radius: isSelected ? 2.0 : 5.0, y: isSelected ? 5 : 10)
-                .foregroundColor(isSelected ? selectedColor : color)
-                .onTapGesture {
-                    withAnimation(.linear(duration: 0.1)) {
+                Button("\(tabs[index].uppercased())") {
+                    withAnimation(.linear(duration: 0.05)) {
                         tab = index + 1
                     }
                 }
+                .lineLimit(1)
+                .font(.custom("pixelmix", size: isSelected ? 25 : 15))
+                .offset(y: isSelected ? 0 : 2)
+                .padding(.top, 15)
+                .padding(.horizontal, 10)
+                .padding(.bottom,
+                         safeAreaInsets.bottom == 0.0
+                         ? 15
+                         : safeAreaInsets.bottom
+                )
             }
         }
-        .padding(.top, 10)
-        .padding(.bottom, safeAreaInsets.bottom == 0.0 ? 15 : safeAreaInsets.bottom)
-        .background(.regularMaterial)
-        .border(width: 1, edges: [.top], color: .secondary.opacity(0.2))
+        .foregroundColor(.accentColor)
+        .frame(maxWidth: .infinity)
+        .background(Material.regularMaterial)
+        .border(width: 2, edges: [.top], color: .secondary.opacity(0.3))
         .edgesIgnoringSafeArea(.bottom)
     }
 }

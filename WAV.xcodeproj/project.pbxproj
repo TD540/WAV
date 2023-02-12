@@ -22,6 +22,7 @@
 		E91F683628867FEC005985BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683528867FEC005985BF /* Preview Assets.xcassets */; };
 		E93FBB90297746D5006CE29D /* View-readSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93FBB8F297746D5006CE29D /* View-readSize.swift */; };
 		E93FBB922977D68E006CE29D /* View-borderEdges.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93FBB912977D68E006CE29D /* View-borderEdges.swift */; };
+		E9487F0229992BCD00D08C1B /* pixelmix_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9487F0129992BCD00D08C1B /* pixelmix_bold.ttf */; };
 		E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E958BAC928F17E4300D37B13 /* Schedule.swift */; };
 		E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95AB21729663BB500AEC268 /* Image-centerCropped.swift */; };
 		E961C5C429253F4C0091FB0B /* ArtworkPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */; };
@@ -72,6 +73,7 @@
 		E93473BA2928E95E00E2016C /* InfiniteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteViewModel.swift; sourceTree = "<group>"; };
 		E93FBB8F297746D5006CE29D /* View-readSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-readSize.swift"; sourceTree = "<group>"; };
 		E93FBB912977D68E006CE29D /* View-borderEdges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-borderEdges.swift"; sourceTree = "<group>"; };
+		E9487F0129992BCD00D08C1B /* pixelmix_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pixelmix_bold.ttf; sourceTree = "<group>"; };
 		E958BAC928F17E4300D37B13 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		E95AB21729663BB500AEC268 /* Image-centerCropped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image-centerCropped.swift"; sourceTree = "<group>"; };
 		E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlaceholder.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			children = (
 				E98887A928942A8D002E0349 /* license.txt */,
 				E98887AB28942A91002E0349 /* readme.txt */,
+				E9487F0129992BCD00D08C1B /* pixelmix_bold.ttf */,
 				E98887A428942A6D002E0349 /* pixelmix.ttf */,
 			);
 			path = Fonts;
@@ -332,6 +335,7 @@
 				E98887AA28942A8D002E0349 /* license.txt in Resources */,
 				E91F683328867FEC005985BF /* Assets.xcassets in Resources */,
 				E98887A628942A70002E0349 /* pixelmix.ttf in Resources */,
+				E9487F0229992BCD00D08C1B /* pixelmix_bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
