@@ -11,19 +11,19 @@ struct RadioView: View {
     @StateObject var radio: Radio
     var body: some View {
         VStack(spacing: 0) {
-
+            RadioMarquee(text: radio.title, size: 24)
+                .padding(.vertical)
             RadioViewHeader()
-
-            // Radio Artwork
-            if let artURL = radio.artURL {
-                AsyncImage(url: artURL) { image in
-                    Artwork(image: image)
-                } placeholder: {
-                    ArtworkPlaceholder()
-                }
-                .padding(.top, -70)
+            AsyncImage(url: radio.artURL) { image in
+                Artwork(image: image)
+            } placeholder: {
+                Image("WAVBol")
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .padding()
+                    .padding()
             }
-
             if radio.isOffAir == false {
                 Button {
                     if radio.isPlaying {
@@ -34,18 +34,15 @@ struct RadioView: View {
                 } label: {
                     PixelButton(isPlaying: $radio.isPlaying)
                 }
-                .shadow(color: .black.opacity(0.3), radius: 25, x: 0.0, y: -10.0)
                 .padding(.top, -80)
             }
-
-            RadioMarquee(text: radio.title, size: 24)
-                .padding(.top, 20)
-
+            Spacer()
         }
-        .padding(.bottom, 20)
+        .padding(.bottom, 80)
         .onAppear {
             radio.updateState()
         }
+
     }
 }
 

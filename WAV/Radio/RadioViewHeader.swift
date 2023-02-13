@@ -9,12 +9,12 @@ import SwiftUI
 
 struct RadioViewHeader: View {
     var body: some View {
-        Image("NoArtworkBackup")
+        Image("WAVLogo")
             .resizable()
             .renderingMode(.template)
             .foregroundColor(.accentColor)
             .scaledToFit()
-            .aspectRatio(1, contentMode: .fit)
+            .padding()
     }
 }
 
