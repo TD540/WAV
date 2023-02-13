@@ -57,11 +57,21 @@ struct ArchiveItemView: View {
                         .clipped()
                         .background(.black.opacity(0.1))
                         .overlay {
-                            PixelButton(isPlaying: isPlayingBinding)
-                                .blendMode(.hardLight)
-                                .frame(maxWidth: 60, maxHeight: 90)
-                                .opacity(imageLoaded ? 1 : 0)
-                                .animation(.easeOut, value: imageLoaded)
+                            VStack {
+                                Spacer()
+                                HStack {
+                                    PixelButton(isPlaying: isPlayingBinding, color: .white)
+                                        .frame(maxWidth: 60/2, maxHeight: 90/2)
+                                        .opacity(imageLoaded ? 1 : 0)
+                                        .animation(.easeOut, value: imageLoaded)
+                                        .padding()
+                                        .background(Color.black.opacity(0.3))
+                                    Spacer()
+                                }
+                                .frame(maxWidth: .infinity)
+                            }
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
                         }
                 }
                 .aspectRatio(100/66.7, contentMode: .fit)
@@ -80,7 +90,7 @@ struct ArchiveItemView: View {
                                 }
                                 ForEach(tags) { tag in
                                     Text(tag.name.stringByDecodingHTMLEntities.uppercased())
-                                        .wavPink(size: 10)
+                                        .wavBlue(size: 10)
                                 }
                             }
                         }
