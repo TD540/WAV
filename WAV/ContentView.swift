@@ -13,56 +13,42 @@ struct ContentView: View {
     @StateObject var archiveDataController = ArchiveDataController()
 
     @State var tab = 1
-    @State var tabBarSize: CGSize = .zero
 
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        GeometryReader { proxy in
-            ZStack(alignment: .bottom) {
-                TabView(selection: $tab) {
-                    RadioView(radio: radio)
-                        .tabItem {
-                            Image(radio.isLive ? "tab-radio-live" : "tab-radio")
-                            Text(radio.isLive ? "LIVE" : "RADIO")
-                        }
-                        .tag(1)
-                    ArchiveView(
-                        archiveDataController: archiveDataController,
-                        tabBarSize: tabBarSize
-                    )
+
+        ZStack(alignment: .bottom) {
+            TabView(selection: $tab) {
+                RadioView(radio: radio)
+                    .tabItem {
+                        Image(radio.isLive ? "tab-radio-live" : "tab-radio")
+                        Text(radio.isLive ? "LIVE" : "RADIO")
+                    }
+                    .tag(1)
+                InfiniteView(archiveDataController: archiveDataController)
                     .tabItem {
                         Image("tab-archive")
                         Text("ARCHIVE")
                     }
                     .tag(2)
-                    Schedule()
-                        .tabItem {
-                            Image("tab-schedule")
-                            Text("SCHEDULE")
-                        }
-                        .tag(3)
-                    // Chat()
-                    //     .tabItem {
-                    //         Image("tab-chat")
-                    //         Text("CHAT")
-                    //     }
-                    //     .tag(4)
-                }
-                .introspectTabBarController { UITabBarController in
-                    UITabBarController.tabBar.isHidden = true
-                }
-
-                CustomTabBar(
-                    tab: $tab,
-                    iconHeight: 32
-                )
-                .readSize { size in
-                    tabBarSize = size
-                }
-
+                Schedule()
+                    .tabItem {
+                        Image("tab-schedule")
+                        Text("SCHEDULE")
+                    }
+                    .tag(3)
             }
-            .edgesIgnoringSafeArea(.bottom)
+            .introspectTabBarController { UITabBarController in
+                UITabBarController.tabBar.isHidden = true
+            }
+
+            VStack(spacing: 0) {
+                ArchivePlayerView(archiveDataController: archiveDataController)
+                    .shadow(radius: 20)
+                CustomTabBar(tab: $tab)
+            }
+
         }
         .edgesIgnoringSafeArea(.bottom)
 

@@ -14,7 +14,6 @@ struct CustomTabBar: View {
     @Environment(\.safeAreaInsets) private var safeAreaInsets
 
     let tabs = ["radio", "archive", "schedule"] //, "chat"]
-    let iconHeight: CGFloat
 
     // Computed properties
     var tabSelected: [Int] {
@@ -33,6 +32,7 @@ struct CustomTabBar: View {
                         tab = index + 1
                     }
                 }
+                .foregroundColor(isSelected ? .accentColor : .black)
                 .lineLimit(1)
                 .font(.custom("pixelmix", size: isSelected ? 25 : 15))
                 .offset(y: isSelected ? 0 : 2)
@@ -45,18 +45,15 @@ struct CustomTabBar: View {
                 )
             }
         }
-        .foregroundColor(.accentColor)
         .frame(maxWidth: .infinity)
         .background(Material.regularMaterial)
-        .border(width: 2, edges: [.top], color: .secondary.opacity(0.3))
+        .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
         .edgesIgnoringSafeArea(.bottom)
     }
 }
 
 struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTabBar(
-            tab: .constant(1),
-            iconHeight: 50)
+        CustomTabBar(tab: .constant(1))
     }
 }
