@@ -139,11 +139,11 @@ extension WAVShow {
         ]
         return urlComponents.url!
     }
-    var pictureURL: URL {
+    var pictureURL: URL? {
         if let mediumLarge = embedded.wpFeaturedmedia.first?.mediaDetails.sizes.mediumLarge {
-            return URL(string: mediumLarge.sourceURL)!
+            return URL(string: mediumLarge.sourceURL)
         } else {
-            return URL(string: embedded.wpFeaturedmedia.first!.sourceURL)!
+            return URL(string: embedded.wpFeaturedmedia.first!.sourceURL)
         }
     }
 }

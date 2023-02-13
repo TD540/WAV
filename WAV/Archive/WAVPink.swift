@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct WAVPinkModifier: ViewModifier {
+    @Environment(\.colorScheme) var colorScheme
     let size: CGFloat
     func body(content: Content) -> some View {
         content
             .padding(8)
-            .foregroundColor(.white)
+            .foregroundColor(
+                colorScheme == .dark
+                ? .black
+                : .white
+            )
             .background(Color("WAVPink"))
             .font(.custom("pixelmix", size: size))
             .lineSpacing(4)

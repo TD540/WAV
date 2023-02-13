@@ -43,63 +43,58 @@ struct ArchiveItemView: View {
                     infiniteViewModel.archiveDataController.state.playPause.toggle()
                 }
             } label: {
-                image()
+                GeometryReader { geo in
+                    WebImage(url: wavShow.pictureURL)
+                        .placeholder {
+                            ProgressView()
+                        }
+                        .onSuccess { _, _, _ in
+                            imageLoaded = true
+                        }
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .clipped()
+                        .background(.black.opacity(0.1))
+                        .overlay {
+                            PixelButton(isPlaying: isPlayingBinding)
+                                .blendMode(.hardLight)
+                                .frame(maxWidth: 60, maxHeight: 90)
+                                .opacity(imageLoaded ? 1 : 0)
+                                .animation(.easeOut, value: imageLoaded)
+                        }
+                }
+                .aspectRatio(100/66.7, contentMode: .fit)
             }
-            archiveItemInfo()
-        }
-    }
-    func image() -> some View {
-        GeometryReader { geo in
-            WebImage(url: wavShow.pictureURL)
-                .placeholder {
-                    ProgressView()
-                }
-                .onSuccess { _, _, _ in
-                    imageLoaded = true
-                }
-                .resizable()
-                .scaledToFill()
-                .frame(width: geo.size.width, height: geo.size.height)
-                .clipped()
-                .background(.black.opacity(0.1))
-                .overlay {
-                    PixelButton(isPlaying: isPlayingBinding)
-                        .blendMode(.hardLight)
-                        .frame(maxWidth: 60, maxHeight: 90)
-                        .opacity(imageLoaded ? 1 : 0)
-                        .animation(.easeOut, value: imageLoaded)
-                }
-        }
-        .aspectRatio(100/66.7, contentMode: .fit)
-    }
-    func archiveItemInfo() -> some View {
-        VStack(alignment: .leading, spacing: spacing) {
-            Group {
+
+            VStack(alignment: .leading, spacing: spacing) {
                 Group {
-                    Text(wavShow.name.uppercased())
-                        .wavBlack()
-                    ScrollView(.horizontal, showsIndicators: true) {
-                        HStack(spacing: 4) {
-                            ForEach(categories) { cat in
-                                Text(verbatim: cat.name.stringByDecodingHTMLEntities)
-                                    .wavBlack(size: 10)
-                            }
-                            ForEach(tags) { tag in
-                                Text(verbatim: tag.name.stringByDecodingHTMLEntities)
-                                    .wavPink(size: 10)
+                    Group {
+                        Text(wavShow.name.uppercased())
+                            .wavBlack()
+                        ScrollView(.horizontal, showsIndicators: true) {
+                            HStack(spacing: 4) {
+                                ForEach(categories) { category in
+                                    Text(category.name.stringByDecodingHTMLEntities.uppercased())
+                                        .wavBlack(size: 10)
+                                }
+                                ForEach(tags) { tag in
+                                    Text(tag.name.stringByDecodingHTMLEntities.uppercased())
+                                        .wavPink(size: 10)
+                                }
                             }
                         }
                     }
+                    .frame(alignment: .leading)
+                    Text(wavShow.dateFormatted.uppercased())
+                        .padding(.vertical, 4)
+                        .font(.custom("pixelmix", size: 10))
                 }
-                .frame(alignment: .leading)
-                Text(wavShow.dateFormatted.uppercased())
-                    .padding(.vertical, 4)
-                    .font(.custom("pixelmix", size: 10))
             }
-        }
-        .onAppear {
-            self.loadCategories()
-            self.loadTags()
+            .onAppear {
+                self.loadCategories()
+                self.loadTags()
+            }
         }
     }
     func loadCategories() {
@@ -125,7 +120,7 @@ struct ArchiveItemView: View {
         task.resume()
     }
     func loadTags() {
-        let url = URL(string: "https://wearevarious.com/wp-json/wp/v2/categories?tags=\(wavShow.id)&_fields=id,name")!
+        let url = URL(string: "https://wearevarious.com/wp-json/wp/v2/tags?post=\(wavShow.id)&_fields=id,name")!
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
                 print("Error: \(error)")

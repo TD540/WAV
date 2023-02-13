@@ -32,7 +32,10 @@ struct CustomTabBar: View {
                         tab = index + 1
                     }
                 }
-                .foregroundColor(isSelected ? .accentColor : .black)
+                .foregroundColor(
+                    isSelected ? .accentColor
+                    : colorScheme == .dark ? .white : .black
+                )
                 .lineLimit(1)
                 .font(.custom("pixelmix", size: isSelected ? 25 : 15))
                 .offset(y: isSelected ? 0 : 2)
@@ -46,7 +49,7 @@ struct CustomTabBar: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(Material.regularMaterial)
+        .background(Material.thick)
         .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
         .edgesIgnoringSafeArea(.bottom)
     }
