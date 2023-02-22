@@ -62,10 +62,6 @@ struct ContentView: View {
                 archiveDataController.state.playPause.toggle()
             }
         }
-        .onAppear {
-            tab = radio.isOffAir ? 2 : 1
-        }
-
     }
 }
 
