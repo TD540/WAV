@@ -11,8 +11,8 @@ import MediaPlayer
 class Radio: ObservableObject {
     private let nowPlayingURL = URL(string: "https://azuracast.wearevarious.com/api/nowplaying/1")!
     private let livestreamInfoURL = URL(string: "https://radio.wearevarious.com/stream.xml")!
-//    private let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
-     private let livestream = AVPlayerItem(url: URL(string: "https://live-radio-cf-vrt.akamaized.net/groupa/live/a9f36fda-cb3c-4b4e-9405-a5bba55654c0/live.isml/live-audio=128000.m3u8")!) // dev
+    private let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
+//     private let livestream = AVPlayerItem(url: URL(string: "https://live-radio-cf-vrt.akamaized.net/groupa/live/a9f36fda-cb3c-4b4e-9405-a5bba55654c0/live.isml/live-audio=128000.m3u8")!) // dev
     let player = AVPlayer()
 
     private var task: Task<Void, Error>?
