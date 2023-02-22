@@ -12,14 +12,14 @@ class Radio: ObservableObject {
     private let nowPlayingURL = URL(string: "https://azuracast.wearevarious.com/api/nowplaying/1")!
     private let livestreamInfoURL = URL(string: "https://radio.wearevarious.com/stream.xml")!
     private let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
-//     private let livestream = AVPlayerItem(url: URL(string: "https://live-radio-cf-vrt.akamaized.net/groupa/live/a9f36fda-cb3c-4b4e-9405-a5bba55654c0/live.isml/live-audio=128000.m3u8")!) // dev
+    //     private let livestream = AVPlayerItem(url: URL(string: "https://live-radio-cf-vrt.akamaized.net/groupa/live/a9f36fda-cb3c-4b4e-9405-a5bba55654c0/live.isml/live-audio=128000.m3u8")!) // dev
     let player = AVPlayer()
 
     private var task: Task<Void, Error>?
     @Published var isPlaying = false
     @Published var isLive = false
     @Published var isOffAir = true
-    @Published var title: String = "We Are Various"
+    @Published var title: String = "Loading ..."
     @Published var artURL: URL?
 
     func updateState() {
@@ -43,7 +43,8 @@ class Radio: ObservableObject {
                     }
                     if artURL != URL(string: newData.artURL) {
                         if newData.artURL.hasSuffix("generic_song.jpg") {
-                            // generic artwork image looks aweful, update with nil
+                            // generic artwork image looks aweful,
+                            // update with nil
                             updateArtURL(with: nil)
                         } else {
                             // artwork image available
@@ -95,7 +96,7 @@ class Radio: ObservableObject {
                     }
                 }
             } catch {
-                 print("WAV: URLSession", String(describing: error))
+                print("WAV: URLSession", String(describing: error))
             }
         }
     }
@@ -103,34 +104,27 @@ class Radio: ObservableObject {
 
 
     func updateInfoCenter() {
-        let title = title
-        if let url = artURL {
-            DispatchQueue.global().async {
-                if let data = try? Data(contentsOf: url) {
-                    if let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            let artwork = MPMediaItemArtwork.init(boundsSize: image.size) { _ -> UIImage in
-                                image
-                            }
-                            MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-                                MPMediaItemPropertyArtwork: artwork,
-                                MPMediaItemPropertyTitle: title,
-                                MPMediaItemPropertyArtist: "We Are Various",
-                                MPMediaItemPropertyPlaybackDuration: 0,
-                                MPNowPlayingInfoPropertyIsLiveStream: true
-                            ]
-                        }
-                    }
-                }
+        let artwork: MPMediaItemArtwork
+        if
+            let url = artURL,
+            let data = try? Data(contentsOf: url),
+            let image = UIImage(data: data) {
+            artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in
+                image
             }
         } else {
-            MPNowPlayingInfoCenter.default().nowPlayingInfo = [
-                MPMediaItemPropertyTitle: title,
-                MPMediaItemPropertyArtist: "We Are Various",
-                MPMediaItemPropertyPlaybackDuration: 0,
-                MPNowPlayingInfoPropertyIsLiveStream: true
-            ]
+            let image = UIImage(named: "AppIcon")!
+            artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in
+                    image
+                }
         }
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [
+            MPMediaItemPropertyArtwork: artwork,
+            MPMediaItemPropertyTitle: title,
+            MPMediaItemPropertyArtist: "We Are Various",
+            MPMediaItemPropertyPlaybackDuration: 0,
+            MPNowPlayingInfoPropertyIsLiveStream: true
+        ]
     }
     func play() {
         player.replaceCurrentItem(with: nil)
