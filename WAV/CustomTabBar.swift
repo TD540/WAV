@@ -32,6 +32,7 @@ struct CustomTabBar: View {
                         tab = index + 1
                     }
                 }
+                .minimumScaleFactor(0.3)
                 .foregroundColor(
                     isSelected ? .accentColor
                     : colorScheme == .dark ? .white : .black
