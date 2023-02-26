@@ -26,7 +26,7 @@ struct RadioMarquee: View {
             .padding(.vertical)
             .padding(.bottom, 5)
 
-            .foregroundColor(.accentColor)
+            .foregroundColor(.primary)
             .background(Material.thin)
             .background(.white.opacity(0.1))
             .border(width: 1, edges: [.bottom], color: .secondary.opacity(0.3))
@@ -38,7 +38,7 @@ struct RadioMarquee: View {
 struct RadioMarquee_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            RadioMarquee(text: "This is the Radio Marquee")
+            RadioMarquee(text: "This is the Radio Marquee. This is the Radio Marquee. ")
             Spacer()
         }
     }

@@ -34,39 +34,31 @@ public struct MarqueeText : View {
             GeometryReader { geo in
                 if stringWidth > geo.size.width { // don't use self.animate as conditional here
                     Group {
-                        HStack {
-                            Text(" NOW PLAYING:")
-                                .foregroundColor(.primary)
-                            Text(self.text)
-                        }
-                        .lineLimit(1)
-                        .font(.init(font))
-                        .offset(x: self.animate ? -stringWidth - stringHeight * 2 : 0)
-                        .animation(self.animate ? animation : nullAnimation, value: self.animate)
-                        .onAppear {
-                            DispatchQueue.main.async {
-                                self.animate = geo.size.width < stringWidth
+                        Text(self.text)
+                            .lineLimit(1)
+                            .font(.init(font))
+                            .offset(x: self.animate ? -stringWidth - stringHeight * 2 : 0)
+                            .animation(self.animate ? animation : nullAnimation, value: self.animate)
+                            .onAppear {
+                                DispatchQueue.main.async {
+                                    self.animate = geo.size.width < stringWidth
+                                }
                             }
-                        }
-                        .fixedSize(horizontal: true, vertical: false)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
 
-                        HStack(spacing: 0) {
-                            Text("NOW PLAYING: ")
-                                .foregroundColor(.black)
-                            Text(self.text)
-                        }
-                        .lineLimit(1)
-                        .font(.init(font))
-                        .offset(x: self.animate ? 0 : stringWidth + stringHeight * 2)
-                        .animation(self.animate ? animation : nullAnimation, value: self.animate)
-                        .onAppear {
-                            DispatchQueue.main.async {
-                                self.animate = geo.size.width < stringWidth
+                        Text(self.text)
+                            .lineLimit(1)
+                            .font(.init(font))
+                            .offset(x: self.animate ? 0 : stringWidth + stringHeight * 2)
+                            .animation(self.animate ? animation : nullAnimation, value: self.animate)
+                            .onAppear {
+                                DispatchQueue.main.async {
+                                    self.animate = geo.size.width < stringWidth
+                                }
                             }
-                        }
-                        .fixedSize(horizontal: true, vertical: false)
-                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                            .fixedSize(horizontal: true, vertical: false)
+                            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                     }
                     .onValueChanged(of: self.text, perform: {text in
                         self.animate = geo.size.width < stringWidth
