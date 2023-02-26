@@ -25,12 +25,13 @@
 		E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E958BAC928F17E4300D37B13 /* Schedule.swift */; };
 		E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95AB21729663BB500AEC268 /* Image-centerCropped.swift */; };
 		E961C5C429253F4C0091FB0B /* ArtworkPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */; };
-		E961C5C629253FA80091FB0B /* RadioViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5C529253FA80091FB0B /* RadioViewHeader.swift */; };
 		E966D6C6288AF89900337C47 /* RadioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E966D6C5288AF89900337C47 /* RadioView.swift */; };
 		E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702CA3295B4BD3007471A4 /* BlackTitle.swift */; };
 		E9702CA6295B5119007471A4 /* ArchiveItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702CA5295B5119007471A4 /* ArchiveItemView.swift */; };
 		E9718AAF2974CDFA008132B8 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9718AAE2974CDFA008132B8 /* CustomTabBar.swift */; };
 		E9718AB22974F3A3008132B8 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = E9718AB12974F3A3008132B8 /* Introspect */; };
+		E973428A29AB7A4E003ADDC1 /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E973428929AB7A4E003ADDC1 /* MarqueeText.swift */; };
+		E973428C29AB7A5E003ADDC1 /* View-onValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = E973428B29AB7A5E003ADDC1 /* View-onValueChanged.swift */; };
 		E97D51BB295A2A3900DB9380 /* String-condenseWhitespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D51BA295A2A3900DB9380 /* String-condenseWhitespace.swift */; };
 		E98887A628942A70002E0349 /* pixelmix.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98887A428942A6D002E0349 /* pixelmix.ttf */; };
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
@@ -42,11 +43,9 @@
 		E9AEFC41299AD08700A0B033 /* WAVBlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEFC40299AD08700A0B033 /* WAVBlue.swift */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
 		E9CE7349297D37F10036451D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9CE7348297D37F10036451D /* SDWebImageSwiftUI */; };
-		E9D77354292AB3D800C816C3 /* MarqueeText in Frameworks */ = {isa = PBXBuildFile; productRef = E9D77353292AB3D800C816C3 /* MarqueeText */; };
 		E9D89F582976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */; };
 		E9DC8EE72961BA1D00C4B557 /* WAVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */; };
 		E9EC4CC829720C1400690B88 /* String-htmlEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */; };
-		E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F17FA52928059200F0FC27 /* Artwork.swift */; };
 		E9F9F407297DDABC0093A008 /* WAVPink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9F406297DDABC0093A008 /* WAVPink.swift */; };
 		E9FC53C0290084A600814244 /* MicroDOM.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC53BF290084A600814244 /* MicroDOM.swift */; };
 /* End PBXBuildFile section */
@@ -76,11 +75,12 @@
 		E958BAC928F17E4300D37B13 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		E95AB21729663BB500AEC268 /* Image-centerCropped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image-centerCropped.swift"; sourceTree = "<group>"; };
 		E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlaceholder.swift; sourceTree = "<group>"; };
-		E961C5C529253FA80091FB0B /* RadioViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioViewHeader.swift; sourceTree = "<group>"; };
 		E966D6C5288AF89900337C47 /* RadioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioView.swift; sourceTree = "<group>"; };
 		E9702CA3295B4BD3007471A4 /* BlackTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackTitle.swift; sourceTree = "<group>"; };
 		E9702CA5295B5119007471A4 /* ArchiveItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveItemView.swift; sourceTree = "<group>"; };
 		E9718AAE2974CDFA008132B8 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		E973428929AB7A4E003ADDC1 /* MarqueeText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarqueeText.swift; sourceTree = "<group>"; };
+		E973428B29AB7A5E003ADDC1 /* View-onValueChanged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-onValueChanged.swift"; sourceTree = "<group>"; };
 		E97D51BA295A2A3900DB9380 /* String-condenseWhitespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-condenseWhitespace.swift"; sourceTree = "<group>"; };
 		E98887A428942A6D002E0349 /* pixelmix.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pixelmix.ttf; sourceTree = "<group>"; };
 		E98887A928942A8D002E0349 /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
@@ -96,7 +96,6 @@
 		E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues-safeAreaInsets.swift"; sourceTree = "<group>"; };
 		E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVShow.swift; sourceTree = "<group>"; };
 		E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-htmlEntities.swift"; sourceTree = "<group>"; };
-		E9F17FA52928059200F0FC27 /* Artwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Artwork.swift; sourceTree = "<group>"; };
 		E9F9F406297DDABC0093A008 /* WAVPink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVPink.swift; sourceTree = "<group>"; };
 		E9FC53BF290084A600814244 /* MicroDOM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MicroDOM.swift; sourceTree = "<group>"; };
 		E9FCF7F429539D7B0015C442 /* RecordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
@@ -108,7 +107,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9CE7349297D37F10036451D /* SDWebImageSwiftUI in Frameworks */,
-				E9D77354292AB3D800C816C3 /* MarqueeText in Frameworks */,
 				E9718AB22974F3A3008132B8 /* Introspect in Frameworks */,
 				E904E42E2928EC6200DEE8B9 /* WebView in Frameworks */,
 			);
@@ -141,9 +139,11 @@
 				E91F682E28867FE7005985BF /* WAVApp.swift */,
 				E91F683028867FE7005985BF /* ContentView.swift */,
 				E9718AAE2974CDFA008132B8 /* CustomTabBar.swift */,
-				E9B229A8289C65A000AC55CF /* Radio */,
-				E961C5C72925EF790091FB0B /* Schedule */,
+				E973428929AB7A4E003ADDC1 /* MarqueeText.swift */,
+				E993B768292AD1E600654912 /* RadioMarquee.swift */,
+				E9B229A8289C65A000AC55CF /* Live */,
 				E934739C2928CBB000E2016C /* Archive */,
+				E961C5C72925EF790091FB0B /* Schedule */,
 				E9AB244D292DBD6D00086338 /* Chat */,
 				E98887A828942A78002E0349 /* Fonts */,
 				E97D51B9295A2A1400DB9380 /* Extensions */,
@@ -212,6 +212,7 @@
 				E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */,
 				E93FBB8F297746D5006CE29D /* View-readSize.swift */,
 				E93FBB912977D68E006CE29D /* View-borderEdges.swift */,
+				E973428B29AB7A5E003ADDC1 /* View-onValueChanged.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -235,20 +236,17 @@
 			path = Chat;
 			sourceTree = "<group>";
 		};
-		E9B229A8289C65A000AC55CF /* Radio */ = {
+		E9B229A8289C65A000AC55CF /* Live */ = {
 			isa = PBXGroup;
 			children = (
 				E9CE734A297D384D0036451D /* Todo */,
 				E9A413642896CFCE00BF9D98 /* Radio.swift */,
 				E966D6C5288AF89900337C47 /* RadioView.swift */,
-				E993B768292AD1E600654912 /* RadioMarquee.swift */,
-				E961C5C529253FA80091FB0B /* RadioViewHeader.swift */,
-				E9F17FA52928059200F0FC27 /* Artwork.swift */,
 				E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */,
 				E9FC53BF290084A600814244 /* MicroDOM.swift */,
 				E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */,
 			);
-			path = Radio;
+			path = Live;
 			sourceTree = "<group>";
 		};
 		E9CE734A297D384D0036451D /* Todo */ = {
@@ -277,7 +275,6 @@
 			name = WAV;
 			packageProductDependencies = (
 				E904E42D2928EC6200DEE8B9 /* WebView */,
-				E9D77353292AB3D800C816C3 /* MarqueeText */,
 				E9718AB12974F3A3008132B8 /* Introspect */,
 				E9CE7348297D37F10036451D /* SDWebImageSwiftUI */,
 			);
@@ -311,7 +308,6 @@
 			mainGroup = E91F682228867FE7005985BF;
 			packageReferences = (
 				E904E42C2928EC6200DEE8B9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
-				E9D77352292AB3D800C816C3 /* XCRemoteSwiftPackageReference "MarqueeText" */,
 				E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				E9CE7347297D37F10036451D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
@@ -353,6 +349,7 @@
 				E904E4312928ED2300DEE8B9 /* InfiniteView.swift in Sources */,
 				E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */,
 				E91F683128867FE7005985BF /* ContentView.swift in Sources */,
+				E973428A29AB7A4E003ADDC1 /* MarqueeText.swift in Sources */,
 				E93FBB90297746D5006CE29D /* View-readSize.swift in Sources */,
 				E9AEFC41299AD08700A0B033 /* WAVBlue.swift in Sources */,
 				E9D89F582976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift in Sources */,
@@ -370,10 +367,9 @@
 				E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */,
 				E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */,
 				E99C802C296F8B06000629F9 /* FlexibleView.swift in Sources */,
-				E961C5C629253FA80091FB0B /* RadioViewHeader.swift in Sources */,
+				E973428C29AB7A5E003ADDC1 /* View-onValueChanged.swift in Sources */,
 				E904E4302928ED2300DEE8B9 /* ArchivePlayerViewModel.swift in Sources */,
 				E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */,
-				E9F17FA62928059200F0FC27 /* Artwork.swift in Sources */,
 				E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */,
 				E91F682F28867FE7005985BF /* WAVApp.swift in Sources */,
 				E961C5C429253F4C0091FB0B /* ArtworkPlaceholder.swift in Sources */,
@@ -607,14 +603,6 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		E9D77352292AB3D800C816C3 /* XCRemoteSwiftPackageReference "MarqueeText" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/joekndy/MarqueeText";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -632,11 +620,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9CE7347297D37F10036451D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
-		};
-		E9D77353292AB3D800C816C3 /* MarqueeText */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E9D77352292AB3D800C816C3 /* XCRemoteSwiftPackageReference "MarqueeText" */;
-			productName = MarqueeText;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

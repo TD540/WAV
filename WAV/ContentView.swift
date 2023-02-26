@@ -11,47 +11,39 @@ import Introspect
 struct ContentView: View {
     @StateObject var radio = Radio()
     @StateObject var archiveDataController = ArchiveDataController()
-
-    @State var tab = 1
-
+    @State var tab: Tab = .live
     @Environment(\.colorScheme) var colorScheme
+    @State var topPadding = 0.0
 
     var body: some View {
+        ZStack {
 
-        ZStack(alignment: .bottom) {
             TabView(selection: $tab) {
-                RadioView(radio: radio)
-                    .tabItem {
-                        Image(radio.isLive ? "tab-radio-live" : "tab-radio")
-                        Text(radio.isLive ? "LIVE" : "RADIO")
-                    }
-                    .tag(1)
+                RadioView(radio: radio, topPadding: topPadding)
+                    .tag(Tab.live)
                 InfiniteView(archiveDataController: archiveDataController)
-                    .tabItem {
-                        Image("tab-archive")
-                        Text("ARCHIVE")
-                    }
-                    .tag(2)
+                    .tag(Tab.archive)
                 Schedule()
-                    .tabItem {
-                        Image("tab-schedule")
-                        Text("SCHEDULE")
-                    }
-                    .tag(3)
+                    .tag(Tab.schedule)
             }
             .introspectTabBarController { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
             }
 
             VStack(spacing: 0) {
-                ArchivePlayerView(archiveDataController: archiveDataController)
-                    .shadow(radius: 20)
-                CustomTabBar(tab: $tab)
+                RadioMarquee(text: radio.title)
+                    .readSize { size in
+                        topPadding = size.height
+                    }
+                Spacer()
+                VStack(spacing: 0) {
+                    ArchivePlayerView(archiveDataController: archiveDataController)
+                        .shadow(radius: 20)
+                    CustomTabBar(tab: $tab)
+                }
             }
-
         }
-        .edgesIgnoringSafeArea(.bottom)
-
+        .edgesIgnoringSafeArea(.all)
         .onChange(of: archiveDataController.state.isPlaying) { isPlaying in
             if isPlaying {
                 radio.stop()

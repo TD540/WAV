@@ -26,6 +26,7 @@ struct InfiniteView: View {
                     .onAppear(perform: viewModel.wavShows.last == viewModel.wavShows[index] ? viewModel.loadNext : nil)
                 }
             }
+            .padding(.top, 70)
         }
         .background(colorScheme == .light ? .black.opacity(0.1) : .white.opacity(0.1))
         .onAppear(perform: viewModel.loadNext)

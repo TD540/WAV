@@ -21,7 +21,7 @@ struct ArchivePlayerView: View {
 
     var body: some View {
         WebView(webView: model.webViewStore.webView)
-            .frame(height: 60)
+            .frame(height: state.selectedShow != nil ? 60 : 0)
             .opacity(state.selectedShow != nil ? 1 : 0)
             .transition(.opacity)
             .onChange(of: state.selectedShow, perform: model.selectedShowChanged)

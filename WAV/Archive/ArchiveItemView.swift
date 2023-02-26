@@ -65,7 +65,7 @@ struct ArchiveItemView: View {
                                         .opacity(imageLoaded ? 1 : 0)
                                         .animation(.easeOut, value: imageLoaded)
                                         .padding()
-                                        .background(Color.black.opacity(0.3))
+                                        .background(Material.regular.opacity(0.3))
                                     Spacer()
                                 }
                                 .frame(maxWidth: .infinity)
@@ -86,19 +86,20 @@ struct ArchiveItemView: View {
                             HStack(spacing: 4) {
                                 ForEach(categories) { category in
                                     Text(category.name.stringByDecodingHTMLEntities.uppercased())
-                                        .wavBlack(size: 10)
+                                        .wavBlack()
                                 }
                                 ForEach(tags) { tag in
                                     Text(tag.name.stringByDecodingHTMLEntities.uppercased())
-                                        .wavBlue(size: 10)
+                                        .wavBlue(size: 14)
                                 }
                             }
                         }
                     }
                     .frame(alignment: .leading)
                     Text(wavShow.dateFormatted.uppercased())
-                        .padding(.vertical, 4)
-                        .font(.custom("pixelmix", size: 10))
+                        .padding(.vertical, 2)
+                        .padding(.leading, colorScheme == .light ? 0 : 8)
+                        .font(Font.custom("Helvetica Neue", size: 12))
                 }
             }
             .onAppear {

@@ -6,24 +6,23 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct RadioView: View {
+    @Environment(\.colorScheme) var colorScheme
     @StateObject var radio: Radio
+    var topPadding: Double = 0.0
+
     var body: some View {
-        VStack(spacing: 0) {
-            RadioMarquee(text: radio.title, size: 24)
-                .padding(.vertical)
-            RadioViewHeader()
-            AsyncImage(url: radio.artURL) { image in
-                Artwork(image: image)
-            } placeholder: {
-                Image("WAVBol")
-                    .resizable()
-                    .scaledToFit()
-                    .padding()
-                    .padding()
-                    .padding()
-            }
+        VStack(spacing: 60) {
+
+            Image("WAVLogo")
+                .resizable()
+                .renderingMode(.template)
+                .foregroundColor(colorScheme == .light ? .accentColor : .white)
+                .scaledToFit()
+                .frame(maxWidth: 300)
+
             if radio.isOffAir == false {
                 Button {
                     if radio.isPlaying {
@@ -33,12 +32,18 @@ struct RadioView: View {
                     }
                 } label: {
                     PixelButton(isPlaying: $radio.isPlaying)
+                        .frame(maxWidth: 200, maxHeight: 200)
                 }
-                .padding(.top, -80)
+            } else {
+                Image("WAVBol")
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(colorScheme == .light ? .accentColor : .white)
+                    .scaledToFit()
+                    .frame(maxWidth: 200)
             }
-            Spacer()
         }
-        .padding(.bottom, 80)
+        .padding(.top, 20)
         .onAppear {
             radio.updateState()
         }

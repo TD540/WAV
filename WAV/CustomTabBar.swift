@@ -7,57 +7,63 @@
 
 import SwiftUI
 
+enum Tab: String {
+    case live = "(( LIVE ))"
+    case archive = "ARCHIVE"
+    case schedule = "SCHEDULE"
+}
+
 struct CustomTabBar: View {
-    @Binding var tab: Int
-
+    @Binding var tab: Tab
     @Environment(\.colorScheme) var colorScheme
-    @Environment(\.safeAreaInsets) private var safeAreaInsets
-
-    let tabs = ["radio", "archive", "schedule"] //, "chat"]
-
-    // Computed properties
-    var tabSelected: [Int] {
-        var ts = [0, 0, 0]
-        ts[tab-1] = 1
-        return ts
-    }
+    @Environment(\.safeAreaInsets) var safeAreaInsets
 
     var body: some View {
-        HStack(alignment: .center, spacing: 5) {
+        HStack(alignment: .center, spacing: 0) {
+            tabButton(.live)
+            tabButton(.archive)
+            tabButton(.schedule)
+        }
+        .frame(maxWidth: .infinity)
+        .background(Material.thin)
+        .background(.white.opacity(0.1))
+        .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
+    }
 
-            ForEach(0..<tabs.count, id: \.self) { index in
-                let isSelected = tabSelected[index] == 1
-                Button("\(tabs[index].uppercased())") {
-                    withAnimation(.linear(duration: 0.05)) {
-                        tab = index + 1
-                    }
-                }
-                .minimumScaleFactor(0.3)
+    func tabButton(_ tab: Tab) -> some View {
+        let isSelected = self.tab == tab
+        return Button(action: {
+            withAnimation(.linear(duration: 0.05)) {
+                self.tab = tab
+            }
+        }) {
+            Text(tab.rawValue)
+                .font(.custom("pixelmix", size: 14))
                 .foregroundColor(
-                    isSelected ? .accentColor
-                    : colorScheme == .dark ? .white : .black
+                    isSelected ? colorScheme == .light ? .accentColor : .white :
+                                 colorScheme == .light ? .black : .secondary
                 )
                 .lineLimit(1)
-                .font(.custom("pixelmix", size: isSelected ? 25 : 15))
-                .offset(y: isSelected ? 0 : 2)
-                .padding(.top, 15)
-                .padding(.horizontal, 10)
+                .minimumScaleFactor(0)
+                .padding(.top)
+                .padding(.horizontal)
                 .padding(.bottom,
                          safeAreaInsets.bottom == 0.0
                          ? 20
                          : safeAreaInsets.bottom
                 )
-            }
         }
-        .frame(maxWidth: .infinity)
-        .background(Material.thick)
-        .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
-        .edgesIgnoringSafeArea(.bottom)
+
     }
 }
 
+
 struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
-        CustomTabBar(tab: .constant(1))
+        VStack {
+            Spacer()
+            CustomTabBar(tab: .constant(.live))
+        }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }

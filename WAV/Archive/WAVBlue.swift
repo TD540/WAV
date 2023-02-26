@@ -8,16 +8,11 @@
 import SwiftUI
 
 struct WAVBlueModifier: ViewModifier {
-    @Environment(\.colorScheme) var colorScheme
     let size: CGFloat
     func body(content: Content) -> some View {
         content
             .padding(8)
-            .foregroundColor(
-                colorScheme == .dark
-                ? .black
-                : .white
-            )
+            .foregroundColor(.white)
             .background(Color("WAVBlue"))
             .font(.custom("pixelmix", size: size))
             .lineSpacing(4)

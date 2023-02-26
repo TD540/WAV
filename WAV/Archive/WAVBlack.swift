@@ -19,7 +19,7 @@ struct WAVBlackModifier: ViewModifier {
     }
 }
 extension View {
-    func wavBlack(size: CGFloat = 14) -> some View {
+    func wavBlack(size: CGFloat = 18) -> some View {
         self.modifier(WAVBlackModifier(size: size))
     }
 }
