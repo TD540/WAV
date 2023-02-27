@@ -61,11 +61,12 @@ struct ArchiveItemView: View {
                                 Spacer()
                                 HStack {
                                     PixelButton(isPlaying: isPlayingBinding, color: .white)
-                                        .frame(maxWidth: 60/2, maxHeight: 90/2)
+                                        .frame(maxWidth: geo.size.height/100*38.2, maxHeight: geo.size.height/100*38.2)
                                         .opacity(imageLoaded ? 1 : 0)
                                         .animation(.easeOut, value: imageLoaded)
                                         .padding()
-                                        .background(Material.regular.opacity(0.3))
+                                        .background(Color.accentColor.blendMode(.colorBurn).opacity(0.1))
+                                        .background(Material.regular.opacity(0.6))
                                     Spacer()
                                 }
                                 .frame(maxWidth: .infinity)
@@ -80,16 +81,16 @@ struct ArchiveItemView: View {
             VStack(alignment: .leading, spacing: spacing) {
                 Group {
                     Group {
-                        Text(wavShow.name.uppercased())
+                        TypeWriterView(wavShow.name.uppercased())
                             .wavBlack()
                         ScrollView(.horizontal, showsIndicators: true) {
                             HStack(spacing: 4) {
                                 ForEach(categories) { category in
-                                    Text(category.name.stringByDecodingHTMLEntities.uppercased())
-                                        .wavBlack()
+                                    TypeWriterView(category.name.stringByDecodingHTMLEntities.uppercased())
+                                        .wavBlack(size: 14)
                                 }
                                 ForEach(tags) { tag in
-                                    Text(tag.name.stringByDecodingHTMLEntities.uppercased())
+                                    TypeWriterView(tag.name.stringByDecodingHTMLEntities.uppercased())
                                         .wavBlue(size: 14)
                                 }
                             }

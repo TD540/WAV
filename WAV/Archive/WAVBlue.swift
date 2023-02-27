@@ -13,7 +13,7 @@ struct WAVBlueModifier: ViewModifier {
         content
             .padding(8)
             .foregroundColor(.white)
-            .background(Color("WAVBlue"))
+            .background(Color.accentColor)
             .font(.custom("pixelmix", size: size))
             .lineSpacing(4)
     }

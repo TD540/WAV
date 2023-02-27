@@ -11,17 +11,19 @@ import SDWebImageSwiftUI
 struct RadioView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var radio: Radio
-    var topPadding: Double = 0.0
+
+    var animatedScale: Double {
+        radio.isPlaying ? 1.0 : 0.8
+    }
 
     var body: some View {
-        VStack(spacing: 60) {
-
+        VStack {
             Image("WAVLogo")
                 .resizable()
                 .renderingMode(.template)
-                .foregroundColor(colorScheme == .light ? .accentColor : .white)
+                .foregroundColor(.accentColor)
                 .scaledToFit()
-                .frame(maxWidth: 300)
+                .padding()
 
             if radio.isOffAir == false {
                 Button {
@@ -32,22 +34,29 @@ struct RadioView: View {
                     }
                 } label: {
                     PixelButton(isPlaying: $radio.isPlaying)
-                        .frame(maxWidth: 200, maxHeight: 200)
+                        .overlay {
+                            Image("WAVBol")
+                                .resizable()
+                                .renderingMode(.template)
+                                .foregroundColor(colorScheme == .light ? .white : .black)
+                                .shadow(color: .black.opacity(0.1), radius: 3, y: 7)
+                                .scaledToFill()
+                                .scaleEffect(animatedScale)
+                                .animation(.interactiveSpring(), value: animatedScale)
+                                .padding()
+                                .mask {
+                                    PixelButton(isPlaying: $radio.isPlaying)
+                                }
+
+                        }
                 }
-            } else {
-                Image("WAVBol")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundColor(colorScheme == .light ? .accentColor : .white)
-                    .scaledToFit()
-                    .frame(maxWidth: 200)
+                .padding()
             }
         }
-        .padding(.top, 20)
+        .padding()
         .onAppear {
             radio.updateState()
         }
-
     }
 }
 

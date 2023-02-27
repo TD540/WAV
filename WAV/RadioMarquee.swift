@@ -29,7 +29,7 @@ struct RadioMarquee: View {
             .foregroundColor(.primary)
             .background(Material.thin)
             .background(.white.opacity(0.1))
-            .border(width: 1, edges: [.bottom], color: .secondary.opacity(0.3))
+            .border(width: 2, edges: [.bottom], color: .secondary.opacity(0.3))
 
         }
     }

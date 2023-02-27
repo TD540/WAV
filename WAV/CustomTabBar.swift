@@ -27,7 +27,7 @@ struct CustomTabBar: View {
         .frame(maxWidth: .infinity)
         .background(Material.thin)
         .background(.white.opacity(0.1))
-        .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
+        .border(width: 2, edges: [.top], color: .secondary.opacity(0.3))
     }
 
     func tabButton(_ tab: Tab) -> some View {
@@ -38,7 +38,7 @@ struct CustomTabBar: View {
             }
         }) {
             Text(tab.rawValue)
-                .font(.custom("pixelmix", size: 14))
+                .font(.custom("pixelmix", size: 16))
                 .foregroundColor(
                     isSelected ? colorScheme == .light ? .accentColor : .white :
                                  colorScheme == .light ? .black : .secondary
@@ -46,10 +46,10 @@ struct CustomTabBar: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0)
                 .padding(.top)
-                .padding(.horizontal)
+                .padding(.horizontal, 15)
                 .padding(.bottom,
                          safeAreaInsets.bottom == 0.0
-                         ? 20
+                         ? 18
                          : safeAreaInsets.bottom
                 )
         }

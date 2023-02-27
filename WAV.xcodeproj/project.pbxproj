@@ -22,6 +22,7 @@
 		E93FBB90297746D5006CE29D /* View-readSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93FBB8F297746D5006CE29D /* View-readSize.swift */; };
 		E93FBB922977D68E006CE29D /* View-borderEdges.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93FBB912977D68E006CE29D /* View-borderEdges.swift */; };
 		E9487F0229992BCD00D08C1B /* pixelmix_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9487F0129992BCD00D08C1B /* pixelmix_bold.ttf */; };
+		E94B597A29AD4FEB0009F11B /* TypeWriterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E94B597929AD4FEB0009F11B /* TypeWriterView.swift */; };
 		E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = E958BAC928F17E4300D37B13 /* Schedule.swift */; };
 		E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E95AB21729663BB500AEC268 /* Image-centerCropped.swift */; };
 		E961C5C429253F4C0091FB0B /* ArtworkPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */; };
@@ -72,6 +73,7 @@
 		E93FBB8F297746D5006CE29D /* View-readSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-readSize.swift"; sourceTree = "<group>"; };
 		E93FBB912977D68E006CE29D /* View-borderEdges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-borderEdges.swift"; sourceTree = "<group>"; };
 		E9487F0129992BCD00D08C1B /* pixelmix_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pixelmix_bold.ttf; sourceTree = "<group>"; };
+		E94B597929AD4FEB0009F11B /* TypeWriterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeWriterView.swift; sourceTree = "<group>"; };
 		E958BAC928F17E4300D37B13 /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		E95AB21729663BB500AEC268 /* Image-centerCropped.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image-centerCropped.swift"; sourceTree = "<group>"; };
 		E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlaceholder.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				E9AEFC40299AD08700A0B033 /* WAVBlue.swift */,
 				E99C802B296F8B06000629F9 /* FlexibleView.swift */,
 				E9702CA3295B4BD3007471A4 /* BlackTitle.swift */,
+				E94B597929AD4FEB0009F11B /* TypeWriterView.swift */,
 				E9718AAB2974B432008132B8 /* Trash */,
 			);
 			path = Archive;
@@ -351,6 +354,7 @@
 				E91F683128867FE7005985BF /* ContentView.swift in Sources */,
 				E973428A29AB7A4E003ADDC1 /* MarqueeText.swift in Sources */,
 				E93FBB90297746D5006CE29D /* View-readSize.swift in Sources */,
+				E94B597A29AD4FEB0009F11B /* TypeWriterView.swift in Sources */,
 				E9AEFC41299AD08700A0B033 /* WAVBlue.swift in Sources */,
 				E9D89F582976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift in Sources */,
 				E904E4332928ED2300DEE8B9 /* InfiniteViewModel.swift in Sources */,

@@ -14,13 +14,16 @@ struct ContentView: View {
     @State var tab: Tab = .live
     @Environment(\.colorScheme) var colorScheme
     @State var topPadding = 0.0
+    @State var bottomPadding = 0.0
 
     var body: some View {
         ZStack {
-
             TabView(selection: $tab) {
-                RadioView(radio: radio, topPadding: topPadding)
+                RadioView(radio: radio)
                     .tag(Tab.live)
+                    .padding(.top, topPadding)
+                    .padding(.bottom, bottomPadding)
+                    .edgesIgnoringSafeArea(.all)
                 InfiniteView(archiveDataController: archiveDataController)
                     .tag(Tab.archive)
                 Schedule()
@@ -29,7 +32,6 @@ struct ContentView: View {
             .introspectTabBarController { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
             }
-
             VStack(spacing: 0) {
                 RadioMarquee(text: radio.title)
                     .readSize { size in
@@ -40,6 +42,9 @@ struct ContentView: View {
                     ArchivePlayerView(archiveDataController: archiveDataController)
                         .shadow(radius: 20)
                     CustomTabBar(tab: $tab)
+                }
+                .readSize { size in
+                    bottomPadding = size.height
                 }
             }
         }
@@ -59,7 +64,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(tab: .live)
             .environmentObject(Radio())
             .environmentObject(ArchiveDataController())
     }
