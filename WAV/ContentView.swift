@@ -33,7 +33,7 @@ struct ContentView: View {
                 UITabBarController.tabBar.isHidden = true
             }
             VStack(spacing: 0) {
-                RadioMarquee(text: radio.title)
+                RadioMarquee(text: radio.title, isLive: $radio.isLive)
                     .readSize { size in
                         topPadding = size.height
                     }

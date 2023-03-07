@@ -9,15 +9,18 @@ import SwiftUI
 
 struct RadioMarquee: View {
     let text: String?
+    @Binding var isLive: Bool
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.safeAreaInsets) var safeAreaInsets
-     
+
     var body: some View {
         if let text = text {
             let cleanTitle = text.applyingTransform(.stripDiacritics, reverse: false)!.uppercased()
             HStack(spacing: 0) {
-                Text("NOW PLAYING:")
-                    .font(.custom("Helvetica Neue Bold", size: 14))
+                if isLive {
+                    Text("NOW PLAYING:")
+                        .font(.custom("Helvetica Neue Bold", size: 14))
+                }
                 MarqueeText(
                     text: cleanTitle,
                     font: UIFont(name: "Helvetica Neue Medium", size: 14)!,
@@ -28,14 +31,13 @@ struct RadioMarquee: View {
             }
             .padding(.top, safeAreaInsets.top)
             .padding()
-            
             .foregroundColor(.black)
             .background {
                 Rectangle()
-                    .fill(.white.opacity(0.9))
+                    .fill(.white)
                     .padding(.top, safeAreaInsets.top)
             }
-            .background(Material.regular)
+            .background(.black)
             .border(width: 2, edges: [.bottom], color: .secondary.opacity(0.3))
         }
     }
@@ -44,7 +46,7 @@ struct RadioMarquee: View {
 struct RadioMarquee_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            RadioMarquee(text: "This is the Radio Marquee. This is the Radio Marquee. ")
+            RadioMarquee(text: "This is the Radio Marquee. This is the Radio Marquee.", isLive: .constant(true))
             Spacer()
         }
         .edgesIgnoringSafeArea(.top)
