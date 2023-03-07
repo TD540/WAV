@@ -33,6 +33,7 @@ struct ArchiveItemView: View {
     }
     
     var body: some View {
+        // Show image with play button overlay
         VStack(alignment: .leading, spacing: spacing) {
             Button {
                 if infiniteViewModel.archiveDataController.state.selectedShow != wavShow {
@@ -61,12 +62,11 @@ struct ArchiveItemView: View {
                                 Spacer()
                                 HStack {
                                     PixelButton(isPlaying: isPlayingBinding, color: .white)
-                                        .frame(maxWidth: geo.size.height/100*38.2, maxHeight: geo.size.height/100*38.2)
+                                        .frame(maxWidth: geo.size.height/100*10, maxHeight: geo.size.height/100*10)
                                         .opacity(imageLoaded ? 1 : 0)
                                         .animation(.easeOut, value: imageLoaded)
-                                        .padding()
-                                        .background(Color.accentColor.blendMode(.colorBurn).opacity(0.1))
-                                        .background(Material.regular.opacity(0.6))
+                                        .padding(10)
+                                        .background(Color.black.opacity(0.7))
                                     Spacer()
                                 }
                                 .frame(maxWidth: .infinity)
@@ -78,6 +78,7 @@ struct ArchiveItemView: View {
                 .aspectRatio(100/66.7, contentMode: .fit)
             }
 
+            // Show Tags and Categories
             VStack(alignment: .leading, spacing: spacing) {
                 Group {
                     Group {
@@ -100,7 +101,7 @@ struct ArchiveItemView: View {
                     Text(wavShow.dateFormatted.uppercased())
                         .padding(.vertical, 2)
                         .padding(.leading, colorScheme == .light ? 0 : 8)
-                        .font(Font.custom("Helvetica Neue", size: 12))
+                        .font(Font.custom("Helvetica Neue Medium", size: 12))
                 }
             }
             .onAppear {

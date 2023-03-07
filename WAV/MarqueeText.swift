@@ -83,6 +83,8 @@ public struct MarqueeText : View {
                     .offset(x: leftFade * -1)
                 } else {
                     Text(self.text)
+                        // .multilineTextAlignment(.center)
+                        // .frame(maxWidth: .infinity)
                         .font(.init(font))
                         .onValueChanged(of: self.text, perform: {text in
                             self.animate = geo.size.width < stringWidth

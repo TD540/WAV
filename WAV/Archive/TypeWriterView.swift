@@ -18,7 +18,7 @@ struct TypeWriterView: View {
     var body: some View {
         Text(text)
             .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
                     typeWriter()
                 }
             }
@@ -28,7 +28,7 @@ struct TypeWriterView: View {
             text = ""
         }
         if position < finalText.count {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.02) {
                 text.append(finalText[position])
                 typeWriter(at: position + 1)
             }

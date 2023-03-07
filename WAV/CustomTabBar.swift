@@ -15,7 +15,6 @@ enum Tab: String {
 
 struct CustomTabBar: View {
     @Binding var tab: Tab
-    @Environment(\.colorScheme) var colorScheme
     @Environment(\.safeAreaInsets) var safeAreaInsets
 
     var body: some View {
@@ -25,8 +24,7 @@ struct CustomTabBar: View {
             tabButton(.schedule)
         }
         .frame(maxWidth: .infinity)
-        .background(Material.thin)
-        .background(.white.opacity(0.1))
+        .background(.black)
         .border(width: 2, edges: [.top], color: .secondary.opacity(0.3))
     }
 
@@ -38,11 +36,8 @@ struct CustomTabBar: View {
             }
         }) {
             Text(tab.rawValue)
-                .font(.custom("pixelmix", size: 16))
-                .foregroundColor(
-                    isSelected ? colorScheme == .light ? .accentColor : .white :
-                                 colorScheme == .light ? .black : .secondary
-                )
+                .font(.custom("Helvetica Neue Medium", size: 16))
+                .foregroundColor(isSelected ?  .white : .accentColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0)
                 .padding(.top)

@@ -11,6 +11,7 @@ import SDWebImageSwiftUI
 struct RadioView: View {
     @Environment(\.colorScheme) var colorScheme
     @StateObject var radio: Radio
+    @StateObject var archiveDataController: ArchiveDataController
 
     var animatedScale: Double {
         radio.isPlaying ? 1.0 : 0.8
@@ -24,6 +25,7 @@ struct RadioView: View {
                 .foregroundColor(.accentColor)
                 .scaledToFit()
                 .padding()
+                .padding(.horizontal, 30)
 
             if radio.isOffAir == false {
                 Button {
@@ -31,25 +33,27 @@ struct RadioView: View {
                         radio.stop()
                     } else {
                         radio.play()
+                        archiveDataController.state.selectedShow = nil
                     }
                 } label: {
                     PixelButton(isPlaying: $radio.isPlaying)
-                        .overlay {
-                            Image("WAVBol")
-                                .resizable()
-                                .renderingMode(.template)
-                                .foregroundColor(colorScheme == .light ? .white : .black)
-                                .shadow(color: .black.opacity(0.1), radius: 3, y: 7)
-                                .scaledToFill()
-                                .scaleEffect(animatedScale)
-                                .animation(.interactiveSpring(), value: animatedScale)
-                                .padding()
-                                .mask {
-                                    PixelButton(isPlaying: $radio.isPlaying)
-                                }
-
-                        }
+//                        .overlay {
+//                            Image("WAVBol")
+//                                .resizable()
+//                                .renderingMode(.template)
+//                                .foregroundColor(colorScheme == .light ? .white : .black)
+//                                .shadow(color: .black.opacity(0.1), radius: 3, y: 7)
+//                                .scaledToFill()
+//                                .scaleEffect(animatedScale)
+//                                .animation(.interactiveSpring(), value: animatedScale)
+//                                .padding()
+//                                .mask {
+//                                    PixelButton(isPlaying: $radio.isPlaying)
+//                                }
+//
+//                        }
                 }
+                .shadow(color: .black.opacity(0.1), radius: 3, y: 7)
                 .padding()
             }
         }
@@ -71,6 +75,6 @@ struct RadioView_Previews: PreviewProvider {
         let radio = Radio()
         // radio.artURL = URL(string: "https://thumbnailer.mixcloud.com/unsafe/288x288/extaudio/5/4/b/2/b201-d6f9-4688-b1e5-efcc63dc8100")
         radio.title = "Title"
-        return RadioView(radio: radio)
+        return RadioView(radio: radio, archiveDataController: ArchiveDataController())
     }
 }

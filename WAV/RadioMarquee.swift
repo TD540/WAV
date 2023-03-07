@@ -11,26 +11,32 @@ struct RadioMarquee: View {
     let text: String?
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.safeAreaInsets) var safeAreaInsets
-    
+     
     var body: some View {
         if let text = text {
             let cleanTitle = text.applyingTransform(.stripDiacritics, reverse: false)!.uppercased()
-            MarqueeText(
-                text: cleanTitle,
-                font: UIFont(name: "pixelmix", size: 14)!,
-                leftFade: 60,
-                rightFade: 60,
-                startDelay: 2
-            )
+            HStack(spacing: 0) {
+                Text("NOW PLAYING:")
+                    .font(.custom("Helvetica Neue Bold", size: 14))
+                MarqueeText(
+                    text: cleanTitle,
+                    font: UIFont(name: "Helvetica Neue Medium", size: 14)!,
+                    leftFade: 0,
+                    rightFade: 0,
+                    startDelay: 2
+                )
+            }
             .padding(.top, safeAreaInsets.top)
-            .padding(.vertical)
-            .padding(.bottom, 5)
-
-            .foregroundColor(.primary)
-            .background(Material.thin)
-            .background(.white.opacity(0.1))
+            .padding()
+            
+            .foregroundColor(.black)
+            .background {
+                Rectangle()
+                    .fill(.white.opacity(0.9))
+                    .padding(.top, safeAreaInsets.top)
+            }
+            .background(Material.regular)
             .border(width: 2, edges: [.bottom], color: .secondary.opacity(0.3))
-
         }
     }
 }
@@ -41,5 +47,6 @@ struct RadioMarquee_Previews: PreviewProvider {
             RadioMarquee(text: "This is the Radio Marquee. This is the Radio Marquee. ")
             Spacer()
         }
+        .edgesIgnoringSafeArea(.top)
     }
 }

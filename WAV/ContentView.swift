@@ -19,7 +19,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             TabView(selection: $tab) {
-                RadioView(radio: radio)
+                RadioView(radio: radio, archiveDataController: archiveDataController)
                     .tag(Tab.live)
                     .padding(.top, topPadding)
                     .padding(.bottom, bottomPadding)
