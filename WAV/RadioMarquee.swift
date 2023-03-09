@@ -9,15 +9,15 @@ import SwiftUI
 
 struct RadioMarquee: View {
     let text: String?
-    @Binding var isLive: Bool
+    @Binding var isOffAir: Bool
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.safeAreaInsets) var safeAreaInsets
 
     var body: some View {
         if let text = text {
             let cleanTitle = text.applyingTransform(.stripDiacritics, reverse: false)!.uppercased()
-            HStack(spacing: 0) {
-                if isLive {
+            HStack {
+                if !isOffAir {
                     Text("NOW PLAYING:")
                         .font(.custom("Helvetica Neue Bold", size: 14))
                 }
@@ -46,7 +46,7 @@ struct RadioMarquee: View {
 struct RadioMarquee_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            RadioMarquee(text: "This is the Radio Marquee. This is the Radio Marquee.", isLive: .constant(true))
+            RadioMarquee(text: "This is the Radio Marquee. This is the Radio Marquee.", isOffAir: .constant(true))
             Spacer()
         }
         .edgesIgnoringSafeArea(.top)
