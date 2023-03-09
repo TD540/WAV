@@ -12,18 +12,13 @@ struct ContentView: View {
     @StateObject var radio = Radio()
     @StateObject var archiveDataController = ArchiveDataController()
     @State var tab: Tab = .live
-    @Environment(\.colorScheme) var colorScheme
-    @State var topPadding = 0.0
-    @State var bottomPadding = 0.0
-
+    
     var body: some View {
-        ZStack {
+        VStack(spacing: 0) {
+            RadioMarquee(text: radio.title, isOffAir: $radio.isOffAir)
             TabView(selection: $tab) {
                 RadioView(radio: radio, archiveDataController: archiveDataController)
                     .tag(Tab.live)
-                    .padding(.top, topPadding)
-                    .padding(.bottom, bottomPadding)
-                    .edgesIgnoringSafeArea(.all)
                 InfiniteView(archiveDataController: archiveDataController)
                     .tag(Tab.archive)
                 Schedule()
@@ -32,21 +27,9 @@ struct ContentView: View {
             .introspectTabBarController { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
             }
-            VStack(spacing: 0) {
-                RadioMarquee(text: radio.title, isOffAir: $radio.isOffAir)
-                    .readSize { size in
-                        topPadding = size.height
-                    }
-                Spacer()
-                VStack(spacing: 0) {
-                    ArchivePlayerView(archiveDataController: archiveDataController)
-                        .shadow(radius: 20)
-                    CustomTabBar(tab: $tab)
-                }
-                .readSize { size in
-                    bottomPadding = size.height
-                }
-            }
+            ArchivePlayerView(archiveDataController: archiveDataController)
+                .shadow(radius: 20)
+            CustomTabBar(tab: $tab)
         }
         .edgesIgnoringSafeArea(.all)
         .onChange(of: archiveDataController.state.isPlaying) { isPlaying in
