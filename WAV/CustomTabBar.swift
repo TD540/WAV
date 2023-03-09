@@ -20,7 +20,9 @@ struct CustomTabBar: View {
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
             tabButton(.live)
+            Spacer()
             tabButton(.archive)
+            Spacer()
             tabButton(.schedule)
         }
         .frame(maxWidth: .infinity)
@@ -36,7 +38,7 @@ struct CustomTabBar: View {
             }
         }) {
             Text(tab.rawValue)
-                .font(.custom("Helvetica Neue Medium", size: 16))
+                .font(.custom("Helvetica Neue Medium", size: 18))
                 .foregroundColor(isSelected ?  .white : .accentColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0)
