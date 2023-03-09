@@ -34,11 +34,11 @@ struct RadioView: View {
 
             if dataController.radioIsOffAir == false {
                 Button {
+                    dataController.state.selectedShow = nil
                     if dataController.radioIsPlaying {
                         dataController.stopRadio()
                     } else {
                         dataController.playRadio()
-                        dataController.state.selectedShow = nil
                     }
                 } label: {
                     PixelButton(isPlaying: isPlayingBinding)

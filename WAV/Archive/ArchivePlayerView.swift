@@ -26,7 +26,6 @@ struct ArchivePlayerView: View {
             .transition(.opacity)
             .onChange(of: state.selectedShow, perform: model.selectedShowChanged)
             .onChange(of: state.playPause, perform: model.playToggle)
-        // .onChange(of: state.isPlaying, perform: model.updatecommandCenter) // To fix later
     }
 
     //    func backgroundView() -> some View {

@@ -27,13 +27,15 @@ struct ContentView: View {
             .introspectTabBarController { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
             }
-            ArchivePlayerView(dataController: dataController)
-                .shadow(radius: 20)
+            if dataController.state.selectedShow != nil {
+                ArchivePlayerView(dataController: dataController)
+                    .shadow(radius: 20)
+            }
             CustomTabBar(tab: $tab)
         }
         .edgesIgnoringSafeArea(.all)
         .onChange(of: dataController.state.wavShowIsPlaying) { isPlaying in
-            if isPlaying {
+            if dataController.radioIsPlaying {
                 dataController.stopRadio()
             }
         }

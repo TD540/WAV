@@ -25,7 +25,7 @@ class DataController: ObservableObject {
     var subscriptions = Set<AnyCancellable>()
     func loadNextPageIfPossible() {
         guard state.canLoadNextPage else { return }
-        print("WAV: loadWAVShows(page: \(state.page))")
+        // print("WAV: loadWAVShows(page: \(state.page))")
         loadWAVShows(page: state.page)
             .sink(receiveCompletion: onReceive, receiveValue: onReceive)
             .store(in: &subscriptions)
@@ -184,6 +184,7 @@ class DataController: ObservableObject {
         ]
     }
     func playRadio() {
+        print("WAV: Play radio")
         radioPlayer.replaceCurrentItem(with: nil)
         radioPlayer.replaceCurrentItem(with: livestream)
         radioPlayer.play()

@@ -94,6 +94,8 @@ extension ArchivePlayerView {
                 webViewStore.webView.load(
                     URLRequest(url: selectedShow.mixcloudWidget)
                 )
+            } else {
+                webViewStore.webView.loadHTMLString("", baseURL: nil)
             }
         }
 
