@@ -9,12 +9,17 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct RadioView: View {
+    @EnvironmentObject var dataController: DataController
     @Environment(\.colorScheme) var colorScheme
-    @StateObject var radio: Radio
-    @StateObject var archiveDataController: ArchiveDataController
+    
+    var isPlayingBinding: Binding<Bool> {
+        Binding {
+            dataController.radioIsPlaying
+        } set: { _ in }
+    }
 
     var animatedScale: Double {
-        radio.isPlaying ? 1.0 : 0.8
+        dataController.radioIsPlaying ? 1.0 : 0.8
     }
 
     var body: some View {
@@ -27,16 +32,16 @@ struct RadioView: View {
                 .padding()
                 .padding(.horizontal, 30)
 
-            if radio.isOffAir == false {
+            if dataController.radioIsOffAir == false {
                 Button {
-                    if radio.isPlaying {
-                        radio.stop()
+                    if dataController.radioIsPlaying {
+                        dataController.stopRadio()
                     } else {
-                        radio.play()
-                        archiveDataController.state.selectedShow = nil
+                        dataController.playRadio()
+                        dataController.state.selectedShow = nil
                     }
                 } label: {
-                    PixelButton(isPlaying: $radio.isPlaying)
+                    PixelButton(isPlaying: isPlayingBinding)
 //                        .overlay {
 //                            Image("WAVBol")
 //                                .resizable()
@@ -59,7 +64,7 @@ struct RadioView: View {
         }
         .padding()
         .onAppear {
-            radio.updateState()
+            dataController.updateRadio()
         }
     }
 }
@@ -72,9 +77,10 @@ struct NoButtonStyle: PrimitiveButtonStyle {
 
 struct RadioView_Previews: PreviewProvider {
     static var previews: some View {
-        let radio = Radio()
+        let dataController = DataController()
         // radio.artURL = URL(string: "https://thumbnailer.mixcloud.com/unsafe/288x288/extaudio/5/4/b/2/b201-d6f9-4688-b1e5-efcc63dc8100")
-        radio.title = "Title"
-        return RadioView(radio: radio, archiveDataController: ArchiveDataController())
+        dataController.radioTitle = "Title"
+        return RadioView()
+            .environmentObject(dataController)
     }
 }

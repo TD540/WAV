@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct WAVShow {
+struct WAVShow: Identifiable {
     let id: Int
     let date: String
     let link: String

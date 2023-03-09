@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RadioMarquee: View {
     let text: String?
-    @Binding var isOffAir: Bool
+    var isOffAir: Bool
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.safeAreaInsets) var safeAreaInsets
 
@@ -46,7 +46,7 @@ struct RadioMarquee: View {
 struct RadioMarquee_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            RadioMarquee(text: "This is the Radio Marquee. This is the Radio Marquee.", isOffAir: .constant(true))
+            RadioMarquee(text: "This is the Radio Marquee. This is the Radio Marquee.", isOffAir: true)
             Spacer()
         }
         .edgesIgnoringSafeArea(.top)

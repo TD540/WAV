@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct WAVApp: App {
+    @StateObject var dataController = DataController()
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(dataController)
         }
     }
 }

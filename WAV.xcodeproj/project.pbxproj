@@ -10,8 +10,7 @@
 		E904E42E2928EC6200DEE8B9 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = E904E42D2928EC6200DEE8B9 /* WebView */; };
 		E904E4302928ED2300DEE8B9 /* ArchivePlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B72928E95E00E2016C /* ArchivePlayerViewModel.swift */; };
 		E904E4312928ED2300DEE8B9 /* InfiniteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B42928E95E00E2016C /* InfiniteView.swift */; };
-		E904E4322928ED2300DEE8B9 /* ArchiveDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B82928E95E00E2016C /* ArchiveDataController.swift */; };
-		E904E4332928ED2300DEE8B9 /* InfiniteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473BA2928E95E00E2016C /* InfiniteViewModel.swift */; };
+		E904E4322928ED2300DEE8B9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B82928E95E00E2016C /* DataController.swift */; };
 		E904E4342928ED2300DEE8B9 /* ArchivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B32928E95E00E2016C /* ArchivePlayerView.swift */; };
 		E904E4352928ED2300DEE8B9 /* userScript.js in Resources */ = {isa = PBXBuildFile; fileRef = E93473B12928E95E00E2016C /* userScript.js */; };
 		E90555A22972FCA500428320 /* WAVCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90555A12972FCA500428320 /* WAVCategory.swift */; };
@@ -40,7 +39,6 @@
 		E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E993B768292AD1E600654912 /* RadioMarquee.swift */; };
 		E99C802C296F8B06000629F9 /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802B296F8B06000629F9 /* FlexibleView.swift */; };
 		E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802D296F8E08000629F9 /* WAVBlack.swift */; };
-		E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A413642896CFCE00BF9D98 /* Radio.swift */; };
 		E9AEFC41299AD08700A0B033 /* WAVBlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEFC40299AD08700A0B033 /* WAVBlue.swift */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
 		E9CE7349297D37F10036451D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9CE7348297D37F10036451D /* SDWebImageSwiftUI */; };
@@ -53,8 +51,6 @@
 
 /* Begin PBXFileReference section */
 		E90555A12972FCA500428320 /* WAVCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVCategory.swift; sourceTree = "<group>"; };
-		E90ED1C3289B06830009EC65 /* status-json.sample.20220803.xsl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "status-json.sample.20220803.xsl.json"; sourceTree = "<group>"; };
-		E91CCD7B289E7D6500F2E3C6 /* status-json.sample.20220806.xsl.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "status-json.sample.20220806.xsl.json"; sourceTree = "<group>"; };
 		E91CCD7C289E7FA700F2E3C6 /* stream.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = stream.xml; sourceTree = "<group>"; };
 		E91F682B28867FE7005985BF /* WAV.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WAV.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E91F682E28867FE7005985BF /* WAVApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVApp.swift; sourceTree = "<group>"; };
@@ -68,8 +64,7 @@
 		E93473B42928E95E00E2016C /* InfiniteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteView.swift; sourceTree = "<group>"; };
 		E93473B62928E95E00E2016C /* RotatingButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RotatingButtonStyle.swift; sourceTree = "<group>"; };
 		E93473B72928E95E00E2016C /* ArchivePlayerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchivePlayerViewModel.swift; sourceTree = "<group>"; };
-		E93473B82928E95E00E2016C /* ArchiveDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveDataController.swift; sourceTree = "<group>"; };
-		E93473BA2928E95E00E2016C /* InfiniteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfiniteViewModel.swift; sourceTree = "<group>"; };
+		E93473B82928E95E00E2016C /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		E93FBB8F297746D5006CE29D /* View-readSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-readSize.swift"; sourceTree = "<group>"; };
 		E93FBB912977D68E006CE29D /* View-borderEdges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View-borderEdges.swift"; sourceTree = "<group>"; };
 		E9487F0129992BCD00D08C1B /* pixelmix_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = pixelmix_bold.ttf; sourceTree = "<group>"; };
@@ -91,7 +86,6 @@
 		E993B768292AD1E600654912 /* RadioMarquee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioMarquee.swift; sourceTree = "<group>"; };
 		E99C802B296F8B06000629F9 /* FlexibleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleView.swift; sourceTree = "<group>"; };
 		E99C802D296F8E08000629F9 /* WAVBlack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlack.swift; sourceTree = "<group>"; };
-		E9A413642896CFCE00BF9D98 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
 		E9AB244E292DBD8300086338 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E9AEFC40299AD08700A0B033 /* WAVBlue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlue.swift; sourceTree = "<group>"; };
 		E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelButton.swift; path = WAV/PixelButton.swift; sourceTree = SOURCE_ROOT; };
@@ -143,12 +137,13 @@
 				E9718AAE2974CDFA008132B8 /* CustomTabBar.swift */,
 				E993B768292AD1E600654912 /* RadioMarquee.swift */,
 				E973428929AB7A4E003ADDC1 /* MarqueeText.swift */,
+				E93473B82928E95E00E2016C /* DataController.swift */,
 				E9B229A8289C65A000AC55CF /* Live */,
 				E934739C2928CBB000E2016C /* Archive */,
 				E961C5C72925EF790091FB0B /* Schedule */,
 				E9AB244D292DBD6D00086338 /* Chat */,
-				E98887A828942A78002E0349 /* Fonts */,
 				E97D51B9295A2A1400DB9380 /* Extensions */,
+				E98887A828942A78002E0349 /* Fonts */,
 				E91F683428867FEC005985BF /* Preview Content */,
 			);
 			path = WAV;
@@ -157,8 +152,6 @@
 		E91F683428867FEC005985BF /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				E90ED1C3289B06830009EC65 /* status-json.sample.20220803.xsl.json */,
-				E91CCD7B289E7D6500F2E3C6 /* status-json.sample.20220806.xsl.json */,
 				E91CCD7C289E7FA700F2E3C6 /* stream.xml */,
 				E91F683528867FEC005985BF /* Preview Assets.xcassets */,
 			);
@@ -169,11 +162,9 @@
 			isa = PBXGroup;
 			children = (
 				E93473B42928E95E00E2016C /* InfiniteView.swift */,
-				E93473BA2928E95E00E2016C /* InfiniteViewModel.swift */,
 				E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */,
 				E90555A12972FCA500428320 /* WAVCategory.swift */,
 				E9702CA5295B5119007471A4 /* ArchiveItemView.swift */,
-				E93473B82928E95E00E2016C /* ArchiveDataController.swift */,
 				E93473B32928E95E00E2016C /* ArchivePlayerView.swift */,
 				E93473B72928E95E00E2016C /* ArchivePlayerViewModel.swift */,
 				E93473B12928E95E00E2016C /* userScript.js */,
@@ -243,7 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				E9CE734A297D384D0036451D /* Todo */,
-				E9A413642896CFCE00BF9D98 /* Radio.swift */,
 				E966D6C5288AF89900337C47 /* RadioView.swift */,
 				E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */,
 				E9FC53BF290084A600814244 /* MicroDOM.swift */,
@@ -357,12 +347,10 @@
 				E94B597A29AD4FEB0009F11B /* TypeWriterView.swift in Sources */,
 				E9AEFC41299AD08700A0B033 /* WAVBlue.swift in Sources */,
 				E9D89F582976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift in Sources */,
-				E904E4332928ED2300DEE8B9 /* InfiniteViewModel.swift in Sources */,
 				E904E4342928ED2300DEE8B9 /* ArchivePlayerView.swift in Sources */,
-				E9A413652896CFCE00BF9D98 /* Radio.swift in Sources */,
 				E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */,
 				E97D51BB295A2A3900DB9380 /* String-condenseWhitespace.swift in Sources */,
-				E904E4322928ED2300DEE8B9 /* ArchiveDataController.swift in Sources */,
+				E904E4322928ED2300DEE8B9 /* DataController.swift in Sources */,
 				E9702CA6295B5119007471A4 /* ArchiveItemView.swift in Sources */,
 				E9718AAF2974CDFA008132B8 /* CustomTabBar.swift in Sources */,
 				E90555A22972FCA500428320 /* WAVCategory.swift in Sources */,
@@ -515,6 +503,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -546,6 +535,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

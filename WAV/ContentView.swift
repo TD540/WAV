@@ -9,17 +9,17 @@ import SwiftUI
 import Introspect
 
 struct ContentView: View {
-    @StateObject var radio = Radio()
-    @StateObject var archiveDataController = ArchiveDataController()
+    @EnvironmentObject var dataController: DataController
     @State var tab: Tab = .live
     
+
     var body: some View {
         VStack(spacing: 0) {
-            RadioMarquee(text: radio.title, isOffAir: $radio.isOffAir)
+            RadioMarquee(text: dataController.radioTitle, isOffAir: dataController.radioIsOffAir)
             TabView(selection: $tab) {
-                RadioView(radio: radio, archiveDataController: archiveDataController)
+                RadioView()
                     .tag(Tab.live)
-                InfiniteView(archiveDataController: archiveDataController)
+                InfiniteView()
                     .tag(Tab.archive)
                 Schedule()
                     .tag(Tab.schedule)
@@ -27,19 +27,19 @@ struct ContentView: View {
             .introspectTabBarController { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
             }
-            ArchivePlayerView(archiveDataController: archiveDataController)
+            ArchivePlayerView(dataController: dataController)
                 .shadow(radius: 20)
             CustomTabBar(tab: $tab)
         }
         .edgesIgnoringSafeArea(.all)
-        .onChange(of: archiveDataController.state.isPlaying) { isPlaying in
+        .onChange(of: dataController.state.wavShowIsPlaying) { isPlaying in
             if isPlaying {
-                radio.stop()
+                dataController.stopRadio()
             }
         }
-        .onChange(of: radio.isPlaying) { isPlaying in
+        .onChange(of: dataController.radioIsPlaying) { isPlaying in
             if isPlaying {
-                archiveDataController.state.playPause.toggle()
+                dataController.state.playPause.toggle()
             }
         }
     }
@@ -48,7 +48,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(tab: .live)
-            .environmentObject(Radio())
-            .environmentObject(ArchiveDataController())
+            .environmentObject(DataController())
     }
 }

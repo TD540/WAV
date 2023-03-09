@@ -8,37 +8,42 @@
 import SwiftUI
 
 struct InfiniteView: View {
+    @EnvironmentObject var dataController: DataController
     @Environment(\.colorScheme) var colorScheme
-    @ObservedObject private var viewModel: ViewModel
-    init(archiveDataController: ArchiveDataController) {
-        viewModel = ViewModel(archiveDataController: archiveDataController)
+    @State private var selectedShow: WAVShow?
+    
+    var wavShows: WAVShows {
+        dataController.state.wavShows
     }
+    
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 30) {
-                ForEach(viewModel.wavShows.indices, id: \.self) { index in
+            LazyVStack(spacing: 20) {
+                ForEach(wavShows) { wavShow in
                     ArchiveItemView(
-                        infiniteViewModel: viewModel,
-                        index: index
-                    )
-                    .id(viewModel.wavShows[index].id)
-                    .padding(.horizontal)
-                    .onAppear(perform: viewModel.wavShows.last == viewModel.wavShows[index] ? viewModel.loadNext : nil)
+                        wavShow: wavShow
+                    ) {
+                        if dataController.state.selectedShow == wavShow {
+                            UINotificationFeedbackGenerator().notificationOccurred(.success)
+                            dataController.state.playPause.toggle()
+                        } else {
+                            dataController.state.selectedShow = wavShow
+                        }
+                    }
+                    .onAppear(perform: wavShows.last == wavShow ? dataController.loadNextPageIfPossible : nil)
                 }
             }
-            .padding(.top, 70)
+            .padding()
         }
         .background(colorScheme == .light ? .black.opacity(0.1) : .white.opacity(0.1))
-        .onAppear(perform: viewModel.loadNext)
+        .onAppear(perform: dataController.loadNextPageIfPossible)
     }
 }
 
+
 struct InfiniteView_Previews: PreviewProvider {
     static var previews: some View {
-        let archiveDataController = ArchiveDataController.preview
-        archiveDataController.state.wavShows += [WAVShow.preview]
-        archiveDataController.state.selectedShow = nil
-        return InfiniteView(archiveDataController: archiveDataController)
-        .preferredColorScheme(.dark)
+        InfiniteView()
+            .environmentObject(DataController())
     }
 }

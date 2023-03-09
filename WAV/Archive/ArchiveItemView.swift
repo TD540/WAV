@@ -9,41 +9,32 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ArchiveItemView: View {
+    @EnvironmentObject var dataController: DataController
     @Environment(\.colorScheme) var colorScheme
-
+    
+    var wavShow: WAVShow
+    var playPauze: () -> Void
+    
     @State var categories: WAVCategories = []
     @State var tags: WAVTags = []
     @State var imageLoaded = false
-
-    var infiniteViewModel: InfiniteView.ViewModel
-
-    let index: Int
-    let spacing: Double = 4
-
-    // Computed properties
-    var wavShow: WAVShow {
-        infiniteViewModel.wavShows[index]
-    }
+    
     var isPlayingBinding: Binding<Bool> {
         Binding {
-            wavShow == infiniteViewModel.archiveDataController.state.selectedShow
+            wavShow == dataController.state.selectedShow
             &&
-            infiniteViewModel.archiveDataController.state.isPlaying
+            dataController.state.wavShowIsPlaying
         } set: { _ in }
     }
+    
+    let spacing: Double = 4
     
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
             
             // Show image with play button overlay
             Button {
-                if infiniteViewModel.archiveDataController.state.selectedShow != wavShow {
-                    UINotificationFeedbackGenerator().notificationOccurred(.success)
-                    infiniteViewModel.archiveDataController.state.selectedShow = wavShow
-                    // print("WAV: now loading \(wavShow.mixcloudWidget)")
-                } else {
-                    infiniteViewModel.archiveDataController.state.playPause.toggle()
-                }
+                playPauze()
             } label: {
                 GeometryReader { geo in
                     WebImage(url: wavShow.pictureURL)
@@ -75,12 +66,12 @@ struct ArchiveItemView: View {
                                 .frame(maxWidth: .infinity)
                             }
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
-
+                            
                         }
                 }
                 .aspectRatio(100/66.7, contentMode: .fit)
             }
-
+            
             // Show Tags and Categories
             VStack(alignment: .leading, spacing: spacing) {
                 Group {
@@ -161,12 +152,10 @@ struct ArchiveItemView: View {
 
 struct ArchiveItem_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveItemView(
-            infiniteViewModel: InfiniteView.ViewModel.preview,
-            index: 0
-        )
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(.white.opacity(0.15))
+        ArchiveItemView(wavShow: WAVShow.preview, playPauze: {})
+            .environmentObject(DataController())
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.white.opacity(0.15))
     }
 }

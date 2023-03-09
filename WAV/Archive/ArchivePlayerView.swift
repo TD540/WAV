@@ -10,12 +10,12 @@ import WebView
 
 struct ArchivePlayerView: View {
     @StateObject private var model: ArchivePlayerViewModel
-    var state: ArchiveDataController.State {
-        model.archiveDataController.state
+    var state: DataController.State {
+        model.dataController.state
     }
     @Environment(\.colorScheme) var colorScheme
-    init(archiveDataController: ArchiveDataController) {
-        let model = ArchivePlayerViewModel(archiveDataController: archiveDataController)
+    init(dataController: DataController) {
+        let model = ArchivePlayerViewModel(dataController: dataController)
         _model = StateObject(wrappedValue: model)
     }
 
@@ -85,12 +85,12 @@ struct ArchivePlayerView: View {
 struct WebPlayerView_Previews: PreviewProvider {
     static var previews: some View {
         WAVShow.autoplay = false
-        let controller = ArchiveDataController.preview
+        let controller = DataController()
         controller.state.selectedShow = WAVShow.preview
-        controller.state.isPlaying = false
+        controller.state.wavShowIsPlaying = false
         return VStack {
             Spacer()
-            ArchivePlayerView(archiveDataController: controller)
+            ArchivePlayerView(dataController: controller)
         }
         // .preferredColorScheme(.dark)
     }

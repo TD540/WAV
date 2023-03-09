@@ -12,12 +12,12 @@ import MediaPlayer
 
 extension ArchivePlayerView {
     class ArchivePlayerViewModel: NSObject, ObservableObject, WKScriptMessageHandler {
-        let archiveDataController: ArchiveDataController
+        let dataController: DataController
 
         @Published var webViewStore: WebViewStore
 
-        init(archiveDataController: ArchiveDataController) {
-            self.archiveDataController = archiveDataController
+        init(dataController: DataController) {
+            self.dataController = dataController
             let userContentController = WKUserContentController()
             let configuration = WKWebViewConfiguration()
             guard let source = try? String(
@@ -50,7 +50,7 @@ extension ArchivePlayerView {
 
             super.init()
 
-            if let playingRecord = archiveDataController.state.selectedShow {
+            if let playingRecord = dataController.state.selectedShow {
                 // print("WAV: Loading Widget: \(playingRecord.mixcloudWidget)")
                 webViewStore.webView.load(
                     URLRequest(url: playingRecord.mixcloudWidget)
@@ -62,7 +62,7 @@ extension ArchivePlayerView {
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             if message.name == "isPlaying" {
-                archiveDataController.state.isPlaying = message.body as! Bool == false
+                dataController.state.wavShowIsPlaying = message.body as! Bool == false
             }
         }
 
@@ -82,7 +82,7 @@ extension ArchivePlayerView {
         }
 
         func onWebViewAppearing() {
-            if let selectedShow = archiveDataController.state.selectedShow {
+            if let selectedShow = dataController.state.selectedShow {
                 webViewStore.webView.load(
                     URLRequest(url: selectedShow.mixcloudWidget)
                 )
