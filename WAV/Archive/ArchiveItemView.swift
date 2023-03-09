@@ -33,8 +33,9 @@ struct ArchiveItemView: View {
     }
     
     var body: some View {
-        // Show image with play button overlay
         VStack(alignment: .leading, spacing: spacing) {
+            
+            // Show image with play button overlay
             Button {
                 if infiniteViewModel.archiveDataController.state.selectedShow != wavShow {
                     UINotificationFeedbackGenerator().notificationOccurred(.success)
@@ -58,6 +59,8 @@ struct ArchiveItemView: View {
                         .clipped()
                         .background(.black.opacity(0.1))
                         .overlay {
+                            // a play button
+                            // todo: loading state
                             VStack {
                                 Spacer()
                                 HStack {
