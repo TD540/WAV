@@ -8,7 +8,7 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-struct RadioView: View {
+struct Radio: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.colorScheme) var colorScheme
 
@@ -47,12 +47,12 @@ struct NoButtonStyle: PrimitiveButtonStyle {
     }
 }
 
-struct RadioView_Previews: PreviewProvider {
+struct Radio_Previews: PreviewProvider {
     static var previews: some View {
         let dataController = DataController()
         // radio.artURL = URL(string: "https://thumbnailer.mixcloud.com/unsafe/288x288/extaudio/5/4/b/2/b201-d6f9-4688-b1e5-efcc63dc8100")
         dataController.radioTitle = "Title"
-        return RadioView()
+        return Radio()
             .environmentObject(dataController)
     }
 }

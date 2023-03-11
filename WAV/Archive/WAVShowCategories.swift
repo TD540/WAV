@@ -29,6 +29,7 @@ struct WAVShowCategories: View {
                         .lineLimit(1)
                         .wavBlack(size: 12, vPadding: 12)
                 }
+                .fadeIn()
             }
         }
         .onAppear(perform: loadCategories)

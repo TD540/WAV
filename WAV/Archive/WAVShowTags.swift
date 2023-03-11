@@ -30,6 +30,7 @@ struct WAVShowTags: View {
                         .wavBlue(size: 12, vPadding: 12)
                 }
                 .disabled(tag == hideTag)
+                .fadeIn()
             }
         }
         .onAppear(perform: loadTags)

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ArchiveView: View {
+struct Archive: View {
     var body: some View {
         NavigationStack {
             InfiniteView()
@@ -15,9 +15,9 @@ struct ArchiveView: View {
     }
 }
 
-struct ArchiveView_Previews: PreviewProvider {
+struct Archive_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveView()
+        Archive()
             .environmentObject(DataController())
     }
 }

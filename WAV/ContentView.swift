@@ -16,12 +16,14 @@ struct ContentView: View {
         VStack(spacing: 0) {
             RadioMarquee(text: dataController.radioTitle, isOffAir: dataController.radioIsOffAir)
             TabView(selection: $tab) {
-                RadioView()
+                Radio()
                     .tag(Tab.live)
-                ArchiveView()
+                Archive()
                     .tag(Tab.archive)
                 Schedule()
                     .tag(Tab.schedule)
+                Search()
+                    .tag(Tab.search)
             }
             .introspectTabBarController { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
@@ -40,7 +42,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(tab: .archive)
+        ContentView(tab: .search)
             .environmentObject(DataController())
     }
 }

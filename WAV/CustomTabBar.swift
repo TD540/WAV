@@ -11,6 +11,7 @@ enum Tab: String {
     case live = "(( LIVE ))"
     case archive = "ARCHIVE"
     case schedule = "SCHEDULE"
+    case search = "SEARCH"
 }
 
 struct CustomTabBar: View {
@@ -22,6 +23,8 @@ struct CustomTabBar: View {
             tabButton(.live)
             Spacer()
             tabButton(.archive)
+            Spacer()
+            tabButton(.search)
             Spacer()
             tabButton(.schedule)
         }
@@ -38,15 +41,15 @@ struct CustomTabBar: View {
             }
         }) {
             Text(tab.rawValue)
-                .font(.custom("Helvetica Neue Medium", size: 18))
+                .font(.custom("Helvetica Neue Medium", size: 13))
                 .foregroundColor(isSelected ?  .white : .accentColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0)
-                .padding(.top)
+                .padding(.top, 20)
                 .padding(.horizontal, 15)
                 .padding(.bottom,
                          safeAreaInsets.bottom == 0.0
-                         ? 18
+                         ? 20
                          : safeAreaInsets.bottom
                 )
         }
@@ -59,7 +62,7 @@ struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
             Spacer()
-            CustomTabBar(tab: .constant(.live))
+            CustomTabBar(tab: .constant(.search))
         }
         .edgesIgnoringSafeArea(.bottom)
     }

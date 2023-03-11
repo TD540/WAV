@@ -11,6 +11,7 @@ import SwiftUI
 struct InfiniteView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.colorScheme) var colorScheme
+
     @State var wavShows = WAVShows()
     @State var canLoadNextPage = true
     @State var page = 0
@@ -34,57 +35,75 @@ struct InfiniteView: View {
         }
     }
 
+    var searchQuery: String?
+    var searchQueryParameter: String {
+        if let searchQuery {
+            return "&fields=title&search=" + searchQuery
+        } else {
+            return ""
+        }
+    }
+
+
     let loadLimit = 10
 
     var body: some View {
-        ScrollView {
-            LazyVStack(spacing: 40) {
-                ForEach(wavShows) { wavShow in
+        Group {
+            if wavShows.isEmpty && !canLoadNextPage {
+                Text("NO SHOWS FOUND")
+                    .wavBlack()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 40) {
+                        ForEach(wavShows) { wavShow in
+                            VStack(alignment: .leading, spacing: 4) {
+                                WAVShowImage(wavShow: wavShow)
+                                    .padding(.horizontal)
+                                    .shadow(color: .black.opacity(0.2), radius: 7, y: 8)
+                                    .onAppear {
+                                        wavShows.last == wavShow ?
+                                        loadNextPageIfPossible() :
+                                        nil
+                                    }
 
-                    VStack(alignment: .leading, spacing: 4) {
-                        WAVShowImage(wavShow: wavShow)
-                            .padding(.horizontal)
-                            .shadow(color: .black.opacity(0.2), radius: 7, y: 8)
-                            .onAppear {
-                                wavShows.last == wavShow ?
-                                loadNextPageIfPossible() :
-                                nil
-                            }
-                        
-                        Text(wavShow.name.uppercased())
-                            .wavBlack(size: 24)
-                            .padding(.horizontal)
+                                Text(wavShow.name.uppercased())
+                                    .wavBlack(size: 24)
+                                    .padding(.horizontal)
 
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 4) {
-                                if category == nil {
-                                    WAVShowCategories(wavShow: wavShow, hideCategory: category)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 4) {
+                                        if category == nil {
+                                            WAVShowCategories(wavShow: wavShow, hideCategory: category)
+                                        }
+                                        if tag == nil {
+                                            WAVShowTags(wavShow: wavShow, hideTag: tag)
+                                        }
+                                    }
+                                    .padding(.horizontal)
+                                    .padding(.trailing, 50)
                                 }
-                                if tag == nil {
-                                    WAVShowTags(wavShow: wavShow, hideTag: tag)
-                                }
+                                .mask(
+                                    LinearGradient(gradient: Gradient(stops: [
+                                        .init(color: .white, location: 0),
+                                        .init(color: .white, location: 0.80),
+                                        .init(color: .clear, location: 0.98)
+                                    ]), startPoint: .leading, endPoint: .trailing)
+                                    .frame(height: 100)
+                                )
+
+                                Text(wavShow.dateFormatted.uppercased()).padding(.horizontal)
+                                    .foregroundColor(.secondary)
+                                    .padding(.vertical, 2)
+                                    .padding(.leading, colorScheme == .light ? 0 : 8)
+                                    .font(Font.custom("Helvetica Neue Medium", size: 12))
                             }
-                            .padding(.horizontal)
-                            .padding(.trailing, 50)
                         }
-                        .mask(
-                            LinearGradient(gradient: Gradient(stops: [
-                                .init(color: .white, location: 0),
-                                .init(color: .white, location: 0.80),
-                                .init(color: .clear, location: 0.98)
-                            ]), startPoint: .leading, endPoint: .trailing)
-                            .frame(height: 100)
-                        )
-
-                        Text(wavShow.dateFormatted.uppercased()).padding(.horizontal)
-                            .foregroundColor(.secondary)
-                            .padding(.vertical, 2)
-                            .padding(.leading, colorScheme == .light ? 0 : 8)
-                            .font(Font.custom("Helvetica Neue Medium", size: 12))
                     }
+                    .padding(.vertical, 60)
+
                 }
             }
-            .padding(.vertical, 60)
         }
         .background {
             Group {
@@ -117,6 +136,7 @@ struct InfiniteView: View {
         }
         .edgesIgnoringSafeArea(.all)
         .navigationTitle(category?.name.stringByDecodingHTMLEntities.uppercased() ?? tag?.name.stringByDecodingHTMLEntities.uppercased() ?? "")
+        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             guard canLoadNextPage else { return }
             loadWAVShows()
@@ -128,7 +148,7 @@ struct InfiniteView: View {
     func loadWAVShows() -> AnyPublisher<WAVShows, Error> {
         let offset = page * loadLimit
         let url = URL(
-            string: "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(offset)\(tagParameter)\(categoryParameter)"
+            string: "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(offset)\(tagParameter + categoryParameter + searchQueryParameter)"
         )!
         return URLSession.shared
             .dataTaskPublisher(for: url)
