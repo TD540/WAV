@@ -10,7 +10,7 @@ import Introspect
 
 struct ContentView: View {
     @EnvironmentObject var dataController: DataController
-    @State var tab: Tab = .live
+    @State var tab: Tab = .archive
 
     var body: some View {
         VStack(spacing: 0) {
@@ -18,7 +18,7 @@ struct ContentView: View {
             TabView(selection: $tab) {
                 RadioView()
                     .tag(Tab.live)
-                InfiniteView()
+                ArchiveView()
                     .tag(Tab.archive)
                 Schedule()
                     .tag(Tab.schedule)

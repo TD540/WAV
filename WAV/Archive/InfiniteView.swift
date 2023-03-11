@@ -15,24 +15,63 @@ struct InfiniteView: View {
     @State var canLoadNextPage = true
     @State var page = 0
     @State var subscriptions = Set<AnyCancellable>()
-    
+
+    var tag: WAVTag?
+    var tagParameter: String {
+        if let tag {
+            return "&tags=" + String(tag.id)
+        } else {
+            return ""
+        }
+    }
+
+    var category: WAVCategory?
+    var categoryParameter: String {
+            if let category {
+                return "&categories=" + String(category.id)
+            } else {
+                return ""
+            }
+    }
+
     let loadLimit = 10
-    
+
     var body: some View {
         ScrollView {
             LazyVStack(spacing: 20) {
                 ForEach(wavShows) { wavShow in
-                    ArchiveItemView(wavShow: wavShow)
-                        .onAppear {
-                            wavShows.last == wavShow ?
-                            loadNextPageIfPossible() :
-                            nil
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        WAVShowImage(wavShow: wavShow)
+                            .onAppear {
+                                wavShows.last == wavShow ?
+                                loadNextPageIfPossible() :
+                                nil
+                            }
+                        TypeWriterView(wavShow.name.uppercased())
+                            .wavBlack()
+
+                        ScrollView(.horizontal, showsIndicators: true) {
+                            HStack(spacing: 4) {
+                                if category == nil {
+                                    WAVShowCategories(wavShow: wavShow, hideCategory: category)
+                                }
+                                if tag == nil {
+                                    WAVShowTags(wavShow: wavShow, hideTag: tag)
+                                }
+                            }
                         }
+
+                        Text(wavShow.dateFormatted.uppercased())
+                            .padding(.vertical, 2)
+                            .padding(.leading, colorScheme == .light ? 0 : 8)
+                            .font(Font.custom("Helvetica Neue Medium", size: 12))
+                    }
                 }
             }
             .padding()
         }
-        .background(colorScheme == .light ? .black.opacity(0.1) : .white.opacity(0.1))
+        .navigationTitle(category?.name.uppercased() ?? tag?.name.uppercased() ?? "")
         .onAppear {
             guard canLoadNextPage else { return }
             // print("WAV: loadWAVShows(page: \(state.page))")
@@ -45,7 +84,7 @@ struct InfiniteView: View {
     func loadWAVShows() -> AnyPublisher<WAVShows, Error> {
         let offset = page * loadLimit
         let url = URL(
-            string: "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(offset)"
+            string: "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(offset)\(tagParameter)\(categoryParameter)"
         )!
         return URLSession.shared
             .dataTaskPublisher(for: url)
@@ -84,6 +123,7 @@ struct InfiniteView: View {
             .sink(receiveCompletion: onReceive, receiveValue: onReceive)
             .store(in: &subscriptions)
     }
+    
 }
 
 struct InfiniteView_Previews: PreviewProvider {
