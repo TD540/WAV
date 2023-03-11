@@ -10,7 +10,7 @@ import Introspect
 
 struct ContentView: View {
     @EnvironmentObject var dataController: DataController
-    @State var tab: Tab = .archive
+    @State var tab: Tab = .live
 
     var body: some View {
         VStack(spacing: 0) {
@@ -40,7 +40,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(tab: .live)
+        ContentView(tab: .archive)
             .environmentObject(DataController())
     }
 }

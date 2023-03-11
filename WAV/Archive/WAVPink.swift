@@ -10,9 +10,11 @@ import SwiftUI
 struct WAVPinkModifier: ViewModifier {
     @Environment(\.colorScheme) var colorScheme
     let size: CGFloat
+    let padding: CGFloat
     func body(content: Content) -> some View {
         content
-            .padding(8)
+            .padding(.vertical, padding)
+            .padding(.horizontal, 8)
             .foregroundColor(
                 colorScheme == .dark
                 ? .black
@@ -24,8 +26,8 @@ struct WAVPinkModifier: ViewModifier {
     }
 }
 extension View {
-    func wavPink(size: CGFloat = 14) -> some View {
-        self.modifier(WAVPinkModifier(size: size))
+    func wavPink(size: CGFloat = 14, vPadding: CGFloat = 8) -> some View {
+        self.modifier(WAVPinkModifier(size: size, padding: vPadding))
     }
 }
 

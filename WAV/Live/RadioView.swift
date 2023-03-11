@@ -28,7 +28,7 @@ struct RadioView: View {
                     dataController.playRadio() :
                     dataController.stopRadio()
                 } label: {
-                    PixelButton(isPlaying: Binding() { dataController.radioIsPlaying } set: { _ in } )
+                    PixelButton(isPlaying: Binding { dataController.radioIsPlaying })
                 }
                 .shadow(color: .black.opacity(0.1), radius: 3, y: 7)
                 .padding()

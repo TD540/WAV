@@ -11,6 +11,11 @@ import SDWebImageSwiftUI
 struct WAVShowImage: View {
     @EnvironmentObject var dataController: DataController
     var wavShow: WAVShow
+    var isPlaying: Bool {
+        dataController.selectedShow == wavShow
+        &&
+        dataController.archiveShowIsPlaying
+    }
 
     var body: some View {
         Button {
@@ -37,11 +42,7 @@ struct WAVShowImage: View {
                             HStack {
                                 PixelButton(
                                     color: .white,
-                                    isPlaying: Binding() {
-                                        wavShow == dataController.selectedShow
-                                        &&
-                                        dataController.archiveShowIsPlaying
-                                    } set: { _ in }
+                                    isPlaying: Binding { isPlaying }
                                 )
                                 .frame(maxWidth: geo.size.height/100*10, maxHeight: geo.size.height/100*10)
                                 .padding(10)

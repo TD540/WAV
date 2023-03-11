@@ -27,22 +27,23 @@ struct InfiniteView: View {
 
     var category: WAVCategory?
     var categoryParameter: String {
-            if let category {
-                return "&categories=" + String(category.id)
-            } else {
-                return ""
-            }
+        if let category {
+            return "&categories=" + String(category.id)
+        } else {
+            return ""
+        }
     }
 
     let loadLimit = 10
 
     var body: some View {
         ScrollView {
-            LazyVStack(spacing: 20) {
+            LazyVStack(spacing: 40) {
                 ForEach(wavShows) { wavShow in
 
                     VStack(alignment: .leading, spacing: 4) {
                         WAVShowImage(wavShow: wavShow)
+                            .padding(.horizontal)
                             .shadow(color: .black.opacity(0.2), radius: 7, y: 8)
                             .onAppear {
                                 wavShows.last == wavShow ?
@@ -51,7 +52,8 @@ struct InfiniteView: View {
                             }
                         
                         Text(wavShow.name.uppercased())
-                            .wavBlack()
+                            .wavBlack(size: 24)
+                            .padding(.horizontal)
 
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 4) {
@@ -62,30 +64,61 @@ struct InfiniteView: View {
                                     WAVShowTags(wavShow: wavShow, hideTag: tag)
                                 }
                             }
+                            .padding(.horizontal)
                             .padding(.trailing, 50)
                         }
                         .mask(
                             LinearGradient(gradient: Gradient(stops: [
-                                        .init(color: .white, location: 0),
-                                        .init(color: .white, location: 0.90),
-                                        .init(color: .clear, location: 1)
-                                    ]), startPoint: .leading, endPoint: .trailing)
-                                    .frame(height: 100)
+                                .init(color: .white, location: 0),
+                                .init(color: .white, location: 0.80),
+                                .init(color: .clear, location: 0.98)
+                            ]), startPoint: .leading, endPoint: .trailing)
+                            .frame(height: 100)
                         )
 
-                        Text(wavShow.dateFormatted.uppercased())
+                        Text(wavShow.dateFormatted.uppercased()).padding(.horizontal)
+                            .foregroundColor(.secondary)
                             .padding(.vertical, 2)
                             .padding(.leading, colorScheme == .light ? 0 : 8)
                             .font(Font.custom("Helvetica Neue Medium", size: 12))
                     }
                 }
             }
-            .padding()
+            .padding(.vertical, 60)
         }
+        .background {
+            Group {
+                colorScheme == .light ?
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [
+                            .black.opacity(0),
+                            .black.opacity(0.2),
+                            .black.opacity(0)
+                        ]
+                    ),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+                :
+                LinearGradient(
+                    gradient: Gradient(
+                        colors: [
+                            .white.opacity(0.1),
+                            .white.opacity(0.0),
+                            .white.opacity(0.1)
+                        ]
+                    ),
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            }
+            .fadeIn()
+        }
+        .edgesIgnoringSafeArea(.all)
         .navigationTitle(category?.name.stringByDecodingHTMLEntities.uppercased() ?? tag?.name.stringByDecodingHTMLEntities.uppercased() ?? "")
         .onAppear {
             guard canLoadNextPage else { return }
-            // print("WAV: loadWAVShows(page: \(state.page))")
             loadWAVShows()
                 .sink(receiveCompletion: onReceive, receiveValue: onReceive)
                 .store(in: &subscriptions)
@@ -139,7 +172,9 @@ struct InfiniteView: View {
 
 struct InfiniteView_Previews: PreviewProvider {
     static var previews: some View {
-        InfiniteView()
-            .environmentObject(DataController())
+        NavigationStack {
+            InfiniteView()
+        }
+        .environmentObject(DataController())
     }
 }

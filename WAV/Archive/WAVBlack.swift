@@ -17,7 +17,6 @@ struct WAVBlackModifier: ViewModifier {
             .foregroundColor(.white)
             .background(.black)
             .font(.custom("pixelmix", size: size))
-            .lineSpacing(4)
     }
 }
 extension View {
