@@ -11,7 +11,6 @@ import Introspect
 struct ContentView: View {
     @EnvironmentObject var dataController: DataController
     @State var tab: Tab = .live
-    
 
     var body: some View {
         VStack(spacing: 0) {
@@ -27,23 +26,16 @@ struct ContentView: View {
             .introspectTabBarController { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
             }
-            if dataController.state.selectedShow != nil {
-                ArchivePlayerView(dataController: dataController)
+            if dataController.selectedShow != nil {
+                ArchivePlayerView()
                     .shadow(radius: 20)
             }
             CustomTabBar(tab: $tab)
         }
+        .onAppear {
+            dataController.updateRadioMarquee()
+        }
         .edgesIgnoringSafeArea(.all)
-        .onChange(of: dataController.state.wavShowIsPlaying) { isPlaying in
-            if dataController.radioIsPlaying {
-                dataController.stopRadio()
-            }
-        }
-        .onChange(of: dataController.radioIsPlaying) { isPlaying in
-            if isPlaying {
-                dataController.state.playPause.toggle()
-            }
-        }
     }
 }
 

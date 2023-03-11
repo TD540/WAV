@@ -13,28 +13,23 @@ struct ArchiveItemView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var wavShow: WAVShow
-    var playPauze: () -> Void
     
     @State var categories: WAVCategories = []
     @State var tags: WAVTags = []
     @State var imageLoaded = false
     
-    var isPlayingBinding: Binding<Bool> {
-        Binding {
-            wavShow == dataController.state.selectedShow
-            &&
-            dataController.state.wavShowIsPlaying
-        } set: { _ in }
-    }
-    
     let spacing: Double = 4
     
     var body: some View {
         VStack(alignment: .leading, spacing: spacing) {
-            
             // Show image with play button overlay
             Button {
-                playPauze()
+                // if selectedShow does not equal this item's wavShow
+                if dataController.selectedShow != wavShow {
+                    dataController.playArchiveShow(wavShow: wavShow)
+                } else {
+                    dataController.toggleArchiveShowPlayback()
+                }
             } label: {
                 GeometryReader { geo in
                     WebImage(url: wavShow.pictureURL)
@@ -55,12 +50,19 @@ struct ArchiveItemView: View {
                             VStack {
                                 Spacer()
                                 HStack {
-                                    PixelButton(isPlaying: isPlayingBinding, color: .white)
-                                        .frame(maxWidth: geo.size.height/100*10, maxHeight: geo.size.height/100*10)
-                                        .opacity(imageLoaded ? 1 : 0)
-                                        .animation(.easeOut, value: imageLoaded)
-                                        .padding(10)
-                                        .background(Color.black.opacity(0.7))
+                                    PixelButton(
+                                        color: .white,
+                                        isPlaying: Binding() {
+                                            wavShow == dataController.selectedShow
+                                            &&
+                                            dataController.archiveShowIsPlaying
+                                        } set: { _ in }
+                                    )
+                                    .frame(maxWidth: geo.size.height/100*10, maxHeight: geo.size.height/100*10)
+                                    .opacity(imageLoaded ? 1 : 0)
+                                    .animation(.easeOut, value: imageLoaded)
+                                    .padding(10)
+                                    .background(Color.black.opacity(0.7))
                                     Spacer()
                                 }
                                 .frame(maxWidth: .infinity)
@@ -152,7 +154,7 @@ struct ArchiveItemView: View {
 
 struct ArchiveItem_Previews: PreviewProvider {
     static var previews: some View {
-        ArchiveItemView(wavShow: WAVShow.preview, playPauze: {})
+        ArchiveItemView(wavShow: WAVShow.preview)
             .environmentObject(DataController())
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity)

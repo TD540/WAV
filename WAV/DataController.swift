@@ -7,81 +7,110 @@
 
 import Combine
 import Foundation
+import WebView
+import WebKit
 import MediaPlayer
 
-class DataController: ObservableObject {
-
+class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
     // ARCHIVE STUFF
-    struct State {
-        var wavShowIsPlaying =  false
-        var playPause = false // the value of doesn't matter, only the toggle
-        var selectedShow: WAVShow?
-        var wavShows: WAVShows = []
-        var page = 0
-        var canLoadNextPage = true
-    }
-    @Published var state = State()
-
-    var subscriptions = Set<AnyCancellable>()
-    func loadNextPageIfPossible() {
-        guard state.canLoadNextPage else { return }
-        // print("WAV: loadWAVShows(page: \(state.page))")
-        loadWAVShows(page: state.page)
-            .sink(receiveCompletion: onReceive, receiveValue: onReceive)
-            .store(in: &subscriptions)
-    }
-    private func onReceive(_ completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .finished:
-            break
-        case .failure:
-            state.canLoadNextPage = false
+    @Published var archiveShowIsPlaying = false {
+        didSet {
+            archiveShowIsPlaying && radioIsPlaying ? stopRadio() : nil
         }
     }
-    
-    let loadLimit = 10
-    private func onReceive(_ wavShows: WAVShows) {
-        // if mixcloudURL is empty, don't add show to wavShows
-        state.wavShows += wavShows.filter { !$0.mixcloudURL.isEmpty }
-        state.page += 1
-        state.canLoadNextPage = wavShows.count == loadLimit
+    @Published var selectedShow: WAVShow?
+    @Published var webViewStore: WebViewStore
+
+    func playArchiveShow(wavShow: WAVShow) {
+        selectedShow = wavShow
+    }
+    func toggleArchiveShowPlayback() {
+        webViewStore.webView.evaluateJavaScript(
+            """
+            (function () {
+              webAudioElement.paused
+              ? webAudioElement.play()
+              : webAudioElement.pause()
+            })()
+            """,
+            in: nil,
+            in: .defaultClient
+        )
     }
 
-    func loadWAVShows(page: Int) -> AnyPublisher<WAVShows, Error> {
-        let offset = page * loadLimit
-        let url = URL(
-            string: "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(offset)"
-        )!
-        // print("WAV: load restapi \(url.description)")
-        return URLSession.shared
-            .dataTaskPublisher(for: url)
-            .tryMap { data, response in
-                do {
-                    return try JSONDecoder().decode(WAVShows.self, from: data)
-                } catch let error {
-                    print("WAV: JSONDecoder error \(error)")
-                    throw error
-                }
-            }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
+    override init() {
+        // WEBPLAYER STUFF
+        let userContentController = WKUserContentController()
+        let configuration = WKWebViewConfiguration()
+        guard let source = try? String(
+            contentsOfFile: Bundle.main.path(
+                forResource: "userScript",
+                ofType: "js"
+            )!
+        ) else {
+            fatalError("userScript.js not found")
+        }
+        let userScript = WKUserScript(
+            source: source,
+            injectionTime: .atDocumentStart,
+            forMainFrameOnly: false,
+            in: .defaultClient
+        )
+        userContentController.addUserScript(userScript)
+        configuration.userContentController = userContentController
+        configuration.mediaTypesRequiringUserActionForPlayback = []
+        let webView = WKWebView(frame: .zero, configuration: configuration)
+        webView.backgroundColor = .clear
+        webView.isOpaque = false
+        webView.scrollView.isScrollEnabled = false
+        // print("WAV: \(webView.backgroundColor?.description ?? "no bgcolor")")
+        webView.customUserAgent = "Mozilla/5.0 "
+        + "(Windows NT 10.0; rv:78.0) "
+        + "Gecko/20100101 Firefox/78.0"
+
+        webViewStore = WebViewStore(webView: webView)
+
+        super.init()
+
+        userContentController.add(self, contentWorld: .defaultClient, name: "isPlaying")
+
     }
-    
-    
+
+    func userContentController(
+        _ userContentController: WKUserContentController,
+        didReceive message: WKScriptMessage
+    ) {
+        if message.name == "isPlaying" {
+            archiveShowIsPlaying = message.body as! Bool == false
+        }
+    }
+
     // RADIO STUFF
+    @Published var radioIsPlaying = false {
+        didSet {
+            if radioIsPlaying && archiveShowIsPlaying {
+                toggleArchiveShowPlayback()
+                selectedShow = nil
+            }
+        }
+    }
+    @Published var radioIsLive = false
+    @Published var radioIsOffAir = true
+    @Published var radioTitle: String = ""
+    @Published var radioArtURL: URL?
+
+    let radioPlayer = Player()
     let azuracastAPI = URL(string: "https://azuracast.wearevarious.com/api/nowplaying/1")!
     let livestreamAPI = URL(string: "https://radio.wearevarious.com/stream.xml")!
     let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
-    let radioPlayer = AVPlayer()
+
+    private var livestreamStatusObservation: NSKeyValueObservation?
+
+    let DEBUG_radio = true
+    let DEBUG_livestream = AVPlayerItem(url: URL(string: "https://22653.live.streamtheworld.com/RADIO1_128.mp3")!)
+
     var radioTask: Task<Void, Error>?
-
-    @Published var radioIsPlaying = false
-    @Published var radioIsLive = false
-    @Published var radioIsOffAir = true
-    @Published var radioTitle: String = "Loading ..."
-    @Published var radioArtURL: URL?
-
-    func updateRadio() {
+    func updateRadioMarquee() {
         radioTask = Task(priority: .medium) {
             do {
                 let (jsonData, _) = try await URLSession.shared.data(from: azuracastAPI)
@@ -122,9 +151,10 @@ class DataController: ObservableObject {
             
             try await Task.sleep(nanoseconds: 60_000_000_000)
             guard !Task.isCancelled else { return }
-            updateRadio()
+            updateRadioMarquee()
         }
     }
+
     func updateRadioArtURL(with newArt: String?) {
         DispatchQueue.main.async {
             if let newArt {
@@ -134,6 +164,7 @@ class DataController: ObservableObject {
             }
         }
     }
+
     func updateRadioTitle(with newTitle: String) {
         DispatchQueue.main.async {
             self.radioTitle = newTitle
@@ -172,8 +203,8 @@ class DataController: ObservableObject {
         } else {
             let image = UIImage(named: "AppIcon")!
             artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in
-                    image
-                }
+                image
+            }
         }
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [
             MPMediaItemPropertyArtwork: artwork,
@@ -183,12 +214,11 @@ class DataController: ObservableObject {
             MPNowPlayingInfoPropertyIsLiveStream: true
         ]
     }
+
     func playRadio() {
-        print("WAV: Play radio")
         radioPlayer.replaceCurrentItem(with: nil)
-        radioPlayer.replaceCurrentItem(with: livestream)
+        radioPlayer.replaceCurrentItem(with: DEBUG_radio ? DEBUG_livestream : livestream)
         radioPlayer.play()
-        radioIsPlaying = true
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback)
             try AVAudioSession.sharedInstance().setActive(true)
@@ -198,7 +228,6 @@ class DataController: ObservableObject {
             commandCenter.stopCommand.isEnabled = true
             commandCenter.playCommand.addTarget { [weak self] (event) -> MPRemoteCommandHandlerStatus in
                 self?.radioPlayer.play()
-                self?.radioIsPlaying = true
                 return .success
             }
             commandCenter.stopCommand.addTarget  { [weak self] (event) -> MPRemoteCommandHandlerStatus in
@@ -209,10 +238,9 @@ class DataController: ObservableObject {
             // print(error.localizedDescription)
         }
     }
+
     func stopRadio() {
-        print("WAV: Stop radio")
         radioPlayer.pause()
-        radioIsPlaying = false
         radioTask?.cancel()
     }
 

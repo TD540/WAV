@@ -9,23 +9,31 @@ import SwiftUI
 import WebView
 
 struct ArchivePlayerView: View {
-    @StateObject private var model: ArchivePlayerViewModel
-    var state: DataController.State {
-        model.dataController.state
-    }
+    @EnvironmentObject var dataController: DataController
     @Environment(\.colorScheme) var colorScheme
-    init(dataController: DataController) {
-        let model = ArchivePlayerViewModel(dataController: dataController)
-        _model = StateObject(wrappedValue: model)
-    }
 
     var body: some View {
-        WebView(webView: model.webViewStore.webView)
-            .frame(height: state.selectedShow != nil ? 60 : 0)
-            .opacity(state.selectedShow != nil ? 1 : 0)
-            .transition(.opacity)
-            .onChange(of: state.selectedShow, perform: model.selectedShowChanged)
-            .onChange(of: state.playPause, perform: model.playToggle)
+        WebView(webView: dataController.webViewStore.webView)
+            .frame(height: 60)
+            .onAppear {
+                if let selectedShow = dataController.selectedShow {
+                    dataController.webViewStore.webView.load(
+                        URLRequest(url: selectedShow.mixcloudWidget)
+                    )
+                }
+            }
+            .onDisappear {
+                dataController.webViewStore.webView.loadHTMLString("", baseURL: nil)
+            }
+            .onChange(of: dataController.selectedShow) { selectedShow in
+                if let selectedShow {
+                    dataController.webViewStore.webView.load(
+                        URLRequest(url: selectedShow.mixcloudWidget)
+                    )
+                } else {
+                    dataController.webViewStore.webView.loadHTMLString("", baseURL: nil)
+                }
+            }
     }
 
     //    func backgroundView() -> some View {
@@ -83,14 +91,12 @@ struct ArchivePlayerView: View {
 
 struct WebPlayerView_Previews: PreviewProvider {
     static var previews: some View {
-        WAVShow.autoplay = false
         let controller = DataController()
-        controller.state.selectedShow = WAVShow.preview
-        controller.state.wavShowIsPlaying = false
+        controller.selectedShow = WAVShow.preview
         return VStack {
             Spacer()
-            ArchivePlayerView(dataController: controller)
+            ArchivePlayerView()
+                .environmentObject(controller)
         }
-        // .preferredColorScheme(.dark)
     }
 }

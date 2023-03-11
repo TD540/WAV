@@ -9,8 +9,8 @@
 import SwiftUI
 
 struct PixelButton: View {
-    @Binding var isPlaying: Bool
     var color = Color.accentColor
+    @Binding var isPlaying: Bool
     @State private var grid = Grid()
     private let pauseGrid = Grid(
         lines: [

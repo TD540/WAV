@@ -11,16 +11,6 @@ import SDWebImageSwiftUI
 struct RadioView: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.colorScheme) var colorScheme
-    
-    var isPlayingBinding: Binding<Bool> {
-        Binding {
-            dataController.radioIsPlaying
-        } set: { _ in }
-    }
-
-    var animatedScale: Double {
-        dataController.radioIsPlaying ? 1.0 : 0.8
-    }
 
     var body: some View {
         VStack {
@@ -32,39 +22,21 @@ struct RadioView: View {
                 .padding()
                 .padding(.horizontal, 30)
 
-            if dataController.radioIsOffAir == false {
+            if dataController.radioIsOffAir == false || dataController.DEBUG_radio {
                 Button {
-                    dataController.state.selectedShow = nil
-                    if dataController.radioIsPlaying {
-                        dataController.stopRadio()
-                    } else {
-                        dataController.playRadio()
-                    }
+                    dataController.radioIsPlaying == false ?
+                    dataController.playRadio() :
+                    dataController.stopRadio()
                 } label: {
-                    PixelButton(isPlaying: isPlayingBinding)
-//                        .overlay {
-//                            Image("WAVBol")
-//                                .resizable()
-//                                .renderingMode(.template)
-//                                .foregroundColor(colorScheme == .light ? .white : .black)
-//                                .shadow(color: .black.opacity(0.1), radius: 3, y: 7)
-//                                .scaledToFill()
-//                                .scaleEffect(animatedScale)
-//                                .animation(.interactiveSpring(), value: animatedScale)
-//                                .padding()
-//                                .mask {
-//                                    PixelButton(isPlaying: $radio.isPlaying)
-//                                }
-//
-//                        }
+                    PixelButton(isPlaying: Binding() { dataController.radioIsPlaying } set: { _ in } )
                 }
                 .shadow(color: .black.opacity(0.1), radius: 3, y: 7)
                 .padding()
             }
         }
         .padding()
-        .onAppear {
-            dataController.updateRadio()
+        .onReceive(dataController.radioPlayer.$isPlaying) { isPlaying in
+            dataController.radioIsPlaying = isPlaying
         }
     }
 }
