@@ -88,9 +88,11 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
     // RADIO STUFF
     @Published var radioIsPlaying = false {
         didSet {
-            if radioIsPlaying && archiveShowIsPlaying {
-                toggleArchiveShowPlayback()
-                selectedShow = nil
+            if radioIsPlaying {
+                archiveShowIsPlaying ? toggleArchiveShowPlayback() : nil
+                if selectedShow != nil {
+                    selectedShow = nil
+                }
             }
         }
     }
