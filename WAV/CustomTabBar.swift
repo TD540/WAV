@@ -27,7 +27,7 @@ struct CustomTabBar: View {
         }
         .frame(maxWidth: .infinity)
         .background(.black)
-        .border(width: 2, edges: [.top], color: .secondary.opacity(0.3))
+        .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
     }
 
     func tabButton(_ tab: Tab) -> some View {

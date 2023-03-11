@@ -26,7 +26,7 @@ struct WAVShowCategories: View {
                     InfiniteView(category: category)
                 } label: {
                     Text(category.name.stringByDecodingHTMLEntities.uppercased())
-                        .wavBlack(size: 14)
+                        .wavBlue(size: 12, vPadding: 12)
                 }
             }
         }

@@ -38,7 +38,7 @@ struct RadioMarquee: View {
                     .padding(.top, safeAreaInsets.top)
             }
             .background(.black)
-            .border(width: 2, edges: [.bottom], color: .secondary.opacity(0.3))
+            .border(width: 1, edges: [.bottom], color: .secondary.opacity(0.3))
         }
     }
 }

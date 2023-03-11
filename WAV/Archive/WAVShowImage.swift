@@ -11,7 +11,6 @@ import SDWebImageSwiftUI
 struct WAVShowImage: View {
     @EnvironmentObject var dataController: DataController
     var wavShow: WAVShow
-    @State var imageLoaded = false
 
     var body: some View {
         Button {
@@ -27,16 +26,12 @@ struct WAVShowImage: View {
                     .placeholder {
                         ProgressView()
                     }
-                    .onSuccess { _, _, _ in
-                        imageLoaded = true
-                    }
                     .resizable()
                     .scaledToFill()
+                    .allowsHitTesting(false)
                     .frame(width: geo.size.width, height: geo.size.height)
                     .clipped()
                     .overlay {
-                        // a play button
-                        // todo: loading state
                         VStack {
                             Spacer()
                             HStack {
@@ -49,8 +44,6 @@ struct WAVShowImage: View {
                                     } set: { _ in }
                                 )
                                 .frame(maxWidth: geo.size.height/100*10, maxHeight: geo.size.height/100*10)
-                                .opacity(imageLoaded ? 1 : 0)
-                                .animation(.easeOut, value: imageLoaded)
                                 .padding(10)
                                 .background(Color.black.opacity(0.7))
                                 Spacer()

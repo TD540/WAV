@@ -43,15 +43,17 @@ struct InfiniteView: View {
 
                     VStack(alignment: .leading, spacing: 4) {
                         WAVShowImage(wavShow: wavShow)
+                            .shadow(color: .black.opacity(0.2), radius: 7, y: 8)
                             .onAppear {
                                 wavShows.last == wavShow ?
                                 loadNextPageIfPossible() :
                                 nil
                             }
-                        TypeWriterView(wavShow.name.uppercased())
+                        
+                        Text(wavShow.name.uppercased())
                             .wavBlack()
 
-                        ScrollView(.horizontal, showsIndicators: true) {
+                        ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: 4) {
                                 if category == nil {
                                     WAVShowCategories(wavShow: wavShow, hideCategory: category)
@@ -60,7 +62,16 @@ struct InfiniteView: View {
                                     WAVShowTags(wavShow: wavShow, hideTag: tag)
                                 }
                             }
+                            .padding(.trailing, 50)
                         }
+                        .mask(
+                            LinearGradient(gradient: Gradient(stops: [
+                                        .init(color: .white, location: 0),
+                                        .init(color: .white, location: 0.90),
+                                        .init(color: .clear, location: 1)
+                                    ]), startPoint: .leading, endPoint: .trailing)
+                                    .frame(height: 100)
+                        )
 
                         Text(wavShow.dateFormatted.uppercased())
                             .padding(.vertical, 2)
@@ -71,7 +82,7 @@ struct InfiniteView: View {
             }
             .padding()
         }
-        .navigationTitle(category?.name.uppercased() ?? tag?.name.uppercased() ?? "")
+        .navigationTitle(category?.name.stringByDecodingHTMLEntities.uppercased() ?? tag?.name.stringByDecodingHTMLEntities.uppercased() ?? "")
         .onAppear {
             guard canLoadNextPage else { return }
             // print("WAV: loadWAVShows(page: \(state.page))")

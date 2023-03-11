@@ -28,7 +28,6 @@ struct ContentView: View {
             }
             if dataController.selectedShow != nil {
                 ArchivePlayerView()
-                    .shadow(radius: 20)
             }
             CustomTabBar(tab: $tab)
         }
