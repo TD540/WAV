@@ -37,12 +37,14 @@ struct Schedule: View {
                 color: #FFF !important;
                 padding: 6px;
             }
+            .main-container .row-container .row-parent .single-internal-gutter .uncont > * {
+                margin-top: 0 !important;
+            }
             """
         let script = """
             var style = document.createElement('style');
             style.innerHTML = `\(css)`;
             document.head.appendChild(style)
-            alert("hello")
             """
         let userScript = WKUserScript(
             source: script,

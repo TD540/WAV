@@ -55,7 +55,7 @@ struct InfiniteView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 ScrollView {
-                    VStack(spacing: 20) {
+                    LazyVStack(spacing: 20) {
                         ForEach(wavShows) { wavShow in
                             VStack(alignment: .leading, spacing: 4) {
                                 WAVShowImage(wavShow: wavShow)
