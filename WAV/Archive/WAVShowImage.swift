@@ -11,6 +11,9 @@ import SDWebImageSwiftUI
 struct WAVShowImage: View {
     @EnvironmentObject var dataController: DataController
     var wavShow: WAVShow
+
+    @State var pixelBGColor = Color.black
+
     var isPlaying: Bool {
         dataController.selectedShow == wavShow
         &&
@@ -46,12 +49,18 @@ struct WAVShowImage: View {
                                 )
                                 .frame(maxWidth: geo.size.height/100*7, maxHeight: geo.size.height/100*7)
                                 .padding(15)
-                                .background(Color.black)
-                                .shadow(color: .black, radius: 10)
+                                .shadow(color: .black.opacity(0.5), radius: 10, x: 10, y: -10)
+                                .background(pixelBGColor)
+                                .onChange(of: isPlaying) { _ in
+                                    withAnimation {
+                                        pixelBGColor = isPlaying ? Color.accentColor : .black
+                                    }
+                                }
                                 Spacer()
                             }
                             .frame(maxWidth: .infinity)
                         }
+                        .clipped()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
             }

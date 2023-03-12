@@ -84,11 +84,11 @@ extension WAVShow {
                 [
                     WAVShow.WpFeaturedmedia(
                         sourceURL:
-                            "https://wearevarious.com/wp-content/uploads/2022/12/common-divisor-nikolai-23-12-2022-300x300.jpeg",
+                            "https://wearevarious.com/wp-content/uploads/2023/02/cover-10-jaar-vleugel-fou-uai-548x365.jpg",
                         mediaDetails: WAVShow.MediaDetails(
                             sizes: Sizes(
                                 mediumLarge: WAVShow.MediumLarge(
-                                    sourceURL: "https://wearevarious.com/wp-content/uploads/2022/12/common-divisor-nikolai-23-12-2022-300x300.jpeg"
+                                    sourceURL: "https://wearevarious.com/wp-content/uploads/2023/02/cover-10-jaar-vleugel-fou-uai-548x365.jpg"
                                 )
                             )
                         )
