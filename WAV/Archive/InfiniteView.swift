@@ -38,7 +38,7 @@ struct InfiniteView: View {
     var searchQuery: String?
     var searchQueryParameter: String {
         if let searchQuery {
-            return "&fields=title&search=" + searchQuery
+            return "&search=" + searchQuery
         } else {
             return ""
         }
@@ -55,7 +55,7 @@ struct InfiniteView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else {
                 ScrollView {
-                    LazyVStack(spacing: 40) {
+                    VStack(spacing: 20) {
                         ForEach(wavShows) { wavShow in
                             VStack(alignment: .leading, spacing: 4) {
                                 WAVShowImage(wavShow: wavShow)
@@ -100,7 +100,7 @@ struct InfiniteView: View {
                             }
                         }
                     }
-                    .padding(.vertical, 60)
+                    .padding(.vertical, 20)
 
                 }
             }
@@ -134,7 +134,7 @@ struct InfiniteView: View {
             }
             .fadeIn()
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.bottom)
         .navigationTitle(category?.name.stringByDecodingHTMLEntities.uppercased() ?? tag?.name.stringByDecodingHTMLEntities.uppercased() ?? "")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {

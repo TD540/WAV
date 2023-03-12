@@ -20,6 +20,7 @@ struct CustomTabBar: View {
 
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
+            Spacer()
             tabButton(.live)
             Spacer()
             tabButton(.archive)
@@ -27,6 +28,7 @@ struct CustomTabBar: View {
             tabButton(.search)
             Spacer()
             tabButton(.schedule)
+            Spacer()
         }
         .frame(maxWidth: .infinity)
         .background(.black)
@@ -41,17 +43,18 @@ struct CustomTabBar: View {
             }
         }) {
             Text(tab.rawValue)
-                .font(.custom("Helvetica Neue Medium", size: 13))
+                .font(.custom("Helvetica Neue Medium", size: 16))
                 .foregroundColor(isSelected ?  .white : .accentColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0)
-                .padding(.top, 20)
-                .padding(.horizontal, 15)
+                .padding(.top, 15)
+                .padding(.horizontal, 6)
                 .padding(.bottom,
                          safeAreaInsets.bottom == 0.0
                          ? 20
                          : safeAreaInsets.bottom
                 )
+//                .border(.red)
         }
 
     }

@@ -13,14 +13,13 @@ struct Radio: View {
     @Environment(\.colorScheme) var colorScheme
 
     var body: some View {
-        VStack {
+        VStack(alignment: .center) {
             Image("WAVLogo")
-                .resizable()
                 .renderingMode(.template)
+                .resizable()
                 .foregroundColor(.accentColor)
                 .scaledToFit()
                 .padding()
-                .padding(.horizontal, 30)
 
             if dataController.radioIsOffAir == false || dataController.DEBUG_radio {
                 Button {
@@ -28,13 +27,36 @@ struct Radio: View {
                     dataController.playRadio() :
                     dataController.stopRadio()
                 } label: {
-                    PixelButton(isPlaying: Binding { dataController.radioIsPlaying })
+
+                    Image("WAVBol")
+                        .renderingMode(.template)
+                        .resizable()
+                        .scaledToFit()
+                        .overlay {
+                            Circle()
+                                .fill(
+                                    colorScheme == .light ?
+                                        .white.opacity(0.6) :
+                                            .black.opacity(0.6)
+                                )
+                                .scaleEffect(0.65)
+                        }
+                        .overlay {
+                            PixelButton(isPlaying: Binding { dataController.radioIsPlaying })
+                                .scaleEffect(0.25)
+                        }
                 }
-                .shadow(color: .black.opacity(0.1), radius: 3, y: 7)
-                .padding()
+            } else {
+                Image("WAVBol")
+                    .renderingMode(.template)
+                    .resizable()
+                    .scaledToFit()
+                    .foregroundColor(.accentColor)
             }
         }
         .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .edgesIgnoringSafeArea(.all)
         .onReceive(dataController.radioPlayer.$isPlaying) { isPlaying in
             dataController.radioIsPlaying = isPlaying
         }

@@ -44,9 +44,10 @@ struct WAVShowImage: View {
                                     color: .white,
                                     isPlaying: Binding { isPlaying }
                                 )
-                                .frame(maxWidth: geo.size.height/100*10, maxHeight: geo.size.height/100*10)
-                                .padding(10)
-                                .background(Color.black.opacity(0.7))
+                                .frame(maxWidth: geo.size.height/100*7, maxHeight: geo.size.height/100*7)
+                                .padding(15)
+                                .background(Color.black)
+                                .shadow(color: .black, radius: 10)
                                 Spacer()
                             }
                             .frame(maxWidth: .infinity)
