@@ -28,10 +28,11 @@ struct Radio: View {
                     dataController.stopRadio()
                 } label: {
 
-                    Image("WAVBol")
-                        .renderingMode(.template)
-                        .resizable()
-                        .scaledToFit()
+                    WAVGlobe()
+//                    Image("WAVBol")
+//                        .renderingMode(.template)
+//                        .resizable()
+//                        .scaledToFit()
                         .overlay {
                             Circle()
                                 .fill(

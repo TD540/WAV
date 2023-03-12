@@ -28,6 +28,7 @@
 		E9607C6329BC13180010490B /* WAVShowCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9607C6229BC13180010490B /* WAVShowCategories.swift */; };
 		E9607C6929BC70A10010490B /* Binding-readOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9607C6829BC70A10010490B /* Binding-readOnly.swift */; };
 		E961C5C429253F4C0091FB0B /* ArtworkPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */; };
+		E964817029BE361200F6A7CF /* WAVGlobe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9337D93297C423F00EDDA43 /* WAVGlobe.swift */; };
 		E966D6C6288AF89900337C47 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E966D6C5288AF89900337C47 /* Radio.swift */; };
 		E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702CA3295B4BD3007471A4 /* BlackTitle.swift */; };
 		E9702CA6295B5119007471A4 /* WAVShowImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702CA5295B5119007471A4 /* WAVShowImage.swift */; };
@@ -378,6 +379,7 @@
 				E99C802C296F8B06000629F9 /* FlexibleView.swift in Sources */,
 				E973428C29AB7A5E003ADDC1 /* View-onValueChanged.swift in Sources */,
 				E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */,
+				E964817029BE361200F6A7CF /* WAVGlobe.swift in Sources */,
 				E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */,
 				E9607C6929BC70A10010490B /* Binding-readOnly.swift in Sources */,
 				E91F682F28867FE7005985BF /* WAVApp.swift in Sources */,
