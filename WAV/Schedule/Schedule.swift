@@ -32,6 +32,11 @@ struct Schedule: View {
                 border-color: white !important;
               }
             }
+            h4 {
+                background-color: #3333FF !important;
+                color: #FFF !important;
+                padding: 6px;
+            }
             """
         let script = """
             var style = document.createElement('style');
