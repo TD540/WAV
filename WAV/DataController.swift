@@ -119,7 +119,7 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
 
     private var livestreamStatusObservation: NSKeyValueObservation?
 
-    let DEBUG_radio = false
+    let DEBUG_radio = true
     let DEBUG_livestream = AVPlayerItem(url: URL(string: "https://22653.live.streamtheworld.com/RADIO1_128.mp3")!)
 
     var radioTask: Task<Void, Error>?
