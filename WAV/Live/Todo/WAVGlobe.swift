@@ -102,3 +102,28 @@ struct WAVGlobe_Previews: PreviewProvider {
         WAVGlobe()
     }
 }
+
+
+//struct SoundWave: Shape {
+//    var values: [CGFloat]
+//    var animatableData: Array<CGFloat>.AnimatableData {
+//        get { values.animatableData }
+//        set { values.animatableData = newValue }
+//    }
+//
+//    func path(in rect: CGRect) -> Path {
+//        var path = Path()
+//        let barWidth = rect.width / CGFloat(values.count)
+//
+//        for (index, value) in values.enumerated() {
+//            let xPos = CGFloat(index) * barWidth
+//            let height = CGFloat(value) * rect.height
+//            let yPos = (rect.height - height) / 2
+//
+//            let barRect = CGRect(x: xPos, y: yPos, width: barWidth, height: height)
+//            path.addRect(barRect)
+//        }
+//
+//        return path
+//    }
+//}
