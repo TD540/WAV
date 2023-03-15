@@ -37,6 +37,17 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
             in: .defaultClient
         )
     }
+    func stopArchiveShowPlayback() {
+        webViewStore.webView.evaluateJavaScript(
+            """
+            (function () {
+              webAudioElement.pause()
+            })()
+            """,
+            in: nil,
+            in: .defaultClient
+        )
+    }
 
     override init() {
         // WEBPLAYER STUFF
@@ -89,7 +100,7 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
     @Published var radioIsPlaying = false {
         didSet {
             if radioIsPlaying {
-                archiveShowIsPlaying ? toggleArchiveShowPlayback() : nil
+                archiveShowIsPlaying ? stopArchiveShowPlayback() : nil
                 if selectedShow != nil {
                     selectedShow = nil
                 }
