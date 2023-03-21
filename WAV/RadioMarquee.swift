@@ -17,12 +17,8 @@ struct RadioMarquee: View {
         if let text = text {
             let cleanTitle = text.applyingTransform(.stripDiacritics, reverse: false)!.uppercased()
             HStack {
-                if !isOffAir {
-                    Text("NOW PLAYING:")
-                        .font(.custom("Helvetica Neue Bold", size: 14))
-                }
                 MarqueeText(
-                    text: cleanTitle,
+                    text: (isOffAir ? "" : "NOW PLAYING: ") + cleanTitle,
                     font: UIFont(name: "Helvetica Neue Medium", size: 14)!,
                     leftFade: 0,
                     rightFade: 0,
