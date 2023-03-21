@@ -21,6 +21,7 @@ struct Radio: View {
                 .scaledToFit()
                 .padding()
 
+            Spacer()
 
             Button {
                 dataController.radioIsPlaying == false ?
@@ -46,8 +47,10 @@ struct Radio: View {
                 }
             }
 
+            Spacer()
+
         }
-        .padding()
+        .padding(30)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .edgesIgnoringSafeArea(.all)
         .onReceive(dataController.radioPlayer.$isPlaying) { isPlaying in

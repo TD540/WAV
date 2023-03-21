@@ -13,13 +13,17 @@ struct WAVGlobe: View {
     @Binding var isLive: Bool
 
     var body: some View {
-        ZStack {
-            WAVGlobeScope(isPlaying: $isPlaying)
-            TimelineView(.animation) { timeline in
-                canvas(timeline)
-            }
-            .scaledToFit()
+
+        TimelineView(.animation) { timeline in
+            canvas(timeline)
         }
+        .overlay {
+            WAVGlobeScope(isPlaying: $isPlaying)
+                .mask {
+                    Circle()
+                }
+        }
+        .scaledToFit()
     }
     
     func canvas(_ timeline: TimelineViewDefaultContext) -> some View {

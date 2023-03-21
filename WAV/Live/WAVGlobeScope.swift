@@ -8,20 +8,31 @@
 import SwiftUI
 
 struct WAVGlobeScope: View {
-    let start = Date()
+    var start = Date()
     @Binding var isPlaying: Bool
     
     var body: some View {
-        VStack {
+        if isPlaying == false {
+            GeometryReader { proxy in
+                let maxSize: CGFloat = proxy.size.width > proxy.size.height ? proxy.size.height : proxy.size.width
+                let waveLine: CGFloat = maxSize / 80
+                Path { path in
+                    path.move(to: CGPoint(x: 0, y: proxy.size.height / 2))
+                    path.addLine(to: CGPoint(x: proxy.size.width, y: proxy.size.height / 2))
+                }
+                .stroke(lineWidth: waveLine)
+            }
+        } else {
             TimelineView(.periodic(from: .now, by: 0.1)) { timeline in
                 canvas(timeline)
             }
-            .scaledToFit()
         }
     }
     
     func canvas(_ timeline: TimelineViewDefaultContext) -> some View {
         Canvas { context, size in
+
+            _ = timeline.date
 
             // setup variables
             
@@ -45,7 +56,6 @@ struct WAVGlobeScope: View {
                 height: fitSize
             )
 
-            if isPlaying {
             // scope wave
             let waveCount: Int = 18
             let amplitude: CGFloat = 0.5
@@ -70,16 +80,6 @@ struct WAVGlobeScope: View {
                     },
                     with: .foreground,
                     style: StrokeStyle(lineWidth: waveLine, lineCap: .round, lineJoin: .round)
-                )
-            }
-            } else {
-                context.stroke (
-                    Path { path in
-                        path.move(to: CGPoint(x: 0, y: fitRect.height / 2 + 4))
-                        path.addLine(to: CGPoint(x: fitRect.width, y: fitRect.height / 2 + 4))
-                    },
-                    with: .foreground,
-                    style: StrokeStyle(lineWidth: waveLine, lineCap: .round)
                 )
             }
         }
