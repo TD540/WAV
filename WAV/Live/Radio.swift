@@ -12,6 +12,8 @@ struct Radio: View {
     @EnvironmentObject var dataController: DataController
     @Environment(\.colorScheme) var colorScheme
 
+    @State private var tapped = false
+
     var body: some View {
         VStack(alignment: .center) {
             Image("WAVLogo")
@@ -23,30 +25,46 @@ struct Radio: View {
 
             Spacer()
 
-            Button {
-                dataController.radioIsPlaying == false ?
-                dataController.playRadio() :
-                dataController.stopRadio()
-            } label: {
-                WAVGlobe(
-                    isPlaying: $dataController.radioIsPlaying,
-                    isLive: .constant(dataController.radioIsOffAir == false)
-                )
-                .overlay {
-                    Circle()
-                        .fill(
-                            colorScheme == .light ?
-                                .white.opacity(0.6) :
-                                    .black.opacity(0.6)
-                        )
-                        .scaleEffect(0.65)
-                }
-                .overlay {
+            WAVGlobe(
+                isPlaying: $dataController.radioIsPlaying,
+                isLive: .constant(dataController.radioIsOffAir == false)
+            )
+            .scaleEffect(tapped ? 1 : 0.98)
+            .foregroundColor(.accentColor)
+            .overlay {
+                Circle()
+                    .fill(
+                        colorScheme == .light ?
+                            .white.opacity(0.6) :
+                                .black.opacity(0.6)
+                    )
+                    .scaleEffect(0.65)
+            }
+            .overlay {
+                if dataController.radioIsOffAir {
+                    Text("OFF AIR")
+                        .font(.custom("pixelmix", size: 12))
+                        .padding(4)
+                        .background(Color.accentColor)
+                        .foregroundColor(.white)
+                } else {
                     PixelButton(isPlaying: Binding { dataController.radioIsPlaying })
                         .scaleEffect(0.25)
                 }
+
             }
             .padding(30)
+            .onTapGesture {
+                if dataController.radioIsOffAir == false || dataController.DEBUG_radio {
+                    withAnimation(.spring()) {
+                        tapped = true
+                    }
+                    dataController.radioIsPlaying == false ?
+                    dataController.playRadio() :
+                    dataController.stopRadio()
+                    tapped = false
+                }
+            }
 
             Spacer()
 
