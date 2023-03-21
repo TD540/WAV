@@ -13,7 +13,7 @@ struct WAVBlueModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .padding(.vertical, padding)
-            .padding(.horizontal, 8)
+            .padding(.horizontal, 4)
             .foregroundColor(.white)
             .background(Color.accentColor)
             .font(.custom("pixelmix", size: size))

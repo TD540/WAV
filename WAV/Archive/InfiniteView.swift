@@ -57,7 +57,7 @@ struct InfiniteView: View {
                 ScrollView {
                     LazyVStack(spacing: 20) {
                         ForEach(wavShows) { wavShow in
-                            VStack(alignment: .leading, spacing: 4) {
+                            VStack(alignment: .leading, spacing: 2) {
                                 WAVShowImage(wavShow: wavShow)
                                     .padding(.horizontal)
                                     .shadow(color: .black.opacity(0.2), radius: 7, y: 8)
@@ -68,20 +68,29 @@ struct InfiniteView: View {
                                     }
 
                                 Text(wavShow.name.uppercased())
-                                    .wavBlack(size: 24)
+                                    .wavBlack(size: 12, vPadding: 4)
+                                    .padding(.horizontal)
+
+                                if category == nil {
+                                    WAVShowCategories(wavShow: wavShow, hideCategory: category)
+                                        .padding(.horizontal)
+                                }
+
+                                Text(wavShow.dateFormatted.uppercased())
+//                                    .padding(.horizontal)
+                                    .foregroundColor(.white)
+                                    .padding(.vertical, 2)
+                                    .padding(.horizontal, 4)
+                                    .font(Font.custom("Helvetica Neue Medium", size: 12))
+                                    .background(.black)
                                     .padding(.horizontal)
 
                                 ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 4) {
-                                        if category == nil {
-                                            WAVShowCategories(wavShow: wavShow, hideCategory: category)
-                                        }
-                                        if tag == nil {
-                                            WAVShowTags(wavShow: wavShow, hideTag: tag)
-                                        }
+                                    if tag == nil {
+                                        WAVShowTags(wavShow: wavShow, hideTag: tag)
+                                            .padding(.horizontal)
+                                            .padding(.trailing, 50)
                                     }
-                                    .padding(.horizontal)
-                                    .padding(.trailing, 50)
                                 }
                                 .mask(
                                     LinearGradient(gradient: Gradient(stops: [
@@ -92,11 +101,6 @@ struct InfiniteView: View {
                                     .frame(height: 100)
                                 )
 
-                                Text(wavShow.dateFormatted.uppercased()).padding(.horizontal)
-                                    .foregroundColor(.secondary)
-                                    .padding(.vertical, 2)
-                                    .padding(.leading, colorScheme == .light ? 0 : 8)
-                                    .font(Font.custom("Helvetica Neue Medium", size: 12))
                             }
                         }
                     }

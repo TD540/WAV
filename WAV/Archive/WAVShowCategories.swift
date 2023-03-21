@@ -27,7 +27,7 @@ struct WAVShowCategories: View {
                 } label: {
                     Text(category.name.stringByDecodingHTMLEntities.uppercased())
                         .lineLimit(1)
-                        .wavBlack(size: 12, vPadding: 12)
+                        .wavBlack(size: 12, vPadding: 4)
                 }
                 .fadeIn()
             }
