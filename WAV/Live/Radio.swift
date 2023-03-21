@@ -46,6 +46,7 @@ struct Radio: View {
                         .scaleEffect(0.25)
                 }
             }
+            .padding(30)
 
             Spacer()
 
