@@ -12,7 +12,7 @@ struct WAVShowImage: View {
     @EnvironmentObject var dataController: DataController
     var wavShow: WAVShow
 
-    @State var pixelBGColor = Color.black
+    @State var pixelBGColor = Color.black.opacity(0.4)
 
     var isPlaying: Bool {
         dataController.selectedShow == wavShow
@@ -53,7 +53,7 @@ struct WAVShowImage: View {
                                 .background(pixelBGColor)
                                 .onChange(of: isPlaying) { _ in
                                     withAnimation {
-                                        pixelBGColor = isPlaying ? Color.accentColor : .black
+                                        pixelBGColor = isPlaying ? Color.accentColor : .black.opacity(0.4)
                                     }
                                 }
                                 Spacer()

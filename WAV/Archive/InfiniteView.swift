@@ -68,7 +68,7 @@ struct InfiniteView: View {
                                     }
 
                                 Text(wavShow.name.uppercased())
-                                    .wavBlack(size: 12, vPadding: 4)
+                                    .wavBlack(size: 16, vPadding: 6)
                                     .padding(.horizontal)
 
                                 if category == nil {
@@ -81,7 +81,7 @@ struct InfiniteView: View {
                                     .foregroundColor(.white)
                                     .padding(.vertical, 2)
                                     .padding(.horizontal, 4)
-                                    .font(Font.custom("Helvetica Neue Medium", size: 12))
+                                    .font(Font.custom("Helvetica Neue Medium", size: 13))
                                     .background(.black)
                                     .padding(.horizontal)
 
