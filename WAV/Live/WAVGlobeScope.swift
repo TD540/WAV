@@ -12,20 +12,12 @@ struct WAVGlobeScope: View {
     @Binding var isPlaying: Bool
     
     var body: some View {
-        if isPlaying == false {
-            GeometryReader { proxy in
-                let maxSize: CGFloat = proxy.size.width > proxy.size.height ? proxy.size.height : proxy.size.width
-                let waveLine: CGFloat = maxSize / 80
-                Path { path in
-                    path.move(to: CGPoint(x: 0, y: proxy.size.height / 2))
-                    path.addLine(to: CGPoint(x: proxy.size.width, y: proxy.size.height / 2))
-                }
-                .stroke(lineWidth: waveLine)
-            }
-        } else {
-            TimelineView(.periodic(from: .now, by: 0.1)) { timeline in
+        if isPlaying {
+            TimelineView(.periodic(from: .now, by: 0.2)) { timeline in
                 canvas(timeline)
             }
+        } else {
+            EmptyView()
         }
     }
     
@@ -42,9 +34,8 @@ struct WAVGlobeScope: View {
             let edgeLine: CGFloat = maxSize / 50
             // example: 1000 / 50 = 20
             
-            let waveLine: CGFloat = maxSize / 80
+            let waveLine: CGFloat = maxSize / 60
             // example: 1000 / 50 = 20
-
             
             let fitSize: CGFloat = maxSize - edgeLine
             // example: 1000 - 20 = 980
@@ -57,8 +48,8 @@ struct WAVGlobeScope: View {
             )
 
             // scope wave
-            let waveCount: Int = 18
-            let amplitude: CGFloat = 0.5
+            let waveCount: Int = 24
+            let amplitude: CGFloat = 0.2
             var samples = [0.0]
             for _ in 0..<waveCount {
                 samples.append(CGFloat.random(in: -amplitude...amplitude))

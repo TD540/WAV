@@ -18,10 +18,14 @@ struct WAVGlobe: View {
             canvas(timeline)
         }
         .overlay {
-            WAVGlobeScope(isPlaying: $isPlaying)
-                .mask {
-                    Circle()
-                }
+            //            WAVGlobeScope(isPlaying: $isPlaying)
+            //                .mask {
+            //                    Circle()
+            //                }
+            Image("WAVGlobeScope")
+                .renderingMode(.template)
+                .resizable()
+                .scaledToFit()
         }
         .scaledToFit()
     }
@@ -31,7 +35,7 @@ struct WAVGlobe: View {
             
             let start = start.timeIntervalSinceReferenceDate
             let timeCount = timeline.date.timeIntervalSinceReferenceDate
-            let age = timeCount - start
+            let age = (timeCount - start) / 1.5
             
             // setup variables
             
