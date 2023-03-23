@@ -68,7 +68,8 @@ struct InfiniteView: View {
                                     }
 
                                 Text(wavShow.name.uppercased())
-                                    .wavBlack(size: 16, vPadding: 6)
+                                    .wavBlack(size: 14, vPadding: 6)
+                                    .lineSpacing(5)
                                     .padding(.horizontal)
 
                                 if category == nil {

@@ -27,7 +27,7 @@ struct WAVShowTags: View {
                 } label: {
                     Text(tag.name.stringByDecodingHTMLEntities.uppercased())
                         .lineLimit(1)
-                        .wavBlue(size: 16, vPadding: 4)
+                        .wavBlue(size: 14, vPadding: 4)
                 }
                 .disabled(tag == hideTag)
                 .fadeIn()
