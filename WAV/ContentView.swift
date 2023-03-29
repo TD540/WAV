@@ -42,7 +42,7 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView(tab: .archive)
+        ContentView(tab: .live)
             .environmentObject(DataController())
     }
 }

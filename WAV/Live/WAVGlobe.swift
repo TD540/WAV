@@ -1,5 +1,5 @@
 //
-//  TESTView.swift
+//  WAVGlobe.swift
 //  WAV
 //
 //  Created by Thomas on 02/12/2022.
@@ -8,17 +8,26 @@
 import SwiftUI
 
 struct WAVGlobe: View {
-    @State var start = Date().timeIntervalSinceReferenceDate
-    
+    let start = Date()
+    @Binding var isPlaying: Bool
+    @Binding var isLive: Bool
+
     var body: some View {
-        TimelineView(.animation) { timeline in
-            canvas(timeline)
+        ZStack {
+            WAVGlobeScope(isPlaying: $isPlaying)
+            TimelineView(.animation) { timeline in
+                canvas(timeline)
+            }
+            .scaledToFit()
         }
-        .scaledToFit()
     }
     
     func canvas(_ timeline: TimelineViewDefaultContext) -> some View {
         Canvas { context, size in
+            
+            let start = start.timeIntervalSinceReferenceDate
+            let timeCount = timeline.date.timeIntervalSinceReferenceDate
+            let age = timeCount - start
             
             // setup variables
             
@@ -26,9 +35,6 @@ struct WAVGlobe: View {
             // example: 1000
             
             let edgeLine: CGFloat = maxSize / 50
-            // example: 1000 / 50 = 20
-            
-            let waveLine: CGFloat = maxSize / 50
             // example: 1000 / 50 = 20
             
             let rippleLine: CGFloat = maxSize / 250
@@ -52,16 +58,14 @@ struct WAVGlobe: View {
                                     lineWidth: edgeLine
                 )
             }
-            
-            let age = timeline.date.timeIntervalSinceReferenceDate - start
-            
+
             // draw ripples
             let maxRippleSize = maxSize - edgeLine
             let amount = 7
             let rippleRange = 0...amount
             let rippleCount = CGFloat(rippleRange.count)
             let rippleLength: CGFloat = 0.32
-            let rippleCycle = CGFloat(rippleCount * age * rippleLength).truncatingRemainder(dividingBy: rippleCount)
+            let rippleCycle = CGFloat(rippleCount * CGFloat(isLive ? age : 0) * rippleLength).truncatingRemainder(dividingBy: rippleCount)
             let interval = maxSize / rippleCount
             let quantifier: CGFloat = rippleCycle / rippleCount
             let rippleSizes = rippleRange.map { maxRippleSize * (1.0/CGFloat(rippleRange.count) * CGFloat($0)) }
@@ -95,39 +99,13 @@ struct WAVGlobe: View {
                     )
                 }
             }
-            
-            // draw sound wave
-            let waveCount: Int = 20
-            let amplitude: CGFloat = 1
-            var samples = [0.0]
-            for _ in 0..<waveCount {
-                samples.append(CGFloat.random(in: -amplitude...amplitude))
-            }
-            samples.append(0.0)
-            context.drawLayer { innerContext in
-                innerContext.stroke(
-                    Path { path in
-                        let yOffset = fitRect.height / 2
-                        let stepWidth = fitRect.width / CGFloat(samples.count)
-                        
-                        path.move(to: CGPoint(x: 0, y: yOffset))
-                        
-                        for (index, sample) in samples.enumerated() {
-                            let xPos = CGFloat(index) * stepWidth
-                            let yPos = yOffset + (sample * yOffset)
-                            path.addLine(to: CGPoint(x: xPos, y: yPos))
-                        }
-                    },
-                    with: .foreground,
-                    style: StrokeStyle(lineWidth: waveLine, lineJoin: .round)
-                )
-            }
         }
+
     }
 }
 
 struct WAVGlobe_Previews: PreviewProvider {
     static var previews: some View {
-        WAVGlobe()
+        WAVGlobe(isPlaying: .constant(true), isLive: .constant(true))
     }
 }

@@ -21,39 +21,31 @@ struct Radio: View {
                 .scaledToFit()
                 .padding()
 
-            if dataController.radioIsOffAir == false || dataController.DEBUG_radio {
-                Button {
-                    dataController.radioIsPlaying == false ?
-                    dataController.playRadio() :
-                    dataController.stopRadio()
-                } label: {
 
-                    WAVGlobe()
-//                    Image("WAVBol")
-//                        .renderingMode(.template)
-//                        .resizable()
-//                        .scaledToFit()
-                        .overlay {
-                            Circle()
-                                .fill(
-                                    colorScheme == .light ?
-                                        .white.opacity(0.6) :
-                                            .black.opacity(0.6)
-                                )
-                                .scaleEffect(0.65)
-                        }
-                        .overlay {
-                            PixelButton(isPlaying: Binding { dataController.radioIsPlaying })
-                                .scaleEffect(0.25)
-                        }
+            Button {
+                dataController.radioIsPlaying == false ?
+                dataController.playRadio() :
+                dataController.stopRadio()
+            } label: {
+                WAVGlobe(
+                    isPlaying: $dataController.radioIsPlaying,
+                    isLive: .constant(dataController.radioIsOffAir == false)
+                )
+                .overlay {
+                    Circle()
+                        .fill(
+                            colorScheme == .light ?
+                                .white.opacity(0.6) :
+                                    .black.opacity(0.6)
+                        )
+                        .scaleEffect(0.65)
                 }
-            } else {
-                Image("WAVBol")
-                    .renderingMode(.template)
-                    .resizable()
-                    .scaledToFit()
-                    .foregroundColor(.accentColor)
+                .overlay {
+                    PixelButton(isPlaying: Binding { dataController.radioIsPlaying })
+                        .scaleEffect(0.25)
+                }
             }
+
         }
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity)
