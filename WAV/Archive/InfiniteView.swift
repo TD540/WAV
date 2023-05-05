@@ -10,7 +10,6 @@ import SwiftUI
 
 struct InfiniteView: View {
     @EnvironmentObject var dataController: DataController
-    @Environment(\.colorScheme) var colorScheme
 
     @State var wavShows = WAVShows()
     @State var canLoadNextPage = true
@@ -111,32 +110,17 @@ struct InfiniteView: View {
             }
         }
         .background {
-            Group {
-                colorScheme == .light ?
-                LinearGradient(
-                    gradient: Gradient(
-                        colors: [
-                            .black.opacity(0),
-                            .black.opacity(0.2),
-                            .black.opacity(0)
-                        ]
-                    ),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-                :
-                LinearGradient(
-                    gradient: Gradient(
-                        colors: [
-                            .white.opacity(0.1),
-                            .white.opacity(0.0),
-                            .white.opacity(0.1)
-                        ]
-                    ),
-                    startPoint: .leading,
-                    endPoint: .trailing
-                )
-            }
+            LinearGradient(
+                gradient: Gradient(
+                    colors: [
+                        .white.opacity(0.1),
+                        .white.opacity(0.0),
+                        .white.opacity(0.1)
+                    ]
+                ),
+                startPoint: .leading,
+                endPoint: .trailing
+            )
             .fadeIn()
         }
         .edgesIgnoringSafeArea(.bottom)

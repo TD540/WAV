@@ -9,7 +9,6 @@ import SwiftUI
 
 struct Radio: View {
     @EnvironmentObject var dataController: DataController
-    @Environment(\.colorScheme) var colorScheme
 
     var isOnAir: Bool {
         dataController.radioIsOffAir == false
@@ -38,11 +37,7 @@ struct Radio: View {
                         .foregroundColor(.accentColor)
                         .overlay {
                             Circle()
-                                .fill(
-                                    colorScheme == .light ?
-                                        .white.opacity(0.6) :
-                                            .black.opacity(0.6)
-                                )
+                                .fill(.black.opacity(0.6))
                                 .scaleEffect(0.65)
                         }
                         .overlay {

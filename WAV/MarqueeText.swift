@@ -14,7 +14,6 @@ public struct MarqueeText : View {
     public var rightFade: CGFloat
     public var startDelay: Double
     public var alignment: Alignment
-    @Environment(\.colorScheme) var colorScheme
     
     @State private var animate = false
     

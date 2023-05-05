@@ -31,7 +31,6 @@ struct CustomTabBar: View {
             Spacer()
         }
         .frame(maxWidth: .infinity)
-        .background(.black)
         .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
     }
 

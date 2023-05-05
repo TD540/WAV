@@ -10,7 +10,6 @@ import SwiftUI
 struct RadioMarquee: View {
     let text: String?
     var isOffAir: Bool
-    @Environment(\.colorScheme) var colorScheme
     @Environment(\.safeAreaInsets) var safeAreaInsets
 
     var body: some View {

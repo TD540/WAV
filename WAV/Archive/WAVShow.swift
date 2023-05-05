@@ -116,13 +116,6 @@ extension WAVShow {
         dateFormatter.dateFormat = "MMMM d, yyyy"
         return dateFormatter.string(from: date!)
     }
-    var colorScheme: ColorScheme {
-        if #available(iOS 13.0, *) {
-            return UIScreen.main.traitCollection.userInterfaceStyle == .dark ? .dark : .light
-        } else {
-            return .light
-        }
-    }
     var mixcloudWidget: URL {
         let range = mixcloudURL.range(of: "mixcloud.com")!
         let slug = String(mixcloudURL[range.upperBound...])
@@ -130,7 +123,7 @@ extension WAVShow {
             string: "https://www.mixcloud.com/widget/iframe"
         )!
         urlComponents.queryItems = [
-            URLQueryItem(name: "light", value: colorScheme == .light ? "1" : "0"),
+            URLQueryItem(name: "light", value: "0"),
             URLQueryItem(name: "hide_cover", value: "1"),
             URLQueryItem(name: "mini", value: "1"),
             URLQueryItem(name: "hide_artwork", value: "1"),
