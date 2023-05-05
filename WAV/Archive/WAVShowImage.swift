@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct WAVShowImage: View {
     @EnvironmentObject var dataController: DataController
@@ -30,39 +29,40 @@ struct WAVShowImage: View {
             }
         } label: {
             GeometryReader { geo in
-                WebImage(url: wavShow.pictureURL)
-                    .placeholder {
-                        ProgressView()
-                    }
-                    .resizable()
-                    .scaledToFill()
-                    .allowsHitTesting(false)
-                    .frame(width: geo.size.width, height: geo.size.height)
-                    .clipped()
-                    .overlay {
-                        VStack {
-                            Spacer()
-                            HStack {
-                                PixelButton(
-                                    color: .white,
-                                    isPlaying: Binding { isPlaying }
-                                )
-                                .frame(maxWidth: geo.size.height/100*7, maxHeight: geo.size.height/100*7)
-                                .padding(15)
-                                .shadow(color: .black.opacity(0.5), radius: 10, x: 10, y: -10)
-                                .background(pixelBGColor)
-                                .onChange(of: isPlaying) { _ in
-                                    withAnimation {
-                                        pixelBGColor = isPlaying ? Color.accentColor : .black.opacity(0.4)
-                                    }
+                AsyncImage(url: wavShow.pictureURL) { image in
+                    image
+                        .resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .scaledToFill()
+                .allowsHitTesting(false)
+                .frame(width: geo.size.width, height: geo.size.height)
+                .clipped()
+                .overlay {
+                    VStack {
+                        Spacer()
+                        HStack {
+                            PixelButton(
+                                color: .white,
+                                isPlaying: Binding { isPlaying }
+                            )
+                            .frame(maxWidth: geo.size.height/100*7, maxHeight: geo.size.height/100*7)
+                            .padding(15)
+                            .shadow(color: .black.opacity(0.5), radius: 10, x: 10, y: -10)
+                            .background(pixelBGColor)
+                            .onChange(of: isPlaying) { _ in
+                                withAnimation {
+                                    pixelBGColor = isPlaying ? Color.accentColor : .black.opacity(0.4)
                                 }
-                                Spacer()
                             }
-                            .frame(maxWidth: .infinity)
+                            Spacer()
                         }
-                        .clipped()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .frame(maxWidth: .infinity)
                     }
+                    .clipped()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
             }
             .aspectRatio(100/66.7, contentMode: .fit)
         }

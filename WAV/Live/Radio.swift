@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct Radio: View {
     @EnvironmentObject var dataController: DataController

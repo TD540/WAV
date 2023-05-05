@@ -49,7 +49,6 @@
 		E9AEFC41299AD08700A0B033 /* WAVBlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEFC40299AD08700A0B033 /* WAVBlue.swift */; };
 		E9C671B729CA3EDE006A79D6 /* WAVGlobeScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C671B629CA3EDE006A79D6 /* WAVGlobeScope.swift */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
-		E9CE7349297D37F10036451D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = E9CE7348297D37F10036451D /* SDWebImageSwiftUI */; };
 		E9D89F582976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */; };
 		E9DC8EE72961BA1D00C4B557 /* WAVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */; };
 		E9EC4CC829720C1400690B88 /* String-htmlEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */; };
@@ -117,7 +116,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9CE7349297D37F10036451D /* SDWebImageSwiftUI in Frameworks */,
 				E9718AB22974F3A3008132B8 /* Introspect in Frameworks */,
 				E904E42E2928EC6200DEE8B9 /* WebView in Frameworks */,
 			);
@@ -283,7 +281,6 @@
 			packageProductDependencies = (
 				E904E42D2928EC6200DEE8B9 /* WebView */,
 				E9718AB12974F3A3008132B8 /* Introspect */,
-				E9CE7348297D37F10036451D /* SDWebImageSwiftUI */,
 			);
 			productName = WAV;
 			productReference = E91F682B28867FE7005985BF /* WAV.app */;
@@ -316,7 +313,6 @@
 			packageReferences = (
 				E904E42C2928EC6200DEE8B9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
 				E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				E9CE7347297D37F10036451D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = E91F682C28867FE7005985BF /* Products */;
 			projectDirPath = "";
@@ -611,14 +607,6 @@
 				kind = branch;
 			};
 		};
-		E9CE7347297D37F10036451D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -631,11 +619,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
-		};
-		E9CE7348297D37F10036451D /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E9CE7347297D37F10036451D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
