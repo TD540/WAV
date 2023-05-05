@@ -13,7 +13,7 @@ struct Search: View {
 
     @State var validQuery: String?
 
-    var suggestedQueries = ["EL GALLITO", "RADIO BOSLABS", "BEST OF", "SPOTLIGHT", "NIKOLAI", "BOROKOV BOROKOV"]
+    var suggestedQueries = ["FOCUS ON", "LIVE FROM BOSBAR", "INTERNATIONAL GUESTS", "JAPAN", "TECHNO", "HOUSE"]
 
     var placeholder = "SEARCH VARIOUS"
 
@@ -78,7 +78,7 @@ struct Search: View {
                 VStack(spacing: 20) {
                     Text("VARIOUS SUGGESTIONS")
                         .font(.custom("Helvetica Neue Bold", size: 14))
-                    ForEach(suggestedQueries.shuffled(), id: \.self) { listQuery in
+                    ForEach(suggestedQueries, id: \.self) { listQuery in
                         Button(listQuery) {
                             searchQuery = listQuery
                             performSearch(with: searchQuery)
