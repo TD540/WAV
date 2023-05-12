@@ -1,6 +1,6 @@
 # We Are Various
 
-![App Icon](WAV/Assets.xcassets/AppIcon.appiconset/Icon.jpg)
+![App Icon](WAV/Assets.xcassets/AppIcon.appiconset/Icon.png)
 
 First version of the **We&nbsp;Are&nbsp;Various** app allows iOS users to listen to the archive- or live stream.
 
