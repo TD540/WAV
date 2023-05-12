@@ -1,8 +1,8 @@
 # We Are Various
 
-<img src="WAV/Assets.xcassets/AppIcon.appiconset/Icon.jpg" style="max-width: 256px" />
+![App Icon](WAV/Assets.xcassets/AppIcon.appiconset/Icon.jpg)
 
-First version of the We&nbsp;Are&nbsp;Various app allows iOS users to listen to the archive- or live stream.
+First version of the **We&nbsp;Are&nbsp;Various** app allows iOS users to listen to the archive- or live stream.
 
 <a href="https://apps.apple.com/be/app/testflight/id899247664">Test the app using TestFlight</a>
 
