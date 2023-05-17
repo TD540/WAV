@@ -136,9 +136,8 @@ struct InfiniteView: View {
 
     func loadWAVShows() -> AnyPublisher<WAVShows, Error> {
         let offset = page * loadLimit
-        let url = URL(
-            string: "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(offset)\(tagParameter + categoryParameter + searchQueryParameter)"
-        )!
+        let urlString = "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(offset)\(tagParameter + categoryParameter + searchQueryParameter)"
+        let url = URL(string: urlString)!
         return URLSession.shared
             .dataTaskPublisher(for: url)
             .tryMap { data, response in

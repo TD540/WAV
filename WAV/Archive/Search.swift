@@ -13,7 +13,7 @@ struct Search: View {
 
     @State var validQuery: String?
 
-    var suggestedQueries = ["FOCUS ON", "LIVE FROM BOSBAR", "INTERNATIONAL GUESTS", "JAPAN", "TECHNO", "HOUSE"]
+    var suggestedQueries = ["LIVE FROM BOSBAR", "PODCAST", "TECHNO", "MEAKUSMA", "AMBIENT"]
 
     var placeholder = "SEARCH VARIOUS"
 
