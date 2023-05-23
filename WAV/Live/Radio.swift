@@ -35,10 +35,13 @@ struct Radio: View {
                             isLive: .constant(isOnAir)
                         )
                         .foregroundColor(.accentColor)
-                        .overlay {
-                            Circle()
-                                .fill(.black.opacity(0.6))
-                                .scaleEffect(0.65)
+                        .mask {
+                            RadialGradient(
+                                gradient: Gradient(colors: [.black.opacity(0.35), .black]),
+                                center: .center,
+                                startRadius: 80,
+                                endRadius: 90
+                            )
                         }
                         .overlay {
                             PixelButton(isPlaying: Binding { dataController.radioIsPlaying })
