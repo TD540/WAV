@@ -109,20 +109,7 @@ struct InfiniteView: View {
                 }
             }
         }
-        .background {
-            LinearGradient(
-                gradient: Gradient(
-                    colors: [
-                        .white.opacity(0.1),
-                        .white.opacity(0.0),
-                        .white.opacity(0.1)
-                    ]
-                ),
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-            .fadeIn()
-        }
+        .background(.black)
         .edgesIgnoringSafeArea(.bottom)
         .navigationTitle(category?.name.stringByDecodingHTMLEntities.uppercased() ?? tag?.name.stringByDecodingHTMLEntities.uppercased() ?? "")
         .navigationBarTitleDisplayMode(.inline)
