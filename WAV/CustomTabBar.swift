@@ -30,6 +30,7 @@ struct CustomTabBar: View {
             tabButton(.schedule)
             Spacer()
         }
+        .background(.black)
         .frame(maxWidth: .infinity)
         .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
     }
@@ -53,7 +54,6 @@ struct CustomTabBar: View {
                          ? 20
                          : safeAreaInsets.bottom
                 )
-//                .border(.red)
         }
 
     }
@@ -66,6 +66,7 @@ struct CustomTabBar_Previews: PreviewProvider {
             Spacer()
             CustomTabBar(tab: .constant(.search))
         }
+        .background(.black)
         .edgesIgnoringSafeArea(.bottom)
     }
 }

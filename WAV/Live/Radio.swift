@@ -60,6 +60,8 @@ struct Radio: View {
             .padding(.horizontal, 30)
         }
         .padding(30)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(.black)
         .onReceive(dataController.radioPlayer.$isPlaying) { isPlaying in
             dataController.radioIsPlaying = isPlaying
         }

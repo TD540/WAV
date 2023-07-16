@@ -44,6 +44,7 @@ struct RadioMarquee_Previews: PreviewProvider {
             RadioMarquee(text: "This is the Radio Marquee. This is the Radio Marquee.", isOffAir: true)
             Spacer()
         }
+        .background(.black)
         .edgesIgnoringSafeArea(.top)
     }
 }

@@ -33,6 +33,7 @@ struct ContentView: View {
             }
             CustomTabBar(tab: $tab)
         }
+        .background(.black)
         .onAppear {
             dataController.updateRadioMarquee()
         }
