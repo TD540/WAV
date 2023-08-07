@@ -10,14 +10,24 @@ import WebView
 
 struct ArchivePlayerView: View {
     @EnvironmentObject var dataController: DataController
+    @State var height: CGFloat = 0
+
+    func setHeight() {
+            if let isSoundcloud = dataController.selectedShow?.isSoundcloud {
+                height = isSoundcloud ? 100 : 60
+            } else {
+                height = 0
+            }
+    }
 
     var body: some View {
         WebView(webView: dataController.webViewStore.webView)
-            .frame(height: 60)
+            .frame(height: height)
             .onAppear {
-                if let selectedShow = dataController.selectedShow {
+                setHeight()
+                if let widgetURL = dataController.selectedShow?.widgetURL {
                     dataController.webViewStore.webView.load(
-                        URLRequest(url: selectedShow.mixcloudWidget)
+                        URLRequest(url: widgetURL)
                     )
                 }
             }
@@ -25,9 +35,10 @@ struct ArchivePlayerView: View {
                 dataController.webViewStore.webView.loadHTMLString("", baseURL: nil)
             }
             .onChange(of: dataController.selectedShow) { selectedShow in
-                if let selectedShow {
+                setHeight()
+                if let widgetURL = selectedShow?.widgetURL {
                     dataController.webViewStore.webView.load(
-                        URLRequest(url: selectedShow.mixcloudWidget)
+                        URLRequest(url: widgetURL)
                     )
                 } else {
                     dataController.webViewStore.webView.loadHTMLString("", baseURL: nil)

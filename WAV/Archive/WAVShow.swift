@@ -47,10 +47,10 @@ extension WAVShow: Codable {
         let sizes: Sizes
     }
     struct Sizes: Codable {
-            let mediumLarge: MediumLarge?
-            enum CodingKeys: String, CodingKey {
-                case mediumLarge = "medium_large"
-            }
+        let mediumLarge: MediumLarge?
+        enum CodingKeys: String, CodingKey {
+            case mediumLarge = "medium_large"
+        }
     }
     struct MediumLarge: Codable {
         let sourceURL: String
@@ -77,7 +77,8 @@ extension WAVShow {
         sticky: false,
         categories: [1040],
         tags: [1073, 368],
-        mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
+        // mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
+        mixcloudURL: "",
         tracklist: "#todo",
         embedded: WAVShow.Embedded(
             wpFeaturedmedia:
@@ -116,21 +117,49 @@ extension WAVShow {
         dateFormatter.dateFormat = "MMMM d, yyyy"
         return dateFormatter.string(from: date!)
     }
-    var mixcloudWidget: URL {
-        let range = mixcloudURL.range(of: "mixcloud.com")!
-        let slug = String(mixcloudURL[range.upperBound...])
-        var urlComponents = URLComponents(
-            string: "https://www.mixcloud.com/widget/iframe"
-        )!
-        urlComponents.queryItems = [
-            URLQueryItem(name: "light", value: "0"),
-            URLQueryItem(name: "hide_cover", value: "1"),
-            URLQueryItem(name: "mini", value: "1"),
-            URLQueryItem(name: "hide_artwork", value: "1"),
-            URLQueryItem(name: "autoplay", value: WAVShow.autoplay ? "1" : "0"),
-            URLQueryItem(name: "feed", value: slug.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!),
-        ]
-        return urlComponents.url!
+    var isMixcloud: Bool {
+        mixcloudURL.lowercased().contains("mixcloud.com")
+    }
+    var isSoundcloud: Bool {
+        mixcloudURL.lowercased().contains("soundcloud.com")
+    }
+    var widgetURL: URL? {
+        if isMixcloud {
+            guard let range = mixcloudURL.range(of: "mixcloud.com", options: .caseInsensitive) else {
+                return nil
+            }
+            let slug = String(mixcloudURL[range.upperBound...])
+            var urlComponents = URLComponents(
+                string: "https://www.mixcloud.com/widget/iframe"
+            )!
+            urlComponents.queryItems = [
+                URLQueryItem(name: "light", value: "0"),
+                URLQueryItem(name: "hide_cover", value: "1"),
+                URLQueryItem(name: "mini", value: "1"),
+                URLQueryItem(name: "hide_artwork", value: "1"),
+                URLQueryItem(name: "autoplay", value: WAVShow.autoplay ? "1" : "0"),
+                URLQueryItem(name: "feed", value: slug.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!),
+            ]
+            return urlComponents.url
+        } else if (isSoundcloud) {
+            var urlComponents = URLComponents(
+                string: "https://w.soundcloud.com/player/"
+            )!
+            urlComponents.queryItems = [
+                URLQueryItem(name: "url", value: mixcloudURL),
+                URLQueryItem(name: "color", value: "2B44F5"),
+                URLQueryItem(name: "auto_play", value: "true"),
+                URLQueryItem(name: "hide_related", value: "true"),
+                URLQueryItem(name: "show_comments", value: "false"),
+                URLQueryItem(name: "show_user", value: "false"),
+                URLQueryItem(name: "show_reposts", value: "false"),
+                URLQueryItem(name: "show_teaser", value: "false"),
+                URLQueryItem(name: "visual", value: "false")
+            ]
+            return urlComponents.url
+        } else {
+            return nil
+        }
     }
     var pictureURL: URL? {
         if let mediumLarge = embedded.wpFeaturedmedia.first?.mediaDetails.sizes.mediumLarge {

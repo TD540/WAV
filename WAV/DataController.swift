@@ -18,7 +18,14 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
             archiveShowIsPlaying && radioIsPlaying ? stopRadio() : nil
         }
     }
-    @Published var selectedShow: WAVShow?
+    @Published var selectedShow: WAVShow? {
+        willSet {
+            webViewStore.webView.loadHTMLString("", baseURL: nil)
+        }
+    }
+    // todo: consider {didSet {if selectedShow == nil {webViewStore.webView.loadHTMLString("", baseURL: nil)}}}
+    // and consider removing ArchivePlayerView .onDisappear
+    // as selectedShow changes, ContentView will react
     @Published var webViewStore: WebViewStore
 
     func playArchiveShow(wavShow: WAVShow) {
@@ -75,16 +82,10 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
         webView.isOpaque = false
         webView.scrollView.isScrollEnabled = false
         // print("WAV: \(webView.backgroundColor?.description ?? "no bgcolor")")
-        webView.customUserAgent = "Mozilla/5.0 "
-        + "(Windows NT 10.0; rv:78.0) "
-        + "Gecko/20100101 Firefox/78.0"
-
+        webView.customUserAgent = "Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0"
         webViewStore = WebViewStore(webView: webView)
-
         super.init()
-
         userContentController.add(self, contentWorld: .defaultClient, name: "isPlaying")
-
     }
 
     func userContentController(
