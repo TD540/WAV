@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct WAVShowImage: View {
     @EnvironmentObject var dataController: DataController
@@ -29,12 +30,7 @@ struct WAVShowImage: View {
             }
         } label: {
             GeometryReader { geo in
-                AsyncImage(url: wavShow.pictureURL) { image in
-                    image
-                        .resizable()
-                } placeholder: {
-                    ProgressView()
-                }
+                KFImage.url(wavShow.pictureURL)
                 .scaledToFill()
                 .allowsHitTesting(false)
                 .frame(width: geo.size.width, height: geo.size.height)

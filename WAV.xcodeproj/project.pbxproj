@@ -38,6 +38,7 @@
 		E973428A29AB7A4E003ADDC1 /* MarqueeText.swift in Sources */ = {isa = PBXBuildFile; fileRef = E973428929AB7A4E003ADDC1 /* MarqueeText.swift */; };
 		E973428C29AB7A5E003ADDC1 /* View-onValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = E973428B29AB7A5E003ADDC1 /* View-onValueChanged.swift */; };
 		E97D51BB295A2A3900DB9380 /* String-condenseWhitespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D51BA295A2A3900DB9380 /* String-condenseWhitespace.swift */; };
+		E97E65772A44E45100705CD6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E97E65762A44E45100705CD6 /* Kingfisher */; };
 		E97F4B1229BCCDEE00A0D5D2 /* View-fadeIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97F4B1129BCCDEE00A0D5D2 /* View-fadeIn.swift */; };
 		E98887A628942A70002E0349 /* pixelmix.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98887A428942A6D002E0349 /* pixelmix.ttf */; };
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
@@ -116,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E97E65772A44E45100705CD6 /* Kingfisher in Frameworks */,
 				E9718AB22974F3A3008132B8 /* Introspect in Frameworks */,
 				E904E42E2928EC6200DEE8B9 /* WebView in Frameworks */,
 			);
@@ -281,6 +283,7 @@
 			packageProductDependencies = (
 				E904E42D2928EC6200DEE8B9 /* WebView */,
 				E9718AB12974F3A3008132B8 /* Introspect */,
+				E97E65762A44E45100705CD6 /* Kingfisher */,
 			);
 			productName = WAV;
 			productReference = E91F682B28867FE7005985BF /* WAV.app */;
@@ -313,6 +316,7 @@
 			packageReferences = (
 				E904E42C2928EC6200DEE8B9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
 				E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				E97E65752A44E45100705CD6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = E91F682C28867FE7005985BF /* Products */;
 			projectDirPath = "";
@@ -526,7 +530,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = design.td540.WeAreVarious;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -558,7 +562,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1;
+				MARKETING_VERSION = 1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = design.td540.WeAreVarious;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -607,6 +611,14 @@
 				kind = branch;
 			};
 		};
+		E97E65752A44E45100705CD6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -619,6 +631,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
+		};
+		E97E65762A44E45100705CD6 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E97E65752A44E45100705CD6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
