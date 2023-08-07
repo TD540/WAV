@@ -23,7 +23,7 @@ struct WAVShowImage: View {
         Button {
             // if selectedShow does not equal this item's wavShow
             if dataController.selectedShow != wavShow {
-                dataController.playArchiveShow(wavShow: wavShow)
+                dataController.selectedShow = wavShow
             } else {
                 dataController.toggleArchiveShowPlayback()
             }
