@@ -17,6 +17,11 @@ enum Tab: String {
 struct CustomTabBar: View {
     @Binding var tab: Tab
     @Environment(\.safeAreaInsets) var safeAreaInsets
+    @Environment(\.scenePhase) var scenePhase
+
+    @State private var barOpacity = 0.0
+    @State private var barOffset = 10.0
+    @State private var barHeight: CGFloat? = 0.0
 
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
@@ -31,8 +36,30 @@ struct CustomTabBar: View {
             Spacer()
         }
         .background(.black)
-        .frame(maxWidth: .infinity)
+        .shadow(color: .black.opacity(0.6), radius: 10, y: -20)
+        .frame(maxWidth: .infinity, maxHeight: barHeight)
         .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                withAnimation {
+                    barOpacity = 1.0
+                    barOffset = 0.0
+                    barHeight = nil
+                }
+            } else {
+                withAnimation {
+                    barOpacity = 0.0
+                    barOffset = 6
+                    barHeight = 0.0
+                }
+            }
+        }
+        .onAppear {
+            barOpacity = 1.0
+            barOffset = 0.0
+        }
+        .offset(y: barOffset)
+        .opacity(barOpacity)
     }
 
     func tabButton(_ tab: Tab) -> some View {
