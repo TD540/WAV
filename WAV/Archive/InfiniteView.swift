@@ -11,7 +11,7 @@ import SwiftUI
 struct InfiniteView: View {
     @EnvironmentObject var dataController: DataController
 
-    @State var wavShows = WAVShows()
+    @State var wavShows = WAVShows() // starts off empty
     @State var canLoadNextPage = true
     @State var page = 0
     @State var subscriptions = Set<AnyCancellable>()
