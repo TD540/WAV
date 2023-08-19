@@ -111,7 +111,6 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
     @Published var radioIsLive = false
     @Published var radioIsOffAir = true
     @Published var radioTitle: String = ""
-    @Published var radioArtURL: URL?
 
     let radioPlayer = Player()
     let azuracastAPI = URL(string: "https://azuracast.wearevarious.com/api/nowplaying/1")!
@@ -143,39 +142,16 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
                             updateRadioTitle(with: newData.title)
                         }
                     }
-                    if radioArtURL != URL(string: newData.artURL) {
-                        if newData.artURL.hasSuffix("generic_song.jpg") {
-                            // generic artwork image looks aweful,
-                            // update with nil
-                            updateRadioArtURL(with: nil)
-                        } else {
-                            // artwork image available
-                            updateRadioArtURL(with: newData.artURL)
-                        }
-                        // updateArtURL(with: newData.artURL) // dev
-                    }
                 } catch {
                     updateRadioTitle(with: "We Are Various")
-                    updateRadioArtURL(with: nil)
                 }
             } catch {
                 updateRadioTitle(with: "We Are Various")
-                updateRadioArtURL(with: nil)
             }
-            
+
             try await Task.sleep(nanoseconds: 60_000_000_000)
             guard !Task.isCancelled else { return }
             updateRadioMarquee()
-        }
-    }
-
-    func updateRadioArtURL(with newArt: String?) {
-        DispatchQueue.main.async {
-            if let newArt {
-                self.radioArtURL = URL(string: newArt)
-            } else {
-                self.radioArtURL = nil
-            }
         }
     }
 
@@ -207,18 +183,9 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
 
     func updateInfoCenter() {
         let artwork: MPMediaItemArtwork
-        if
-            let url = radioArtURL,
-            let data = try? Data(contentsOf: url),
-            let image = UIImage(data: data) {
-            artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in
-                image
-            }
-        } else {
-            let image = UIImage(named: "AppIcon")!
-            artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in
-                image
-            }
+        let image = UIImage(named: "AppIcon")!
+        artwork = MPMediaItemArtwork(boundsSize: image.size) { _ in
+            image
         }
         MPNowPlayingInfoCenter.default().nowPlayingInfo = [
             MPMediaItemPropertyArtwork: artwork,
@@ -271,10 +238,6 @@ struct AzuracastData: Decodable {
     }
     var title: String {
         nowPlaying.song.text
-    }
-    /// `art` contains a URL string to a relevant image
-    var artURL: String {
-        nowPlaying.song.art.replacingOccurrences(of: "http:", with: "https:")
     }
     var isLive: Bool {
         title.lowercased().contains("live broadcast")
