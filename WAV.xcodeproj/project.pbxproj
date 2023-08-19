@@ -16,7 +16,6 @@
 		E91F683128867FE7005985BF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91F683028867FE7005985BF /* ContentView.swift */; };
 		E91F683328867FEC005985BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683228867FEC005985BF /* Assets.xcassets */; };
 		E91F683628867FEC005985BF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E91F683528867FEC005985BF /* Preview Assets.xcassets */; };
-		E92360E429C21F8300FEDDB6 /* TryoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92360E329C21F8300FEDDB6 /* TryoutView.swift */; };
 		E93FBB90297746D5006CE29D /* View-readSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93FBB8F297746D5006CE29D /* View-readSize.swift */; };
 		E93FBB922977D68E006CE29D /* View-borderEdges.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93FBB912977D68E006CE29D /* View-borderEdges.swift */; };
 		E9487F0229992BCD00D08C1B /* pixelmix_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9487F0129992BCD00D08C1B /* pixelmix_bold.ttf */; };
@@ -64,7 +63,6 @@
 		E91F683028867FE7005985BF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E91F683228867FEC005985BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E91F683528867FEC005985BF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		E92360E329C21F8300FEDDB6 /* TryoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryoutView.swift; sourceTree = "<group>"; };
 		E9337D93297C423F00EDDA43 /* WAVGlobe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WAVGlobe.swift; sourceTree = "<group>"; };
 		E93473B12928E95E00E2016C /* userScript.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = userScript.js; sourceTree = "<group>"; };
 		E93473B22928E95E00E2016C /* BlurView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurView.swift; sourceTree = "<group>"; };
@@ -254,7 +252,6 @@
 			children = (
 				E9337D93297C423F00EDDA43 /* WAVGlobe.swift */,
 				E9C671B629CA3EDE006A79D6 /* WAVGlobeScope.swift */,
-				E92360E329C21F8300FEDDB6 /* TryoutView.swift */,
 				E966D6C5288AF89900337C47 /* Radio.swift */,
 				E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */,
 				E9FC53BF290084A600814244 /* MicroDOM.swift */,
@@ -297,7 +294,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1340;
-				LastUpgradeCheck = 1340;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					E91F682A28867FE7005985BF = {
 						CreatedOnToolsVersion = 13.4.1;
@@ -354,7 +351,6 @@
 				E9DC8EE72961BA1D00C4B557 /* WAVShow.swift in Sources */,
 				E93FBB922977D68E006CE29D /* View-borderEdges.swift in Sources */,
 				E904E4312928ED2300DEE8B9 /* InfiniteView.swift in Sources */,
-				E92360E429C21F8300FEDDB6 /* TryoutView.swift in Sources */,
 				E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */,
 				E9A38AF929BCC75100254E9A /* Search.swift in Sources */,
 				E91F683128867FE7005985BF /* ContentView.swift in Sources */,
@@ -397,6 +393,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -429,6 +426,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -457,6 +455,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -489,6 +488,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
