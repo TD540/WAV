@@ -11,18 +11,22 @@ import WebView
 import WebKit
 import MediaPlayer
 
-class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
+class DataController: NSObject, ObservableObject {
     // ARCHIVE STUFF
     @Published var archiveShowIsPlaying = false {
         didSet {
+            print("archiveShowIsPlaying changed to \(archiveShowIsPlaying)")
             archiveShowIsPlaying && radioIsPlaying ? stopRadio() : nil
         }
     }
     @Published var selectedShow: WAVShow? {
-        willSet {
-            webViewStore.webView.loadHTMLString("", baseURL: nil)
+        didSet {
+            if selectedShow != nil {
+                archiveShowIsPlaying = true
+            }
         }
     }
+
     // todo: consider {didSet {if selectedShow == nil {webViewStore.webView.loadHTMLString("", baseURL: nil)}}}
     // and consider removing ArchivePlayerView .onDisappear
     // as selectedShow changes, ContentView will react
@@ -30,30 +34,6 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
 
     func playArchiveShow(wavShow: WAVShow) {
         selectedShow = wavShow
-    }
-    func toggleArchiveShowPlayback() {
-        webViewStore.webView.evaluateJavaScript(
-            """
-            (function () {
-              webAudioElement.paused
-              ? webAudioElement.play()
-              : webAudioElement.pause()
-            })()
-            """,
-            in: nil,
-            in: .defaultClient
-        )
-    }
-    func stopArchiveShowPlayback() {
-        webViewStore.webView.evaluateJavaScript(
-            """
-            (function () {
-              webAudioElement.pause()
-            })()
-            """,
-            in: nil,
-            in: .defaultClient
-        )
     }
 
     override init() {
@@ -81,30 +61,16 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
         webView.backgroundColor = .clear
         webView.isOpaque = false
         webView.scrollView.isScrollEnabled = false
-        // print("WAV: \(webView.backgroundColor?.description ?? "no bgcolor")")
-        webView.customUserAgent = "Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101 Firefox/78.0"
+        webView.customUserAgent = "We Are Various"
         webViewStore = WebViewStore(webView: webView)
         super.init()
-        userContentController.add(self, contentWorld: .defaultClient, name: "isPlaying")
-    }
-
-    func userContentController(
-        _ userContentController: WKUserContentController,
-        didReceive message: WKScriptMessage
-    ) {
-        if message.name == "isPlaying" {
-            archiveShowIsPlaying = message.body as! Bool == false
-        }
     }
 
     // RADIO STUFF
     @Published var radioIsPlaying = false {
         didSet {
             if radioIsPlaying {
-                archiveShowIsPlaying ? stopArchiveShowPlayback() : nil
-                if selectedShow != nil {
-                    selectedShow = nil
-                }
+                selectedShow = nil
             }
         }
     }
@@ -117,12 +83,8 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
     let livestreamAPI = URL(string: "https://radio.wearevarious.com/stream.xml")!
     let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
 
-    private var livestreamStatusObservation: NSKeyValueObservation?
-
-    let DEBUG_radio = false
-    let DEBUG_livestream = AVPlayerItem(url: URL(string: "https://22653.live.streamtheworld.com/RADIO1_128.mp3")!)
-
     var radioTask: Task<Void, Error>?
+
     func updateRadioMarquee() {
         radioTask = Task(priority: .medium) {
             do {
@@ -168,7 +130,6 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
                 let (data, _) = try await URLSession.shared.data(from: livestreamAPI)
                 let dom = MicroDOM(data: data)
                 let tree = dom.parse()
-                // print(tree?.tag ?? "") // todo: check later if this is still "live" when wearevarious.com radio is not live
                 if let tags = tree?.getElementsByTagName("title") {
                     let newTitle = tags[0].data
                     if radioTitle != newTitle {
@@ -197,8 +158,9 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
     }
 
     func playRadio() {
+        print("WAV: playRadio()")
         radioPlayer.replaceCurrentItem(with: nil)
-        radioPlayer.replaceCurrentItem(with: DEBUG_radio ? DEBUG_livestream : livestream)
+        radioPlayer.replaceCurrentItem(with: livestream)
         radioPlayer.play()
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback)
@@ -212,17 +174,16 @@ class DataController: NSObject, ObservableObject, WKScriptMessageHandler {
                 return .success
             }
             commandCenter.stopCommand.addTarget  { [weak self] (event) -> MPRemoteCommandHandlerStatus in
-                self?.stopRadio()
+                self?.radioPlayer.pause()
                 return .success
             }
         } catch {
-            // print(error.localizedDescription)
+             print(error.localizedDescription)
         }
     }
 
     func stopRadio() {
         radioPlayer.pause()
-        radioTask?.cancel()
     }
 
 }
@@ -237,7 +198,11 @@ struct AzuracastData: Decodable {
         }
     }
     var title: String {
-        nowPlaying.song.text
+        if nowPlaying.song.text.hasPrefix(" - ") {
+            return String(nowPlaying.song.text.dropFirst(3))
+        } else {
+            return nowPlaying.song.text
+        }
     }
     var isLive: Bool {
         title.lowercased().contains("live broadcast")

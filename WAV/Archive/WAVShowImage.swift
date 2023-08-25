@@ -22,11 +22,8 @@ struct WAVShowImage: View {
 
     var body: some View {
         Button {
-            // if selectedShow does not equal this item's wavShow
             if dataController.selectedShow != wavShow {
                 dataController.selectedShow = wavShow
-            } else {
-                dataController.toggleArchiveShowPlayback()
             }
         } label: {
             GeometryReader { geo in
@@ -36,28 +33,31 @@ struct WAVShowImage: View {
                 .frame(width: geo.size.width, height: geo.size.height)
                 .clipped()
                 .overlay {
-                    VStack {
-                        Spacer()
-                        HStack {
-                            PixelButton(
-                                color: .white,
-                                isPlaying: Binding { isPlaying }
-                            )
-                            .frame(maxWidth: geo.size.height/100*7, maxHeight: geo.size.height/100*7)
-                            .padding(15)
-                            .shadow(color: .black.opacity(0.5), radius: 10, x: 10, y: -10)
-                            .background(pixelBGColor)
-                            .onChange(of: isPlaying) { _ in
-                                withAnimation {
-                                    pixelBGColor = isPlaying ? Color.accentColor : .black.opacity(0.4)
-                                }
-                            }
+                    if isPlaying == false {
+                        // show play button
+                        VStack {
                             Spacer()
+                            HStack {
+                                PixelButton(
+                                    color: .white,
+                                    isPlaying: .constant(false) // false shows play button
+                                )
+                                .frame(maxWidth: geo.size.height/100*7, maxHeight: geo.size.height/100*7)
+                                .padding(15)
+                                .shadow(color: .black.opacity(0.5), radius: 10, x: 10, y: -10)
+                                .background(pixelBGColor)
+                                .onChange(of: isPlaying) { _ in
+                                    withAnimation {
+                                        pixelBGColor = isPlaying ? Color.accentColor : .black.opacity(0.4)
+                                    }
+                                }
+                                Spacer()
+                            }
+                            .frame(maxWidth: .infinity)
                         }
-                        .frame(maxWidth: .infinity)
+                        .clipped()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    .clipped()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
             .aspectRatio(100/66.7, contentMode: .fit)

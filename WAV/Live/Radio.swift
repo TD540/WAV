@@ -12,7 +12,6 @@ struct Radio: View {
 
     var isOnAir: Bool {
         dataController.radioIsOffAir == false
-        || dataController.DEBUG_radio
     }
 
     var body: some View {
@@ -26,9 +25,7 @@ struct Radio: View {
             Group {
                 if isOnAir {
                     Button {
-                        dataController.radioIsPlaying == false ?
-                        dataController.playRadio() :
-                        dataController.stopRadio()
+                        dataController.radioIsPlaying == false ? dataController.playRadio() : dataController.stopRadio()
                     } label: {
                         WAVGlobe(
                             isPlaying: $dataController.radioIsPlaying,
