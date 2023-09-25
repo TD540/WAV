@@ -28,6 +28,7 @@ struct WAVShowImage: View {
         } label: {
             GeometryReader { geo in
                 KFImage.url(wavShow.pictureURL)
+                    .resizable()
                 .scaledToFill()
                 .allowsHitTesting(false)
                 .frame(width: geo.size.width, height: geo.size.height)
