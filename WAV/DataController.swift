@@ -12,7 +12,6 @@ import WebKit
 import MediaPlayer
 
 class DataController: NSObject, ObservableObject {
-    // ARCHIVE STUFF
     @Published var archiveShowIsPlaying = false {
         didSet {
             print("archiveShowIsPlaying changed to \(archiveShowIsPlaying)")
@@ -127,6 +126,7 @@ class DataController: NSObject, ObservableObject {
     func updateLiveTitle() {
         Task(priority: .medium) {
             do {
+                let livestreamAPI = URL(string: "https://radio.wearevarious.com/stream.xml")!
                 let (data, _) = try await URLSession.shared.data(from: livestreamAPI)
                 let dom = MicroDOM(data: data)
                 let tree = dom.parse()
@@ -160,6 +160,7 @@ class DataController: NSObject, ObservableObject {
     func playRadio() {
         print("WAV: playRadio()")
         radioPlayer.replaceCurrentItem(with: nil)
+        let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
         radioPlayer.replaceCurrentItem(with: livestream)
         radioPlayer.play()
         do {
@@ -181,11 +182,10 @@ class DataController: NSObject, ObservableObject {
              print(error.localizedDescription)
         }
     }
-
     func stopRadio() {
         radioPlayer.pause()
+        radioPlayer.replaceCurrentItem(with: nil)
     }
-
 }
 
 struct AzuracastData: Decodable {
