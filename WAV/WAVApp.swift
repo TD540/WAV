@@ -18,3 +18,7 @@ struct WAVApp: App {
         }
     }
 }
+
+struct Constants {
+    static let loadLimit = 10
+}

@@ -35,7 +35,7 @@ struct CustomTabBar: View {
             tabButton(.schedule)
             Spacer()
         }
-        .background(.black)
+        .background(.black.opacity(0.9))
         .shadow(color: .black.opacity(0.6), radius: 10, y: -20)
         .frame(maxWidth: .infinity, maxHeight: barHeight)
         .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
@@ -85,7 +85,6 @@ struct CustomTabBar: View {
 
     }
 }
-
 
 struct CustomTabBar_Previews: PreviewProvider {
     static var previews: some View {

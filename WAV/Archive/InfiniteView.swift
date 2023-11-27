@@ -10,166 +10,106 @@ import SwiftUI
 
 struct InfiniteView: View {
     @EnvironmentObject var dataController: DataController
-
-    @State var wavShows = WAVShows() // starts off empty
-    @State var canLoadNextPage = true
-    @State var page = 0
-    @State var subscriptions = Set<AnyCancellable>()
+    @State private var wavShows = WAVShows() // Starts off empty
+    @State private var loading = false
+    @State private var canLoadMore = true
+    @State private var page = 0
+    @State private var subscriptions = Set<AnyCancellable>()
 
     var tag: WAVTag?
-    var tagParameter: String {
-        if let tag {
-            return "&tags=" + String(tag.id)
-        } else {
-            return ""
-        }
-    }
-
     var category: WAVCategory?
-    var categoryParameter: String {
-        if let category {
-            return "&categories=" + String(category.id)
-        } else {
-            return ""
-        }
-    }
-
     var searchQuery: String?
-    var searchQueryParameter: String {
-        if let searchQuery {
-            return "&search=" + searchQuery
-        } else {
-            return ""
-        }
+
+    private let loadLimit = 10
+
+    private var requestParameters: String {
+        [
+            tag.map { "tags=\($0.id)" },
+            category.map { "categories=\($0.id)" },
+            searchQuery.map { "search=\($0)" }
+        ]
+        .compactMap { $0 }
+        .joined(separator: "&")
+        .addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
     }
-
-
-    let loadLimit = 10
 
     var body: some View {
-        Group {
-            if wavShows.isEmpty && !canLoadNextPage {
-                Text("NO SHOWS FOUND")
-                    .wavBlack()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+        ZStack {
+            if wavShows.isEmpty && loading {
+                LoadingView()
+            } else if wavShows.isEmpty {
+                PlaceholderView()
             } else {
-                ScrollView {
-                    LazyVStack(spacing: 20) {
-                        ForEach(wavShows) { wavShow in
-                            VStack(alignment: .leading, spacing: 2) {
-                                WAVShowImage(wavShow: wavShow)
-                                    .padding(.horizontal)
-                                    .shadow(color: .black.opacity(0.2), radius: 7, y: 8)
-                                    .onAppear {
-                                        wavShows.last == wavShow ?
-                                        loadNextPageIfPossible() :
-                                        nil
-                                    }
+                wavShowsScrollView
+            }
+        }
+        .background(Color.black)
+        .edgesIgnoringSafeArea(.bottom)
+        .navigationTitle(navigationTitle)
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear(perform: loadInitialData)
+    }
 
-                                Text(wavShow.name.uppercased())
-                                    .wavBlack(size: 13, vPadding: 6)
-                                    .lineSpacing(5)
-                                    .padding(.horizontal)
-
-                                if category == nil {
-                                    WAVShowCategories(wavShow: wavShow, hideCategory: category)
-                                        .padding(.horizontal)
-                                }
-
-                                Text(wavShow.dateFormatted.uppercased())
-//                                    .padding(.horizontal)
-                                    .foregroundColor(.white)
-                                    .padding(.vertical, 2)
-                                    .padding(.horizontal, 4)
-                                    .font(Font.custom("Helvetica Neue Medium", size: 13))
-                                    .background(.black)
-                                    .padding(.horizontal)
-
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    if tag == nil {
-                                        WAVShowTags(wavShow: wavShow, hideTag: tag)
-                                            .padding(.horizontal)
-                                            .padding(.trailing, 50)
-                                    }
-                                }
-                                .mask(
-                                    LinearGradient(gradient: Gradient(stops: [
-                                        .init(color: .white, location: 0),
-                                        .init(color: .white, location: 0.80),
-                                        .init(color: .clear, location: 0.98)
-                                    ]), startPoint: .leading, endPoint: .trailing)
-                                    .frame(height: 100)
-                                )
-
+    private var wavShowsScrollView: some View {
+        ScrollView {
+            LazyVStack(spacing: 20) {
+                ForEach(wavShows) { wavShow in
+                    WAVShowView(wavShow: wavShow, category: category, tag: tag)
+                        .onAppear {
+                            if wavShow == wavShows.last {
+                                loadNextPageIfPossible()
                             }
                         }
-                    }
-                    .padding(.vertical, 20)
-
                 }
             }
-        }
-        .background(.black)
-        .edgesIgnoringSafeArea(.bottom)
-        .navigationTitle(category?.name.stringByDecodingHTMLEntities.uppercased() ?? tag?.name.stringByDecodingHTMLEntities.uppercased() ?? "")
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            guard canLoadNextPage else { return }
-            loadWAVShows()
-                .sink(receiveCompletion: onReceive, receiveValue: onReceive)
-                .store(in: &subscriptions)
+            .padding(.vertical, 20)
         }
     }
 
-    func loadWAVShows() -> AnyPublisher<WAVShows, Error> {
-        let offset = page * loadLimit
-        let urlString = "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(offset)\(tagParameter + categoryParameter + searchQueryParameter)"
-        let url = URL(string: urlString)!
-        return URLSession.shared
-            .dataTaskPublisher(for: url)
-            .tryMap { data, response in
-                do {
-                    return try JSONDecoder().decode(WAVShows.self, from: data)
-                } catch let error {
-                    print("WAV: JSONDecoder error \(error)")
-                    throw error
-                }
-            }
-            .receive(on: DispatchQueue.main)
-            .eraseToAnyPublisher()
+    private var navigationTitle: String {
+        category?.name.stringByDecodingHTMLEntities.uppercased() ??
+        tag?.name.stringByDecodingHTMLEntities.uppercased() ?? ""
     }
 
-    private func onReceive(_ completion: Subscribers.Completion<Error>) {
-        switch completion {
-        case .finished:
-            break
-        case .failure:
-            canLoadNextPage = false
-        }
-    }
-
-    private func onReceive(_ wavShows: WAVShows) {
-        // if mixcloudURL is empty, don't add show to wavShows
-        self.wavShows += wavShows.filter { !$0.mixcloudURL.isEmpty }
-        page += 1
-        canLoadNextPage = wavShows.count == loadLimit
-    }
-
-    func loadNextPageIfPossible() {
-        guard canLoadNextPage else { return }
-        // print("WAV: loadWAVShows(page: \(state.page))")
+    private func loadInitialData() {
+        guard canLoadMore else { return }
         loadWAVShows()
-            .sink(receiveCompletion: onReceive, receiveValue: onReceive)
+    }
+
+    private func loadWAVShows() {
+        guard canLoadMore else { return }
+        loading = true
+
+        let urlString = "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(page * loadLimit)&\(requestParameters)"
+        guard let url = URL(string: urlString) else {
+            fatalError("Invalid URL")
+        }
+
+        URLSession.shared.dataTaskPublisher(for: url)
+            .map(\.data)
+            .decode(type: WAVShows.self, decoder: JSONDecoder())
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                if case .failure = completion {
+                    self.canLoadMore = false
+                }
+                self.loading = false
+            }, receiveValue: { newWavShows in
+                self.wavShows.append(contentsOf: newWavShows.filter { !$0.mixcloudURL.isEmpty })
+                self.page += 1
+                self.canLoadMore = newWavShows.count == self.loadLimit
+            })
             .store(in: &subscriptions)
     }
-    
+
+    private func loadNextPageIfPossible() {
+        loadWAVShows()
+    }
 }
 
-struct InfiniteView_Previews: PreviewProvider {
-    static var previews: some View {
-        NavigationStack {
-            InfiniteView()
-        }
-        .environmentObject(DataController())
+#Preview {
+    NavigationStack {
+        InfiniteView()
     }
+    .environmentObject(DataController())
 }
