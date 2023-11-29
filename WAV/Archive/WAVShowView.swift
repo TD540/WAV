@@ -15,8 +15,6 @@ struct WAVShowView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             WAVShowImage(wavShow: wavShow)
-                .padding(.horizontal)
-                .shadow(color: .black.opacity(0.2), radius: 7, y: 8)
 
             Text(wavShow.name.uppercased())
                 .wavBlack(size: 13, vPadding: 6)
@@ -55,6 +53,6 @@ struct WAVShowView: View {
     }
 }
 
-#Preview {
-    WAVShowView(wavShow: WAVShow.preview)
-}
+//#Preview {
+//    WAVShowView(wavShow: WAVShow.preview)
+//}

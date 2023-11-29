@@ -12,24 +12,31 @@ struct ContentView: View {
     @EnvironmentObject var dataController: DataController
     @State var tab: Tab = .live
 
+    var archivePlayerHeight: CGFloat {
+        dataController.selectedShow != nil ? 120.0 : 0.0
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             RadioMarquee(text: dataController.radioTitle, isOffAir: dataController.radioIsOffAir)
-            TabView(selection: $tab) {
-                Radio()
-                    .tag(Tab.live)
-                Archive()
-                    .tag(Tab.archive)
-                Schedule()
-                    .tag(Tab.schedule)
-                Search()
-                    .tag(Tab.search)
-            }
-            .introspectTabBarController { UITabBarController in
-                UITabBarController.tabBar.isHidden = true
-            }
-            if dataController.selectedShow != nil {
-                ArchivePlayerView()
+            ZStack(alignment: .bottom) {
+                TabView(selection: $tab) {
+                    Radio()
+                        .padding(.bottom, archivePlayerHeight)
+                        .tag(Tab.live)
+                    Archive()
+                        .tag(Tab.archive)
+                    Search()
+                        .tag(Tab.search)
+                    Schedule()
+                        .tag(Tab.schedule)
+                }
+                .introspectTabBarController { UITabBarController in
+                    UITabBarController.tabBar.isHidden = true
+                }
+                if dataController.selectedShow != nil {
+                    ArchivePlayerView()
+                }
             }
             CustomTabBar(tab: $tab)
         }

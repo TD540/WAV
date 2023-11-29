@@ -10,14 +10,12 @@ import SwiftUI
 struct LoadingView: View {
     var body: some View {
         Text("LOADING VARIOUS")
-            .multilineTextAlignment(.center)
-            .lineSpacing(10.0)
-            .wavBlack() // Assuming this is a custom modifier you've defined
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .font(.custom("pixelmix", size: 20))
     }
 }
 
 #Preview {
     LoadingView()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.black)
 }

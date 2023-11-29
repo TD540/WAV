@@ -36,7 +36,8 @@ struct CustomTabBar: View {
             Spacer()
         }
         .background(.black.opacity(0.9))
-        .shadow(color: .black.opacity(0.6), radius: 10, y: -20)
+        .shadow(color: .black.opacity(0.6), radius: 25, y: -7)
+        .shadow(color: .black, radius: 5)
         .frame(maxWidth: .infinity, maxHeight: barHeight)
         .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
         .onChange(of: scenePhase) { newPhase in
@@ -74,25 +75,21 @@ struct CustomTabBar: View {
                 .foregroundColor(isSelected ?  .white : .accentColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0)
-                .padding(.top, 15)
+                .padding(.top, 20)
                 .padding(.horizontal, 6)
                 .padding(.bottom,
                          safeAreaInsets.bottom == 0.0
-                         ? 20
-                         : safeAreaInsets.bottom
+                         ? 20 : safeAreaInsets.bottom
                 )
+                .padding(.bottom, 5)
         }
-
     }
 }
 
-struct CustomTabBar_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack {
-            Spacer()
-            CustomTabBar(tab: .constant(.search))
-        }
-        .background(.black)
-        .edgesIgnoringSafeArea(.bottom)
+#Preview {
+    VStack {
+        Spacer()
+        CustomTabBar(tab: .constant(.search))
     }
+    .background(.black.opacity(0.6))
 }

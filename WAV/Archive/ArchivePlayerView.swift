@@ -13,16 +13,20 @@ struct ArchivePlayerView: View {
     @State var height: CGFloat = 0
 
     func setHeight() {
-            if let isSoundcloud = dataController.selectedShow?.isSoundcloud {
-                height = isSoundcloud ? 100 : 60
-            } else {
-                height = 0
-            }
+        if let isSoundcloud = dataController.selectedShow?.isSoundcloud {
+            height = isSoundcloud ? 100 : 60
+        } else {
+            height = 0
+        }
     }
 
     var body: some View {
         WebView(webView: dataController.webViewStore.webView)
             .frame(height: height)
+            .clipShape(RoundedRectangle(cornerRadius: 5.0))
+            .shadow(radius: 10)
+            .padding(.horizontal, 8)
+            .padding(.bottom, 8)
             .onAppear {
                 setHeight()
                 if let widgetURL = dataController.selectedShow?.widgetURL {
@@ -45,17 +49,15 @@ struct ArchivePlayerView: View {
                 }
             }
     }
-
 }
 
-struct WebPlayerView_Previews: PreviewProvider {
-    static var previews: some View {
-        let controller = DataController()
-        controller.selectedShow = WAVShow.preview
-        return VStack {
-            Spacer()
-            ArchivePlayerView()
-                .environmentObject(controller)
-        }
+#Preview {
+    let controller = DataController()
+    controller.selectedShow = WAVShow.preview
+    return VStack {
+        Spacer()
+        ArchivePlayerView()
+            .environmentObject(controller)
     }
+    .background(.black)
 }

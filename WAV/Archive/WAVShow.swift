@@ -77,8 +77,7 @@ extension WAVShow {
         sticky: false,
         categories: [1040],
         tags: [1073, 368],
-        // mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
-        mixcloudURL: "",
+        mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
         tracklist: "#todo",
         embedded: WAVShow.Embedded(
             wpFeaturedmedia:

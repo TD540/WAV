@@ -35,8 +35,8 @@ struct WAVGlobe: View {
             
             let start = start.timeIntervalSinceReferenceDate
             let timeCount = timeline.date.timeIntervalSinceReferenceDate
-            let age = (timeCount - start) / 1.5
-            
+            let age = (timeCount - start) / 0.75
+
             // setup variables
             
             let maxSize: CGFloat = size.width > size.height ? size.height : size.width

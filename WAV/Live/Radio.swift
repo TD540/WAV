@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Radio: View {
     @EnvironmentObject var dataController: DataController
+    @State private var scale: CGFloat = 1.0
 
     var isOnAir: Bool {
         dataController.radioIsOffAir == false
@@ -45,7 +46,15 @@ struct Radio: View {
                                 .scaleEffect(0.25)
                         }
                     }
-
+                    .scaleEffect(scale)
+                    .onTapGesture {
+                        withAnimation(.spring(response: 0.1, dampingFraction: 0.3, blendDuration: 0)) {
+                            self.scale = 0.75
+                        }
+                        withAnimation(.spring(response: 0.1, dampingFraction: 0.3, blendDuration: 0).delay(0.1)) {
+                            self.scale = 1
+                        }
+                    }
                 } else {
                     Image("WAVBol")
                         .renderingMode(.template)
@@ -65,17 +74,9 @@ struct Radio: View {
     }
 }
 
-struct NoButtonStyle: PrimitiveButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-    }
-}
-
-struct Radio_Previews: PreviewProvider {
-    static var previews: some View {
-        let dataController = DataController()
-        dataController.radioTitle = "Title"
-        return Radio()
-            .environmentObject(dataController)
-    }
+#Preview {
+    let dataController = DataController()
+    dataController.radioTitle = "Title"
+    return Radio()
+        .environmentObject(dataController)
 }

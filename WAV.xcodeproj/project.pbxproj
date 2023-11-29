@@ -53,6 +53,7 @@
 		E9D29F3F2B1560160023AF30 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D29F3E2B1560160023AF30 /* PlaceholderView.swift */; };
 		E9D29F412B1560AD0023AF30 /* WAVShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D29F402B1560AD0023AF30 /* WAVShowView.swift */; };
 		E9D89F582976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */; };
+		E9D8FC892B17EA460038C18A /* BouncyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D8FC882B17EA460038C18A /* BouncyButton.swift */; };
 		E9DC8EE72961BA1D00C4B557 /* WAVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */; };
 		E9EC4CC829720C1400690B88 /* String-htmlEntities.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */; };
 		E9F9F407297DDABC0093A008 /* WAVPink.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F9F406297DDABC0093A008 /* WAVPink.swift */; };
@@ -109,6 +110,7 @@
 		E9D29F3E2B1560160023AF30 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		E9D29F402B1560AD0023AF30 /* WAVShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVShowView.swift; sourceTree = "<group>"; };
 		E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues-safeAreaInsets.swift"; sourceTree = "<group>"; };
+		E9D8FC882B17EA460038C18A /* BouncyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncyButton.swift; sourceTree = "<group>"; };
 		E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVShow.swift; sourceTree = "<group>"; };
 		E9EC4CC729720C1400690B88 /* String-htmlEntities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-htmlEntities.swift"; sourceTree = "<group>"; };
 		E9F9F406297DDABC0093A008 /* WAVPink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVPink.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 		E97D51B9295A2A1400DB9380 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E9D8FC882B17EA460038C18A /* BouncyButton.swift */,
 				E9607C6829BC70A10010490B /* Binding-readOnly.swift */,
 				E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */,
 				E95AB21729663BB500AEC268 /* Image-centerCropped.swift */,
@@ -383,6 +386,7 @@
 				E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */,
 				E99C802C296F8B06000629F9 /* FlexibleView.swift in Sources */,
 				E973428C29AB7A5E003ADDC1 /* View-onValueChanged.swift in Sources */,
+				E9D8FC892B17EA460038C18A /* BouncyButton.swift in Sources */,
 				E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */,
 				E964817029BE361200F6A7CF /* WAVGlobe.swift in Sources */,
 				E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */,
