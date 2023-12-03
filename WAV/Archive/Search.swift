@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct Search: View {
+    @EnvironmentObject var dataController: DataController
     @State var searchQuery = ""
     @FocusState private var isFocused: Bool
 
     @State var validQuery: String?
 
-    var suggestedQueries = ["LIVE FROM BOSBAR", "PODCAST", "TECHNO", "MEAKUSMA", "AMBIENT"]
-
-    var placeholder = "SEARCH VARIOUS"
+    var suggestedQueries = ["BOSBAR", "PODCAST", "TECHNO", "MEAKUSMA", "AMBIENT"]
 
     func reset() {
         searchQuery = ""
@@ -52,10 +51,9 @@ struct Search: View {
                 .font(.custom("pixelmix", size: 18))
                 .foregroundStyle(.white)
                 .placeholder(when: searchQuery.isEmpty && !isFocused) {
-                    Text(placeholder)
+                    Text("SEARCH VARIOUS")
                         .font(.custom("pixelmix", size: 16))
                         .lineLimit(1)
-                        .opacity(0.5)
                 }
                 if !searchQuery.isEmpty {
                     Button {
@@ -71,13 +69,17 @@ struct Search: View {
             .onTapGesture {
                 isFocused = true
             }
-            .padding()
-            .accentColor(.primary)
-            .border(width: 2, edges: [.bottom], color: .primary.opacity(0.2))
-            .shadow(color: .black.opacity(0.1), radius: 3, y: 3)
+            .padding(20)
+            .accentColor(.white)
+            .foregroundStyle(.white)
+            .background(.black)
+            .border(width: 2, edges: [.bottom], color: .white.opacity(0.2))
 
-            if !isFocused && searchQuery.isEmpty {
-                Spacer()
+            if let validQuery = validQuery {
+                NavigationStack {
+                    InfiniteView(searchQuery: validQuery, topPadding: 20)
+                }
+            } else {
                 VStack(spacing: 20) {
                     Text("VARIOUS SUGGESTIONS")
                         .font(.custom("Helvetica Neue Bold", size: 14))
@@ -90,34 +92,18 @@ struct Search: View {
                     }
                     .font(.custom("pixelmix", size: 18))
                 }
-                Spacer()
-            } else {
-
-                if let validQuery = validQuery {
-                    NavigationStack {
-                        InfiniteView(searchQuery: validQuery)
-                    }
-                } else {
-                    Spacer()
-                    VStack {
-                        Text(placeholder)
-                            .font(.custom("Helvetica Neue Bold", size: 14))
-                        Image("WAV")
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundColor(.accentColor)
-                            .scaledToFit()
-                            .frame(maxWidth: 150)
-                            .padding()
-                    }
-                    Spacer()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.bottom,
+                         dataController.selectedShow != nil ?
+                         dataController.selectedShow!.isSoundcloud ? 100 : 60 : 0
+                )
+                .background(.black)
+                .onTapGesture {
+                    isFocused = false
                 }
             }
         }
-        .background(.black.opacity(0.1))
-        .onTapGesture {
-            isFocused = false
-        }
+
     }
 }
 

@@ -41,6 +41,7 @@
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
 		E98887AC28942A91002E0349 /* readme.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887AB28942A91002E0349 /* readme.txt */; };
 		E993B769292AD1E600654912 /* RadioMarquee.swift in Sources */ = {isa = PBXBuildFile; fileRef = E993B768292AD1E600654912 /* RadioMarquee.swift */; };
+		E997B9922B1D082700C86E43 /* TempView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E997B9912B1D082700C86E43 /* TempView.swift */; };
 		E99C802C296F8B06000629F9 /* FlexibleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802B296F8B06000629F9 /* FlexibleView.swift */; };
 		E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802D296F8E08000629F9 /* WAVBlack.swift */; };
 		E9A38AF929BCC75100254E9A /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A38AF829BCC75100254E9A /* Search.swift */; };
@@ -99,6 +100,7 @@
 		E98887AB28942A91002E0349 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 		E98887AD28942DC2002E0349 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E993B768292AD1E600654912 /* RadioMarquee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioMarquee.swift; sourceTree = "<group>"; };
+		E997B9912B1D082700C86E43 /* TempView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempView.swift; sourceTree = "<group>"; };
 		E99C802B296F8B06000629F9 /* FlexibleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleView.swift; sourceTree = "<group>"; };
 		E99C802D296F8E08000629F9 /* WAVBlack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlack.swift; sourceTree = "<group>"; };
 		E9A38AF829BCC75100254E9A /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 			children = (
 				E9607C5E29BC0B000010490B /* Archive.swift */,
 				E9A38AF829BCC75100254E9A /* Search.swift */,
+				E997B9912B1D082700C86E43 /* TempView.swift */,
 				E93473B42928E95E00E2016C /* InfiniteView.swift */,
 				E9DC8EE62961BA1D00C4B557 /* WAVShow.swift */,
 				E9D29F402B1560AD0023AF30 /* WAVShowView.swift */,
@@ -403,6 +406,7 @@
 				E9607C6329BC13180010490B /* WAVShowCategories.swift in Sources */,
 				E9D29F3B2B15555F0023AF30 /* Array-isNotEmpty.swift in Sources */,
 				E9C671B729CA3EDE006A79D6 /* WAVGlobeScope.swift in Sources */,
+				E997B9922B1D082700C86E43 /* TempView.swift in Sources */,
 				E9D29F3F2B1560160023AF30 /* PlaceholderView.swift in Sources */,
 				E9607C6129BC130C0010490B /* WAVShowTags.swift in Sources */,
 			);

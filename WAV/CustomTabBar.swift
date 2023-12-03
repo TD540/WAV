@@ -18,7 +18,6 @@ struct CustomTabBar: View {
     @Binding var tab: Tab
     @Environment(\.safeAreaInsets) var safeAreaInsets
     @Environment(\.scenePhase) var scenePhase
-
     @State private var barHeight: CGFloat? = 0.0
 
     var body: some View {
@@ -47,10 +46,7 @@ struct CustomTabBar: View {
                 )
             }
         }
-        //        .background(.black.opacity(0.8))
-        //        .shadow(color: .black.opacity(0.6), radius: 25, y: -7)
-        //        .shadow(color: .black, radius: 5)
-        .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
+        .border(width: 1, edges: [.top], color: .white.opacity(0.2))
     }
 
     func tabButton(_ tab: Tab) -> some View {

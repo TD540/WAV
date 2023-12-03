@@ -10,7 +10,7 @@ import SwiftUI
 struct Archive: View {
     var body: some View {
         NavigationStack {
-            InfiniteView()
+            InfiniteView(topPadding: Constants.marqueeHeight + 20)
         }
     }
 }

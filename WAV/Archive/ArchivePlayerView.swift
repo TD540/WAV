@@ -25,9 +25,8 @@ struct ArchivePlayerView: View {
             .frame(height: height)
             .clipShape(RoundedRectangle(cornerRadius: 10.0))
             .shadow(color: .black.opacity(0.5), radius: 25, y: -5)
-            .shadow(radius: 10)
-            .padding(.horizontal, 12)
-            .padding(.bottom, 12)
+            .shadow(radius: 5)
+            .padding(10)
             .onAppear {
                 setHeight()
                 if let widgetURL = dataController.selectedShow?.widgetURL {

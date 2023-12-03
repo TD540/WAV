@@ -10,6 +10,7 @@ import WebView
 import WebKit
 
 struct Schedule: View {
+    @EnvironmentObject var dataController: DataController
     @StateObject var webViewStore = WebViewStore(webView: WKWebView(frame: .zero))
 
     func modifySchedulePageCSS() {
@@ -66,6 +67,10 @@ struct Schedule: View {
                 modifySchedulePageCSS()
                 webViewStore.webView.load(URLRequest(url: URL(string: "https://wearevarious.com/week-schedule")!))
             }
+            .padding(.bottom,
+                      dataController.selectedShow != nil ?
+                      dataController.selectedShow!.isSoundcloud ? 100 : 60 : 0
+             )
     }
 }
 

@@ -14,7 +14,6 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-
             TabView(selection: $tab) {
                 Radio()
                     .tag(Tab.live)
@@ -43,6 +42,16 @@ struct ContentView: View {
                 VStack(spacing: 0) {
                     if dataController.selectedShow != nil {
                         ArchivePlayerView()
+                            .background {
+                                LinearGradient(
+                                    gradient: Gradient(stops: [
+                                        .init(color: Color.black.opacity(0.0), location: 0.0),
+                                        .init(color: Color.black.opacity(1.0), location: 1.0)
+                                    ]),
+                                    startPoint: .top,
+                                    endPoint: .bottom
+                                )
+                            }
                     }
                     CustomTabBar(tab: $tab)
                         .shadow(color: .black.opacity(0.9), radius: 10)

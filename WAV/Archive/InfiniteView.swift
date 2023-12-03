@@ -21,6 +21,9 @@ struct InfiniteView: View {
     var category: WAVCategory?
     var searchQuery: String?
 
+    var topPadding = 0.0
+    var bottomPadding = 0.0
+
     private let loadLimit = 10
 
     private var requestParameters: String {
@@ -53,7 +56,7 @@ struct InfiniteView: View {
 
     private var wavShowsScrollView: some View {
         ScrollView {
-            LazyVStack(spacing: 30) {
+            LazyVStack(spacing: 50) {
                 ForEach(wavShows) { wavShow in
                     WAVShowView(wavShow: wavShow, category: category, tag: tag)
                         .onAppear {
@@ -63,8 +66,8 @@ struct InfiniteView: View {
                         }
                 }
             }
-            .padding(.top, 60)
-            .padding(.bottom, 120)
+            .padding(.top, topPadding)
+            .padding(.bottom, bottomPadding)
         }
     }
 
