@@ -20,5 +20,6 @@ struct WAVApp: App {
 }
 
 struct Constants {
-    static let loadLimit = 10
+    static let loadLimit = 10.0
+    static let marqueeHeight = 50.0
 }

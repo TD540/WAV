@@ -19,8 +19,6 @@ struct CustomTabBar: View {
     @Environment(\.safeAreaInsets) var safeAreaInsets
     @Environment(\.scenePhase) var scenePhase
 
-    @State private var barOpacity = 0.0
-    @State private var barOffset = 10.0
     @State private var barHeight: CGFloat? = 0.0
 
     var body: some View {
@@ -35,32 +33,24 @@ struct CustomTabBar: View {
             tabButton(.schedule)
             Spacer()
         }
-        .background(.black.opacity(0.9))
-        .shadow(color: .black.opacity(0.6), radius: 25, y: -7)
-        .shadow(color: .black, radius: 5)
-        .frame(maxWidth: .infinity, maxHeight: barHeight)
-        .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
-        .onChange(of: scenePhase) { newPhase in
-            if newPhase == .active {
-                withAnimation {
-                    barOpacity = 1.0
-                    barOffset = 0.0
-                    barHeight = nil
-                }
-            } else {
-                withAnimation {
-                    barOpacity = 0.0
-                    barOffset = 6
-                    barHeight = 0.0
-                }
+        .frame(maxWidth: .infinity)
+        .background {
+            ZStack {
+                BlurView(style: .dark)
+                LinearGradient(
+                    gradient: Gradient(stops: [
+                        .init(color: Color.black.opacity(0.1), location: 0.0),
+                        .init(color: Color.black.opacity(0.8), location: 1.0)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
             }
         }
-        .onAppear {
-            barOpacity = 1.0
-            barOffset = 0.0
-        }
-        .offset(y: barOffset)
-        .opacity(barOpacity)
+        //        .background(.black.opacity(0.8))
+        //        .shadow(color: .black.opacity(0.6), radius: 25, y: -7)
+        //        .shadow(color: .black, radius: 5)
+        .border(width: 1, edges: [.top], color: .secondary.opacity(0.3))
     }
 
     func tabButton(_ tab: Tab) -> some View {
@@ -89,7 +79,7 @@ struct CustomTabBar: View {
 #Preview {
     VStack {
         Spacer()
-        CustomTabBar(tab: .constant(.search))
+        CustomTabBar(tab: .constant(.archive))
     }
     .background(.black.opacity(0.6))
 }

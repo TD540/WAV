@@ -16,7 +16,7 @@ struct WAVShow: Identifiable {
     let sticky: Bool
     let categories, tags: [Int]
     let mixcloudURL, tracklist: String
-    let embedded: WAVShow.Embedded
+    var embedded: WAVShow.Embedded
 }
 
 // static settings //dev
@@ -30,30 +30,30 @@ extension WAVShow: Codable {
         let rendered: String
     }
     struct Embedded: Codable {
-        let wpFeaturedmedia: [WpFeaturedmedia]
+        var wpFeaturedmedia: [WpFeaturedmedia]
         enum CodingKeys: String, CodingKey {
             case wpFeaturedmedia = "wp:featuredmedia"
         }
     }
     struct WpFeaturedmedia: Codable {
-        let sourceURL: String
-        let mediaDetails: MediaDetails
+        var sourceURL: String
+        var mediaDetails: MediaDetails
         enum CodingKeys: String, CodingKey {
             case sourceURL = "source_url"
             case mediaDetails = "media_details"
         }
     }
     struct MediaDetails: Codable {
-        let sizes: Sizes
+        var sizes: Sizes
     }
     struct Sizes: Codable {
-        let mediumLarge: MediumLarge?
+        var mediumLarge: MediumLarge?
         enum CodingKeys: String, CodingKey {
             case mediumLarge = "medium_large"
         }
     }
     struct MediumLarge: Codable {
-        let sourceURL: String
+        var sourceURL: String
         enum CodingKeys: String, CodingKey {
             case sourceURL = "source_url"
         }
@@ -69,7 +69,7 @@ extension WAVShow: Codable {
 
 // static preview
 extension WAVShow {
-    static let preview = WAVShow(
+    static var preview = WAVShow(
         id: 109399,
         date: "2022-12-24T17:43:55",
         link: "https://wearevarious.com/bent-von-bent/gemu-xiv-dec22/",
@@ -77,7 +77,8 @@ extension WAVShow {
         sticky: false,
         categories: [1040],
         tags: [1073, 368],
-        mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
+        //mixcloudURL: "https://www.mixcloud.com/WeAreVarious/privat-live-aus-at-de-nor-08-07-22/",
+        mixcloudURL: "https://soundcloud.com/we-are-various-wav/dj-aldolino-for-we-are-various-28-11-23",
         tracklist: "#todo",
         embedded: WAVShow.Embedded(
             wpFeaturedmedia:

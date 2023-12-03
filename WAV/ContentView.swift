@@ -12,45 +12,56 @@ struct ContentView: View {
     @EnvironmentObject var dataController: DataController
     @State var tab: Tab = .live
 
-    var archivePlayerHeight: CGFloat {
-        dataController.selectedShow != nil ? 120.0 : 0.0
-    }
-
     var body: some View {
-        VStack(spacing: 0) {
-            RadioMarquee(text: dataController.radioTitle, isOffAir: dataController.radioIsOffAir)
-            ZStack(alignment: .bottom) {
-                TabView(selection: $tab) {
-                    Radio()
-                        .padding(.bottom, archivePlayerHeight)
-                        .tag(Tab.live)
-                    Archive()
-                        .tag(Tab.archive)
-                    Search()
-                        .tag(Tab.search)
-                    Schedule()
-                        .tag(Tab.schedule)
-                }
-                .introspectTabBarController { UITabBarController in
-                    UITabBarController.tabBar.isHidden = true
-                }
-                if dataController.selectedShow != nil {
-                    ArchivePlayerView()
+        ZStack {
+
+            TabView(selection: $tab) {
+                Radio()
+                    .tag(Tab.live)
+                    .padding(.top, Constants.marqueeHeight)
+                    .padding(.bottom,
+                             dataController.selectedShow != nil ? 
+                             dataController.selectedShow!.isSoundcloud ? 100 : 60 : 0
+                    )
+                Archive()
+                    .tag(Tab.archive)
+                Search()
+                    .tag(Tab.search)
+                Schedule()
+                    .tag(Tab.schedule)
+            }
+            .introspectTabBarController { UITabBarController in
+                UITabBarController.tabBar.isHidden = true
+            }
+            VStack(spacing: 0) {
+                RadioMarquee(text: dataController.radioTitle, isOffAir: dataController.radioIsOffAir)
+                    .shadow(color: .black.opacity(0.4), radius: 15)
+                Spacer()
+            }
+            VStack(spacing: 0) {
+                Spacer()
+                VStack(spacing: 0) {
+                    if dataController.selectedShow != nil {
+                        ArchivePlayerView()
+                    }
+                    CustomTabBar(tab: $tab)
+                        .shadow(color: .black.opacity(0.9), radius: 10)
                 }
             }
-            CustomTabBar(tab: $tab)
+
         }
-        .background(.black)
+        .edgesIgnoringSafeArea(.all)
         .onAppear {
             dataController.updateRadioMarquee()
         }
-        .edgesIgnoringSafeArea(.all)
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(tab: .live)
-            .environmentObject(DataController())
-    }
+#Preview {
+    let dataController = DataController()
+    dataController.radioTitle = "Title"
+    dataController.selectedShow = WAVShow.preview
+    dataController.radioIsOffAir = false
+    return ContentView(tab: .archive)
+        .environmentObject(dataController)
 }

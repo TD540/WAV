@@ -7,6 +7,7 @@
 
 import Combine
 import SwiftUI
+import OSLog
 
 struct InfiniteView: View {
     @EnvironmentObject var dataController: DataController
@@ -52,7 +53,7 @@ struct InfiniteView: View {
 
     private var wavShowsScrollView: some View {
         ScrollView {
-            LazyVStack(spacing: 20) {
+            LazyVStack(spacing: 30) {
                 ForEach(wavShows) { wavShow in
                     WAVShowView(wavShow: wavShow, category: category, tag: tag)
                         .onAppear {
@@ -62,7 +63,8 @@ struct InfiniteView: View {
                         }
                 }
             }
-            .padding(.vertical, 20)
+            .padding(.top, 60)
+            .padding(.bottom, 120)
         }
     }
 
@@ -81,6 +83,8 @@ struct InfiniteView: View {
         loading = true
 
         let urlString = "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(page * loadLimit)&\(requestParameters)"
+
+        Logger.check.info("Loading \(urlString)")
         guard let url = URL(string: urlString) else {
             fatalError("Invalid URL")
         }

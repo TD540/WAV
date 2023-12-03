@@ -45,10 +45,12 @@ struct Search: View {
                 TextField("", text: $searchQuery) {
                     performSearch(with: searchQuery)
                 }
+                .disableAutocorrection(true)
                 .keyboardType(.webSearch)
                 .autocapitalization(.allCharacters)
                 .focused($isFocused)
                 .font(.custom("pixelmix", size: 18))
+                .foregroundStyle(.white)
                 .placeholder(when: searchQuery.isEmpty && !isFocused) {
                     Text(placeholder)
                         .font(.custom("pixelmix", size: 16))
@@ -65,6 +67,7 @@ struct Search: View {
                     }
                 }
             }
+            .padding(.top, Constants.marqueeHeight)
             .onTapGesture {
                 isFocused = true
             }
@@ -78,6 +81,7 @@ struct Search: View {
                 VStack(spacing: 20) {
                     Text("VARIOUS SUGGESTIONS")
                         .font(.custom("Helvetica Neue Bold", size: 14))
+                        .foregroundStyle(.white)
                     ForEach(suggestedQueries, id: \.self) { listQuery in
                         Button(listQuery) {
                             searchQuery = listQuery
@@ -118,11 +122,10 @@ struct Search: View {
 }
 
 
-struct Search_Previews: PreviewProvider {
-    static var previews: some View {
-        Search()
-            .environmentObject(DataController())
-    }
+#Preview {
+    Search()
+        .environmentObject(DataController())
+        .background(.black)
 }
 
 extension View {

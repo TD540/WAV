@@ -9,17 +9,17 @@ import SwiftUI
 
 struct Radio: View {
     @EnvironmentObject var dataController: DataController
-    @State private var scale: CGFloat = 1.0
+    @Environment(\.safeAreaInsets) var safeAreaInsets
 
     var isOnAir: Bool {
         dataController.radioIsOffAir == false
     }
 
     var body: some View {
-        VStack(spacing: 30) {
+        VStack(spacing: 20) {
             Image("WAVLogo")
-                .renderingMode(.template)
                 .resizable()
+                .renderingMode(.template)
                 .foregroundColor(.accentColor)
                 .scaledToFit()
 
@@ -28,6 +28,7 @@ struct Radio: View {
                     Button {
                         dataController.radioIsPlaying == false ? dataController.playRadio() : dataController.stopRadio()
                     } label: {
+
                         WAVGlobe(
                             isPlaying: $dataController.radioIsPlaying,
                             isLive: .constant(isOnAir)
@@ -45,28 +46,22 @@ struct Radio: View {
                             PixelButton(isPlaying: Binding { dataController.radioIsPlaying })
                                 .scaleEffect(0.25)
                         }
+
                     }
-                    .scaleEffect(scale)
-                    .onTapGesture {
-                        withAnimation(.spring(response: 0.1, dampingFraction: 0.3, blendDuration: 0)) {
-                            self.scale = 0.75
-                        }
-                        withAnimation(.spring(response: 0.1, dampingFraction: 0.3, blendDuration: 0).delay(0.1)) {
-                            self.scale = 1
-                        }
-                    }
+                    .buttonStyle(NoHighlightButtonStyle())
                 } else {
                     Image("WAVBol")
-                        .renderingMode(.template)
                         .resizable()
+                        .renderingMode(.template)
                         .foregroundColor(.accentColor)
                         .scaledToFit()
+                        .opacity(0.3)
                 }
             }
-            .padding(.horizontal, 30)
+            .padding()
+
         }
-        .padding(30)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding(40)
         .background(.black)
         .onReceive(dataController.radioPlayer.$isPlaying) { isPlaying in
             dataController.radioIsPlaying = isPlaying
@@ -77,6 +72,7 @@ struct Radio: View {
 #Preview {
     let dataController = DataController()
     dataController.radioTitle = "Title"
+    dataController.radioIsOffAir = false
     return Radio()
         .environmentObject(dataController)
 }

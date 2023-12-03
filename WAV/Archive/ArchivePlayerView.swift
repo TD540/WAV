@@ -23,10 +23,11 @@ struct ArchivePlayerView: View {
     var body: some View {
         WebView(webView: dataController.webViewStore.webView)
             .frame(height: height)
-            .clipShape(RoundedRectangle(cornerRadius: 5.0))
+            .clipShape(RoundedRectangle(cornerRadius: 10.0))
+            .shadow(color: .black.opacity(0.5), radius: 25, y: -5)
             .shadow(radius: 10)
-            .padding(.horizontal, 8)
-            .padding(.bottom, 8)
+            .padding(.horizontal, 12)
+            .padding(.bottom, 12)
             .onAppear {
                 setHeight()
                 if let widgetURL = dataController.selectedShow?.widgetURL {
@@ -59,5 +60,5 @@ struct ArchivePlayerView: View {
         ArchivePlayerView()
             .environmentObject(controller)
     }
-    .background(.black)
+    .background(.gray)
 }

@@ -60,6 +60,7 @@ struct Schedule: View {
 
     var body: some View {
         WebView(webView: webViewStore.webView)
+            .edgesIgnoringSafeArea(.top)
             .edgesIgnoringSafeArea(.bottom)
             .onAppear {
                 modifySchedulePageCSS()

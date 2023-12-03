@@ -6,24 +6,66 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct WAVShowView: View {
+    @EnvironmentObject var dataController: DataController
     var wavShow: WAVShow
     var category: WAVCategory?
     var tag: WAVTag?
+    @State private var progress: CGFloat = 0
+
+    var isPlaying: Bool {
+        dataController.selectedShow == wavShow
+        &&
+        dataController.archiveShowIsPlaying
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
-            WAVShowImage(wavShow: wavShow)
+            Button {
+                if dataController.selectedShow != wavShow {
+                    dataController.selectedShow = wavShow
+                }
+            } label: {
+                GeometryReader { geometry in
+                    KFImage(wavShow.pictureURL)
+                        .placeholder {
+                            WAVShowImagePlaceholder(loaded: progress)
+                        }
+                        .onProgress { receivedSize, totalSize in
+                            self.progress = CGFloat(receivedSize) / CGFloat(totalSize)
+                        }
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                }
+                .aspectRatio(100/66.7, contentMode: .fit)
+            }
+            .overlay(alignment: .bottomLeading) {
+                if isPlaying == false {
+                    ZStack {
+                        Color.black.opacity(0.5)
+                            .aspectRatio(1, contentMode: .fit)
+                        Image("play-pixels")
+                            .resizable()
+                            .renderingMode(.template)
+                            .foregroundColor(.white)
+                            .scaledToFit()
+                            .scaleEffect(0.5)
+                    }
+                    .scaleEffect(0.17, anchor: .bottomLeading)
+                }
+            }
+
 
             Text(wavShow.name.uppercased())
                 .wavBlack(size: 13, vPadding: 6)
                 .lineSpacing(5)
-                .padding(.horizontal)
 
             if category == nil {
                 WAVShowCategories(wavShow: wavShow, hideCategory: category)
-                    .padding(.horizontal)
             }
 
             Text(wavShow.dateFormatted.uppercased())
@@ -31,13 +73,10 @@ struct WAVShowView: View {
                 .padding(.vertical, 2)
                 .padding(.horizontal, 4)
                 .font(Font.custom("Helvetica Neue Medium", size: 13))
-                .background(Color.black)
-                .padding(.horizontal)
 
             ScrollView(.horizontal, showsIndicators: false) {
                 if tag == nil {
                     WAVShowTags(wavShow: wavShow, hideTag: tag)
-                        .padding(.horizontal)
                         .padding(.trailing, 50)
                 }
             }
@@ -53,6 +92,14 @@ struct WAVShowView: View {
     }
 }
 
-//#Preview {
-//    WAVShowView(wavShow: WAVShow.preview)
-//}
+#Preview {
+    let dataController = DataController()
+    var wavShow = WAVShow.preview
+    wavShow.embedded.wpFeaturedmedia[0].mediaDetails.sizes.mediumLarge!.sourceURL = "https://wearevarious.com/wp-content/uploads/2023/11/BTWAV6.jpg"
+    dataController.selectedShow = wavShow
+    dataController.archiveShowIsPlaying = false
+
+    return WAVShowView(wavShow: wavShow)
+        .environmentObject(dataController)
+        .background(.black)
+}

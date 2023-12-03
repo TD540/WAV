@@ -7,9 +7,10 @@
 
 import Combine
 import Foundation
+import MediaPlayer
+import OSLog
 import WebView
 import WebKit
-import MediaPlayer
 
 class DataController: NSObject, ObservableObject {
     @Published var archiveShowIsPlaying = false {
@@ -20,7 +21,8 @@ class DataController: NSObject, ObservableObject {
     }
     @Published var selectedShow: WAVShow? {
         didSet {
-            if selectedShow != nil {
+            if let selectedShow {
+                Logger.check.info("\(selectedShow.mixcloudURL)")
                 archiveShowIsPlaying = true
             }
         }

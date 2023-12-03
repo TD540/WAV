@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="90px" viewBox="0 0 60 90" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>pause-pixels</title>
+    <g id="pause-pixels" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Path" fill="#000000" points="0 90 0 0 25 0 25 90"></polygon>
+        <polygon id="Path" fill="#000000" points="35 90 35 0 60 0 60 90"></polygon>
+    </g>
+</svg>
