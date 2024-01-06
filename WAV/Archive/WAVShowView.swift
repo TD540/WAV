@@ -95,7 +95,14 @@ struct WAVShowView: View {
 #Preview {
     let dataController = DataController()
     var wavShow = WAVShow.preview
-    wavShow.embedded.wpFeaturedmedia[0].mediaDetails.sizes.mediumLarge!.sourceURL = "https://wearevarious.com/wp-content/uploads/2023/11/BTWAV6.jpg"
+
+    // Safely handle the assignment
+    if wavShow.embedded.wpFeaturedmedia[0].mediaDetails?.sizes.mediumLarge == nil {
+        wavShow.embedded.wpFeaturedmedia[0].mediaDetails?.sizes.mediumLarge = WAVShow.MediumLarge(sourceURL: "https://wearevarious.com/wp-content/uploads/2023/11/BTWAV6.jpg")
+    } else {
+        wavShow.embedded.wpFeaturedmedia[0].mediaDetails?.sizes.mediumLarge?.sourceURL = "https://wearevarious.com/wp-content/uploads/2023/11/BTWAV6.jpg"
+    }
+
     dataController.selectedShow = wavShow
     dataController.archiveShowIsPlaying = false
 

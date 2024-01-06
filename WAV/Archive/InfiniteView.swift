@@ -97,8 +97,13 @@ struct InfiniteView: View {
             .decode(type: WAVShows.self, decoder: JSONDecoder())
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
-                if case .failure = completion {
-                    self.canLoadMore = false
+                switch completion {
+                    case .failure(let error):
+                        print("Error: \(error)")
+                        self.canLoadMore = false
+                    case .finished:
+                        print("urlString finished loading: \(urlString)")
+                        break
                 }
                 self.loading = false
             }, receiveValue: { newWavShows in

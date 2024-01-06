@@ -36,8 +36,8 @@ extension WAVShow: Codable {
         }
     }
     struct WpFeaturedmedia: Codable {
-        var sourceURL: String
-        var mediaDetails: MediaDetails
+        var sourceURL: String?
+        var mediaDetails: MediaDetails?
         enum CodingKeys: String, CodingKey {
             case sourceURL = "source_url"
             case mediaDetails = "media_details"
@@ -162,10 +162,12 @@ extension WAVShow {
         }
     }
     var pictureURL: URL? {
-        if let mediumLarge = embedded.wpFeaturedmedia.first?.mediaDetails.sizes.mediumLarge {
-            return URL(string: mediumLarge.sourceURL)
+        if let mediumLargeURL = embedded.wpFeaturedmedia.first?.mediaDetails?.sizes.mediumLarge?.sourceURL {
+            return URL(string: mediumLargeURL)
+        } else if let url = embedded.wpFeaturedmedia.first?.sourceURL {
+            return URL(string: url)
         } else {
-            return URL(string: embedded.wpFeaturedmedia.first!.sourceURL)
+            return nil
         }
     }
 }
