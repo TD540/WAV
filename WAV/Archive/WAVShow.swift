@@ -113,6 +113,7 @@ extension WAVShow {
     var dateFormatted: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
         let date = dateFormatter.date(from: date)
         dateFormatter.dateFormat = "MMMM d, yyyy"
         return dateFormatter.string(from: date!)
