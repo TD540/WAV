@@ -16,6 +16,7 @@ struct InfiniteView: View {
     @State private var canLoadMore = true
     @State private var page = 0
     @State private var subscriptions = Set<AnyCancellable>()
+    @State private var retriedOnce = false // Track if retry has been attempted
 
     var tag: WAVTag?
     var category: WAVCategory?
@@ -40,9 +41,17 @@ struct InfiniteView: View {
     var body: some View {
         ZStack {
             if wavShows.isEmpty && loading {
-                LoadingView()
+                PlaceholderView(message: "LOADING VARIOUS")
             } else if wavShows.isEmpty {
-                PlaceholderView()
+                PlaceholderView(message: retriedOnce ? "NOTHING VARIOUS" : "JUST A SEC...")
+                    .onAppear {
+                        if !retriedOnce {
+                            retriedOnce = true
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1)) {
+                                loadInitialData()
+                            }
+                        }
+                    }
             } else {
                 wavShowsScrollView
             }

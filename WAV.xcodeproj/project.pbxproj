@@ -49,7 +49,6 @@
 		E9C671B729CA3EDE006A79D6 /* WAVGlobeScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C671B629CA3EDE006A79D6 /* WAVGlobeScope.swift */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
 		E9D29F3B2B15555F0023AF30 /* Array-isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D29F3A2B15555F0023AF30 /* Array-isNotEmpty.swift */; };
-		E9D29F3D2B155FBA0023AF30 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D29F3C2B155FBA0023AF30 /* LoadingView.swift */; };
 		E9D29F3F2B1560160023AF30 /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D29F3E2B1560160023AF30 /* PlaceholderView.swift */; };
 		E9D29F412B1560AD0023AF30 /* WAVShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D29F402B1560AD0023AF30 /* WAVShowView.swift */; };
 		E9D89F582976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */; };
@@ -109,7 +108,6 @@
 		E9C671B629CA3EDE006A79D6 /* WAVGlobeScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVGlobeScope.swift; sourceTree = "<group>"; };
 		E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelButton.swift; path = WAV/PixelButton.swift; sourceTree = SOURCE_ROOT; };
 		E9D29F3A2B15555F0023AF30 /* Array-isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-isNotEmpty.swift"; sourceTree = "<group>"; };
-		E9D29F3C2B155FBA0023AF30 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E9D29F3E2B1560160023AF30 /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		E9D29F402B1560AD0023AF30 /* WAVShowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVShowView.swift; sourceTree = "<group>"; };
 		E9D89F572976068E00CCD9BC /* EnvironmentValues-safeAreaInsets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "EnvironmentValues-safeAreaInsets.swift"; sourceTree = "<group>"; };
@@ -205,7 +203,6 @@
 				E9702CA3295B4BD3007471A4 /* BlackTitle.swift */,
 				E94B597929AD4FEB0009F11B /* TypeWriterView.swift */,
 				E9718AAB2974B432008132B8 /* Trash */,
-				E9D29F3C2B155FBA0023AF30 /* LoadingView.swift */,
 				E9D29F3E2B1560160023AF30 /* PlaceholderView.swift */,
 			);
 			path = Archive;
@@ -376,7 +373,6 @@
 				E91F683128867FE7005985BF /* ContentView.swift in Sources */,
 				E97F4B1229BCCDEE00A0D5D2 /* View-fadeIn.swift in Sources */,
 				E9607C5F29BC0B000010490B /* Archive.swift in Sources */,
-				E9D29F3D2B155FBA0023AF30 /* LoadingView.swift in Sources */,
 				E93FBB90297746D5006CE29D /* View-readSize.swift in Sources */,
 				E94B597A29AD4FEB0009F11B /* TypeWriterView.swift in Sources */,
 				E9D8FC8B2B17F2EE0038C18A /* Logger.swift in Sources */,
@@ -558,7 +554,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = design.td540.WeAreVarious;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -592,7 +588,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.1;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = design.td540.WeAreVarious;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct PlaceholderView: View {
+    var message = "NOTHING VARIOUS"
     var body: some View {
-        Text("NOTHING VARIOUS")
+        Text(message)
             .font(.custom("pixelmix", size: 20))
     }
 }
