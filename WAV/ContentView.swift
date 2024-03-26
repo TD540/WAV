@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Introspect
+import SwiftUIIntrospect
 
 struct ContentView: View {
     @EnvironmentObject var dataController: DataController
@@ -29,7 +29,7 @@ struct ContentView: View {
                 Schedule()
                     .tag(Tab.schedule)
             }
-            .introspectTabBarController { UITabBarController in
+            .introspect(.tabView, on: .iOS(.v13, .v14, .v15, .v16, .v17)) { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
             }
             VStack(spacing: 0) {

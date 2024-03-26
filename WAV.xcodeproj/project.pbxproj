@@ -32,10 +32,12 @@
 		E966D6C6288AF89900337C47 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E966D6C5288AF89900337C47 /* Radio.swift */; };
 		E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702CA3295B4BD3007471A4 /* BlackTitle.swift */; };
 		E9718AAF2974CDFA008132B8 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9718AAE2974CDFA008132B8 /* CustomTabBar.swift */; };
-		E9718AB22974F3A3008132B8 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = E9718AB12974F3A3008132B8 /* Introspect */; };
+		E971B1502BB2A8AE002612B3 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = E971B14F2BB2A8AE002612B3 /* SwiftUIIntrospect */; };
+		E971B1522BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E971B1512BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic */; };
+		E971B1542BB2A8AE002612B3 /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = E971B1532BB2A8AE002612B3 /* SwiftUIIntrospect-Static */; };
+		E971B1572BB2AD6B002612B3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E971B1562BB2AD6B002612B3 /* Kingfisher */; };
 		E973428C29AB7A5E003ADDC1 /* View-onValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = E973428B29AB7A5E003ADDC1 /* View-onValueChanged.swift */; };
 		E97D51BB295A2A3900DB9380 /* String-condenseWhitespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D51BA295A2A3900DB9380 /* String-condenseWhitespace.swift */; };
-		E97E65772A44E45100705CD6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E97E65762A44E45100705CD6 /* Kingfisher */; };
 		E97F4B1229BCCDEE00A0D5D2 /* View-fadeIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97F4B1129BCCDEE00A0D5D2 /* View-fadeIn.swift */; };
 		E98887A628942A70002E0349 /* pixelmix.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E98887A428942A6D002E0349 /* pixelmix.ttf */; };
 		E98887AA28942A8D002E0349 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = E98887A928942A8D002E0349 /* license.txt */; };
@@ -126,9 +128,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E97E65772A44E45100705CD6 /* Kingfisher in Frameworks */,
-				E9718AB22974F3A3008132B8 /* Introspect in Frameworks */,
+				E971B1502BB2A8AE002612B3 /* SwiftUIIntrospect in Frameworks */,
+				E971B1522BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic in Frameworks */,
+				E971B1542BB2A8AE002612B3 /* SwiftUIIntrospect-Static in Frameworks */,
 				E904E42E2928EC6200DEE8B9 /* WebView in Frameworks */,
+				E971B1572BB2AD6B002612B3 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,8 +299,10 @@
 			name = WAV;
 			packageProductDependencies = (
 				E904E42D2928EC6200DEE8B9 /* WebView */,
-				E9718AB12974F3A3008132B8 /* Introspect */,
-				E97E65762A44E45100705CD6 /* Kingfisher */,
+				E971B14F2BB2A8AE002612B3 /* SwiftUIIntrospect */,
+				E971B1512BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic */,
+				E971B1532BB2A8AE002612B3 /* SwiftUIIntrospect-Static */,
+				E971B1562BB2AD6B002612B3 /* Kingfisher */,
 			);
 			productName = WAV;
 			productReference = E91F682B28867FE7005985BF /* WAV.app */;
@@ -328,8 +334,8 @@
 			mainGroup = E91F682228867FE7005985BF;
 			packageReferences = (
 				E904E42C2928EC6200DEE8B9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
-				E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
-				E97E65752A44E45100705CD6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+				E971B1552BB2AD6B002612B3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = E91F682C28867FE7005985BF /* Products */;
 			projectDirPath = "";
@@ -629,20 +635,20 @@
 				minimumVersion = 0.3.0;
 			};
 		};
-		E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+		E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
-		E97E65752A44E45100705CD6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			repositoryURL = "https://github.com/siteline/swiftui-introspect";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.0.0;
+				minimumVersion = 1.1.3;
+			};
+		};
+		E971B1552BB2AD6B002612B3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.11.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -653,14 +659,24 @@
 			package = E904E42C2928EC6200DEE8B9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */;
 			productName = WebView;
 		};
-		E9718AB12974F3A3008132B8 /* Introspect */ = {
+		E971B14F2BB2A8AE002612B3 /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E9718AB02974F3A3008132B8 /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
-			productName = Introspect;
+			package = E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = SwiftUIIntrospect;
 		};
-		E97E65762A44E45100705CD6 /* Kingfisher */ = {
+		E971B1512BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E97E65752A44E45100705CD6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = "SwiftUIIntrospect-Dynamic";
+		};
+		E971B1532BB2A8AE002612B3 /* SwiftUIIntrospect-Static */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			productName = "SwiftUIIntrospect-Static";
+		};
+		E971B1562BB2AD6B002612B3 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E971B1552BB2AD6B002612B3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
