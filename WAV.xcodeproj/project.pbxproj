@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E904E42E2928EC6200DEE8B9 /* WebView in Frameworks */ = {isa = PBXBuildFile; productRef = E904E42D2928EC6200DEE8B9 /* WebView */; };
 		E904E4312928ED2300DEE8B9 /* InfiniteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B42928E95E00E2016C /* InfiniteView.swift */; };
 		E904E4322928ED2300DEE8B9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B82928E95E00E2016C /* DataController.swift */; };
 		E904E4342928ED2300DEE8B9 /* ArchivePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93473B32928E95E00E2016C /* ArchivePlayerView.swift */; };
@@ -32,10 +31,6 @@
 		E966D6C6288AF89900337C47 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E966D6C5288AF89900337C47 /* Radio.swift */; };
 		E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702CA3295B4BD3007471A4 /* BlackTitle.swift */; };
 		E9718AAF2974CDFA008132B8 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9718AAE2974CDFA008132B8 /* CustomTabBar.swift */; };
-		E971B1502BB2A8AE002612B3 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = E971B14F2BB2A8AE002612B3 /* SwiftUIIntrospect */; };
-		E971B1522BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = E971B1512BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic */; };
-		E971B1542BB2A8AE002612B3 /* SwiftUIIntrospect-Static in Frameworks */ = {isa = PBXBuildFile; productRef = E971B1532BB2A8AE002612B3 /* SwiftUIIntrospect-Static */; };
-		E971B1572BB2AD6B002612B3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E971B1562BB2AD6B002612B3 /* Kingfisher */; };
 		E973428C29AB7A5E003ADDC1 /* View-onValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = E973428B29AB7A5E003ADDC1 /* View-onValueChanged.swift */; };
 		E97D51BB295A2A3900DB9380 /* String-condenseWhitespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D51BA295A2A3900DB9380 /* String-condenseWhitespace.swift */; };
 		E97F4B1229BCCDEE00A0D5D2 /* View-fadeIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97F4B1129BCCDEE00A0D5D2 /* View-fadeIn.swift */; };
@@ -48,6 +43,9 @@
 		E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802D296F8E08000629F9 /* WAVBlack.swift */; };
 		E9A38AF929BCC75100254E9A /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A38AF829BCC75100254E9A /* Search.swift */; };
 		E9AEFC41299AD08700A0B033 /* WAVBlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEFC40299AD08700A0B033 /* WAVBlue.swift */; };
+		E9B9433A2C19C7E000F9B011 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = E9B943392C19C7E000F9B011 /* SwiftUIIntrospect */; };
+		E9B9433D2C19C8BD00F9B011 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E9B9433C2C19C8BD00F9B011 /* Kingfisher */; };
+		E9B943402C19CA4C00F9B011 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B9433F2C19CA4C00F9B011 /* WebView.swift */; };
 		E9C671B729CA3EDE006A79D6 /* WAVGlobeScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C671B629CA3EDE006A79D6 /* WAVGlobeScope.swift */; };
 		E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */; };
 		E9D29F3B2B15555F0023AF30 /* Array-isNotEmpty.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D29F3A2B15555F0023AF30 /* Array-isNotEmpty.swift */; };
@@ -107,6 +105,8 @@
 		E9A38AF829BCC75100254E9A /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		E9AB244E292DBD8300086338 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E9AEFC40299AD08700A0B033 /* WAVBlue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlue.swift; sourceTree = "<group>"; };
+		E9B9433F2C19CA4C00F9B011 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		E9B943412C19CA7300F9B011 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E9C671B629CA3EDE006A79D6 /* WAVGlobeScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVGlobeScope.swift; sourceTree = "<group>"; };
 		E9C88D1F28AD74D500C62DC2 /* PixelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PixelButton.swift; path = WAV/PixelButton.swift; sourceTree = SOURCE_ROOT; };
 		E9D29F3A2B15555F0023AF30 /* Array-isNotEmpty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array-isNotEmpty.swift"; sourceTree = "<group>"; };
@@ -128,11 +128,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E971B1502BB2A8AE002612B3 /* SwiftUIIntrospect in Frameworks */,
-				E971B1522BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic in Frameworks */,
-				E971B1542BB2A8AE002612B3 /* SwiftUIIntrospect-Static in Frameworks */,
-				E904E42E2928EC6200DEE8B9 /* WebView in Frameworks */,
-				E971B1572BB2AD6B002612B3 /* Kingfisher in Frameworks */,
+				E9B9433D2C19C8BD00F9B011 /* Kingfisher in Frameworks */,
+				E9B9433A2C19C7E000F9B011 /* SwiftUIIntrospect in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +170,7 @@
 				E97D51B9295A2A1400DB9380 /* Extensions */,
 				E98887A828942A78002E0349 /* Fonts */,
 				E91F683428867FEC005985BF /* Preview Content */,
+				E9B9433E2C19CA3E00F9B011 /* WebView */,
 			);
 			path = WAV;
 			sourceTree = "<group>";
@@ -281,6 +279,15 @@
 			path = Live;
 			sourceTree = "<group>";
 		};
+		E9B9433E2C19CA3E00F9B011 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				E9B9433F2C19CA4C00F9B011 /* WebView.swift */,
+				E9B943412C19CA7300F9B011 /* README.md */,
+			);
+			path = WebView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,11 +305,8 @@
 			);
 			name = WAV;
 			packageProductDependencies = (
-				E904E42D2928EC6200DEE8B9 /* WebView */,
-				E971B14F2BB2A8AE002612B3 /* SwiftUIIntrospect */,
-				E971B1512BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic */,
-				E971B1532BB2A8AE002612B3 /* SwiftUIIntrospect-Static */,
-				E971B1562BB2AD6B002612B3 /* Kingfisher */,
+				E9B943392C19C7E000F9B011 /* SwiftUIIntrospect */,
+				E9B9433C2C19C8BD00F9B011 /* Kingfisher */,
 			);
 			productName = WAV;
 			productReference = E91F682B28867FE7005985BF /* WAV.app */;
@@ -333,9 +337,8 @@
 			);
 			mainGroup = E91F682228867FE7005985BF;
 			packageReferences = (
-				E904E42C2928EC6200DEE8B9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */,
-				E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
-				E971B1552BB2AD6B002612B3 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				E9B943382C19C7E000F9B011 /* XCRemoteSwiftPackageReference "swiftui-introspect" */,
+				E9B9433B2C19C8BD00F9B011 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = E91F682C28867FE7005985BF /* Products */;
 			projectDirPath = "";
@@ -373,6 +376,7 @@
 				E9D29F412B1560AD0023AF30 /* WAVShowView.swift in Sources */,
 				E93FBB922977D68E006CE29D /* View-borderEdges.swift in Sources */,
 				E904E4312928ED2300DEE8B9 /* InfiniteView.swift in Sources */,
+				E9B943402C19CA4C00F9B011 /* WebView.swift in Sources */,
 				E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */,
 				E9A38AF929BCC75100254E9A /* Search.swift in Sources */,
 				E9D8FC8E2B18EB100038C18A /* WAVShowImagePlaceholder.swift in Sources */,
@@ -560,7 +564,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = design.td540.WeAreVarious;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -594,7 +598,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = design.td540.WeAreVarious;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -627,56 +631,33 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E904E42C2928EC6200DEE8B9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kylehickinson/SwiftUI-WebView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.3.0;
-			};
-		};
-		E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
+		E9B943382C19C7E000F9B011 /* XCRemoteSwiftPackageReference "swiftui-introspect" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/siteline/swiftui-introspect";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.3;
+				minimumVersion = 1.1.4;
 			};
 		};
-		E971B1552BB2AD6B002612B3 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+		E9B9433B2C19C8BD00F9B011 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.11.0;
+				minimumVersion = 7.12.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E904E42D2928EC6200DEE8B9 /* WebView */ = {
+		E9B943392C19C7E000F9B011 /* SwiftUIIntrospect */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E904E42C2928EC6200DEE8B9 /* XCRemoteSwiftPackageReference "SwiftUI-WebView" */;
-			productName = WebView;
-		};
-		E971B14F2BB2A8AE002612B3 /* SwiftUIIntrospect */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
+			package = E9B943382C19C7E000F9B011 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
 			productName = SwiftUIIntrospect;
 		};
-		E971B1512BB2A8AE002612B3 /* SwiftUIIntrospect-Dynamic */ = {
+		E9B9433C2C19C8BD00F9B011 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
-			productName = "SwiftUIIntrospect-Dynamic";
-		};
-		E971B1532BB2A8AE002612B3 /* SwiftUIIntrospect-Static */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E971B14E2BB2A8AE002612B3 /* XCRemoteSwiftPackageReference "swiftui-introspect" */;
-			productName = "SwiftUIIntrospect-Static";
-		};
-		E971B1562BB2AD6B002612B3 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = E971B1552BB2AD6B002612B3 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			package = E9B9433B2C19C8BD00F9B011 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */

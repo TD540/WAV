@@ -1,31 +1,22 @@
 {
-  "originHash" : "dcc33fadb706918586f5751a4590ed96e359cb7bd25cf57b04e5e3a4e96b5f2b",
+  "originHash" : "fd041302abc71f40e5c35c8fb25aa537c49a366632fb80aae3a36a44d6028660",
   "pins" : [
     {
       "identity" : "kingfisher",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/onevcat/Kingfisher",
+      "location" : "https://github.com/onevcat/Kingfisher.git",
       "state" : {
-        "revision" : "5b92f029fab2cce44386d28588098b5be0824ef5",
-        "version" : "7.11.0"
+        "revision" : "2ef543ee21d63734e1c004ad6c870255e8716c50",
+        "version" : "7.12.0"
       }
     },
     {
       "identity" : "swiftui-introspect",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/siteline/SwiftUI-Introspect",
+      "location" : "https://github.com/siteline/swiftui-introspect",
       "state" : {
-        "revision" : "0cd2a5a5895306bc21d54a2254302d24a9a571e4",
-        "version" : "1.1.3"
-      }
-    },
-    {
-      "identity" : "swiftui-webview",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kylehickinson/SwiftUI-WebView",
-      "state" : {
-        "revision" : "a67dcaff2377573a51f75761bb6e768b78931909",
-        "version" : "0.3.0"
+        "revision" : "7dc5b287f8040e4ad5038739850b758e78f77808",
+        "version" : "1.1.4"
       }
     }
   ],

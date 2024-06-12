@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import WebView
 
 struct ArchivePlayerView: View {
     @EnvironmentObject var dataController: DataController
