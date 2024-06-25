@@ -11,50 +11,42 @@ import MediaPlayer
 import OSLog
 import WebKit
 
-class DataController: NSObject, ObservableObject {
+class DataController: ObservableObject {
     @Published var archiveShowIsPlaying = false {
         didSet {
-            print("archiveShowIsPlaying changed to \(archiveShowIsPlaying)")
+            Logger.check.info("archiveShowIsPlaying now \(self.archiveShowIsPlaying)")
             archiveShowIsPlaying && radioIsPlaying ? stopRadio() : nil
         }
     }
     @Published var selectedShow: WAVShow? {
         didSet {
             if let selectedShow {
-                Logger.check.info("\(selectedShow.mixcloudURL)")
+                Logger.check.info("selected show: \(selectedShow.mixcloudURL)")
                 archiveShowIsPlaying = true
+            } else {
+                Logger.check.info("selected show: nil")
             }
         }
     }
-
-    // todo: consider {didSet {if selectedShow == nil {webViewStore.webView.loadHTMLString("", baseURL: nil)}}}
-    // and consider removing ArchivePlayerView .onDisappear
-    // as selectedShow changes, ContentView will react
-    @Published var webViewStore: WebViewStore
-
-    func playArchiveShow(wavShow: WAVShow) {
-        selectedShow = wavShow
-    }
-
-    override init() {
-        // WEBPLAYER STUFF
+    @Published var webViewStore = WebViewStore(webView: ({
         let userContentController = WKUserContentController()
         let configuration = WKWebViewConfiguration()
-        guard let source = try? String(
-            contentsOfFile: Bundle.main.path(
-                forResource: "userScript",
-                ofType: "js"
-            )!
-        ) else {
-            fatalError("userScript.js not found")
+        do {
+            guard let scriptPath = Bundle.main.path(forResource: "userScript", ofType: "js") else {
+                throw NSError(domain: "DataControllerError", code: 1001, userInfo: [NSLocalizedDescriptionKey: "Path for userScript.js not found"])
+            }
+            let source = try String(contentsOfFile: scriptPath)
+            let userScript = WKUserScript(
+                source: source,
+                injectionTime: .atDocumentStart,
+                forMainFrameOnly: false,
+                in: .defaultClient
+            )
+            userContentController.addUserScript(userScript)
+        } catch {
+            Logger.check.error("Failed to load userScript.js with error: \(error.localizedDescription)")
         }
-        let userScript = WKUserScript(
-            source: source,
-            injectionTime: .atDocumentStart,
-            forMainFrameOnly: false,
-            in: .defaultClient
-        )
-        userContentController.addUserScript(userScript)
+
         configuration.userContentController = userContentController
         configuration.mediaTypesRequiringUserActionForPlayback = []
         let webView = WKWebView(frame: .zero, configuration: configuration)
@@ -62,9 +54,10 @@ class DataController: NSObject, ObservableObject {
         webView.isOpaque = false
         webView.scrollView.isScrollEnabled = false
         webView.customUserAgent = "We Are Various"
-        webViewStore = WebViewStore(webView: webView)
-        super.init()
-    }
+
+        return webView
+    })()
+    )
 
     // RADIO STUFF
     @Published var radioIsPlaying = false {
@@ -84,6 +77,10 @@ class DataController: NSObject, ObservableObject {
     let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
 
     var radioTask: Task<Void, Error>?
+
+    func playArchiveShow(wavShow: WAVShow) {
+        selectedShow = wavShow
+    }
 
     func updateRadioMarquee() {
         radioTask = Task(priority: .medium) {
@@ -123,11 +120,11 @@ class DataController: NSObject, ObservableObject {
         }
     }
 
-    /// updateLiveTitle() parses stream.xml and updates title
     func updateLiveTitle() {
         Task(priority: .medium) {
+            let url = "https://radio.wearevarious.com/stream.xml"
             do {
-                let livestreamAPI = URL(string: "https://radio.wearevarious.com/stream.xml")!
+                let livestreamAPI = URL(string: url)!
                 let (data, _) = try await URLSession.shared.data(from: livestreamAPI)
                 let dom = MicroDOM(data: data)
                 let tree = dom.parse()
@@ -138,7 +135,7 @@ class DataController: NSObject, ObservableObject {
                     }
                 }
             } catch {
-                print("WAV: URLSession", String(describing: error))
+                Logger.check.error("Error fetching live stream title from \(url): \(error.localizedDescription)")
             }
         }
     }
@@ -159,7 +156,7 @@ class DataController: NSObject, ObservableObject {
     }
 
     func playRadio() {
-        print("WAV: playRadio()")
+        Logger.check.info("playRadio()")
         radioPlayer.replaceCurrentItem(with: nil)
         let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
         radioPlayer.replaceCurrentItem(with: livestream)
@@ -180,9 +177,10 @@ class DataController: NSObject, ObservableObject {
                 return .success
             }
         } catch {
-             print(error.localizedDescription)
+            Logger.check.error("Error setting AVAudioSession category: \(error.localizedDescription)")
         }
     }
+
     func stopRadio() {
         radioPlayer.pause()
         radioPlayer.replaceCurrentItem(with: nil)

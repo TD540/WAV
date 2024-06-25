@@ -108,10 +108,10 @@ struct InfiniteView: View {
             .sink(receiveCompletion: { completion in
                 switch completion {
                     case .failure(let error):
-                        print("Error: \(error)")
+                        Logger.check.error("Error loading \(urlString): \(error.localizedDescription)")
                         self.canLoadMore = false
                     case .finished:
-                        print("urlString finished loading: \(urlString)")
+                        Logger.check.info("Finished loading \(urlString)")
                         break
                 }
                 self.loading = false

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import OSLog
 
 struct WAVCategory: Codable, Identifiable, Hashable {
     var id: Int
@@ -39,11 +40,11 @@ struct WAVShowCategories: View {
         let url = URL(string: "https://wearevarious.com/wp-json/wp/v2/categories?post=\(wavShow.id)&_fields=id,name")!
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
-                print("Error: \(error)")
+                Logger.check.error("Error fetching categories for show \(wavShow.id): \(error.localizedDescription)")
                 return
             }
             guard let data = data else {
-                print("Error: no data received")
+                Logger.check.error("Error: no data received")
                 return
             }
             do {
@@ -57,7 +58,7 @@ struct WAVShowCategories: View {
                     self.categories = categories
                 }
             } catch let error {
-                print("Error decoding JSON: \(error)")
+                Logger.check.error("Error decoding JSON: \(error.localizedDescription)")
             }
         }
         task.resume()
