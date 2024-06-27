@@ -1,5 +1,5 @@
 //
-//  CustomTabBar.swift
+//  WAVTabBar.swift
 //  WAV
 //
 //  Created by Thomas on 16/01/2023.
@@ -7,18 +7,17 @@
 
 import SwiftUI
 
-enum Tab: String {
+enum WAVTab: String {
     case live = "(( LIVE ))"
     case archive = "ARCHIVE"
     case schedule = "SCHEDULE"
     case search = "SEARCH"
 }
 
-struct CustomTabBar: View {
-    @Binding var tab: Tab
+struct WAVTabBar: View {
+    @Binding var tab: WAVTab
     @Environment(\.safeAreaInsets) var safeAreaInsets
     @Environment(\.scenePhase) var scenePhase
-    @State private var barHeight: CGFloat? = 0.0
 
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
@@ -27,9 +26,9 @@ struct CustomTabBar: View {
             Spacer()
             tabButton(.archive)
             Spacer()
-            tabButton(.search)
-            Spacer()
             tabButton(.schedule)
+            Spacer()
+            tabButton(.search)
             Spacer()
         }
         .frame(maxWidth: .infinity)
@@ -49,7 +48,7 @@ struct CustomTabBar: View {
         .border(width: 1, edges: [.top], color: .white.opacity(0.2))
     }
 
-    func tabButton(_ tab: Tab) -> some View {
+    func tabButton(_ tab: WAVTab) -> some View {
         let isSelected = self.tab == tab
         return Button(action: {
             withAnimation(.linear(duration: 0.05)) {
@@ -75,7 +74,7 @@ struct CustomTabBar: View {
 #Preview {
     VStack {
         Spacer()
-        CustomTabBar(tab: .constant(.archive))
+        WAVTabBar(tab: .constant(.archive))
     }
     .background(.black.opacity(0.6))
 }

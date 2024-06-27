@@ -12,17 +12,17 @@ import OSLog
 class DataController: ObservableObject {
     @Published var archiveShowIsPlaying = false {
         didSet {
-            Logger.check.info("archiveShowIsPlaying now \(self.archiveShowIsPlaying)")
+            Logger.check.info("WAV: archiveShowIsPlaying now \(self.archiveShowIsPlaying)")
             archiveShowIsPlaying && radioIsPlaying ? stopRadio() : nil
         }
     }
     @Published var selectedShow: WAVShow? {
         didSet {
             if let selectedShow {
-                Logger.check.info("selected show: \(selectedShow.mixcloudURL)")
+                Logger.check.info("WAV: selected show: \(selectedShow.mixcloudURL)")
                 archiveShowIsPlaying = true
             } else {
-                Logger.check.info("selected show: nil")
+                Logger.check.info("WAV: no selected show")
             }
         }
     }
@@ -69,18 +69,23 @@ class DataController: ObservableObject {
                         } else {
                             updateRadioTitle(with: newData.title)
                         }
+                        Logger.check.info("WAV: Radio title changed to \(newData.title)")
                     }
                 } catch {
                     updateRadioTitle(with: "We Are Various")
+                    Logger.check.error("WAV: Error decoding AzuracastData: \(error.localizedDescription)\nUpdated radio title to 'We Are Various'")
                 }
             } catch {
                 updateRadioTitle(with: "We Are Various")
+                Logger.check.error("WAV: Error fetching data from Azuracast API: \(error.localizedDescription)\nUpdated radio title to 'We Are Various'")
             }
 
             try await Task.sleep(nanoseconds: 60_000_000_000)
             guard !Task.isCancelled else { return }
             updateRadioMarquee()
         }
+        // Todo: updateRadioMarquee only when nessecary according to schedule?
+        Logger.check.info("WAV: updateRadioMarquee called at \(Date())")
     }
 
     func updateRadioTitle(with newTitle: String) {
@@ -104,7 +109,7 @@ class DataController: ObservableObject {
                     }
                 }
             } catch {
-                Logger.check.error("Error fetching live stream title from \(url): \(error.localizedDescription)")
+                Logger.check.error("WAV: Error fetching live stream title from \(url): \(error.localizedDescription)")
             }
         }
     }
@@ -125,7 +130,7 @@ class DataController: ObservableObject {
     }
 
     func playRadio() {
-        Logger.check.info("playRadio()")
+        Logger.check.info("WAV: Playing WAV radio")
         radioPlayer.replaceCurrentItem(with: nil)
         let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
         radioPlayer.replaceCurrentItem(with: livestream)
@@ -146,7 +151,7 @@ class DataController: ObservableObject {
                 return .success
             }
         } catch {
-            Logger.check.error("Error setting AVAudioSession category: \(error.localizedDescription)")
+            Logger.check.error("WAV: Error setting AVAudioSession category: \(error.localizedDescription)")
         }
     }
 

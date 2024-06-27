@@ -10,24 +10,24 @@ import SwiftUIIntrospect
 
 struct ContentView: View {
     @EnvironmentObject var dataController: DataController
-    @State var tab: Tab = .live
+    @State var tab: WAVTab = .live
 
     var body: some View {
         ZStack {
             TabView(selection: $tab) {
                 Radio()
-                    .tag(Tab.live)
+                    .tag(WAVTab.live)
                     .padding(.top, Constants.marqueeHeight)
                     .padding(.bottom,
                              dataController.selectedShow != nil ? 
                              dataController.selectedShow!.isSoundcloud ? 100 : 60 : 0
                     )
                 Archive()
-                    .tag(Tab.archive)
-                Search()
-                    .tag(Tab.search)
+                    .tag(WAVTab.archive)
                 Schedule()
-                    .tag(Tab.schedule)
+                    .tag(WAVTab.schedule)
+                Search()
+                    .tag(WAVTab.search)
             }
             .introspect(.tabView, on: .iOS(.v13, .v14, .v15, .v16, .v17)) { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
@@ -53,7 +53,7 @@ struct ContentView: View {
                                 )
                             }
                     }
-                    CustomTabBar(tab: $tab)
+                    WAVTabBar(tab: $tab)
                         .shadow(color: .black.opacity(0.9), radius: 10)
                 }
             }

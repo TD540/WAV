@@ -96,7 +96,7 @@ struct InfiniteView: View {
 
         let urlString = "https://wearevarious.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia&per_page=\(loadLimit)&offset=\(page * loadLimit)&\(requestParameters)"
 
-        Logger.check.info("Loading \(urlString)")
+        Logger.check.info("WAV: Loading \(urlString)")
         guard let url = URL(string: urlString) else {
             fatalError("Invalid URL")
         }
@@ -108,10 +108,10 @@ struct InfiniteView: View {
             .sink(receiveCompletion: { completion in
                 switch completion {
                     case .failure(let error):
-                        Logger.check.error("Error loading \(urlString): \(error.localizedDescription)")
+                        Logger.check.error("WAV: Error loading \(urlString): \(error.localizedDescription)")
                         self.canLoadMore = false
                     case .finished:
-                        Logger.check.info("Finished loading \(urlString)")
+                        Logger.check.info("WAV: Finished loading \(urlString)")
                         break
                 }
                 self.loading = false

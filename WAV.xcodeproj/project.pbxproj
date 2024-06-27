@@ -30,7 +30,7 @@
 		E964817029BE361200F6A7CF /* WAVGlobe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9337D93297C423F00EDDA43 /* WAVGlobe.swift */; };
 		E966D6C6288AF89900337C47 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = E966D6C5288AF89900337C47 /* Radio.swift */; };
 		E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702CA3295B4BD3007471A4 /* BlackTitle.swift */; };
-		E9718AAF2974CDFA008132B8 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9718AAE2974CDFA008132B8 /* CustomTabBar.swift */; };
+		E9718AAF2974CDFA008132B8 /* WAVTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9718AAE2974CDFA008132B8 /* WAVTabBar.swift */; };
 		E973428C29AB7A5E003ADDC1 /* View-onValueChanged.swift in Sources */ = {isa = PBXBuildFile; fileRef = E973428B29AB7A5E003ADDC1 /* View-onValueChanged.swift */; };
 		E97AEC532C2B23350061D18E /* ArchiveWebViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97AEC522C2B23350061D18E /* ArchiveWebViewStore.swift */; };
 		E97D51BB295A2A3900DB9380 /* String-condenseWhitespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97D51BA295A2A3900DB9380 /* String-condenseWhitespace.swift */; };
@@ -91,7 +91,7 @@
 		E961C5C329253F4C0091FB0B /* ArtworkPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtworkPlaceholder.swift; sourceTree = "<group>"; };
 		E966D6C5288AF89900337C47 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
 		E9702CA3295B4BD3007471A4 /* BlackTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackTitle.swift; sourceTree = "<group>"; };
-		E9718AAE2974CDFA008132B8 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		E9718AAE2974CDFA008132B8 /* WAVTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVTabBar.swift; sourceTree = "<group>"; };
 		E973428B29AB7A5E003ADDC1 /* View-onValueChanged.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "View-onValueChanged.swift"; sourceTree = "<group>"; };
 		E97AEC522C2B23350061D18E /* ArchiveWebViewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveWebViewStore.swift; sourceTree = "<group>"; };
 		E97D51BA295A2A3900DB9380 /* String-condenseWhitespace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String-condenseWhitespace.swift"; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 				E91F683028867FE7005985BF /* ContentView.swift */,
 				E993B768292AD1E600654912 /* RadioMarquee.swift */,
 				E94DDAF82B1A220300FCE47B /* Marquee.swift */,
-				E9718AAE2974CDFA008132B8 /* CustomTabBar.swift */,
+				E9718AAE2974CDFA008132B8 /* WAVTabBar.swift */,
 				E93473B82928E95E00E2016C /* DataController.swift */,
 				E9B229A8289C65A000AC55CF /* Live */,
 				E934739C2928CBB000E2016C /* Archive */,
@@ -395,7 +395,7 @@
 				E9C88D2028AD74EB00C62DC2 /* PixelButton.swift in Sources */,
 				E97D51BB295A2A3900DB9380 /* String-condenseWhitespace.swift in Sources */,
 				E904E4322928ED2300DEE8B9 /* DataController.swift in Sources */,
-				E9718AAF2974CDFA008132B8 /* CustomTabBar.swift in Sources */,
+				E9718AAF2974CDFA008132B8 /* WAVTabBar.swift in Sources */,
 				E9F9F407297DDABC0093A008 /* WAVPink.swift in Sources */,
 				E966D6C6288AF89900337C47 /* Radio.swift in Sources */,
 				E958BACA28F17E4300D37B13 /* Schedule.swift in Sources */,

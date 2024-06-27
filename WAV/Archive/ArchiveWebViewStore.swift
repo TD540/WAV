@@ -26,7 +26,7 @@ class ArchiveWebViewStore: WebViewStore {
             )
             userContentController.addUserScript(userScript)
         } catch {
-            Logger.check.error("Failed to load userScript.js with error: \(error.localizedDescription)")
+            Logger.check.error("WAV: Failed to load userScript.js with error: \(error.localizedDescription)")
         }
 
         configuration.userContentController = userContentController

@@ -41,11 +41,11 @@ struct WAVShowTags: View {
         let url = URL(string: "https://wearevarious.com/wp-json/wp/v2/tags?post=\(wavShow.id)&_fields=id,name")!
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let error = error {
-                Logger.check.error("Error fetching tags for show \(wavShow.id): \(error.localizedDescription)")
+                Logger.check.error("WAV: Error fetching tags for show \(wavShow.id): \(error.localizedDescription)")
                 return
             }
             guard let data = data else {
-                Logger.check.error("Error: no data received")
+                Logger.check.error("WAV: Error: no data received")
                 return
             }
             do {
@@ -54,7 +54,7 @@ struct WAVShowTags: View {
                     self.tags = tags
                 }
             } catch let error {
-                Logger.check.error("Error decoding JSON: \(error.localizedDescription)")
+                Logger.check.error("WAV: Error decoding JSON: \(error.localizedDescription)")
             }
         }
         task.resume()
