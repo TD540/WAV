@@ -52,6 +52,9 @@ class DataController: ObservableObject {
     }
 
     func updateRadioMarquee() {
+        // Todo: Figure out where "Live Broadcast" in "WAV: Radio title changed to Live Broadcast" comes from
+        // Todo: Rethink this whole function because
+        // Todo: updateRadioMarquee only when nessecary according to schedule?
         radioTask = Task(priority: .medium) {
             do {
                 let (jsonData, _) = try await URLSession.shared.data(from: azuracastAPI)
@@ -84,7 +87,6 @@ class DataController: ObservableObject {
             guard !Task.isCancelled else { return }
             updateRadioMarquee()
         }
-        // Todo: updateRadioMarquee only when nessecary according to schedule?
         Logger.check.info("WAV: updateRadioMarquee called at \(Date())")
     }
 

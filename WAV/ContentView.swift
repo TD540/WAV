@@ -14,6 +14,7 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
+            
             TabView(selection: $tab) {
                 Radio()
                     .tag(WAVTab.live)
@@ -22,6 +23,8 @@ struct ContentView: View {
                              dataController.selectedShow != nil ? 
                              dataController.selectedShow!.isSoundcloud ? 100 : 60 : 0
                     )
+                Text("coming soon")
+                    .tag(WAVTab.waves)
                 Archive()
                     .tag(WAVTab.archive)
                 Schedule()
@@ -32,11 +35,15 @@ struct ContentView: View {
             .introspect(.tabView, on: .iOS(.v13, .v14, .v15, .v16, .v17)) { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
             }
+
+            // Top
             VStack(spacing: 0) {
-                RadioMarquee(text: dataController.radioTitle, isOffAir: dataController.radioIsOffAir)
+                RadioMarquee()
                     .shadow(color: .black.opacity(0.4), radius: 15)
                 Spacer()
             }
+
+            // Tabbar
             VStack(spacing: 0) {
                 Spacer()
                 VStack(spacing: 0) {

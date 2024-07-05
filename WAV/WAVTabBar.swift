@@ -8,7 +8,8 @@
 import SwiftUI
 
 enum WAVTab: String {
-    case live = "(( LIVE ))"
+    case live = "LIVE"
+    case waves = "WAVES"
     case archive = "ARCHIVE"
     case schedule = "SCHEDULE"
     case search = "SEARCH"
@@ -23,6 +24,8 @@ struct WAVTabBar: View {
         HStack(alignment: .center, spacing: 0) {
             Spacer()
             tabButton(.live)
+            Spacer()
+            tabButton(.waves)
             Spacer()
             tabButton(.archive)
             Spacer()
@@ -56,12 +59,11 @@ struct WAVTabBar: View {
             }
         }) {
             Text(tab.rawValue)
-                .font(.custom("Helvetica Neue Medium", size: 16))
+                .font(.custom("Helvetica Neue Medium", size: 14))
                 .foregroundColor(isSelected ?  .white : .accentColor)
                 .lineLimit(1)
                 .minimumScaleFactor(0)
                 .padding(.top, 20)
-                .padding(.horizontal, 6)
                 .padding(.bottom,
                          safeAreaInsets.bottom == 0.0
                          ? 20 : safeAreaInsets.bottom

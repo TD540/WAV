@@ -105,7 +105,6 @@
 		E99C802B296F8B06000629F9 /* FlexibleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlexibleView.swift; sourceTree = "<group>"; };
 		E99C802D296F8E08000629F9 /* WAVBlack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlack.swift; sourceTree = "<group>"; };
 		E9A38AF829BCC75100254E9A /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
-		E9AB244E292DBD8300086338 /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		E9AEFC40299AD08700A0B033 /* WAVBlue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlue.swift; sourceTree = "<group>"; };
 		E9B9433F2C19CA4C00F9B011 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		E9B943412C19CA7300F9B011 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -168,7 +167,6 @@
 				E9B229A8289C65A000AC55CF /* Live */,
 				E934739C2928CBB000E2016C /* Archive */,
 				E961C5C72925EF790091FB0B /* Schedule */,
-				E9AB244D292DBD6D00086338 /* Chat */,
 				E97D51B9295A2A1400DB9380 /* Extensions */,
 				E98887A828942A78002E0349 /* Fonts */,
 				E91F683428867FEC005985BF /* Preview Content */,
@@ -258,14 +256,6 @@
 				E98887A428942A6D002E0349 /* pixelmix.ttf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		E9AB244D292DBD6D00086338 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				E9AB244E292DBD8300086338 /* Chat.swift */,
-			);
-			path = Chat;
 			sourceTree = "<group>";
 		};
 		E9B229A8289C65A000AC55CF /* Live */ = {
