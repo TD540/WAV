@@ -44,6 +44,8 @@
 		E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E99C802D296F8E08000629F9 /* WAVBlack.swift */; };
 		E9A38AF929BCC75100254E9A /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A38AF829BCC75100254E9A /* Search.swift */; };
 		E9AEFC41299AD08700A0B033 /* WAVBlue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9AEFC40299AD08700A0B033 /* WAVBlue.swift */; };
+		E9B244EA2C382EA600B54F71 /* Waves.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B244E92C382EA600B54F71 /* Waves.swift */; };
+		E9B244EC2C38340400B54F71 /* WavesWebViewStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B244EB2C38340400B54F71 /* WavesWebViewStore.swift */; };
 		E9B9433A2C19C7E000F9B011 /* SwiftUIIntrospect in Frameworks */ = {isa = PBXBuildFile; productRef = E9B943392C19C7E000F9B011 /* SwiftUIIntrospect */; };
 		E9B9433D2C19C8BD00F9B011 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = E9B9433C2C19C8BD00F9B011 /* Kingfisher */; };
 		E9B943402C19CA4C00F9B011 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9B9433F2C19CA4C00F9B011 /* WebView.swift */; };
@@ -106,6 +108,8 @@
 		E99C802D296F8E08000629F9 /* WAVBlack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlack.swift; sourceTree = "<group>"; };
 		E9A38AF829BCC75100254E9A /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		E9AEFC40299AD08700A0B033 /* WAVBlue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVBlue.swift; sourceTree = "<group>"; };
+		E9B244E92C382EA600B54F71 /* Waves.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Waves.swift; sourceTree = "<group>"; };
+		E9B244EB2C38340400B54F71 /* WavesWebViewStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WavesWebViewStore.swift; sourceTree = "<group>"; };
 		E9B9433F2C19CA4C00F9B011 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		E9B943412C19CA7300F9B011 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E9C671B629CA3EDE006A79D6 /* WAVGlobeScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVGlobeScope.swift; sourceTree = "<group>"; };
@@ -165,6 +169,7 @@
 				E9718AAE2974CDFA008132B8 /* WAVTabBar.swift */,
 				E93473B82928E95E00E2016C /* DataController.swift */,
 				E9B229A8289C65A000AC55CF /* Live */,
+				E9B244E82C382E9700B54F71 /* Waves */,
 				E934739C2928CBB000E2016C /* Archive */,
 				E961C5C72925EF790091FB0B /* Schedule */,
 				E97D51B9295A2A1400DB9380 /* Extensions */,
@@ -272,6 +277,15 @@
 			path = Live;
 			sourceTree = "<group>";
 		};
+		E9B244E82C382E9700B54F71 /* Waves */ = {
+			isa = PBXGroup;
+			children = (
+				E9B244E92C382EA600B54F71 /* Waves.swift */,
+				E9B244EB2C38340400B54F71 /* WavesWebViewStore.swift */,
+			);
+			path = Waves;
+			sourceTree = "<group>";
+		};
 		E9B9433E2C19CA3E00F9B011 /* WebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +391,7 @@
 				E97F4B1229BCCDEE00A0D5D2 /* View-fadeIn.swift in Sources */,
 				E9607C5F29BC0B000010490B /* Archive.swift in Sources */,
 				E93FBB90297746D5006CE29D /* View-readSize.swift in Sources */,
+				E9B244EC2C38340400B54F71 /* WavesWebViewStore.swift in Sources */,
 				E94B597A29AD4FEB0009F11B /* TypeWriterView.swift in Sources */,
 				E9D8FC8B2B17F2EE0038C18A /* Logger.swift in Sources */,
 				E9AEFC41299AD08700A0B033 /* WAVBlue.swift in Sources */,
@@ -394,6 +409,7 @@
 				E94DDAF92B1A220300FCE47B /* Marquee.swift in Sources */,
 				E973428C29AB7A5E003ADDC1 /* View-onValueChanged.swift in Sources */,
 				E9D8FC892B17EA460038C18A /* BouncyButton.swift in Sources */,
+				E9B244EA2C382EA600B54F71 /* Waves.swift in Sources */,
 				E99C802E296F8E08000629F9 /* WAVBlack.swift in Sources */,
 				E964817029BE361200F6A7CF /* WAVGlobe.swift in Sources */,
 				E95AB21829663BB500AEC268 /* Image-centerCropped.swift in Sources */,

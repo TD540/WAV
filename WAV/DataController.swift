@@ -26,7 +26,8 @@ class DataController: ObservableObject {
             }
         }
     }
-    @Published var webViewStore = ArchiveWebViewStore()
+    let webViewStore = ArchiveWebViewStore()
+    let wavesWebViewStore = WavesWebViewStore()
 
     // RADIO STUFF
     @Published var radioIsPlaying = false {

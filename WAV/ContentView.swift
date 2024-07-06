@@ -23,8 +23,9 @@ struct ContentView: View {
                              dataController.selectedShow != nil ? 
                              dataController.selectedShow!.isSoundcloud ? 100 : 60 : 0
                     )
-                Text("coming soon")
+                Waves()
                     .tag(WAVTab.waves)
+                    .padding(.top, Constants.marqueeHeight)
                 Archive()
                     .tag(WAVTab.archive)
                 Schedule()
