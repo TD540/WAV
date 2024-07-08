@@ -1,6 +1,5 @@
 //
 //  View-borderEdges.swift
-//  WAV
 //
 //  https://stackoverflow.com/a/58632759/147163
 //

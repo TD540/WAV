@@ -1,8 +1,5 @@
 //
 //  Logger.swift
-//  WAV
-//
-//  Created by thomas on 29/11/2023.
 //  https://www.avanderlee.com/debugging/oslog-unified-logging/
 //
 

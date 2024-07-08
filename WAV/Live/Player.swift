@@ -1,8 +1,5 @@
 //
 //  Player.swift
-//  WAV
-//
-//  Created by thomas on 11/03/2023.
 //  https://stackoverflow.com/a/60362141/147163
 //
 

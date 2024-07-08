@@ -2,8 +2,6 @@
 //  DataController.swift
 //  WeAreVarious
 //
-//  Created by Thomas on 17/04/2021.
-//
 
 import Combine
 import MediaPlayer
@@ -14,6 +12,15 @@ class DataController: ObservableObject {
         didSet {
             Logger.check.info("WAV: archiveShowIsPlaying now \(self.archiveShowIsPlaying)")
             archiveShowIsPlaying && radioIsPlaying ? stopRadio() : nil
+        }
+        willSet {
+            if Thread.isMainThread {
+                self.archiveShowIsPlaying = newValue
+            } else {
+                DispatchQueue.main.async {
+                    self.archiveShowIsPlaying = newValue
+                }
+            }
         }
     }
     @Published var selectedShow: WAVShow? {
@@ -28,7 +35,7 @@ class DataController: ObservableObject {
     }
     let webViewStore = ArchiveWebViewStore()
     let wavesWebViewStore = WavesWebViewStore()
-
+    
     // RADIO STUFF
     @Published var radioIsPlaying = false {
         didSet {
@@ -37,32 +44,37 @@ class DataController: ObservableObject {
             }
         }
     }
-    @Published var radioIsLive = false
-    @Published var radioIsOffAir = true
-    @Published var radioTitle: String = ""
-
+    @Published var radioIsLive: Bool? // true if live, false if recording, started off false
+    @Published var radioIsOffAir: Bool? // radio can be, starts off true
+    @Published var radioTitle: String = "We Are Various"
+    
     let radioPlayer = Player()
     let azuracastAPI = URL(string: "https://azuracast.wearevarious.com/api/nowplaying/1")!
-    let livestreamAPI = URL(string: "https://radio.wearevarious.com/stream.xml")!
     let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
-
+    
     var radioTask: Task<Void, Error>?
-
+    
     func playArchiveShow(wavShow: WAVShow) {
         selectedShow = wavShow
     }
-
+    
     func updateRadioMarquee() {
-        // Todo: Figure out where "Live Broadcast" in "WAV: Radio title changed to Live Broadcast" comes from
-        // Todo: Rethink this whole function because
-        // Todo: updateRadioMarquee only when nessecary according to schedule?
+        Logger.check.info("WAV: Updating radio marquee...")
+        radioTask?.cancel()
+        
+        // Todo: build better update schedule logic
+        
         radioTask = Task(priority: .medium) {
             do {
                 let (jsonData, _) = try await URLSession.shared.data(from: azuracastAPI)
+                Logger.check.info("WAV: Radio data fetched at \(Date())")
+                Logger.check.info("\(String(data: jsonData, encoding: .utf8)!)")
                 let jsonDecoder = JSONDecoder()
                 jsonDecoder.keyDecodingStrategy = .convertFromSnakeCase
                 do {
                     let newData = try jsonDecoder.decode(AzuracastData.self, from: jsonData)
+                    // Log all radio data
+                    Logger.check.info("WAV: Radio data: \(String(describing: newData))")
                     DispatchQueue.main.async {
                         self.radioIsOffAir = newData.isOffAir
                         self.radioIsLive = newData.isLive
@@ -71,52 +83,51 @@ class DataController: ObservableObject {
                         if newData.isLive {
                             updateLiveTitle()
                         } else {
-                            updateRadioTitle(with: newData.title)
+                            DispatchQueue.main.async {
+                                self.radioTitle = newData.title
+                                Logger.check.info("WAV: Updated RADIO title to  \(newData.title)")
+                            }
                         }
-                        Logger.check.info("WAV: Radio title changed to \(newData.title)")
                     }
                 } catch {
-                    updateRadioTitle(with: "We Are Various")
-                    Logger.check.error("WAV: Error decoding AzuracastData: \(error.localizedDescription)\nUpdated radio title to 'We Are Various'")
+                    Logger.check.error("Error decoding API: \(error.localizedDescription)")
+                    DispatchQueue.main.async {
+                        self.radioTitle = "We Are Various"
+                    }
                 }
             } catch {
-                updateRadioTitle(with: "We Are Various")
-                Logger.check.error("WAV: Error fetching data from Azuracast API: \(error.localizedDescription)\nUpdated radio title to 'We Are Various'")
+                Logger.check.error("Error fetching API: \(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.radioTitle = "We Are Various"
+                }
             }
-
+            
             try await Task.sleep(nanoseconds: 60_000_000_000)
             guard !Task.isCancelled else { return }
             updateRadioMarquee()
         }
-        Logger.check.info("WAV: updateRadioMarquee called at \(Date())")
     }
-
-    func updateRadioTitle(with newTitle: String) {
-        DispatchQueue.main.async {
-            self.radioTitle = newTitle
-        }
-    }
-
+    
     func updateLiveTitle() {
         Task(priority: .medium) {
-            let url = "https://radio.wearevarious.com/stream.xml"
+            let url = URL(string: "https://radio.wearevarious.com/stream.xml")!
             do {
-                let livestreamAPI = URL(string: url)!
-                let (data, _) = try await URLSession.shared.data(from: livestreamAPI)
+                let (data, _) = try await URLSession.shared.data(from: url)
                 let dom = MicroDOM(data: data)
                 let tree = dom.parse()
                 if let tags = tree?.getElementsByTagName("title") {
-                    let newTitle = tags[0].data
-                    if radioTitle != newTitle {
-                        updateRadioTitle(with: newTitle)
+                    let liveTitle = tags[0].data
+                    if radioTitle != liveTitle {
+                        radioTitle = liveTitle
                     }
                 }
+                Logger.check.info("WAV: Updated LIVE title to \"\(self.radioTitle)\"")
             } catch {
-                Logger.check.error("WAV: Error fetching live stream title from \(url): \(error.localizedDescription)")
+                Logger.check.error("WAV: Error fetching LIVE title from \(url): \(error.localizedDescription)")
             }
         }
     }
-
+    
     func updateInfoCenter() {
         let artwork: MPMediaItemArtwork
         let image = UIImage(named: "AppIcon")!
@@ -130,10 +141,10 @@ class DataController: ObservableObject {
             MPMediaItemPropertyPlaybackDuration: 0,
             MPNowPlayingInfoPropertyIsLiveStream: true
         ]
+        Logger.check.info("WAV: Updated info center")
     }
-
+    
     func playRadio() {
-        Logger.check.info("WAV: Playing WAV radio")
         radioPlayer.replaceCurrentItem(with: nil)
         let livestream = AVPlayerItem(url: URL(string: "https://azuracast.wearevarious.com/listen/we_are_various/live.mp3")!)
         radioPlayer.replaceCurrentItem(with: livestream)
@@ -156,11 +167,13 @@ class DataController: ObservableObject {
         } catch {
             Logger.check.error("WAV: Error setting AVAudioSession category: \(error.localizedDescription)")
         }
+        Logger.check.info("WAV: Playing WAV radio")
     }
-
+    
     func stopRadio() {
         radioPlayer.pause()
         radioPlayer.replaceCurrentItem(with: nil)
+        Logger.check.info("WAV: Stopped WAV radio")
     }
 }
 

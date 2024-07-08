@@ -1,8 +1,5 @@
 //
 //  ContentView.swift
-//  WAV
-//
-//  Created by Thomas on 19/07/2022.
 //
 
 import SwiftUI
@@ -10,41 +7,38 @@ import SwiftUIIntrospect
 
 struct ContentView: View {
     @EnvironmentObject var dataController: DataController
-    @State var tab: WAVTab = .live
-
+    typealias tab = WAVTabbarView.tab
+    @State var currentTab = tab.live
+    
     var body: some View {
         ZStack {
-            
-            TabView(selection: $tab) {
-                Radio()
-                    .tag(WAVTab.live)
+            TabView(selection: $currentTab) {
+                WAVLiveView()
+                    .tag(tab.live)
                     .padding(.top, Constants.marqueeHeight)
                     .padding(.bottom,
-                             dataController.selectedShow != nil ? 
+                             dataController.selectedShow != nil ?
                              dataController.selectedShow!.isSoundcloud ? 100 : 60 : 0
                     )
-                Waves()
-                    .tag(WAVTab.waves)
+                WAVWavesView()
+                    .tag(tab.waves)
                     .padding(.top, Constants.marqueeHeight)
-                Archive()
-                    .tag(WAVTab.archive)
-                Schedule()
-                    .tag(WAVTab.schedule)
-                Search()
-                    .tag(WAVTab.search)
+                WAVArchiveView()
+                    .tag(tab.archive)
+                WAVScheduleView()
+                    .tag(tab.schedule)
+                WAVSearchView()
+                    .tag(tab.search)
             }
             .introspect(.tabView, on: .iOS(.v13, .v14, .v15, .v16, .v17)) { UITabBarController in
                 UITabBarController.tabBar.isHidden = true
             }
 
-            // Top
-            VStack(spacing: 0) {
-                RadioMarquee()
-                    .shadow(color: .black.opacity(0.4), radius: 15)
-                Spacer()
-            }
+            WAVMarqueeView()
+                .shadow(color: .black.opacity(0.4), radius: 15)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
 
-            // Tabbar
+            // WAVTabView
             VStack(spacing: 0) {
                 Spacer()
                 VStack(spacing: 0) {
@@ -61,11 +55,11 @@ struct ContentView: View {
                                 )
                             }
                     }
-                    WAVTabBar(tab: $tab)
+                    WAVTabbarView(tab: $currentTab)
                         .shadow(color: .black.opacity(0.9), radius: 10)
                 }
             }
-
+            
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear {
@@ -76,9 +70,9 @@ struct ContentView: View {
 
 #Preview {
     let dataController = DataController()
-    dataController.radioTitle = "Title"
+    dataController.radioTitle = "We Are Preview"
     dataController.selectedShow = WAVShow.preview
     dataController.radioIsOffAir = false
-    return ContentView(tab: .archive)
+    return ContentView(currentTab: .archive)
         .environmentObject(dataController)
 }

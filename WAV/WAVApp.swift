@@ -2,8 +2,6 @@
 //  WAVApp.swift
 //  WAV
 //
-//  Created by Thomas on 19/07/2022.
-//
 
 import SwiftUI
 

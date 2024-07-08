@@ -1,7 +1,6 @@
 //
 //  WebView.swift
-//
-//  https://github.com/kylehickinson/SwiftUI-WebView/tree/main
+//  kylehickinson/SwiftUI-WebView
 //
 
 import SwiftUI
