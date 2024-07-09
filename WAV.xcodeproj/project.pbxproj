@@ -25,7 +25,6 @@
 		E9607C6129BC130C0010490B /* WAVShowTags.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9607C6029BC130C0010490B /* WAVShowTags.swift */; };
 		E9607C6329BC13180010490B /* WAVShowCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9607C6229BC13180010490B /* WAVShowCategories.swift */; };
 		E9607C6929BC70A10010490B /* Binding-readOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9607C6829BC70A10010490B /* Binding-readOnly.swift */; };
-		E961C5C429253F4C0091FB0B /* WAVPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E961C5C329253F4C0091FB0B /* WAVPlaceholderView.swift */; };
 		E964817029BE361200F6A7CF /* WAVGlobeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9337D93297C423F00EDDA43 /* WAVGlobeView.swift */; };
 		E966D6C6288AF89900337C47 /* WAVLiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E966D6C5288AF89900337C47 /* WAVLiveView.swift */; };
 		E9702CA4295B4BD3007471A4 /* BlackTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9702CA3295B4BD3007471A4 /* BlackTitle.swift */; };
@@ -88,7 +87,6 @@
 		E9607C6029BC130C0010490B /* WAVShowTags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVShowTags.swift; sourceTree = "<group>"; };
 		E9607C6229BC13180010490B /* WAVShowCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVShowCategories.swift; sourceTree = "<group>"; };
 		E9607C6829BC70A10010490B /* Binding-readOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Binding-readOnly.swift"; sourceTree = "<group>"; };
-		E961C5C329253F4C0091FB0B /* WAVPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVPlaceholderView.swift; sourceTree = "<group>"; };
 		E966D6C5288AF89900337C47 /* WAVLiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVLiveView.swift; sourceTree = "<group>"; };
 		E9702CA3295B4BD3007471A4 /* BlackTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackTitle.swift; sourceTree = "<group>"; };
 		E9718AAE2974CDFA008132B8 /* WAVTabbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WAVTabbarView.swift; sourceTree = "<group>"; };
@@ -164,10 +162,12 @@
 				E91F683028867FE7005985BF /* ContentView.swift */,
 				E9718AAE2974CDFA008132B8 /* WAVTabbarView.swift */,
 				E93473B82928E95E00E2016C /* DataController.swift */,
-				E9B229A8289C65A000AC55CF /* Live */,
+				E993B768292AD1E600654912 /* WAVMarqueeView.swift */,
+				E94DDAF82B1A220300FCE47B /* MarqueeView.swift */,
+				E9B229A8289C65A000AC55CF /* WAVLiveView */,
 				E9B244E82C382E9700B54F71 /* WAVWaves */,
 				E934739C2928CBB000E2016C /* WAVArchiveView */,
-				E961C5C72925EF790091FB0B /* Schedule */,
+				E961C5C72925EF790091FB0B /* WAVSchedule */,
 				E93CE7BF2C3A8441002145A3 /* Classes */,
 				E97D51B9295A2A1400DB9380 /* Extensions */,
 				E98887A828942A78002E0349 /* Fonts */,
@@ -219,12 +219,12 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
-		E961C5C72925EF790091FB0B /* Schedule */ = {
+		E961C5C72925EF790091FB0B /* WAVSchedule */ = {
 			isa = PBXGroup;
 			children = (
 				E958BAC928F17E4300D37B13 /* WAVScheduleView.swift */,
 			);
-			path = Schedule;
+			path = WAVSchedule;
 			sourceTree = "<group>";
 		};
 		E9718AAB2974B432008132B8 /* Trash */ = {
@@ -267,19 +267,16 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		E9B229A8289C65A000AC55CF /* Live */ = {
+		E9B229A8289C65A000AC55CF /* WAVLiveView */ = {
 			isa = PBXGroup;
 			children = (
-				E94DDAF82B1A220300FCE47B /* MarqueeView.swift */,
-				E9337D93297C423F00EDDA43 /* WAVGlobeView.swift */,
-				E993B768292AD1E600654912 /* WAVMarqueeView.swift */,
-				E9C671B629CA3EDE006A79D6 /* WAVScopeView.swift */,
 				E966D6C5288AF89900337C47 /* WAVLiveView.swift */,
-				E961C5C329253F4C0091FB0B /* WAVPlaceholderView.swift */,
+				E9337D93297C423F00EDDA43 /* WAVGlobeView.swift */,
+				E9C671B629CA3EDE006A79D6 /* WAVScopeView.swift */,
 				E9C88D1F28AD74D500C62DC2 /* WAVPlayPauseView.swift */,
 				E9607C5C29BBEEC80010490B /* Player.swift */,
 			);
-			path = Live;
+			path = WAVLiveView;
 			sourceTree = "<group>";
 		};
 		E9B244E82C382E9700B54F71 /* WAVWaves */ = {
@@ -421,7 +418,6 @@
 				E91F682F28867FE7005985BF /* WAVApp.swift in Sources */,
 				E9607C5D29BBEEC90010490B /* Player.swift in Sources */,
 				E9D8FC8C2B17F9840038C18A /* BlurView.swift in Sources */,
-				E961C5C429253F4C0091FB0B /* WAVPlaceholderView.swift in Sources */,
 				E9607C6329BC13180010490B /* WAVShowCategories.swift in Sources */,
 				E97AEC532C2B23350061D18E /* ArchiveWebViewStore.swift in Sources */,
 				E9D29F3B2B15555F0023AF30 /* Array-isNotEmpty.swift in Sources */,
