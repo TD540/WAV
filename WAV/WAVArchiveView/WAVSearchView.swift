@@ -11,7 +11,7 @@ struct WAVSearchView: View {
 
     @State var validQuery: String?
 
-    var suggestedQueries = ["BOSBAR", "PODCAST", "TECHNO", "MEAKUSMA", "AMBIENT"]
+    var suggestedQueries = ["FOCUS ON", "AMBIENT", "LIVE FROM BOSBAR ", "PLUS-ONE GALLERY", "DISCO", "INTERNATIONAL GUESTS"]
 
     func reset() {
         searchQuery = ""
