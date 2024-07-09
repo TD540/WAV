@@ -7,8 +7,10 @@ import SwiftUIIntrospect
 
 struct ContentView: View {
     @EnvironmentObject var dataController: DataController
+    @Environment(\.safeAreaInsets) var safeAreaInsets
     typealias tab = WAVTabbarView.tab
     @State var currentTab = tab.live
+    @State var tabHeight = 0.0
     
     var body: some View {
         ZStack {
@@ -22,7 +24,7 @@ struct ContentView: View {
                     )
                 WAVWavesView()
                     .tag(tab.waves)
-                    .padding(.top, Constants.marqueeHeight)
+                    .padding(.bottom, tabHeight)
                 WAVArchiveView()
                     .tag(tab.archive)
                 WAVScheduleView()
@@ -57,6 +59,9 @@ struct ContentView: View {
                     }
                     WAVTabbarView(tab: $currentTab)
                         .shadow(color: .black.opacity(0.9), radius: 10)
+                        .readSize { size in
+                            tabHeight = size.height - (safeAreaInsets.bottom == 0.0 ? 20 : safeAreaInsets.bottom)
+                        }
                 }
             }
             

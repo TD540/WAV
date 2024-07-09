@@ -13,9 +13,10 @@ class WavesWebViewStore: WebViewStore {
         let script = """
             function removeElements() {
                 const elementsToRemove = [
-                    'button#waves-logo',
-                    'div#waves-bar',
-                    'div#waves-text-overlay'
+                    '.menu-wrapper',
+                    '#home_continuous_padding',
+                    '.post-content > :not(:first-child)',
+                    '.site-footer'
                 ];
                 elementsToRemove.forEach(selector => {
                     const element = document.querySelector(selector);
@@ -23,7 +24,6 @@ class WavesWebViewStore: WebViewStore {
                 });
             }
             removeElements();
-            // In case the content loads dynamically, we'll observe for changes
             const observer = new MutationObserver(removeElements);
             observer.observe(document.body, { childList: true, subtree: true });
         """
