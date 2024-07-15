@@ -20,7 +20,8 @@ class ArchiveWebViewStore: WebViewStore {
             let userScript = WKUserScript(
                 source: source,
                 injectionTime: .atDocumentStart,
-                forMainFrameOnly: false
+                forMainFrameOnly: false,
+                in: .world(name: "app")
             )
             userContentController.addUserScript(userScript)
         } catch {

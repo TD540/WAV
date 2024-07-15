@@ -3,36 +3,36 @@
 //  WAV
 //
 
-import Foundation
 import WebKit
 
 class WavesWebViewStore: WebViewStore {
     init() {
         super.init()
-
         let script = """
-            function removeElements() {
-                const elementsToRemove = [
-                    '.menu-wrapper',
-                    '#home_continuous_padding',
-                    '.post-content > :not(:first-child)',
-                    '.site-footer'
-                ];
-                elementsToRemove.forEach(selector => {
-                    const element = document.querySelector(selector);
-                    if (element) element.remove();
-                });
+            function getWavesWebContent() {
+                const content = document.querySelector('.vc_custom_1687967564696');
+                const copy = content.cloneNode(true);
+                copy.removeAttribute('style');
+                copy.className = '';
+                const divs = document.body.querySelectorAll('div');
+                divs.forEach(div => div.remove());
+                document.body.appendChild(copy);
             }
-            removeElements();
-            const observer = new MutationObserver(removeElements);
-            observer.observe(document.body, { childList: true, subtree: true });
+            getWavesWebContent();
+            const wavesObserver = new MutationObserver(getWavesWebContent);
+            wavesObserver.observe(document.body, { childList: true, subtree: true });
         """
-
-        let userScript = WKUserScript(source: script, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let userScript = WKUserScript(
+            source: script,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true,
+            in: .world(name: "app")
+        )
         self.webView.configuration.userContentController.addUserScript(userScript)
-
-        // Load the page
-        if let url = URL(string: "https://wearevarious.com/waves/") {
+        self.webView.isOpaque = false
+        self.webView.backgroundColor = .clear
+        self.webView.scrollView.backgroundColor = .clear
+        if let url = URL(string: "https://wearevarious.com") {
             self.webView.load(URLRequest(url: url))
         }
     }

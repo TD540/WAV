@@ -10,16 +10,10 @@ import OSLog
 class DataController: ObservableObject {
     @Published var archiveShowIsPlaying = false {
         didSet {
+            // user intends to play an archive show
             Logger.check.info("WAV: archiveShowIsPlaying now \(self.archiveShowIsPlaying)")
-            archiveShowIsPlaying && radioIsPlaying ? stopRadio() : nil
-        }
-        willSet {
-            if Thread.isMainThread {
-                self.archiveShowIsPlaying = newValue
-            } else {
-                DispatchQueue.main.async {
-                    self.archiveShowIsPlaying = newValue
-                }
+            if archiveShowIsPlaying && radioIsPlaying {
+                stopRadio()
             }
         }
     }
